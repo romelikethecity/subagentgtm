@@ -1,5 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import SectionLabel from '../../components/SectionLabel.astro';
+import CTAButton from '../../components/CTAButton.astro';
 ---
 
 <Base
@@ -8,6 +11,52 @@ import Base from '../../layouts/Base.astro';
   path="/work/"
 >
   <main>
-    <p>Work — content pending prompt 8.</p>
+    <section class="section" style="padding-top: var(--space-16);">
+      <div class="container">
+        <span class="t-micro">WORK · PROOF FROM THE STACK</span>
+
+        <h1 class="t-display-xl" style="margin: var(--space-6) 0 var(--space-6);">
+          We don't pitch. We ship.
+        </h1>
+
+        <p class="t-body t-muted" style="max-width: 640px; margin-bottom: var(--space-12);">
+          Case studies from subagent/gtm engagements are coming. In the meantime, here's the proof from the four operating properties that power every engagement.
+        </p>
+
+        <div class="grid grid--4">
+          <ServiceCard
+            label="SHARPPAGES"
+            title="700+ pages built"
+            body="Static sites, event registration, programmatic SEO. 98 average PageSpeed. 2x industry CTR on paid social."
+            href="/services/web-subagents/"
+          />
+          <ServiceCard
+            label="VERUM"
+            title="$20K+ MRR in 2 months"
+            body="5 customers. 0 ad spend. 300K+ records per month. 91% owner match accuracy. Built from zero."
+            href="/services/data-subagents/"
+          />
+          <ServiceCard
+            label="FIELDWORK"
+            title="27K+ active postings"
+            body="11,000+ companies tracked. Weekly refresh. Monthly reports that CHROs read in ten minutes."
+            href="/services/intel-subagents/"
+          />
+          <ServiceCard
+            label="AI NEWS DIGEST"
+            title="3,000+ weekly readers"
+            body="Organic growth. No paid acquisition. Proof that content built on Claude Code scales."
+            href="/about/"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container" style="text-align: center;">
+        <h2 class="t-display" style="margin-bottom: var(--space-6);">Want to be the first case study?</h2>
+        <CTAButton href="/contact/" label="→ Book a build" variant="primary" large={true} />
+      </div>
+    </section>
   </main>
 </Base>

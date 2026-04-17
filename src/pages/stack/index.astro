@@ -1,5 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
+import SectionLabel from '../../components/SectionLabel.astro';
+import CTAButton from '../../components/CTAButton.astro';
 ---
 
 <Base
@@ -8,6 +10,88 @@ import Base from '../../layouts/Base.astro';
   path="/stack/"
 >
   <main>
-    <p>The four-property stack — content pending prompt 8.</p>
+    <section class="section" style="padding-top: var(--space-16);">
+      <div class="container" style="max-width: 900px;">
+        <span class="t-micro">THE STACK · FOUR PROPERTIES</span>
+
+        <h1 class="t-display-xl" style="margin: var(--space-6) 0 var(--space-6);">
+          Four properties. One team. Every engagement.
+        </h1>
+
+        <p class="t-body t-muted" style="max-width: 640px; margin-bottom: 0;">
+          subagent<span class="slash">/</span>gtm is the engineering layer over four operating properties. Each one is proven. Each one is in production. Each one wires together through Claude Code subagents versioned in your repo.
+        </p>
+      </div>
+    </section>
+
+    <!-- Verum -->
+    <section class="section">
+      <div class="container container--narrow">
+        <SectionLabel number="01" label="DATA" />
+        <h2 class="t-h1" style="margin: var(--space-4) 0 var(--space-6);">Verum</h2>
+        <div class="t-body t-muted stack-prose">
+          <p>B2B data validation, cleaning, enrichment, and discovery. 300K+ records processed per month. 91% owner match accuracy. Delivered in hours, not weeks.</p>
+          <p><strong>Who it serves:</strong> Sales teams drowning in bad data. RevOps teams paying $50K+/year for ZoomInfo and using 10% of the credits. Anyone who needs clean, enriched contact data without an annual contract.</p>
+          <p><strong>How subagent/gtm deploys it:</strong> Verum's data pipelines run as Claude Code subagents in your stack. Continuous validation, enrichment on ingest, and decay detection. Not a database you rent — infrastructure you own.</p>
+          <p><a href="https://veruminc.com" target="_blank" rel="noopener">veruminc.com →</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Provyx -->
+    <section class="section">
+      <div class="container container--narrow">
+        <SectionLabel number="02" label="HEALTHCARE DATA" />
+        <h2 class="t-h1" style="margin: var(--space-4) 0 var(--space-6);">Provyx</h2>
+        <div class="t-body t-muted stack-prose">
+          <p>Healthcare provider data, NPI-verified. 2.4M+ provider records. 40+ specialties. Practice intelligence, technology detection, and physician outreach lists.</p>
+          <p><strong>Who it serves:</strong> Medical device companies, healthcare SaaS, pharmaceutical sales teams, and anyone selling into provider practices who is tired of paying Definitive Healthcare six figures for stale data.</p>
+          <p><strong>How subagent/gtm deploys it:</strong> Provyx's NPI-backed pipelines feed into your CRM as clean, enriched contacts. Practice type classification, decision-maker identification, and chain/franchise filtering — all automated.</p>
+          <p><a href="https://getprovyx.com" target="_blank" rel="noopener">getprovyx.com →</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SharpPages -->
+    <section class="section">
+      <div class="container container--narrow">
+        <SectionLabel number="03" label="WEB + CONVERSION" />
+        <h2 class="t-h1" style="margin: var(--space-4) 0 var(--space-6);">SharpPages</h2>
+        <div class="t-body t-muted stack-prose">
+          <p>Static sites that load in under a second. Event registration. Programmatic SEO. Paid social that converts. 700+ pages built. 98 average PageSpeed.</p>
+          <p><strong>Who it serves:</strong> B2B companies whose sites are slow, whose SEO is guesswork, and whose agency redesigns the homepage every 18 months and calls it strategy.</p>
+          <p><strong>How subagent/gtm deploys it:</strong> Every web asset we build for clients — registration sites, trust centers, landing pages — ships through SharpPages. Static HTML. CDN-hosted. No WordPress. No page builders. Server-side Meta Conversions API from day one.</p>
+          <p><a href="https://sharppages.com" target="_blank" rel="noopener">sharppages.com →</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fieldwork -->
+    <section class="section">
+      <div class="container container--narrow">
+        <SectionLabel number="04" label="COMPETITIVE INTEL" />
+        <h2 class="t-h1" style="margin: var(--space-4) 0 var(--space-6);">Fieldwork</h2>
+        <div class="t-body t-muted stack-prose">
+          <p>Competitive hiring intelligence. 27,000+ active postings tracked. 11,000+ companies. Weekly refresh. Monthly reports your CHRO reads in ten minutes.</p>
+          <p><strong>Who it serves:</strong> CROs and CHROs who need to know what competitors are building, paying, and hiring — before it shows up on a podcast three months late.</p>
+          <p><strong>How subagent/gtm deploys it:</strong> Fieldwork's intel feeds into trust center benchmarking, battlecard generation, and competitive signal scoring for outbound. When your competitor hires a VP of Product from your biggest customer, your team knows that week.</p>
+          <p><a href="https://runfieldwork.com" target="_blank" rel="noopener">runfieldwork.com →</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section">
+      <div class="container" style="text-align: center;">
+        <h2 class="t-display" style="margin-bottom: var(--space-6);">Ready to deploy the stack?</h2>
+        <CTAButton href="/contact/" label="→ Book a build" variant="primary" large={true} />
+      </div>
+    </section>
   </main>
 </Base>
+
+<style>
+  .stack-prose p {
+    margin-bottom: var(--space-6);
+  }
+</style>

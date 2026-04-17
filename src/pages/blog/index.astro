@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import CTAButton from '../../components/CTAButton.astro';
 ---
 
 <Base
@@ -8,6 +9,23 @@ import Base from '../../layouts/Base.astro';
   path="/blog/"
 >
   <main>
-    <p>Blog — content pending prompt 8.</p>
+    <section class="section" style="padding-top: var(--space-16);">
+      <div class="container container--narrow">
+        <span class="t-micro">BLOG · ESSAYS</span>
+
+        <h1 class="t-display-xl" style="margin: var(--space-6) 0 var(--space-6);">
+          Essays coming.
+        </h1>
+
+        <p class="t-body t-muted" style="margin-bottom: var(--space-8);">
+          We're writing about AI for GTM, Claude Code, and the Forward Test. First posts ship soon.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+          <a href="/methodology/" class="btn">Read the Forward Test →</a>
+          <a href="/stack/" class="btn">See the four-property stack →</a>
+        </div>
+      </div>
+    </section>
   </main>
 </Base>

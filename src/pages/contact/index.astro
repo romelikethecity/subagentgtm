@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import CTAButton from '../../components/CTAButton.astro';
 ---
 
 <Base
@@ -8,6 +9,80 @@ import Base from '../../layouts/Base.astro';
   path="/contact/"
 >
   <main>
-    <p>Contact — content pending prompt 7.</p>
+    <section class="section" style="padding-top: var(--space-16);">
+      <div class="container container--narrow">
+        <span class="t-micro">BOOK A BUILD</span>
+
+        <h1 class="t-display-xl" style="margin: var(--space-6) 0 var(--space-6);">
+          Tell us what you want built.
+        </h1>
+
+        <p class="t-body t-muted" style="margin-bottom: var(--space-12);">
+          Fixed quote within two business days. If we're not the right fit, we'll say so.
+        </p>
+
+        <form action="https://formspree.io/f/xbdqoybv" method="POST" class="form">
+          <label>
+            Name *
+            <input type="text" name="name" required>
+          </label>
+
+          <label>
+            Email *
+            <input type="email" name="email" required>
+          </label>
+
+          <label>
+            Company *
+            <input type="text" name="company" required>
+          </label>
+
+          <label>
+            Role
+            <select name="role">
+              <option value="">Select...</option>
+              <option value="CEO/Founder">CEO / Founder</option>
+              <option value="CRO/VP Sales">CRO / VP Sales</option>
+              <option value="CMO/VP Marketing">CMO / VP Marketing</option>
+              <option value="Head of RevOps">Head of RevOps / Sales Ops</option>
+              <option value="Head of CS">Head of Customer Success</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
+
+          <label>
+            What are you trying to build or fix?
+            <textarea name="build_request" rows="5" placeholder="Pipeline hygiene, AI SDR replacement, RFP automation, data enrichment, event ABM, trust center, HubSpot Breeze deployment, or something else."></textarea>
+          </label>
+
+          <label>
+            Current GTM stack
+            <input type="text" name="stack" placeholder="CRM + any AI tools currently deployed (HubSpot, Salesforce, Clay, 11x, Artisan, etc.)">
+          </label>
+
+          <label>
+            Timeline
+            <select name="timeline">
+              <option value="">Select...</option>
+              <option value="Urgent — within 2 weeks">Urgent — within 2 weeks</option>
+              <option value="30 days">30 days</option>
+              <option value="60–90 days">60–90 days</option>
+              <option value="Exploring">Exploring / just curious</option>
+            </select>
+          </label>
+
+          <!-- Honeypot -->
+          <input type="text" name="_gotcha" style="display:none">
+
+          <!-- Formspree redirect -->
+          <input type="hidden" name="_next" value="https://subagentgtm.com/contact/thanks/">
+
+          <!-- Email subject -->
+          <input type="hidden" name="_subject" value="New build request from subagentgtm.com">
+
+          <button type="submit" class="btn btn--primary btn--large">→ Book a build</button>
+        </form>
+      </div>
+    </section>
   </main>
 </Base>
