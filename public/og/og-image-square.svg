@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" width="1200" height="1200">
+  <rect width="1200" height="1200" fill="#0A0A0B"/>
+
+  <defs>
+    <pattern id="grid2" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1F1F1F" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="1200" fill="url(#grid2)" opacity="0.6"/>
+
+  <!-- Top: wordmark -->
+  <text x="80" y="120" font-family="Space Grotesk, system-ui, sans-serif" font-weight="500" font-size="42" letter-spacing="-0.84" fill="#F5F5F4">subagent</text>
+  <text x="269" y="120" font-family="Space Grotesk, system-ui, sans-serif" font-weight="500" font-size="42" fill="#10B981">/</text>
+  <text x="290" y="120" font-family="Space Grotesk, system-ui, sans-serif" font-weight="500" font-size="42" letter-spacing="-0.84" fill="#F5F5F4">gtm</text>
+
+  <line x1="80" y1="160" x2="1120" y2="160" stroke="#1F1F1F" stroke-width="1"/>
+
+  <!-- Hero -->
+  <text x="80" y="540" font-family="Space Grotesk, system-ui, sans-serif" font-weight="500" font-size="88" letter-spacing="-2.64" fill="#F5F5F4">Subagents</text>
+  <text x="80" y="650" font-family="Space Grotesk, system-ui, sans-serif" font-weight="500" font-size="88" letter-spacing="-2.64" fill="#F5F5F4">for the</text>
+  <text x="80" y="760" font-family="Fraunces, Georgia, serif" font-weight="400" font-style="italic" font-size="88" letter-spacing="-2.64" fill="#10B981">GTM stack.</text>
+
+  <!-- Subtext -->
+  <text x="80" y="900" font-family="IBM Plex Mono, monospace" font-weight="400" font-size="20" fill="#737373">Versioned in your repo.</text>
+  <text x="80" y="934" font-family="IBM Plex Mono, monospace" font-weight="400" font-size="20" fill="#737373">Running against your data.</text>
+  <text x="80" y="968" font-family="IBM Plex Mono, monospace" font-weight="400" font-size="20" fill="#737373">Owned by your team.</text>
+
+  <!-- Footer -->
+  <line x1="80" y1="1060" x2="1120" y2="1060" stroke="#1F1F1F" stroke-width="1"/>
+  <text x="80" y="1110" font-family="IBM Plex Mono, monospace" font-weight="500" font-size="16" letter-spacing="1.6" fill="#737373">SUBAGENTGTM.COM</text>
+  <text x="1120" y="1110" text-anchor="end" font-family="IBM Plex Mono, monospace" font-weight="500" font-size="16" letter-spacing="1.6" fill="#10B981">→ BOOK A CALL</text>
+</svg>

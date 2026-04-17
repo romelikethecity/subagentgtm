@@ -1,0 +1,631 @@
+/* ==========================================================================
+   subagent/gtm — design tokens
+   v1.1 · P1 Terminal Noir · Space Grotesk + Fraunces + IBM Plex Mono
+   ========================================================================== */
+
+:root {
+  /* ---------- Color ---------- */
+  --bg:          #0A0A0B;  /* primary surface */
+  --surface:     #141415;  /* cards, elevated */
+  --surface-2:   #1F1F1F;  /* secondary elevation, borders */
+  --accent:      #10B981;  /* emerald · signal, the slash */
+  --ink:         #F5F5F4;  /* body text on dark */
+  --muted:       #737373;  /* secondary text */
+  --line:        #1F1F1F;  /* dividers on dark */
+  --line-light:  #E5E5E5;  /* dividers on light */
+  --ink-light:   #0A0A0B;  /* body text on light */
+  --bg-light:    #F5F5F4;  /* light mode surface */
+
+  /* ---------- Type ---------- */
+  --font-display:  'Space Grotesk', system-ui, sans-serif;
+  --font-body:     'Fraunces', Georgia, serif;
+  --font-mono:     'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Scale */
+  --fs-display-xl: 72px;
+  --fs-display:    56px;
+  --fs-h1:         40px;
+  --fs-h2:         28px;
+  --fs-h3:         20px;
+  --fs-body:       16px;
+  --fs-small:      13px;
+  --fs-micro:      11px;
+
+  /* Line height */
+  --lh-display:    1.0;
+  --lh-heading:    1.1;
+  --lh-body:       1.6;
+
+  /* Letter spacing */
+  --ls-tight:      -0.03em;
+  --ls-snug:       -0.02em;
+  --ls-mono:       0.1em;
+
+  /* ---------- Spacing ---------- */
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-6:   24px;
+  --space-8:   32px;
+  --space-12:  48px;
+  --space-16:  64px;
+  --space-24:  96px;
+  --space-32:  128px;
+
+  /* ---------- Layout ---------- */
+  --container:        1200px;
+  --container-narrow: 720px;
+  --radius-sm:        2px;
+  --radius-md:        4px;
+  --radius-lg:        8px;
+
+  /* ---------- Motion ---------- */
+  --ease:          cubic-bezier(0.2, 0.8, 0.2, 1);
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 400ms;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-feature-settings: "ss01", "cv11";
+}
+
+a { color: var(--accent); text-decoration: none; transition: opacity var(--duration-base) var(--ease); }
+a:hover { opacity: 0.8; }
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  :root {
+    --fs-display-xl: 48px;
+    --fs-display:    40px;
+    --fs-h1:         32px;
+    --fs-h2:         24px;
+  }
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
+.t-display-xl {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-xl);
+  font-weight: 500;
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-tight);
+}
+
+.t-display {
+  font-family: var(--font-display);
+  font-size: var(--fs-display);
+  font-weight: 500;
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-tight);
+}
+
+.t-h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  font-weight: 500;
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-snug);
+}
+
+.t-h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: 500;
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-snug);
+}
+
+.t-h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.t-body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: var(--lh-body);
+}
+
+.t-body-display {
+  font-family: var(--font-display);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: var(--lh-body);
+}
+
+.t-small {
+  font-size: var(--fs-small);
+  line-height: 1.5;
+}
+
+.t-micro {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.t-muted { color: var(--muted); }
+.t-accent { color: var(--accent); }
+
+/* Pull quote */
+.t-quote {
+  font-family: var(--font-body);
+  font-size: 24px;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--ink);
+  border-left: 2px solid var(--accent);
+  padding-left: var(--space-6);
+  margin: var(--space-12) 0;
+}
+
+/* ==========================================================================
+   Wordmark
+   ========================================================================== */
+
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: var(--ls-snug);
+  color: var(--ink);
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+}
+
+.wordmark .slash {
+  color: var(--accent);
+  display: inline-block;
+  margin: 0 0.05em;
+  font-weight: 500;
+}
+
+.wordmark--light { color: var(--ink-light); }
+.wordmark--light .slash { color: var(--ink-light); }
+
+.wordmark--mono,
+.wordmark--mono .slash { color: currentColor; }
+
+/* ==========================================================================
+   Primitives
+   ========================================================================== */
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--space-8);
+}
+.container--narrow { max-width: var(--container-narrow); }
+
+.divider { height: 1px; background: var(--line); border: 0; margin: var(--space-16) 0; }
+
+.section {
+  padding: var(--space-24) 0;
+}
+
+.section--tight {
+  padding: var(--space-16) 0;
+}
+
+/* Section label with number (e.g., "01 / THE STACK") */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: var(--space-6);
+  display: block;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  font-family: var(--font-display);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border: 1px solid var(--surface-2);
+  background: transparent;
+  color: var(--ink);
+  transition: all var(--duration-base) var(--ease);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+
+.btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  opacity: 1;
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
+.btn--primary:hover {
+  background: transparent;
+  color: var(--accent);
+}
+
+.btn--large {
+  padding: var(--space-4) var(--space-8);
+  font-size: var(--fs-body);
+}
+
+.cta-caption {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  color: var(--muted);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  margin-top: var(--space-3);
+}
+
+/* ==========================================================================
+   Cards
+   ========================================================================== */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--surface-2);
+  padding: var(--space-8);
+  border-radius: var(--radius-md);
+  transition: border-color var(--duration-base) var(--ease);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.card:hover {
+  border-color: var(--accent);
+}
+
+.card__label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.card__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.card__body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  color: var(--muted);
+  line-height: var(--lh-body);
+}
+
+.card__arrow {
+  margin-top: auto;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease);
+}
+
+.card:hover .card__arrow {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Grids
+   ========================================================================== */
+
+.grid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.grid--2 { grid-template-columns: repeat(2, 1fr); }
+.grid--3 { grid-template-columns: repeat(3, 1fr); }
+.grid--4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 1024px) {
+  .grid--4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .grid--2,
+  .grid--3,
+  .grid--4 { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================================
+   Stat blocks
+   ========================================================================== */
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.stat__value {
+  font-family: var(--font-display);
+  font-size: var(--fs-display);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: var(--ls-tight);
+  color: var(--ink);
+}
+
+.stat__label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ==========================================================================
+   Terminal panel
+   ========================================================================== */
+
+.terminal {
+  background: var(--bg);
+  border: 1px solid var(--surface-2);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+  position: relative;
+  overflow-x: auto;
+}
+
+.terminal__pill {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.terminal__prompt { color: var(--muted); }
+.terminal__slash { color: var(--accent); font-weight: 500; }
+.terminal__arrow { color: var(--muted); }
+.terminal__check { color: var(--accent); }
+
+.terminal__cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1em;
+  background: var(--accent);
+  animation: terminal-blink 1s step-end infinite;
+  vertical-align: middle;
+  margin-left: 2px;
+}
+
+@keyframes terminal-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* ==========================================================================
+   Form
+   ========================================================================== */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: var(--container-narrow);
+}
+
+.form label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.form input,
+.form textarea,
+.form select {
+  background: var(--surface);
+  border: 1px solid var(--surface-2);
+  padding: var(--space-4);
+  font-family: var(--font-display);
+  font-size: var(--fs-body);
+  color: var(--ink);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--duration-base) var(--ease);
+  width: 100%;
+}
+
+.form textarea {
+  font-family: var(--font-body);
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form input:focus,
+.form textarea:focus,
+.form select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.form input::placeholder,
+.form textarea::placeholder {
+  color: var(--muted);
+  opacity: 0.6;
+}
+
+/* ==========================================================================
+   Nav
+   ========================================================================== */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(10, 10, 11, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color var(--duration-base) var(--ease);
+  border-bottom: 1px solid transparent;
+}
+
+.nav--scrolled {
+  border-bottom-color: var(--line);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-8);
+  max-width: var(--container);
+  margin: 0 auto;
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.nav__link {
+  font-family: var(--font-display);
+  font-size: var(--fs-small);
+  color: var(--muted);
+  text-decoration: none;
+  transition: color var(--duration-base) var(--ease);
+}
+
+.nav__link:hover {
+  color: var(--ink);
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .nav__links .nav__link { display: none; }
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.footer {
+  border-top: 1px solid var(--line);
+  padding: var(--space-16) 0 var(--space-12);
+  margin-top: var(--space-24);
+}
+
+.footer__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.footer__properties {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+
+.footer__properties a {
+  color: var(--muted);
+}
+
+.footer__properties a:hover {
+  color: var(--ink);
+}
+
+.footer__tagline {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ==========================================================================
+   Accessibility
+   ========================================================================== */
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

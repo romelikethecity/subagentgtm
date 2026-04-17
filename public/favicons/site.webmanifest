@@ -1,0 +1,29 @@
+{
+  "name": "subagent/gtm",
+  "short_name": "subagent/gtm",
+  "description": "GTM engineering for teams building on Claude Code.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A0A0B",
+  "theme_color": "#0A0A0B",
+  "icons": [
+    {
+      "src": "/favicons/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicons/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicons/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

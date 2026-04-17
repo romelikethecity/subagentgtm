@@ -1,0 +1,96 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+}
+
+const { title, description, path } = Astro.props;
+const pageTitle = `${title} · subagent/gtm`;
+const canonicalUrl = `https://subagentgtm.com${path}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary meta -->
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="subagent/gtm" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="subagent/gtm" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content="https://subagentgtm.com/og/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="subagent/gtm — AI for GTM that actually ships" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@subagentgtm" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://subagentgtm.com/og/og-image.png" />
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicons/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/favicon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicons/favicon-512.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+    <link rel="mask-icon" href="/favicons/favicon-mark.svg" color="#10B981" />
+    <link rel="manifest" href="/favicons/site.webmanifest" />
+    <meta name="theme-color" content="#0A0A0B" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+    <!-- Tokens + styles -->
+    <link rel="stylesheet" href="/tokens.css" />
+
+    <!-- Analytics (Plausible) -->
+    <script defer data-domain="subagentgtm.com" src="https://plausible.io/js/script.js"></script>
+
+    <!-- Global Organization schema -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "subagent/gtm",
+      "alternateName": "subagentgtm",
+      "url": "https://subagentgtm.com",
+      "logo": "https://subagentgtm.com/brand/logo-dark.svg",
+      "description": "AI for GTM that actually ships. We deploy AI agents, data pipelines, event sites, and competitive intel into your sales, marketing, and CS stack.",
+      "founder": {
+        "@type": "Person",
+        "name": "Rome Thorndike",
+        "url": "https://www.linkedin.com/in/romethorndike"
+      },
+      "sameAs": [
+        "https://veruminc.com",
+        "https://getprovyx.com",
+        "https://sharppages.com",
+        "https://runfieldwork.com"
+      ]
+    })} />
+
+    <!-- Page-specific schema slot -->
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

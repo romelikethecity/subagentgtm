@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.astro/
+
+# Internal docs — never commit to public repo
+BUILD_BRIEF.md
+CLAUDE.md
+head-snippet.html
+subagent-gtm-brand/
+
+# System
+.DS_Store
+*.log
+
+# Editor
+.vscode/
+.idea/
+
+# Claude Code internals
+.agents/
+.planning/
+.claude/
