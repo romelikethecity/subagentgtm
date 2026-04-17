@@ -1,13 +1,140 @@
 ---
-import Base from '../../../layouts/Base.astro';
+import ServicePage from '../../../layouts/ServicePage.astro';
+import ServiceCard from '../../../components/ServiceCard.astro';
+
+const faqData = [
+  {
+    question: "What data sources do you use?",
+    answer: "NPI registries, state licensing boards, SEC filings, web scraping, domain association databases, and commercial APIs. Every record is multi-source verified before delivery. We do not resell a single vendor's database."
+  },
+  {
+    question: "How fast is delivery?",
+    answer: "Custom list builds deliver in 24-72 hours depending on volume and ICP complexity. Ongoing enrichment pipelines run daily. We are not a quarterly refresh shop."
+  },
+  {
+    question: "What does it cost?",
+    answer: "Data work starts at $2K for one-time builds. Ongoing enrichment retainers start at $4K/mo. No annual contracts. No seat licenses. You own every record we deliver."
+  }
+];
 ---
 
-<Base
+<ServicePage
   title="Data subagents"
   description="Data validation, cleaning, enrichment, and discovery. Powered by Verum and Provyx. 300K+ records a month."
   path="/services/data-subagents/"
+  microLabel="DATA SUBAGENTS · VERUM + PROVYX"
+  h1="Data validation, cleaning, enrichment, and discovery. In hours."
+  subhead="We run the data subagents that power Verum and Provyx. 300K+ records a month. 91% owner match accuracy. NPI-verified for healthcare."
+  serviceType="Data Enrichment and Validation"
 >
-  <main>
-    <p>Data subagents — content pending prompt 6.</p>
-  </main>
-</Base>
+  <!-- FAQPage schema -->
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqData.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  })} />
+
+  <!-- Problem -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">Your data is wrong. And expensive.</h2>
+
+      <div class="t-body t-muted service-prose">
+        <p>
+          Enterprise data contracts run $50K-$200K a year. ZoomInfo, Definitive Healthcare, Apollo. You pay for a seat, get a static database, and spend the next twelve months discovering how many records are stale, duplicated, or flat wrong.
+        </p>
+        <p>
+          Your SDRs waste hours confirming bad phone numbers. Your marketing team sends to bounced emails. Your ops team runs dedup scripts every quarter and still finds duplicates. The data vendor shrugs and points to their "95% accuracy" claim that nobody can audit.
+        </p>
+        <p>
+          We build data pipelines that validate, clean, enrich, and discover contacts from primary sources. Not a database you rent. Infrastructure you own.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we build it -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">How we build it.</h2>
+
+      <ol class="t-body t-muted service-prose">
+        <li>
+          <strong>Validation.</strong> Every record runs through multi-source verification. Email deliverability via ZeroBounce. Phone line-type detection via Twilio. Title and employer confirmed against LinkedIn, NPI registries, and state licensing boards. Bad records get flagged, not silently kept.
+        </li>
+        <li>
+          <strong>Cleaning.</strong> Deduplication by person, not by row. Title normalization. Company name standardization. Practice type classification for healthcare. Chain and franchise exclusion. The output is one clean record per human being.
+        </li>
+        <li>
+          <strong>Enrichment.</strong> Missing emails, direct dials, mobile numbers, LinkedIn URLs, technology stack, practice type, facility size, decision-maker identification. We use FullEnrich, Prospeo, and direct web research depending on the field.
+        </li>
+        <li>
+          <strong>Discovery.</strong> Net-new contact identification for your ICP. We build lists from scratch using NPI bulk data, Outscraper, state directories, and web research. Not filtered from an existing database.
+        </li>
+        <li>
+          <strong>Maintenance.</strong> Ongoing pipelines that re-validate weekly, enrich net-new records daily, and flag decay before your team sends to a dead email. Delivered as Claude Code subagents versioned in your repo.
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Proof -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">The numbers.</h2>
+
+      <div class="grid grid--3" style="margin-bottom: var(--space-12);">
+        <div class="stat">
+          <span class="stat__value">300K+</span>
+          <span class="stat__label">RECORDS PROCESSED PER MONTH</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">91%</span>
+          <span class="stat__label">OWNER MATCH ACCURACY</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">Hours</span>
+          <span class="stat__label">NOT WEEKS. DELIVERY TIME.</span>
+        </div>
+      </div>
+
+      <div class="t-body t-muted service-prose">
+        <p>
+          <a href="https://veruminc.com" target="_blank" rel="noopener">Verum</a> handles B2B data validation, cleaning, enrichment, and discovery. <a href="https://getprovyx.com" target="_blank" rel="noopener">Provyx</a> handles healthcare provider data with NPI verification, practice intelligence, and technology detection. subagent/gtm deploys both as subagents in your stack.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-12);">Questions.</h2>
+
+      <div class="faq-list">
+        {faqData.map(faq => (
+          <div class="faq-item">
+            <h3 class="t-h3">{faq.question}</h3>
+            <p class="t-body t-muted">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</ServicePage>
+
+<style is:global>
+  .service-prose p { margin-bottom: var(--space-6); }
+  .service-prose ul, .service-prose ol { padding-left: var(--space-6); margin-bottom: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); }
+  .service-prose li { line-height: var(--lh-body); }
+  .faq-list { display: flex; flex-direction: column; gap: var(--space-12); }
+  .faq-item h3 { margin-bottom: var(--space-3); }
+  .faq-item p { margin: 0; }
+</style>

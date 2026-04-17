@@ -1,13 +1,135 @@
 ---
-import Base from '../../../layouts/Base.astro';
+import ServicePage from '../../../layouts/ServicePage.astro';
 ---
 
-<Base
-  title="Event-driven ABM"
+<ServicePage
+  title="Event-driven ABM · subagent/gtm"
   description="SharpPages registration sites + Verum enrichment + orchestration. Multi-city conference playbook as a productized service."
   path="/services/event-abm/"
+  microLabel="EVENT-DRIVEN ABM · SHARPPAGES + VERUM"
+  h1="Multi-city conference playbook. Productized."
+  subhead="SharpPages registration sites + Verum enrichment + orchestration. Multi-city conference playbook as a productized service."
+  serviceType="Event-Driven ABM"
 >
-  <main>
-    <p>Event-driven ABM — content pending prompt 6.</p>
-  </main>
-</Base>
+  <!-- FAQPage schema -->
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How fast can you build a registration site?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Five to seven business days from kickoff to live. SharpPages builds static sites that score 98 average on PageSpeed. The template is reusable across cities — subsequent events launch in two to three days."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you run the ads too?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We build and manage Meta Ads campaigns for event registration. Paid social is part of the SharpPages service — not a separate vendor. Targeting, creative, and spend managed end to end."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does a multi-city event ABM engagement cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Fixed-fee per city. Registration site, enrichment, pre-event outreach, and post-event follow-up as one package. Typical range is $8K–$15K per city depending on list size and outreach volume. Volume discounts for four or more cities."
+        }
+      }
+    ]
+  })} />
+
+  <!-- Problem -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">Events are expensive. The outreach around them is worse.</h2>
+
+      <div class="t-body t-muted service-prose">
+        <p>
+          You're spending $50K–$200K per conference. The booth is booked. The sponsorship is signed. And the pre-event outreach is a batch-and-blast email from marketing that lands in spam. Post-event follow-up is a CSV dump to SDRs who call two weeks late. Every outbound message we build around events passes the <a href="/methodology/">Forward Test</a> — because generic "stopping by booth 412" emails get deleted.
+        </p>
+        <p>
+          There's no scalable playbook. Each city gets rebuilt from scratch. Registration sites are one-off WordPress pages. Enrichment is manual. The ROI math never closes because the execution leaks at every stage.
+        </p>
+        <p>
+          We productized the entire motion. Registration site, enrichment, outreach, follow-up — one engagement, repeatable across cities.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we build it -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">How we build it.</h2>
+
+      <ol class="t-body t-muted service-prose">
+        <li>
+          <strong><a href="https://sharppages.com" target="_blank" rel="noopener">SharpPages</a> builds the registration site in 5–7 days.</strong> Static site. 98 PageSpeed. Conversion-optimized. Reusable template across cities — subsequent events launch in days, not weeks.
+        </li>
+        <li>
+          <strong><a href="https://veruminc.com" target="_blank" rel="noopener">Verum</a> enriches registrants in real time.</strong> As registrations come in, Verum validates emails, enriches company data, and scores each registrant against your ICP. Your team knows who matters before the event starts.
+        </li>
+        <li>
+          <strong>Forward Test-trained pre- and post-event outreach.</strong> Pre-event messages reference specific signals — a registrant's recent hire, a product launch, a competitive move. Post-event follow-up within 48 hours, personalized to the conversation at the booth. No generic "great meeting you" sequences.
+        </li>
+        <li>
+          <strong>Multi-city template.</strong> After the first city, the playbook replicates. New registration site in 2–3 days. Same enrichment pipeline. Same outreach subagents with updated signals. Each city gets better because the system learns.
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Proof -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">The numbers.</h2>
+
+      <div class="t-body t-muted service-prose">
+        <p>
+          700+ pages built across SharpPages. 98 average PageSpeed on event registration sites. Verum delivers enriched registrant data in hours, not weeks. The entire motion — site, data, outreach — runs as one service.
+        </p>
+        <p style="margin-top: var(--space-4);">
+          Operated by <a href="https://sharppages.com" target="_blank" rel="noopener">SharpPages</a> + <a href="https://veruminc.com" target="_blank" rel="noopener">Verum</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-12);">Questions.</h2>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <h3 class="t-h3">How fast can you build a registration site?</h3>
+          <p class="t-body t-muted">Five to seven business days from kickoff to live. SharpPages builds static sites that score 98 average on PageSpeed. The template is reusable across cities — subsequent events launch in two to three days.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="t-h3">Do you run the ads too?</h3>
+          <p class="t-body t-muted">We build and manage Meta Ads campaigns for event registration. Paid social is part of the SharpPages service — not a separate vendor. Targeting, creative, and spend managed end to end.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="t-h3">What does a multi-city event ABM engagement cost?</h3>
+          <p class="t-body t-muted">Fixed-fee per city. Registration site, enrichment, pre-event outreach, and post-event follow-up as one package. Typical range is $8K–$15K per city depending on list size and outreach volume. Volume discounts for four or more cities.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</ServicePage>
+
+<style is:global>
+  .service-prose p { margin-bottom: var(--space-6); }
+  .service-prose ul, .service-prose ol { padding-left: var(--space-6); margin-bottom: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); }
+  .service-prose li { line-height: var(--lh-body); }
+  .faq-list { display: flex; flex-direction: column; gap: var(--space-12); }
+  .faq-item h3 { margin-bottom: var(--space-3); }
+  .faq-item p { margin: 0; }
+</style>

@@ -1,13 +1,136 @@
 ---
-import Base from '../../../layouts/Base.astro';
+import ServicePage from '../../../layouts/ServicePage.astro';
+
+const faqData = [
+  {
+    question: "How is this different from LinkedIn Recruiter or job board alerts?",
+    answer: "LinkedIn shows you individual postings. We show you patterns. Hiring velocity by department. Comp drift over 12 months. Geographic expansion signals. Tech stack adoption across your competitive set. The output is a monthly report your CHRO reads in ten minutes, not a feed you scroll."
+  },
+  {
+    question: "How many companies can you track?",
+    answer: "We currently track 11,000+ companies across 27,000+ active postings. If your competitor posts a job, we see it within the weekly refresh cycle. Custom tracking for unlisted companies is available."
+  },
+  {
+    question: "What does it cost?",
+    answer: "Monthly reports start at $3K/mo for a five-company competitive set. Broader coverage and custom analysis are scoped per engagement. No annual contract required."
+  }
+];
 ---
 
-<Base
+<ServicePage
   title="Competitive intel subagents"
   description="Track what your competitors are hiring, paying, and building. Monthly reports. Powered by Fieldwork."
   path="/services/intel-subagents/"
+  microLabel="COMPETITIVE INTEL · FIELDWORK"
+  h1="Track what your competitors are hiring, paying, and building."
+  subhead="Operated by Fieldwork. 27,000+ active postings tracked. 11,000+ companies. Weekly refresh. Monthly reports your CHRO reads in ten minutes."
+  serviceType="Competitive Intelligence"
 >
-  <main>
-    <p>Intel subagents — content pending prompt 6.</p>
-  </main>
-</Base>
+  <!-- FAQPage schema -->
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqData.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  })} />
+
+  <!-- Problem -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">You are flying blind.</h2>
+
+      <div class="t-body t-muted service-prose">
+        <p>
+          Your competitor just posted 14 ML engineering roles in Austin. They hired a VP of Product from your biggest customer. They are paying 20% above market for solutions engineers in your territory.
+        </p>
+        <p>
+          You found out three months later on a podcast. By then, the hire closed. The territory shifted. The deal you were counting on went to a team you did not know existed.
+        </p>
+        <p>
+          Hiring data is the most reliable leading indicator of corporate strategy. Companies lie in press releases. They do not lie in job postings. Every req is a budget line, a team priority, and a strategic signal.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we build it -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">How we build it.</h2>
+
+      <ol class="t-body t-muted service-prose">
+        <li>
+          <strong>Collection.</strong> We ingest job postings, comp data, org chart changes, and tech stack signals across your competitive set. 27,000+ active postings tracked. Weekly refresh. No stale data.
+        </li>
+        <li>
+          <strong>Analysis.</strong> Hiring velocity by department. Compensation benchmarks by role and geography. Growth vs. backfill classification. Technology adoption and deprecation signals. Geographic footprint mapping.
+        </li>
+        <li>
+          <strong>Reporting.</strong> Monthly reports built for executives. Ten-minute read. Key signals highlighted. Trend lines over 3, 6, and 12 months. No 40-page decks. No dashboards you never open.
+        </li>
+        <li>
+          <strong>Recommendations.</strong> Each report ends with concrete actions. Adjust comp in this market. Staff this territory before they do. Build against this technical gap. Competitive intel that drives decisions, not slides.
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Proof -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">The numbers.</h2>
+
+      <div class="grid grid--3" style="margin-bottom: var(--space-12);">
+        <div class="stat">
+          <span class="stat__value">27K+</span>
+          <span class="stat__label">ACTIVE POSTINGS TRACKED</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">11K+</span>
+          <span class="stat__label">COMPANIES MONITORED</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">Weekly</span>
+          <span class="stat__label">REFRESH CYCLE</span>
+        </div>
+      </div>
+
+      <div class="t-body t-muted service-prose">
+        <p>
+          Operated by <a href="https://runfieldwork.com" target="_blank" rel="noopener">Fieldwork</a>. Every report is built from primary job posting data, not scraped summaries or third-party aggregations.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-12);">Questions.</h2>
+
+      <div class="faq-list">
+        {faqData.map(faq => (
+          <div class="faq-item">
+            <h3 class="t-h3">{faq.question}</h3>
+            <p class="t-body t-muted">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</ServicePage>
+
+<style is:global>
+  .service-prose p { margin-bottom: var(--space-6); }
+  .service-prose ul, .service-prose ol { padding-left: var(--space-6); margin-bottom: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); }
+  .service-prose li { line-height: var(--lh-body); }
+  .faq-list { display: flex; flex-direction: column; gap: var(--space-12); }
+  .faq-item h3 { margin-bottom: var(--space-3); }
+  .faq-item p { margin: 0; }
+</style>

@@ -1,13 +1,128 @@
 ---
-import Base from '../../../layouts/Base.astro';
+import ServicePage from '../../../layouts/ServicePage.astro';
 ---
 
-<Base
-  title="Team training & handoff"
+<ServicePage
+  title="Team training & handoff · subagent/gtm"
   description="Every engagement includes training. Your team learns to modify, extend, and operate the subagents we built."
   path="/services/team-training/"
+  microLabel="TEAM TRAINING · EVERY ENGAGEMENT"
+  h1="We train your team to operate what we built."
+  subhead="Every engagement ends with handoff. Your operators learn Claude Code. Your CROs learn the Forward Test. You leave the engagement more capable, not more dependent."
+  serviceType="Team Training and Handoff"
 >
-  <main>
-    <p>Team training — content pending prompt 6.</p>
-  </main>
-</Base>
+  <!-- FAQPage schema -->
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can we buy training without a build engagement?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Training is only available as part of a build engagement. We train your team on the specific subagents and systems we built for you — not generic AI workshops. No standalone courses. No cohorts."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if we hire new people after the handoff?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The optional async Loom library covers onboarding. Every subagent ships with a CLAUDE.md that documents how it works, what it does, and how to modify it. New hires can self-onboard. Quarterly check-ins are available for 12 months if you want live support."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How technical does our team need to be?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "RevOps-level. If your team can build a HubSpot workflow or write a Salesforce report, they can operate what we hand off. Claude Code subagents are configured via CLAUDE.md files — plain English instructions, not code. The Forward Test rubric is a scoring sheet, not a codebase."
+        }
+      }
+    ]
+  })} />
+
+  <!-- Problem -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">AI tools deployed. Nobody trained. Adoption dies.</h2>
+
+      <div class="t-body t-muted service-prose">
+        <p>
+          Every failed AI GTM pilot has the same post-mortem. The tool was bought. The vendor did a demo. The champion left or got busy. Six months later, the license is still active and nobody uses it. The problem was never the technology. It was the handoff.
+        </p>
+        <p>
+          We build subagents trained on the <a href="/methodology/">Forward Test</a>. But building isn't enough. If your team can't modify the rubric, adjust the scoring threshold, or debug a subagent that's drafting poorly — then you're dependent on us. That's not the model. Every engagement ends with your team more capable than when it started.
+        </p>
+        <p>
+          Training isn't an add-on. It's built into the engagement.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's included -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">What's included.</h2>
+
+      <ul class="t-body t-muted service-prose">
+        <li>
+          <strong>90-minute handoff session on every subagent shipped.</strong> Walk through the build, the logic, the data sources, the scoring thresholds. Your operators leave knowing exactly what it does and how to change it.
+        </li>
+        <li>
+          <strong>CLAUDE.md walkthrough + modification training.</strong> Every subagent ships with a CLAUDE.md that governs its behavior. We teach your team how to read it, edit it, and extend it. Plain English instructions, not code.
+        </li>
+        <li>
+          <strong>Forward Test rubric training for any team member.</strong> Anyone drafting or reviewing outbound learns the three criteria — Specific, Timely, Actionable — and how to score messages against them. The rubric becomes your team's quality standard.
+        </li>
+        <li>
+          <strong>Optional: async Loom library for onboarding future hires.</strong> Recorded walkthroughs of every subagent, every pipeline, every workflow we built. New team members self-onboard without scheduling a call.
+        </li>
+        <li>
+          <strong>Optional: quarterly 60-minute check-ins for 12 months.</strong> Live sessions to review subagent performance, adjust thresholds, and address new use cases. Available as an add-on.
+        </li>
+      </ul>
+
+      <div class="t-body t-muted service-prose" style="margin-top: var(--space-8); padding: var(--space-6); border: 1px solid var(--surface-2); border-radius: var(--radius-lg);">
+        <p style="margin: 0;">
+          <strong>No standalone courses.</strong> We don't sell cohorts. Training is only available as part of a build engagement.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-12);">Questions.</h2>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <h3 class="t-h3">Can we buy training without a build engagement?</h3>
+          <p class="t-body t-muted">No. Training is only available as part of a build engagement. We train your team on the specific subagents and systems we built for you — not generic AI workshops. No standalone courses. No cohorts.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="t-h3">What if we hire new people after the handoff?</h3>
+          <p class="t-body t-muted">The optional async Loom library covers onboarding. Every subagent ships with a CLAUDE.md that documents how it works, what it does, and how to modify it. New hires can self-onboard. Quarterly check-ins are available for 12 months if you want live support.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="t-h3">How technical does our team need to be?</h3>
+          <p class="t-body t-muted">RevOps-level. If your team can build a HubSpot workflow or write a Salesforce report, they can operate what we hand off. Claude Code subagents are configured via CLAUDE.md files — plain English instructions, not code. The Forward Test rubric is a scoring sheet, not a codebase.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</ServicePage>
+
+<style is:global>
+  .service-prose p { margin-bottom: var(--space-6); }
+  .service-prose ul, .service-prose ol { padding-left: var(--space-6); margin-bottom: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); }
+  .service-prose li { line-height: var(--lh-body); }
+  .faq-list { display: flex; flex-direction: column; gap: var(--space-12); }
+  .faq-item h3 { margin-bottom: var(--space-3); }
+  .faq-item p { margin: 0; }
+</style>

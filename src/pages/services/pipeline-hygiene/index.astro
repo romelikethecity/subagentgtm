@@ -1,13 +1,130 @@
 ---
-import Base from '../../../layouts/Base.astro';
+import ServicePage from '../../../layouts/ServicePage.astro';
+
+const faqData = [
+  {
+    question: "What CRMs do you support?",
+    answer: "Salesforce and HubSpot natively. Other CRMs via API. The subagent reads your pipeline data, scores it, and writes back. No manual exports. No spreadsheet gymnastics."
+  },
+  {
+    question: "How do you handle stale-deal outreach without annoying prospects?",
+    answer: "Every re-engagement message passes the Forward Test. The subagent researches current signals — new hires, product launches, funding events — before drafting. If there is no valid signal, the deal stays dormant. No 'just checking in' emails."
+  },
+  {
+    question: "What does it cost?",
+    answer: "Pipeline hygiene audit and initial cleanup: $10K-$15K fixed-fee. Ongoing weekly truth digest and stale-deal resurrection retainer starts at $6K/mo. Includes the subagent, the rubric, and weekly CRO-ready reports."
+  }
+];
 ---
 
-<Base
+<ServicePage
   title="Pipeline hygiene"
   description="Stale-deal resurrection, forecast accuracy, and weekly pipeline truth digests for CROs who are tired of lying pipelines."
   path="/services/pipeline-hygiene/"
+  microLabel="PIPELINE HYGIENE · GTM ENGINEERING"
+  h1="Your pipeline is lying. We fix that."
+  subhead="Stale-deal resurrection, forecast accuracy, and weekly pipeline truth digests for CROs who are tired of lying pipelines."
+  serviceType="Pipeline Hygiene and Deal Resurrection"
 >
-  <main>
-    <p>Pipeline hygiene — content pending prompt 6.</p>
-  </main>
-</Base>
+  <!-- FAQPage schema -->
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqData.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  })} />
+
+  <!-- Problem -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">Your forecast is fiction.</h2>
+
+      <div class="t-body t-muted service-prose">
+        <p>
+          Every CRO inherits a pipeline full of lies. Deals sitting in "negotiation" for six months. Opportunities with no next step logged since January. Stage labels that do not match activity. Your board deck says $4M in pipeline. Your gut says half of that is dead.
+        </p>
+        <p>
+          The problem is not discipline. Your reps know these deals are stale. They keep them alive because removing a deal from pipeline feels like admitting failure. So the pipeline inflates. The forecast drifts. And the CRO makes hiring and territory decisions on numbers that do not reflect reality.
+        </p>
+        <p>
+          We build a subagent that reads your pipeline weekly, scores every deal against activity signals, flags the liars, and drafts <a href="/methodology/">Forward Test</a>-grade re-engagement messages for deals worth resurrecting. The output is a truth digest your CRO reads every Monday morning.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we build it -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">How we build it.</h2>
+
+      <ol class="t-body t-muted service-prose">
+        <li>
+          <strong>Audit.</strong> We pull every open opportunity from your CRM. Last activity date. Stage duration. Next step field. Email and call activity. Meeting history. The subagent builds a health score for every deal and flags the ones that do not match their stage label.
+        </li>
+        <li>
+          <strong>Scoring.</strong> Each deal gets a truth score: active, stale, misclassified, or dead. Active deals stay. Dead deals get archived with a reason code. Misclassified deals get restaged. Stale deals move to the resurrection queue.
+        </li>
+        <li>
+          <strong>Resurrection outreach.</strong> For stale deals with viable signals, the subagent drafts re-engagement messages that pass the <a href="/methodology/">Forward Test</a>. New hiring at the account. Product launch. Funding event. A concrete reason to reconnect — not "circling back."
+        </li>
+        <li>
+          <strong>Weekly truth digest.</strong> Every Monday, your CRO gets a pipeline report built from activity data, not rep self-reporting. Real pipeline value. Forecast confidence intervals. Deals at risk. Resurrection results from the prior week. One page. Ten minutes.
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Proof -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">What changes.</h2>
+
+      <div class="grid grid--3" style="margin-bottom: var(--space-12);">
+        <div class="stat">
+          <span class="stat__value">Weekly</span>
+          <span class="stat__label">TRUTH DIGEST DELIVERED MONDAYS</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">FWD</span>
+          <span class="stat__label">RESURRECTION MESSAGES PASS THE FORWARD TEST</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">Yours</span>
+          <span class="stat__label">SUBAGENT IN YOUR REPO. YOUR RUBRIC.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-12);">Questions.</h2>
+
+      <div class="faq-list">
+        {faqData.map(faq => (
+          <div class="faq-item">
+            <h3 class="t-h3">{faq.question}</h3>
+            <p class="t-body t-muted">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</ServicePage>
+
+<style is:global>
+  .service-prose p { margin-bottom: var(--space-6); }
+  .service-prose ul, .service-prose ol { padding-left: var(--space-6); margin-bottom: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); }
+  .service-prose li { line-height: var(--lh-body); }
+  .faq-list { display: flex; flex-direction: column; gap: var(--space-12); }
+  .faq-item h3 { margin-bottom: var(--space-3); }
+  .faq-item p { margin: 0; }
+</style>

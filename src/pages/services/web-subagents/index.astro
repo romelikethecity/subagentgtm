@@ -1,13 +1,136 @@
 ---
-import Base from '../../../layouts/Base.astro';
+import ServicePage from '../../../layouts/ServicePage.astro';
+
+const faqData = [
+  {
+    question: "Why static sites instead of WordPress?",
+    answer: "WordPress averages 3-5 seconds to first paint. Our static sites load in under one second. No plugins to patch. No database to hack. No hosting fees that scale with traffic. The site is HTML files on a CDN."
+  },
+  {
+    question: "Do you run ongoing ad campaigns?",
+    answer: "No. We build the conversion infrastructure — landing pages, tracking, creative — and hand it off. If you need ongoing campaign management, we will tell you. We are a build-and-hand-off firm, not an ad agency."
+  },
+  {
+    question: "What does a typical engagement cost?",
+    answer: "Event registration sites start at $5K. Full site builds start at $15K. SEO and content strategy retainers start at $6K/mo. Paid social buildouts are scoped per campaign. No hourly billing."
+  }
+];
 ---
 
-<Base
+<ServicePage
   title="Web & conversion subagents"
   description="Static sites that load in under a second. Event registration, programmatic SEO, paid social. Powered by SharpPages."
   path="/services/web-subagents/"
+  microLabel="WEB & CONVERSION · SHARPPAGES"
+  h1="Static sites that load in under a second. Programmatic SEO. Paid social that converts."
+  subhead="Operated by SharpPages. 700+ pages built. 98 average PageSpeed. 2x industry-average CTR on Meta Ads."
+  serviceType="Web Design and Conversion Optimization"
 >
-  <main>
-    <p>Web subagents — content pending prompt 6.</p>
-  </main>
-</Base>
+  <!-- FAQPage schema -->
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqData.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  })} />
+
+  <!-- Problem -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">Your site is slow. Your SEO is guesswork. Your agency bills hourly.</h2>
+
+      <div class="t-body t-muted service-prose">
+        <p>
+          Most B2B sites run on WordPress with a page builder, three dozen plugins, and a 4-second load time. Google penalizes anything over 2.5 seconds. Your prospects bounce before the hero image renders.
+        </p>
+        <p>
+          Your agency redesigns the site every 18 months and calls it SEO. Meanwhile, your competitors are building 200-page programmatic SEO plays that capture long-tail traffic you did not know existed. And your paid social? A Meta Ads account managed by someone who optimizes for landing page views instead of conversions.
+        </p>
+        <p>
+          We build sites that load in under a second, rank for terms that matter, and convert paid traffic into pipeline.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we build it -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">How we build it.</h2>
+
+      <ol class="t-body t-muted service-prose">
+        <li>
+          <strong>Audit.</strong> PageSpeed, Core Web Vitals, crawl errors, content gaps, competitor keyword overlap. We map every page against search intent and flag what is missing, broken, or cannibalizing.
+        </li>
+        <li>
+          <strong>Build.</strong> Static HTML on Astro or raw templates. No WordPress. No page builders. Every page hand-coded, every image optimized, every asset served from a CDN. GitHub Pages or Cloudflare Pages hosting.
+        </li>
+        <li>
+          <strong>SEO.</strong> Programmatic page generation for long-tail terms. Title and meta description templates enforced at the build level. Internal linking architecture. Schema markup on every page. Content expansion for thin pages.
+        </li>
+        <li>
+          <strong>Launch and convert.</strong> Event registration sites in 48 hours. Paid social creative and landing pages optimized for ViewContent, not vanity metrics. Server-side Meta Conversions API from day one.
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Proof -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">The numbers.</h2>
+
+      <div class="grid grid--3" style="margin-bottom: var(--space-12);">
+        <div class="stat">
+          <span class="stat__value">700+</span>
+          <span class="stat__label">PAGES BUILT</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">98</span>
+          <span class="stat__label">AVERAGE PAGESPEED SCORE</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">2x</span>
+          <span class="stat__label">INDUSTRY-AVERAGE CTR ON META ADS</span>
+        </div>
+      </div>
+
+      <div class="t-body t-muted service-prose">
+        <p>
+          Operated by <a href="https://sharppages.com" target="_blank" rel="noopener">SharpPages</a>. Every site we build scores 95+ on Lighthouse. Every event site launches in under a week.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-12);">Questions.</h2>
+
+      <div class="faq-list">
+        {faqData.map(faq => (
+          <div class="faq-item">
+            <h3 class="t-h3">{faq.question}</h3>
+            <p class="t-body t-muted">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</ServicePage>
+
+<style is:global>
+  .service-prose p { margin-bottom: var(--space-6); }
+  .service-prose ul, .service-prose ol { padding-left: var(--space-6); margin-bottom: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); }
+  .service-prose li { line-height: var(--lh-body); }
+  .faq-list { display: flex; flex-direction: column; gap: var(--space-12); }
+  .faq-item h3 { margin-bottom: var(--space-3); }
+  .faq-item p { margin: 0; }
+</style>

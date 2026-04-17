@@ -1,0 +1,92 @@
+---
+import Base from './Base.astro';
+import CTAButton from '../components/CTAButton.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  microLabel: string;
+  h1: string;
+  subhead: string;
+  serviceType: string;
+}
+
+const { title, description, path, microLabel, h1, subhead, serviceType } = Astro.props;
+---
+
+<Base title={title} description={description} path={path}>
+  <!-- Service schema -->
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": serviceType,
+    "provider": {
+      "@type": "Organization",
+      "name": "subagent/gtm",
+      "url": "https://subagentgtm.com"
+    },
+    "areaServed": "United States",
+    "description": description
+  })} />
+
+  <main>
+    <!-- Hero -->
+    <section class="section" style="padding-top: var(--space-16);">
+      <div class="container" style="max-width: 900px;">
+        <span class="t-micro">{microLabel}</span>
+        <h1 class="t-display-xl" style="margin: var(--space-6) 0 var(--space-6);">
+          {h1}
+        </h1>
+        <p class="t-body t-muted" style="max-width: 640px; margin-bottom: var(--space-8);">
+          {subhead}
+        </p>
+        <CTAButton href="/contact/" label="→ Book a build" variant="primary" large={true} caption="Fixed-fee engagements. Deliverable you own. No seat licenses." />
+      </div>
+    </section>
+
+    <!-- Page content slot -->
+    <slot />
+
+    <!-- CTA -->
+    <section class="section">
+      <div class="container" style="text-align: center;">
+        <h2 class="t-display" style="margin-bottom: var(--space-6);">Ready to ship?</h2>
+        <CTAButton href="/contact/" label="→ Book a build" variant="primary" large={true} />
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style>
+  .service-prose p {
+    margin-bottom: var(--space-6);
+  }
+
+  .service-prose ul,
+  .service-prose ol {
+    padding-left: var(--space-6);
+    margin-bottom: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .service-prose li {
+    line-height: var(--lh-body);
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  .faq-item h3 {
+    margin-bottom: var(--space-3);
+  }
+
+  .faq-item p {
+    margin: 0;
+  }
+</style>

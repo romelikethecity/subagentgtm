@@ -1,13 +1,130 @@
 ---
-import Base from '../../../layouts/Base.astro';
+import ServicePage from '../../../layouts/ServicePage.astro';
+
+const faqData = [
+  {
+    question: "What data do you need from us?",
+    answer: "CRM export of closed-won deals from the last 12-24 months. Company name, deal size, sales cycle length, industry, and any custom fields you track. We handle the rest. If your CRM is messy, we clean it first."
+  },
+  {
+    question: "How is this different from our existing ICP?",
+    answer: "Most ICPs are built by a founder in a conference room. Ours are built from your closed-won data. We find patterns your team missed — deal size by vertical, sales cycle by company size, win rate by persona. The output is a scoring model, not a slide."
+  },
+  {
+    question: "What does it cost?",
+    answer: "ICP discovery is a fixed-fee engagement, typically $10K-$20K depending on CRM complexity and data volume. Delivered in three weeks. Includes the scoring model, the validation report, and a handoff session with your team."
+  }
+];
 ---
 
-<Base
+<ServicePage
   title="ICP discovery"
   description="Your ICP isn't what you think. We reverse-engineer it from your closed-won data in three weeks."
   path="/services/icp-discovery/"
+  microLabel="ICP DISCOVERY · GTM ENGINEERING"
+  h1="Your ICP isn't what you think. We prove it in three weeks."
+  subhead="Your ICP isn't what you think. We reverse-engineer it from your closed-won data in three weeks."
+  serviceType="ICP Discovery and Analysis"
 >
-  <main>
-    <p>ICP discovery — content pending prompt 6.</p>
-  </main>
-</Base>
+  <!-- FAQPage schema -->
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqData.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  })} />
+
+  <!-- Problem -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">Your outbound is aimed at the wrong people.</h2>
+
+      <div class="t-body t-muted service-prose">
+        <p>
+          Your ICP was defined in a board meeting 18 months ago. A founder said "mid-market SaaS, VP of Sales, 200-500 employees." It went on a slide. SDRs started dialing. Nobody checked whether the companies you actually close look anything like that profile.
+        </p>
+        <p>
+          We see this in every engagement. The ICP slide says one thing. The closed-won data says another. The best customers came from verticals nobody targeted. The fastest sales cycles happened at company sizes nobody prioritized. The highest-value personas were not the ones on the outbound list.
+        </p>
+        <p>
+          Every outbound message we build passes the <a href="/methodology/">Forward Test</a>. But the Forward Test only works if you are sending to the right people. ICP discovery is the prerequisite.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we build it -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">How we build it.</h2>
+
+      <ol class="t-body t-muted service-prose">
+        <li>
+          <strong>Closed-won analysis.</strong> We pull every closed-won deal from the last 12-24 months. Deal size, sales cycle length, industry, company size, persona, lead source, competitive displacement. We clean the data first — most CRMs have 20-40% field inconsistency.
+        </li>
+        <li>
+          <strong>Pattern extraction.</strong> A Claude Code subagent identifies clusters in your win data that your team has not named yet. Which verticals close fastest. Which personas expand. Which company sizes churn. Which signals predict a closed-won outcome before the first call.
+        </li>
+        <li>
+          <strong>ICP scoring model.</strong> We build a weighted scoring model that ranks prospects by fit. Not a persona doc — a formula your SDRs can run against any list. Integrates directly into your CRM as a custom field.
+        </li>
+        <li>
+          <strong>Validation.</strong> We test the model against your lost deals and open pipeline. If the model would have predicted your losses, it is working. If it would not have, we adjust. The output ships with a confidence report.
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Proof -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">What changes.</h2>
+
+      <div class="grid grid--3" style="margin-bottom: var(--space-12);">
+        <div class="stat">
+          <span class="stat__value">3 wks</span>
+          <span class="stat__label">DISCOVERY TO DELIVERY</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">Score</span>
+          <span class="stat__label">NOT A SLIDE. A SCORING MODEL.</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">Yours</span>
+          <span class="stat__label">LIVES IN YOUR CRM. YOUR REPO.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-12);">Questions.</h2>
+
+      <div class="faq-list">
+        {faqData.map(faq => (
+          <div class="faq-item">
+            <h3 class="t-h3">{faq.question}</h3>
+            <p class="t-body t-muted">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</ServicePage>
+
+<style is:global>
+  .service-prose p { margin-bottom: var(--space-6); }
+  .service-prose ul, .service-prose ol { padding-left: var(--space-6); margin-bottom: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); }
+  .service-prose li { line-height: var(--lh-body); }
+  .faq-list { display: flex; flex-direction: column; gap: var(--space-12); }
+  .faq-item h3 { margin-bottom: var(--space-3); }
+  .faq-item p { margin: 0; }
+</style>

@@ -1,13 +1,119 @@
 ---
-import Base from '../../../layouts/Base.astro';
+import ServicePage from '../../../layouts/ServicePage.astro';
 ---
 
-<Base
-  title="HubSpot Breeze deployment"
+<ServicePage
+  title="HubSpot Breeze deployment · subagent/gtm"
   description="You bought Breeze. Nobody on your team knows how to deploy it. We configure Breeze + build Claude Code subagents around it."
   path="/services/hubspot-breeze/"
+  microLabel="HUBSPOT BREEZE · GTM ENGINEERING"
+  h1="You bought Breeze. Nobody knows how to deploy it."
+  subhead="You bought Breeze. Nobody on your team knows how to deploy it. We configure Breeze + build Claude Code subagents around it."
+  serviceType="HubSpot Breeze Deployment"
 >
-  <main>
-    <p>HubSpot Breeze — content pending prompt 6.</p>
-  </main>
-</Base>
+  <!-- FAQPage schema -->
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do we need to be on HubSpot Enterprise for Breeze?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Breeze features are available across HubSpot tiers, but the most useful ones — Breeze Copilot, Breeze Agents, and Breeze Intelligence — require Sales Hub or Marketing Hub Professional or Enterprise. We audit your current tier and tell you exactly what's usable before we touch anything."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if Breeze can't do what we need?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "That's half the engagement. Breeze has real gaps — especially in multi-step workflows and custom object handling. Where Breeze falls short, we build Claude Code subagents that fill the gap and pipe results back into HubSpot. You get one system, not two."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does the deployment take?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Two to four weeks. Week one is audit and configuration. Weeks two through four are subagent builds around the gaps. Team training is included in the final week."
+        }
+      }
+    ]
+  })} />
+
+  <!-- Problem -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">HubSpot sold it. Your team can't configure it.</h2>
+
+      <div class="t-body t-muted service-prose">
+        <p>
+          HubSpot shipped Breeze across every hub in 2024. Your AE promised AI-native CRM. Your team got a settings page nobody understands and a Copilot that hallucinates deal data.
+        </p>
+        <p>
+          The features are real — Breeze Intelligence for enrichment, Breeze Agents for customer-facing automation, Breeze Copilot for internal workflows. But HubSpot's deployment documentation is sparse, their CSMs aren't trained on it, and your RevOps team has a backlog that started before Breeze existed.
+        </p>
+        <p>
+          So the AI features sit unused. You're paying for them. Nobody's deploying them. That's the gap we close.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we build it -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">How we deploy it.</h2>
+
+      <ol class="t-body t-muted service-prose">
+        <li>
+          <strong>Audit your HubSpot instance.</strong> We map your current objects, workflows, integrations, and data hygiene. Most Breeze features fail silently on dirty data — we identify blockers before configuration starts.
+        </li>
+        <li>
+          <strong>Configure Breeze features.</strong> Breeze Intelligence for contact and company enrichment. Breeze Agents for lead routing and customer-facing responses. Breeze Copilot for internal summarization and deal analysis. Each one configured against your actual data, not HubSpot defaults.
+        </li>
+        <li>
+          <strong>Build Claude Code subagents around the gaps.</strong> Breeze can't do everything. Where it falls short — multi-step research, custom scoring, cross-object analysis — we build subagents that run alongside HubSpot and pipe results back in. Versioned in your repo. You own the code.
+        </li>
+        <li>
+          <strong>Train your team.</strong> 90-minute handoff session. Your RevOps team learns what Breeze is doing, what the subagents are doing, and how to modify both. No black boxes.
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-12);">Questions.</h2>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <h3 class="t-h3">Do we need to be on HubSpot Enterprise for Breeze?</h3>
+          <p class="t-body t-muted">Breeze features are available across HubSpot tiers, but the most useful ones — Breeze Copilot, Breeze Agents, and Breeze Intelligence — require Sales Hub or Marketing Hub Professional or Enterprise. We audit your current tier and tell you exactly what's usable before we touch anything.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="t-h3">What if Breeze can't do what we need?</h3>
+          <p class="t-body t-muted">That's half the engagement. Breeze has real gaps — especially in multi-step workflows and custom object handling. Where Breeze falls short, we build Claude Code subagents that fill the gap and pipe results back into HubSpot. You get one system, not two.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="t-h3">How long does the deployment take?</h3>
+          <p class="t-body t-muted">Two to four weeks. Week one is audit and configuration. Weeks two through four are subagent builds around the gaps. Team training is included in the final week.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</ServicePage>
+
+<style is:global>
+  .service-prose p { margin-bottom: var(--space-6); }
+  .service-prose ul, .service-prose ol { padding-left: var(--space-6); margin-bottom: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); }
+  .service-prose li { line-height: var(--lh-body); }
+  .faq-list { display: flex; flex-direction: column; gap: var(--space-12); }
+  .faq-item h3 { margin-bottom: var(--space-3); }
+  .faq-item p { margin: 0; }
+</style>

@@ -1,13 +1,122 @@
 ---
-import Base from '../../../layouts/Base.astro';
+import ServicePage from '../../../layouts/ServicePage.astro';
 ---
 
-<Base
-  title="Post-PE GTM rebuild"
+<ServicePage
+  title="Post-PE GTM rebuild · subagent/gtm"
   description="First 90 days after acquisition. We rebuild the GTM engine across portfolio companies. Fixed-fee. Repeatable."
   path="/services/pe-portco-gtm/"
+  microLabel="POST-PE GTM · PORTFOLIO COMPANIES"
+  h1="First 90 days. New GTM engine. Fixed-fee."
+  subhead="First 90 days after acquisition. We rebuild the GTM engine across portfolio companies. Fixed-fee. Repeatable."
+  serviceType="Post-PE GTM Rebuild"
 >
-  <main>
-    <p>Post-PE GTM rebuild — content pending prompt 6.</p>
-  </main>
-</Base>
+  <!-- FAQPage schema -->
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can you work across multiple portfolio companies at once?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The engagement is templated. After the first portco, subsequent rebuilds run faster because the playbook, subagents, and data pipelines are reusable. We scope each portco individually but the methodology is repeatable."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if the portco is on a CRM we don't support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We work with HubSpot, Salesforce, and Pipedrive natively. For other CRMs, we connect via API. The subagents are CRM-agnostic — they read and write through standard integrations."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does a 90-day engagement cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Fixed-fee, scoped in discovery. Typical range is $40K–$75K per portco depending on GTM complexity, number of reps, and data cleanup required. Volume pricing available for multi-portco engagements."
+        }
+      }
+    ]
+  })} />
+
+  <!-- Problem -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">Acquired a company. The GTM engine is broken.</h2>
+
+      <div class="t-body t-muted service-prose">
+        <p>
+          PE firms acquire companies with impressive top-line numbers and discover the GTM stack underneath is duct tape. CRM data is stale. Pipeline reporting is fiction. Outbound is manual. The sales team is running plays from three years ago.
+        </p>
+        <p>
+          The operating partner needs results in 90 days. Traditional agencies take 90 days just to onboard. Consultants deliver a deck. Neither ships pipeline. You need someone who can audit, rebuild, and hand off a working GTM engine on a fixed timeline. That's what we do. Every outbound motion we deploy passes the <a href="/methodology/">Forward Test</a> — no generic sequences, no spray-and-pray.
+        </p>
+        <p>
+          We've built the playbook to be repeatable across portfolio companies. Same methodology. Same data pipelines. Same handoff. Different portco, same speed.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we build it -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">How we rebuild the GTM engine.</h2>
+
+      <ol class="t-body t-muted service-prose">
+        <li>
+          <strong>GTM audit (week 1–2).</strong> CRM hygiene, pipeline accuracy, outbound sequences, inbound conversion paths, rep activity data. We score what's working and what's broken. No deck — a prioritized build list.
+        </li>
+        <li>
+          <strong>Data cleanup via <a href="https://veruminc.com" target="_blank" rel="noopener">Verum</a>.</strong> Contact and company data validated, enriched, and deduplicated. Stale records flagged. Missing fields filled. This is the foundation — nothing works downstream without clean data.
+        </li>
+        <li>
+          <strong>Pipeline rebuild.</strong> New pipeline stages mapped to buyer behavior, not internal process. Subagents deployed for deal scoring, stale-deal resurrection, and forecast accuracy. CRO gets a weekly pipeline truth digest on day one.
+        </li>
+        <li>
+          <strong>Outbound via the Forward Test.</strong> New outbound subagents trained on prospect pain, not the portco's value prop. Every message passes the Forward Test or it doesn't send. First 50 messages human-approved. Then the system runs.
+        </li>
+        <li>
+          <strong>Team training and handoff.</strong> Your operators learn to run what we built. CLAUDE.md walkthrough. Forward Test rubric training. The portco's team leaves more capable than when the engagement started.
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-12);">Questions.</h2>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <h3 class="t-h3">Can you work across multiple portfolio companies at once?</h3>
+          <p class="t-body t-muted">Yes. The engagement is templated. After the first portco, subsequent rebuilds run faster because the playbook, subagents, and data pipelines are reusable. We scope each portco individually but the methodology is repeatable.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="t-h3">What if the portco is on a CRM we don't support?</h3>
+          <p class="t-body t-muted">We work with HubSpot, Salesforce, and Pipedrive natively. For other CRMs, we connect via API. The subagents are CRM-agnostic — they read and write through standard integrations.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="t-h3">What does a 90-day engagement cost?</h3>
+          <p class="t-body t-muted">Fixed-fee, scoped in discovery. Typical range is $40K–$75K per portco depending on GTM complexity, number of reps, and data cleanup required. Volume pricing available for multi-portco engagements.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</ServicePage>
+
+<style is:global>
+  .service-prose p { margin-bottom: var(--space-6); }
+  .service-prose ul, .service-prose ol { padding-left: var(--space-6); margin-bottom: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); }
+  .service-prose li { line-height: var(--lh-body); }
+  .faq-list { display: flex; flex-direction: column; gap: var(--space-12); }
+  .faq-item h3 { margin-bottom: var(--space-3); }
+  .faq-item p { margin: 0; }
+</style>

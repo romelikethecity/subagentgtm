@@ -1,13 +1,119 @@
 ---
-import Base from '../../../layouts/Base.astro';
+import ServicePage from '../../../layouts/ServicePage.astro';
 ---
 
-<Base
-  title="Salesforce Agentforce deployment"
+<ServicePage
+  title="Salesforce Agentforce deployment · subagent/gtm"
   description="Agentforce is aggressively sold and poorly deployed. We make it work — or tell you when it won't."
   path="/services/salesforce-agentforce/"
+  microLabel="SALESFORCE AGENTFORCE · GTM ENGINEERING"
+  h1="Agentforce is aggressively sold and poorly deployed. We fix that."
+  subhead="Agentforce is aggressively sold and poorly deployed. We make it work — or tell you when it won't."
+  serviceType="Salesforce Agentforce Deployment"
 >
-  <main>
-    <p>Salesforce Agentforce — content pending prompt 6.</p>
-  </main>
-</Base>
+  <!-- FAQPage schema -->
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do we need Salesforce Unlimited or Einstein 1 to use Agentforce?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Agentforce requires Einstein 1 Edition or specific add-on SKUs. Part of our assessment is telling you whether your current Salesforce contract supports it — and whether the per-conversation pricing makes financial sense for your volume."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if Agentforce isn't the right fit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We tell you. If Claude Code subagents connected to Salesforce via API deliver better results at lower cost, we build that instead. We don't have a Salesforce partnership incentive. We have a build incentive."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is this different from a Salesforce SI?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Salesforce SIs sell implementation hours. We build and hand off. Fixed-fee. No ongoing Salesforce consulting retainer. If Agentforce works, you run it. If it doesn't, the Claude Code subagents we built run instead."
+        }
+      }
+    ]
+  })} />
+
+  <!-- Problem -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">Salesforce is selling Agentforce to everyone. Most deployments fail.</h2>
+
+      <div class="t-body t-muted service-prose">
+        <p>
+          Salesforce made Agentforce the centerpiece of their product roadmap. Every AE is pitching it. Every QBR features it. The pressure to adopt is real — and the gap between what's promised and what's deployed is widening.
+        </p>
+        <p>
+          Most Agentforce implementations stall at configuration. The data model isn't clean enough. The knowledge base isn't structured. The trust layer blocks useful actions. Teams end up with a partially deployed agent that answers simple questions and breaks on anything complex.
+        </p>
+        <p>
+          Wasted licenses. Wasted quarters. Meanwhile the CRO still needs pipeline built and the CS team still needs deflection that works.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we build it -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">How we deploy it.</h2>
+
+      <ol class="t-body t-muted service-prose">
+        <li>
+          <strong>Assess fit.</strong> We audit your Salesforce instance, data model, and use cases. Agentforce is strong for structured service workflows and weak for complex sales motions. We tell you where it fits and where it doesn't — before you spend configuration time.
+        </li>
+        <li>
+          <strong>Configure Agentforce.</strong> Topics, actions, knowledge articles, trust layer guardrails. Each agent scoped to a specific workflow — not a catch-all chatbot. We configure against your actual objects and fields, not Salesforce demo data.
+        </li>
+        <li>
+          <strong>Integrate with Claude Code subagents.</strong> Where Agentforce hits its ceiling — multi-step research, cross-system orchestration, outbound that passes the <a href="/methodology/">Forward Test</a> — we build Claude Code subagents that run alongside it. Results pipe back into Salesforce. One source of truth.
+        </li>
+        <li>
+          <strong>Validate and hand off.</strong> Two weeks of production testing against real cases. We measure resolution rate, escalation rate, and accuracy. Your team gets a 90-minute handoff session covering what Agentforce handles, what the subagents handle, and how to adjust both.
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-12);">Questions.</h2>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <h3 class="t-h3">Do we need Salesforce Unlimited or Einstein 1 to use Agentforce?</h3>
+          <p class="t-body t-muted">Agentforce requires Einstein 1 Edition or specific add-on SKUs. Part of our assessment is telling you whether your current Salesforce contract supports it — and whether the per-conversation pricing makes financial sense for your volume.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="t-h3">What if Agentforce isn't the right fit?</h3>
+          <p class="t-body t-muted">We tell you. If Claude Code subagents connected to Salesforce via API deliver better results at lower cost, we build that instead. We don't have a Salesforce partnership incentive. We have a build incentive.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="t-h3">How is this different from a Salesforce SI?</h3>
+          <p class="t-body t-muted">Salesforce SIs sell implementation hours. We build and hand off. Fixed-fee. No ongoing Salesforce consulting retainer. If Agentforce works, you run it. If it doesn't, the Claude Code subagents we built run instead.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</ServicePage>
+
+<style is:global>
+  .service-prose p { margin-bottom: var(--space-6); }
+  .service-prose ul, .service-prose ol { padding-left: var(--space-6); margin-bottom: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); }
+  .service-prose li { line-height: var(--lh-body); }
+  .faq-list { display: flex; flex-direction: column; gap: var(--space-12); }
+  .faq-item h3 { margin-bottom: var(--space-3); }
+  .faq-item p { margin: 0; }
+</style>

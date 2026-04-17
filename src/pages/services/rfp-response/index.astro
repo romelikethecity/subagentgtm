@@ -1,13 +1,130 @@
 ---
-import Base from '../../../layouts/Base.astro';
+import ServicePage from '../../../layouts/ServicePage.astro';
+
+const faqData = [
+  {
+    question: "What compliance frameworks do you cover?",
+    answer: "SOC 2 Type I and II, HIPAA, FedRAMP, ISO 27001, GDPR, CCPA, and custom enterprise security questionnaires. If your prospect sends a 200-question spreadsheet, we handle it."
+  },
+  {
+    question: "How do you maintain accuracy over time?",
+    answer: "The knowledge base updates with every response cycle. When your security posture changes — new certifications, updated policies, infrastructure changes — the subagent learns from the SME review and applies it to future responses automatically."
+  },
+  {
+    question: "What does it cost?",
+    answer: "Initial knowledge base build and first 5 RFP responses: $15K-$25K fixed-fee. Ongoing retainer for continuous response capacity starts at $4K/mo. Volume discounts for teams responding to 10+ RFPs per quarter."
+  }
+];
 ---
 
-<Base
+<ServicePage
   title="RFP & security questionnaire response"
   description="SOC 2, HIPAA, FedRAMP, enterprise RFPs — answered in 48-72 hours with AI-drafted, SME-reviewed responses."
   path="/services/rfp-response/"
+  microLabel="RFP & SECURITY QUESTIONNAIRE · GTM ENGINEERING"
+  h1="SOC 2, HIPAA, FedRAMP, enterprise RFPs. Answered in 48-72 hours."
+  subhead="SOC 2, HIPAA, FedRAMP, enterprise RFPs — answered in 48-72 hours with AI-drafted, SME-reviewed responses."
+  serviceType="RFP Response Automation"
 >
-  <main>
-    <p>RFP response — content pending prompt 6.</p>
-  </main>
-</Base>
+  <!-- FAQPage schema -->
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqData.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  })} />
+
+  <!-- Problem -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">RFPs are killing your deal velocity.</h2>
+
+      <div class="t-body t-muted service-prose">
+        <p>
+          Every outbound message we build passes the <a href="/methodology/">Forward Test</a>. RFP responses need the same rigor. The difference is volume. Your SE team is buried in 150-question security questionnaires, 40-page RFPs, and compliance spreadsheets that all ask the same questions in slightly different formats.
+        </p>
+        <p>
+          The answers exist. They are scattered across Google Docs, old RFP responses, Confluence pages nobody maintains, and the heads of three people on your security team. Every response is a scavenger hunt. Your best SEs spend 30% of their time on paperwork instead of selling.
+        </p>
+        <p>
+          We build a knowledge base from your existing responses, policies, and certifications. A Claude Code subagent drafts responses in hours. Your SMEs review and approve. The knowledge base gets smarter with every cycle.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we build it -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">How we build it.</h2>
+
+      <ol class="t-body t-muted service-prose">
+        <li>
+          <strong>Knowledge base ingest.</strong> We collect every prior RFP response, security policy, compliance certification, SOC 2 report, and internal wiki page. The subagent indexes, deduplicates, and structures the corpus into a queryable knowledge base versioned in your repo.
+        </li>
+        <li>
+          <strong>AI draft.</strong> When a new RFP arrives, the subagent maps each question to existing answers, identifies gaps, and drafts a complete response. SOC 2 questions pull from your latest audit report. HIPAA questions reference your BAA and privacy policies. Custom questions get flagged for SME input.
+        </li>
+        <li>
+          <strong>SME review.</strong> Your subject matter experts review drafts in a structured format. Approved responses go back to the knowledge base. Corrections teach the subagent for next time. The review loop shrinks with every cycle.
+        </li>
+        <li>
+          <strong>Continuous learning.</strong> New certifications, policy changes, infrastructure updates. The knowledge base stays current because the subagent ingests changes as they happen. No quarterly refresh. No stale answers.
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Proof -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">What changes.</h2>
+
+      <div class="grid grid--3" style="margin-bottom: var(--space-12);">
+        <div class="stat">
+          <span class="stat__value">48-72h</span>
+          <span class="stat__label">RFP TURNAROUND TIME</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">30%</span>
+          <span class="stat__label">SE TIME RECOVERED</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">Yours</span>
+          <span class="stat__label">KNOWLEDGE BASE. YOUR REPO.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-12);">Questions.</h2>
+
+      <div class="faq-list">
+        {faqData.map(faq => (
+          <div class="faq-item">
+            <h3 class="t-h3">{faq.question}</h3>
+            <p class="t-body t-muted">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</ServicePage>
+
+<style is:global>
+  .service-prose p { margin-bottom: var(--space-6); }
+  .service-prose ul, .service-prose ol { padding-left: var(--space-6); margin-bottom: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); }
+  .service-prose li { line-height: var(--lh-body); }
+  .faq-list { display: flex; flex-direction: column; gap: var(--space-12); }
+  .faq-item h3 { margin-bottom: var(--space-3); }
+  .faq-item p { margin: 0; }
+</style>

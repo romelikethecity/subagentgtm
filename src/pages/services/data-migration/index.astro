@@ -1,13 +1,138 @@
 ---
-import Base from '../../../layouts/Base.astro';
+import ServicePage from '../../../layouts/ServicePage.astro';
 ---
 
-<Base
-  title="GTM data migration"
+<ServicePage
+  title="GTM data migration · subagent/gtm"
   description="ZoomInfo to Verum. Definitive Healthcare to Provyx. We migrate your GTM data off enterprise contracts and cut your spend 80%."
   path="/services/data-migration/"
+  microLabel="DATA MIGRATION · GTM STACK"
+  h1="ZoomInfo to Verum. Definitive to Provyx. Cut your spend 80%."
+  subhead="ZoomInfo to Verum. Definitive Healthcare to Provyx. We migrate your GTM data off enterprise contracts and cut your spend 80%."
+  serviceType="GTM Data Migration"
 >
-  <main>
-    <p>Data migration — content pending prompt 6.</p>
-  </main>
-</Base>
+  <!-- FAQPage schema -->
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Will the data quality drop if we leave ZoomInfo?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. ZoomInfo's data decays at the same rate as everyone else's — roughly 30% per year. Verum validates and enriches continuously. You get fresher data because we build pipelines that refresh on your schedule, not on an annual contract renewal."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you migrate mid-contract?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. We build the new pipeline in parallel while your existing contract runs. When it expires, you cut over. No gap in data access. We time the migration to your renewal date."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does migration cost versus what we're paying now?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Migration is a one-time fixed fee, typically $5K–$15K depending on record volume and field complexity. Ongoing data from Verum or Provyx runs 80% less than enterprise contracts. Most teams recover the migration cost in the first quarter."
+        }
+      }
+    ]
+  })} />
+
+  <!-- Problem -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">You're overpaying for data you barely use.</h2>
+
+      <div class="t-body t-muted service-prose">
+        <p>
+          ZoomInfo charges $30K–$100K per year. Definitive Healthcare charges more. Your team uses a fraction of the credits. The contract auto-renewed because nobody tracked the renewal date. And the data quality — 30% decay per year, same as everyone else.
+        </p>
+        <p>
+          You're locked into enterprise pricing for commodity data. The switching cost feels high because nobody's mapped the fields, validated the records, or built an alternative pipeline. So the contract renews again.
+        </p>
+        <p>
+          We migrate you off. <a href="https://veruminc.com" target="_blank" rel="noopener">Verum</a> replaces ZoomInfo for B2B data. <a href="https://getprovyx.com" target="_blank" rel="noopener">Provyx</a> replaces Definitive Healthcare for provider data. Same fields. Fresher records. 80% less spend.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we build it -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">How we migrate.</h2>
+
+      <ol class="t-body t-muted service-prose">
+        <li>
+          <strong>Audit current contracts and usage.</strong> We pull your actual usage data — credits consumed, fields used, integrations active, renewal dates. Most teams are paying for 10x the data they touch.
+        </li>
+        <li>
+          <strong>Map fields to Verum/Provyx schema.</strong> Every field your CRM and outbound tools depend on gets mapped to the equivalent in our stack. No orphaned fields. No broken integrations. We document every mapping decision.
+        </li>
+        <li>
+          <strong>Migrate and validate.</strong> Records transferred, validated against primary sources, and enriched where gaps exist. Verum delivers B2B data in hours. Provyx delivers NPI-verified healthcare data at the same speed. We run a parallel period so you can compare quality before cutting over.
+        </li>
+        <li>
+          <strong>Train your team on the new stack.</strong> Your RevOps team learns the new data sources, refresh cadences, and integration points. No vendor lock-in. You own the pipeline.
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Proof -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">The math.</h2>
+
+      <div class="t-body t-muted service-prose">
+        <p>
+          Verum delivers validated, enriched B2B data in hours — not the weeks it takes enterprise vendors to process a list request. 300K+ records processed per month. 91% owner match accuracy. At a fraction of ZoomInfo's cost.
+        </p>
+        <p>
+          Provyx delivers NPI-verified healthcare provider data across 40+ specialties. No annual contract. No minimum spend. Pay for what you use.
+        </p>
+        <p style="margin-top: var(--space-4);">
+          Operated by <a href="https://veruminc.com" target="_blank" rel="noopener">Verum</a> + <a href="https://getprovyx.com" target="_blank" rel="noopener">Provyx</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-12);">Questions.</h2>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <h3 class="t-h3">Will the data quality drop if we leave ZoomInfo?</h3>
+          <p class="t-body t-muted">No. ZoomInfo's data decays at the same rate as everyone else's — roughly 30% per year. Verum validates and enriches continuously. You get fresher data because we build pipelines that refresh on your schedule, not on an annual contract renewal.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="t-h3">Can you migrate mid-contract?</h3>
+          <p class="t-body t-muted">Yes. We build the new pipeline in parallel while your existing contract runs. When it expires, you cut over. No gap in data access. We time the migration to your renewal date.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 class="t-h3">What does migration cost versus what we're paying now?</h3>
+          <p class="t-body t-muted">Migration is a one-time fixed fee, typically $5K–$15K depending on record volume and field complexity. Ongoing data from Verum or Provyx runs 80% less than enterprise contracts. Most teams recover the migration cost in the first quarter.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</ServicePage>
+
+<style is:global>
+  .service-prose p { margin-bottom: var(--space-6); }
+  .service-prose ul, .service-prose ol { padding-left: var(--space-6); margin-bottom: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); }
+  .service-prose li { line-height: var(--lh-body); }
+  .faq-list { display: flex; flex-direction: column; gap: var(--space-12); }
+  .faq-item h3 { margin-bottom: var(--space-3); }
+  .faq-item p { margin: 0; }
+</style>

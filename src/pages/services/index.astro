@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
 ---
 
 <Base
@@ -8,6 +9,150 @@ import Base from '../../layouts/Base.astro';
   path="/services/"
 >
   <main>
-    <p>Services index — content pending prompt 6.</p>
+    <section class="section" style="padding-top: var(--space-16);">
+      <div class="container" style="max-width: 900px;">
+        <span class="t-micro">ALL SERVICES · SUBAGENT/GTM</span>
+        <h1 class="t-display-xl" style="margin: var(--space-6) 0 var(--space-6);">
+          Sixteen services. Four properties. One engineering team.
+        </h1>
+        <p class="t-body t-muted" style="max-width: 640px; margin-bottom: var(--space-8);">
+          Every service ships to your repo. Fixed-fee. No seat licenses. Grouped by function below.
+        </p>
+      </div>
+    </section>
+
+    <!-- Data -->
+    <section class="section--tight">
+      <div class="container">
+        <span class="section-label">DATA</span>
+        <div class="grid grid--3" style="margin-top: var(--space-4);">
+          <ServiceCard
+            label="VERUM + PROVYX"
+            title="Data subagents"
+            body="Validation, cleaning, enrichment, discovery. 300K+ records/month. 91% owner match accuracy."
+            href="/services/data-subagents/"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Web -->
+    <section class="section--tight">
+      <div class="container">
+        <span class="section-label">WEB & CONVERSION</span>
+        <div class="grid grid--3" style="margin-top: var(--space-4);">
+          <ServiceCard
+            label="SHARPPAGES"
+            title="Web & conversion subagents"
+            body="Sub-one-second sites. Programmatic SEO. Paid social. 700+ pages built. 98 PageSpeed."
+            href="/services/web-subagents/"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Intel -->
+    <section class="section--tight">
+      <div class="container">
+        <span class="section-label">COMPETITIVE INTEL</span>
+        <div class="grid grid--3" style="margin-top: var(--space-4);">
+          <ServiceCard
+            label="FIELDWORK"
+            title="Competitive intel subagents"
+            body="27K+ postings tracked. 11K+ companies. Weekly refresh. Monthly reports."
+            href="/services/intel-subagents/"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- GTM Engineering -->
+    <section class="section--tight">
+      <div class="container">
+        <span class="section-label">GTM ENGINEERING</span>
+        <div class="grid grid--3" style="margin-top: var(--space-4);">
+          <ServiceCard
+            label="GTM ENGINEERING"
+            title="GTM subagents"
+            body="Pipeline hygiene, ICP discovery, RFP response, CRM cleanup. All versioned in your repo."
+            href="/services/gtm-subagents/"
+          />
+          <ServiceCard
+            label="FORWARD TEST"
+            title="AI SDR replacement"
+            body="Your AI SDR failed because it pitched. We build agents that pass the Forward Test."
+            href="/services/ai-sdr-replacement/"
+          />
+          <ServiceCard
+            label="GTM ENGINEERING"
+            title="RFP & security questionnaire"
+            body="SOC 2, HIPAA, FedRAMP, enterprise RFPs. Answered in 48-72 hours."
+            href="/services/rfp-response/"
+          />
+          <ServiceCard
+            label="GTM ENGINEERING"
+            title="ICP discovery"
+            body="Reverse-engineer your ICP from closed-won data in three weeks."
+            href="/services/icp-discovery/"
+          />
+          <ServiceCard
+            label="GTM ENGINEERING"
+            title="Pipeline hygiene"
+            body="Stale-deal resurrection. Forecast accuracy. Weekly truth digests."
+            href="/services/pipeline-hygiene/"
+          />
+          <ServiceCard
+            label="GTM ENGINEERING"
+            title="HubSpot Breeze deployment"
+            body="You bought Breeze. Nobody on your team knows how to deploy it. We do."
+            href="/services/hubspot-breeze/"
+          />
+          <ServiceCard
+            label="GTM ENGINEERING"
+            title="Salesforce Agentforce"
+            body="Agentforce is aggressively sold and poorly deployed. We make it work."
+            href="/services/salesforce-agentforce/"
+          />
+          <ServiceCard
+            label="GTM ENGINEERING"
+            title="Post-PE GTM rebuild"
+            body="First 90 days after acquisition. We rebuild the GTM engine. Fixed-fee."
+            href="/services/pe-portco-gtm/"
+          />
+          <ServiceCard
+            label="GTM ENGINEERING"
+            title="Event-driven ABM"
+            body="Registration sites + enrichment + orchestration. Multi-city conference playbook."
+            href="/services/event-abm/"
+          />
+          <ServiceCard
+            label="GTM ENGINEERING"
+            title="Trust center buildout"
+            body="SOC 2 / HIPAA trust center. SharpPages builds it. Verum maintains it."
+            href="/services/trust-center/"
+          />
+          <ServiceCard
+            label="GTM ENGINEERING"
+            title="GTM data migration"
+            body="ZoomInfo to Verum. Definitive to Provyx. Cut your data spend 80%."
+            href="/services/data-migration/"
+          />
+          <ServiceCard
+            label="EVERY ENGAGEMENT"
+            title="Team training & handoff"
+            body="Your team learns to modify, extend, and operate the subagents we built."
+            href="/services/team-training/"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section">
+      <div class="container" style="text-align: center;">
+        <h2 class="t-display" style="margin-bottom: var(--space-6);">Ready to ship?</h2>
+        <a href="/contact/" class="btn btn--primary btn--large">→ Book a build</a>
+      </div>
+    </section>
   </main>
 </Base>

@@ -1,13 +1,152 @@
 ---
-import Base from '../../../layouts/Base.astro';
+import ServicePage from '../../../layouts/ServicePage.astro';
+import ServiceCard from '../../../components/ServiceCard.astro';
+
+const faqData = [
+  {
+    question: "Do we need to be using Claude Code already?",
+    answer: "No. We set it up with you. Every engagement starts with a CLAUDE.md we write for your team and ends with a handoff session that trains your operators to modify the subagents we built."
+  },
+  {
+    question: "Can we pick one service or do we need the full stack?",
+    answer: "Pick one. Each service is scoped independently. Most teams start with pipeline hygiene or ICP discovery and expand from there once the first subagent is running."
+  },
+  {
+    question: "What does a typical GTM engineering engagement cost?",
+    answer: "Subagent builds typically run $15K-$75K depending on scope. Retainers for ongoing engineering start at $6K/mo. No hourly billing. No seat licenses."
+  }
+];
 ---
 
-<Base
+<ServicePage
   title="GTM engineering subagents"
   description="Pipeline hygiene, ICP discovery, RFP response, and CRM cleanup — deployed as Claude Code subagents."
   path="/services/gtm-subagents/"
+  microLabel="GTM ENGINEERING · CLAUDE CODE SUBAGENTS"
+  h1="GTM engineering, built as Claude Code subagents."
+  subhead="Pipeline hygiene, ICP discovery, RFP response, CRM cleanup. All versioned in your repo, all trained on the Forward Test."
+  serviceType="GTM Engineering"
 >
-  <main>
-    <p>GTM subagents — content pending prompt 6.</p>
-  </main>
-</Base>
+  <!-- FAQPage schema -->
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqData.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  })} />
+
+  <!-- Intro -->
+  <section class="section">
+    <div class="container container--narrow">
+      <div class="t-body t-muted service-prose">
+        <p>
+          Every subagent we build ships with a <code>CLAUDE.md</code>, a <a href="/methodology/">Forward Test</a> rubric, and version history in your repo. Your team can read, modify, and extend anything we deploy. No black boxes. No vendor lock-in.
+        </p>
+        <p>
+          Ten services. Each one scoped independently. Start with one. Expand when the first one ships pipeline.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service cards -->
+  <section class="section">
+    <div class="container">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">The services.</h2>
+
+      <div class="grid grid--3">
+        <ServiceCard
+          label="FORWARD TEST"
+          title="AI SDR replacement"
+          body="Your AI SDR failed because it pitched. We build agents that pass the Forward Test."
+          href="/services/ai-sdr-replacement/"
+        />
+        <ServiceCard
+          label="GTM ENGINEERING"
+          title="Pipeline hygiene"
+          body="Stale-deal resurrection. Forecast accuracy. Weekly truth digests for CROs."
+          href="/services/pipeline-hygiene/"
+        />
+        <ServiceCard
+          label="GTM ENGINEERING"
+          title="RFP & security questionnaire"
+          body="SOC 2, HIPAA, FedRAMP, enterprise RFPs. Answered in 48-72 hours."
+          href="/services/rfp-response/"
+        />
+        <ServiceCard
+          label="GTM ENGINEERING"
+          title="ICP discovery"
+          body="Reverse-engineer your ICP from closed-won data in three weeks."
+          href="/services/icp-discovery/"
+        />
+        <ServiceCard
+          label="GTM ENGINEERING"
+          title="HubSpot Breeze deployment"
+          body="You bought Breeze. Nobody on your team knows how to deploy it. We do."
+          href="/services/hubspot-breeze/"
+        />
+        <ServiceCard
+          label="GTM ENGINEERING"
+          title="Salesforce Agentforce"
+          body="Agentforce is aggressively sold and poorly deployed. We make it work."
+          href="/services/salesforce-agentforce/"
+        />
+        <ServiceCard
+          label="GTM ENGINEERING"
+          title="Post-PE GTM rebuild"
+          body="First 90 days after acquisition. Rebuild the GTM engine. Fixed-fee. Repeatable."
+          href="/services/pe-portco-gtm/"
+        />
+        <ServiceCard
+          label="GTM ENGINEERING"
+          title="Event-driven ABM"
+          body="Registration sites + enrichment + orchestration. Multi-city conference playbook."
+          href="/services/event-abm/"
+        />
+        <ServiceCard
+          label="GTM ENGINEERING"
+          title="Trust center buildout"
+          body="SOC 2 / HIPAA trust center. SharpPages builds it. Verum maintains it."
+          href="/services/trust-center/"
+        />
+        <ServiceCard
+          label="GTM ENGINEERING"
+          title="GTM data migration"
+          body="ZoomInfo to Verum. Definitive to Provyx. Cut your data spend 80%."
+          href="/services/data-migration/"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-12);">Questions.</h2>
+
+      <div class="faq-list">
+        {faqData.map(faq => (
+          <div class="faq-item">
+            <h3 class="t-h3">{faq.question}</h3>
+            <p class="t-body t-muted">{faq.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</ServicePage>
+
+<style is:global>
+  .service-prose p { margin-bottom: var(--space-6); }
+  .service-prose ul, .service-prose ol { padding-left: var(--space-6); margin-bottom: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); }
+  .service-prose li { line-height: var(--lh-body); }
+  .faq-list { display: flex; flex-direction: column; gap: var(--space-12); }
+  .faq-item h3 { margin-bottom: var(--space-3); }
+  .faq-item p { margin: 0; }
+</style>
