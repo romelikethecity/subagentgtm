@@ -1,0 +1,21 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  variant?: 'primary' | 'secondary';
+  large?: boolean;
+  caption?: string;
+}
+
+const { href, label, variant = 'primary', large = false, caption } = Astro.props;
+const classes = [
+  'btn',
+  variant === 'primary' ? 'btn--primary' : '',
+  large ? 'btn--large' : '',
+].filter(Boolean).join(' ');
+---
+
+<div>
+  <a href={href} class={classes}>{label}</a>
+  {caption && <span class="cta-caption">{caption}</span>}
+</div>

@@ -1,0 +1,12 @@
+---
+interface Props {
+  pill?: string;
+}
+
+const { pill } = Astro.props;
+---
+
+<div class="terminal">
+  {pill && <span class="terminal__pill">{pill}</span>}
+  <slot />
+</div>

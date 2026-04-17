@@ -1,0 +1,34 @@
+---
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '' } = Astro.props;
+---
+
+<nav class="nav" id="main-nav">
+  <div class="nav__inner">
+    <a href="/" class="wordmark" style="font-size: 20px; text-decoration: none;">
+      subagent<span class="slash">/</span>gtm
+    </a>
+    <div class="nav__links">
+      <a href="/services/" class="nav__link">Services</a>
+      <a href="/methodology/" class="nav__link">Methodology</a>
+      <a href="/work/" class="nav__link">Work</a>
+      <a href="/contact/" class="btn btn--primary" style="margin-left: var(--space-2);">→ Book a build</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        nav.classList.add('nav--scrolled');
+      } else {
+        nav.classList.remove('nav--scrolled');
+      }
+    }, { passive: true });
+  }
+</script>

@@ -1,4 +1,7 @@
 ---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
 interface Props {
   title: string;
   description: string;
@@ -91,6 +94,8 @@ const canonicalUrl = `https://subagentgtm.com${path}`;
     <slot name="head" />
   </head>
   <body>
+    <Nav currentPath={path} />
     <slot />
+    <Footer />
   </body>
 </html>

@@ -1,0 +1,10 @@
+---
+interface Props {
+  number: string;
+  label: string;
+}
+
+const { number, label } = Astro.props;
+---
+
+<span class="section-label">{number} / {label}</span>
