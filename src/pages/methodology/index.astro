@@ -1,5 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
+import SectionLabel from '../../components/SectionLabel.astro';
+import CTAButton from '../../components/CTAButton.astro';
 ---
 
 <Base
@@ -7,7 +9,212 @@ import Base from '../../layouts/Base.astro';
   description="Every outbound message must pass one test: would the recipient forward it? If not, it doesn't send. Read the methodology."
   path="/methodology/"
 >
+  <!-- Article schema -->
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "The Forward Test",
+    "description": "Every outbound message must be valuable enough that the recipient wants to forward it to their boss, their peer, or their team. If it fails, it doesn't send.",
+    "author": {
+      "@type": "Person",
+      "name": "Rome Thorndike"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "subagent/gtm",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://subagentgtm.com/brand/logo-dark.svg"
+      }
+    },
+    "mainEntityOfPage": "https://subagentgtm.com/methodology/"
+  })} />
+
   <main>
-    <p>The Forward Test — content pending prompt 4.</p>
+    <!-- Hero -->
+    <section class="section" style="padding-top: var(--space-16);">
+      <div class="container container--narrow">
+        <span class="t-micro">THE FORWARD TEST · SUBAGENT METHODOLOGY</span>
+
+        <h1 class="t-display-xl" style="margin: var(--space-6) 0 var(--space-6);">
+          The Forward Test.
+        </h1>
+
+        <p class="t-body t-muted" style="margin-bottom: 0;">
+          Every message we send must be valuable enough that the recipient wants their boss, their peer, or their team to see it. If it fails the Forward Test, it doesn't send.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 1: Why PVP wasn't enough -->
+    <section class="section">
+      <div class="container container--narrow">
+        <h2 class="t-h1" style="margin-bottom: var(--space-8);">Why PVP wasn't enough.</h2>
+
+        <div class="t-body t-muted methodology-prose">
+          <p>
+            Jordan Crawford's Permissionless Value Proposition framework at Cannonball GTM is one of the best pieces of outbound thinking in the last five years. Its core insight — that the best outbound messages deliver value a prospect would pay to receive — reshaped how serious operators think about cold email.
+          </p>
+          <p>
+            But PVP was designed for humans drafting messages. When you try to scale it through AI agents at volume, three things break:
+          </p>
+          <ol>
+            <li><strong>Quality drift.</strong> PVP's seven criteria are a great teaching tool. They're a worse quality control mechanism. Agents pattern-match on surface criteria and produce plausible-looking slop that technically passes but doesn't resonate.</li>
+            <li><strong>Sender bias.</strong> PVP asks "would the prospect pay for this?" That's still a sender-side question. The agent is guessing what the prospect values.</li>
+            <li><strong>No shareability test.</strong> A message can be valuable in isolation and still be something the recipient would never share. The shareability bar is the stronger signal of real value.</li>
+          </ol>
+          <p>
+            We needed a test that was simpler, harder, and agent-native.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: The test -->
+    <section class="section">
+      <div class="container container--narrow">
+        <h2 class="t-h1" style="margin-bottom: var(--space-8);">The test.</h2>
+
+        <blockquote class="t-quote">
+          Would the recipient forward this to their boss, their peer, or their team?
+        </blockquote>
+
+        <div class="t-body t-muted methodology-prose">
+          <p>
+            If yes, send it. If no, regenerate.
+          </p>
+          <p>
+            That's the entire methodology. One question. Two outcomes. Every subagent we build self-scores on this before any message leaves our infrastructure.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Why this is harder than PVP -->
+    <section class="section">
+      <div class="container container--narrow">
+        <h2 class="t-h1" style="margin-bottom: var(--space-8);">Why this is harder than PVP.</h2>
+
+        <div class="t-body t-muted methodology-prose">
+          <p>
+            PVP asks one audience to like a message. The Forward Test asks two audiences to like it — the recipient AND whoever they might forward it to. A message that clears that bar has to be:
+          </p>
+          <ul>
+            <li>Valuable enough that sharing it makes the sharer look smart</li>
+            <li>Specific enough that it reads as research, not mass email</li>
+            <li>Timely enough that forwarding it is still relevant tomorrow</li>
+            <li>Actionable enough that the forwarded recipient has something to do</li>
+          </ul>
+          <p>
+            Most outbound fails at least three of those. Most AI SDR output fails all four.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: The three criteria (STA) -->
+    <section class="section">
+      <div class="container">
+        <div class="container--narrow" style="margin-bottom: var(--space-12);">
+          <h2 class="t-h1" style="margin-bottom: var(--space-6);">The three criteria.</h2>
+          <p class="t-body t-muted">Every message our subagents draft is scored against three criteria before sending.</p>
+        </div>
+
+        <div class="grid grid--3" style="max-width: var(--container);">
+          <div class="card">
+            <span class="card__label">SPECIFIC</span>
+            <span class="card__title">Names. Numbers. Dates.</span>
+            <span class="card__body">A specific permit, a specific raise, a specific hire, a specific tech stack change. If the message could be sent to 50 other prospects with minor edits, it fails Specific.</span>
+          </div>
+          <div class="card">
+            <span class="card__label">TIMELY</span>
+            <span class="card__title">Last 30 days. Ideally 7.</span>
+            <span class="card__body">The signal must be from the last 30 days. Outbound based on a six-month-old data point reads as outdated research. The subagent checks signal dates before drafting and kills anything stale.</span>
+          </div>
+          <div class="card">
+            <span class="card__label">ACTIONABLE</span>
+            <span class="card__title">Something they can do today.</span>
+            <span class="card__body">The recipient must have something they can do today based on this message. Not "think about this next quarter." Something concrete, scoped, and doable this week.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: How we implement it -->
+    <section class="section">
+      <div class="container container--narrow">
+        <h2 class="t-h1" style="margin-bottom: var(--space-8);">How we implement it in Claude Code.</h2>
+
+        <div class="t-body t-muted methodology-prose">
+          <p>
+            Every subagent we ship includes a <code>forward-test.md</code> file in the repo with the three criteria and a scoring rubric (0–3 per criterion, 7+ to send). Before any message reaches the send queue, the subagent self-scores the draft. Below threshold, it regenerates. After three failed regenerations on the same prospect, it skips and logs.
+          </p>
+          <p>This means:</p>
+          <ul>
+            <li>You can audit every message that was ever sent</li>
+            <li>You can adjust the threshold per campaign</li>
+            <li>Your team can modify the rubric as ICP understanding deepens</li>
+            <li>No human has to manually review each draft — the system self-regulates</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: The metric nobody else reports -->
+    <section class="section">
+      <div class="container container--narrow">
+        <h2 class="t-h1" style="margin-bottom: var(--space-8);">The metric nobody else reports.</h2>
+
+        <div class="t-body t-muted methodology-prose">
+          <p>
+            Every subagent<span class="slash">/</span>gtm engagement tracks <strong>forward rate</strong> — the percentage of sent messages that were forwarded by the recipient (measured by email thread replies, CC/BCC mentions, and post-meeting references).
+          </p>
+          <p>
+            Open rate is vanity. Reply rate is closer. Forward rate is the real signal. When a message gets forwarded, you've reached not just the recipient but everyone the recipient wanted to impress with their find.
+          </p>
+          <p>
+            We publish forward rate in every case study. No other AI GTM vendor reports it, because most can't.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section">
+      <div class="container" style="text-align: center;">
+        <h2 class="t-display" style="margin-bottom: var(--space-6);">Ready to ship?</h2>
+        <p class="t-body t-muted" style="max-width: 560px; margin: 0 auto var(--space-8);">
+          Tell us what you want built. We'll reply within two business days with a fixed quote.
+        </p>
+        <CTAButton href="/contact/" label="→ Book a build" variant="primary" large={true} />
+      </div>
+    </section>
   </main>
 </Base>
+
+<style>
+  .methodology-prose p {
+    margin-bottom: var(--space-6);
+  }
+
+  .methodology-prose ol,
+  .methodology-prose ul {
+    padding-left: var(--space-6);
+    margin-bottom: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .methodology-prose li {
+    line-height: var(--lh-body);
+  }
+
+  .methodology-prose code {
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
+    background: var(--surface);
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+  }
+</style>
