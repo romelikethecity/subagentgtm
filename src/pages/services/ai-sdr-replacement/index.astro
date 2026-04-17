@@ -1,5 +1,6 @@
 ---
 import Base from '../../../layouts/Base.astro';
+import CTAButton from '../../../components/CTAButton.astro';
 ---
 
 <Base
@@ -7,7 +8,222 @@ import Base from '../../../layouts/Base.astro';
   description="Your AI SDR failed because it pitched. We build agents that pass the Forward Test. Or they don't send."
   path="/services/ai-sdr-replacement/"
 >
+  <!-- Service schema -->
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "AI SDR Replacement",
+    "provider": {
+      "@type": "Organization",
+      "name": "subagent/gtm",
+      "url": "https://subagentgtm.com"
+    },
+    "areaServed": "United States",
+    "description": "Forward Test-trained AI SDR agents that replace failed AI SDR tools. Custom-built, versioned in your repo, owned by your team."
+  })} />
+
+  <!-- FAQPage schema -->
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "We already have 11x / Artisan / Regie / some other AI SDR. Do you replace or augment?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Replace. We're not an addition to a stack that's failing. If your current AI SDR is producing forward-worthy messages, you don't need us. If it isn't, we migrate you off."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long until messages start sending?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Two to three weeks for the first campaign. One week for subsequent campaigns using the same ICP. New ICPs require the 50-message human approval phase."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who owns the agents?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You do. Every subagent, every prompt, every rubric — versioned in your repo. If we ended the engagement tomorrow, your team continues running exactly what we built."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does it cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Initial build is fixed-fee, typically $25K–$45K depending on ICP complexity and data sources. Ongoing engineering retainer starts at $6K/mo for one active campaign."
+        }
+      }
+    ]
+  })} />
+
   <main>
-    <p>AI SDR replacement — content pending prompt 5.</p>
+    <!-- Hero -->
+    <section class="section" style="padding-top: var(--space-16);">
+      <div class="container" style="max-width: 900px;">
+        <span class="t-micro">AI SDR REPLACEMENT · TRAINED ON THE FORWARD TEST</span>
+
+        <h1 class="t-display-xl" style="margin: var(--space-6) 0 var(--space-6);">
+          Your AI SDR failed because it pitched. We build agents that do the reverse.
+        </h1>
+
+        <p class="t-body t-muted" style="max-width: 640px; margin-bottom: var(--space-8);">
+          We train on your prospect's visible pain first. Your value prop comes last — or not at all. Every message passes the <a href="/methodology/">Forward Test</a> or it doesn't send.
+        </p>
+
+        <CTAButton href="/contact/" label="→ Book a build" variant="primary" large={true} caption="Your existing AI SDR contract? We migrate you off. Fixed-fee." />
+      </div>
+    </section>
+
+    <!-- The problem -->
+    <section class="section">
+      <div class="container container--narrow">
+        <h2 class="t-h1" style="margin-bottom: var(--space-8);">The AI SDR graveyard.</h2>
+
+        <div class="t-body t-muted service-prose">
+          <p>
+            11x raised $76M and reportedly lost 70–80% of its early customers. Artisan got LinkedIn-banned for spam. The whole AI SDR category is three years into a hype cycle and most CROs are tired of pilots that never ship pipeline.
+          </p>
+          <p>
+            The problem isn't AI. It's training. Every AI SDR vendor trains their agents on the seller's value prop. They scrape a LinkedIn title, plug in positioning, and call it personalization. The output is structurally generic because the input was generic.
+          </p>
+          <p>
+            We build the reverse.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How we train -->
+    <section class="section">
+      <div class="container container--narrow">
+        <h2 class="t-h1" style="margin-bottom: var(--space-8);">How we train subagents that pass the Forward Test.</h2>
+
+        <ol class="t-body t-muted service-steps">
+          <li>
+            <strong>Prospect-first research.</strong> The first subagent in the pipeline researches the prospect's visible pain — hiring patterns, product launches, funding events, public reviews, tech stack changes, exec movements. It builds a dossier before it ever touches your value prop.
+          </li>
+          <li>
+            <strong>Signal scoring.</strong> A second subagent scores each signal against STA — is it Specific, Timely, Actionable? Signals scoring below threshold are discarded. This kills 60–80% of "possible reasons to reach out" before drafting ever begins.
+          </li>
+          <li>
+            <strong>Value-prop anchoring.</strong> Only after a high-STA signal survives does the third subagent anchor your value prop to it. The message leads with the signal, delivers the insight, and positions your product as the answer to a problem the prospect has already admitted publicly.
+          </li>
+          <li>
+            <strong>Forward Test self-scoring.</strong> The drafted message is scored by a fourth subagent against the Forward Test rubric. Below 7/9, regenerate. Three failed regenerations, skip the prospect.
+          </li>
+          <li>
+            <strong>Human approval for the first 50.</strong> For every new ICP, a human on your team approves the first 50 sends. After that, the system runs with sampling review.
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Proof -->
+    <section class="section">
+      <div class="container container--narrow">
+        <h2 class="t-h1" style="margin-bottom: var(--space-8);">What actually happens when you train this way.</h2>
+
+        <div class="grid grid--4" style="margin-bottom: var(--space-12);">
+          <div class="stat">
+            <span class="stat__value">FWD</span>
+            <span class="stat__label">FORWARD RATE TRACKED PER CAMPAIGN</span>
+          </div>
+          <div class="stat">
+            <span class="stat__value">RPL</span>
+            <span class="stat__label">REPLY RATE BENCHMARKED AGAINST CONTROL</span>
+          </div>
+          <div class="stat">
+            <span class="stat__value">MTG</span>
+            <span class="stat__label">MEETINGS BOOKED — QUALIFIED ONLY</span>
+          </div>
+          <div class="stat">
+            <span class="stat__value">CPM</span>
+            <span class="stat__label">COST PER MEETING VS YOUR CURRENT AI SDR</span>
+          </div>
+        </div>
+
+        <blockquote class="t-quote">
+          "The first outbound that didn't sound like a robot wrote it."
+        </blockquote>
+
+        <div style="margin-top: var(--space-8);">
+          <a href="/methodology/" class="btn">Read the Forward Test →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+      <div class="container container--narrow">
+        <h2 class="t-h1" style="margin-bottom: var(--space-12);">Questions.</h2>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <h3 class="t-h3">We already have 11x / Artisan / Regie / some other AI SDR. Do you replace or augment?</h3>
+            <p class="t-body t-muted">Replace. We're not an addition to a stack that's failing. If your current AI SDR is producing forward-worthy messages, you don't need us. If it isn't, we migrate you off.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3 class="t-h3">How long until messages start sending?</h3>
+            <p class="t-body t-muted">Two to three weeks for the first campaign. One week for subsequent campaigns using the same ICP. New ICPs require the 50-message human approval phase.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3 class="t-h3">Who owns the agents?</h3>
+            <p class="t-body t-muted">You do. Every subagent, every prompt, every rubric — versioned in your repo. If we ended the engagement tomorrow, your team continues running exactly what we built.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3 class="t-h3">What does it cost?</h3>
+            <p class="t-body t-muted">Initial build is fixed-fee, typically $25K–$45K depending on ICP complexity and data sources. Ongoing engineering retainer starts at $6K/mo for one active campaign.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section">
+      <div class="container" style="text-align: center;">
+        <h2 class="t-display" style="margin-bottom: var(--space-6);">Ready to replace your AI SDR?</h2>
+        <CTAButton href="/contact/" label="→ Book a build" variant="primary" large={true} />
+      </div>
+    </section>
   </main>
 </Base>
+
+<style>
+  .service-prose p {
+    margin-bottom: var(--space-6);
+  }
+
+  .service-steps {
+    padding-left: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .service-steps li {
+    line-height: var(--lh-body);
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  .faq-item h3 {
+    margin-bottom: var(--space-3);
+  }
+
+  .faq-item p {
+    margin: 0;
+  }
+</style>
