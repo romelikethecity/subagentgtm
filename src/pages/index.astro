@@ -89,52 +89,66 @@ import TerminalPanel from '../components/TerminalPanel.astro';
     ]
   })} />
 
+  <!-- Background grid texture -->
+  <div class="bg-grid" aria-hidden="true"></div>
+
   <main>
     <!-- ============================================
          HERO — Above the fold
          ============================================ -->
     <section class="section" style="padding-top: var(--space-16);">
       <div class="container">
-        <span class="t-micro">AI FOR GTM · BUILT ON CLAUDE CODE</span>
+        <div class="hero-enter" style="--delay: 0;">
+          <span class="t-micro">AI FOR GTM · BUILT ON CLAUDE CODE</span>
+        </div>
 
-        <h1 class="t-display-xl" style="margin: var(--space-6) 0 var(--space-6);">
-          AI for GTM that actually ships.
-        </h1>
+        <div class="hero-enter" style="--delay: 1;">
+          <h1 class="t-display-xl" style="margin: var(--space-6) 0 var(--space-6);">
+            AI for GTM that actually ships.
+          </h1>
+        </div>
 
-        <p class="t-body t-muted" style="max-width: 640px; margin-bottom: var(--space-12);">
-          We deploy AI agents, data pipelines, event sites, and competitive intel into your sales, marketing, and CS stack. You own the build.
-        </p>
+        <div class="hero-enter" style="--delay: 2;">
+          <p class="t-body t-muted" style="max-width: 640px; margin-bottom: var(--space-12);">
+            We deploy AI agents, data pipelines, event sites, and competitive intel into your sales, marketing, and CS stack. You own the build.
+          </p>
+        </div>
 
-        <!-- Terminal visual -->
-        <TerminalPanel pill="STAGED">
-          <pre><span class="terminal__prompt">$</span> claude subagent run pipeline-hygiene --dry-run
-
-<span class="terminal__slash">/</span> reading 847 open opps from salesforce
-<span class="terminal__slash">/</span> scoring against forward-test rubric
-<span class="terminal__slash">/</span> 23 deals flagged: no activity > 21 days
-<span class="terminal__slash">/</span> 8 deals flagged: no next step logged
-<span class="terminal__slash">/</span> 4 deals flagged: stage inconsistent with activity
-
-<span class="terminal__arrow">→</span> drafting 23 re-engagement messages
-<span class="terminal__arrow">→</span> self-scoring against forward-test
-<span class="terminal__arrow">→</span> 14 passed (threshold 7/9)
-<span class="terminal__arrow">→</span> 9 regenerated
-<span class="terminal__arrow">→</span> 7 passed on second pass
-<span class="terminal__arrow">→</span> 2 skipped: insufficient signal
-
-<span class="terminal__check">✓</span> 21 messages staged for review
-<span class="terminal__check">✓</span> pipeline-hygiene report saved to /reports/2026-04-17.md<span class="terminal__cursor"></span></pre>
-        </TerminalPanel>
+        <!-- Terminal visual with typing animation -->
+        <div class="hero-enter" style="--delay: 3;">
+          <TerminalPanel pill="STAGED">
+            <div class="terminal-lines" id="terminal-output">
+              <div class="terminal-line"><span class="terminal__prompt">$</span> claude subagent run pipeline-hygiene --dry-run</div>
+              <div class="terminal-line terminal-line--gap"><span class="terminal__slash">/</span> reading 847 open opps from salesforce</div>
+              <div class="terminal-line"><span class="terminal__slash">/</span> scoring against forward-test rubric</div>
+              <div class="terminal-line"><span class="terminal__slash">/</span> 23 deals flagged: no activity > 21 days</div>
+              <div class="terminal-line"><span class="terminal__slash">/</span> 8 deals flagged: no next step logged</div>
+              <div class="terminal-line"><span class="terminal__slash">/</span> 4 deals flagged: stage inconsistent with activity</div>
+              <div class="terminal-line terminal-line--gap"><span class="terminal__arrow">→</span> drafting 23 re-engagement messages</div>
+              <div class="terminal-line"><span class="terminal__arrow">→</span> self-scoring against forward-test</div>
+              <div class="terminal-line"><span class="terminal__arrow">→</span> 14 passed (threshold 7/9)</div>
+              <div class="terminal-line"><span class="terminal__arrow">→</span> 9 regenerated</div>
+              <div class="terminal-line"><span class="terminal__arrow">→</span> 7 passed on second pass</div>
+              <div class="terminal-line"><span class="terminal__arrow">→</span> 2 skipped: insufficient signal</div>
+              <div class="terminal-line terminal-line--gap"><span class="terminal__check">✓</span> 21 messages staged for review</div>
+              <div class="terminal-line"><span class="terminal__check">✓</span> pipeline-hygiene report saved to /reports/2026-04-17.md<span class="terminal__cursor"></span></div>
+            </div>
+          </TerminalPanel>
+        </div>
 
         <!-- Social proof strip -->
-        <div style="margin-top: var(--space-8); display: flex; flex-direction: column; gap: var(--space-2);">
-          <span class="t-micro">OPERATORS FROM · SNAPDOCS · SALESFORCE · MICROSOFT · DATABRICKS (DATAJOY)</span>
-          <span class="t-micro">3,000+ AI NEWS DIGEST SUBSCRIBERS · FOUR OPERATING PROPERTIES · SHIPPED</span>
+        <div class="hero-enter" style="--delay: 4;">
+          <div style="margin-top: var(--space-8); display: flex; flex-direction: column; gap: var(--space-2);">
+            <span class="t-micro">OPERATORS FROM · SNAPDOCS · SALESFORCE · MICROSOFT · DATABRICKS (DATAJOY)</span>
+            <span class="t-micro">3,000+ AI NEWS DIGEST SUBSCRIBERS · FOUR OPERATING PROPERTIES · SHIPPED</span>
+          </div>
         </div>
 
         <!-- Primary CTA -->
-        <div style="margin-top: var(--space-12);">
-          <CTAButton href="/contact/" label="→ Book a build" variant="primary" large={true} caption="Fixed-fee engagements. Deliverable you own. No seat licenses." />
+        <div class="hero-enter" style="--delay: 5;">
+          <div style="margin-top: var(--space-12);">
+            <CTAButton href="/contact/" label="→ Book a build" variant="primary" large={true} caption="Fixed-fee engagements. Deliverable you own. No seat licenses." />
+          </div>
         </div>
       </div>
     </section>
@@ -142,7 +156,7 @@ import TerminalPanel from '../components/TerminalPanel.astro';
     <!-- ============================================
          SECTION 1 — What we build
          ============================================ -->
-    <section class="section">
+    <section class="section scroll-reveal">
       <div class="container">
         <SectionLabel number="01" label="THE STACK" />
 
@@ -154,7 +168,7 @@ import TerminalPanel from '../components/TerminalPanel.astro';
           Every AI GTM agency promises to build. We already ship. subagent<span class="slash">/</span>gtm is the engineering layer over four operating properties — each one proven, each one in production, each one wired together through Claude Code subagents versioned in your repo.
         </p>
 
-        <div class="grid grid--4">
+        <div class="grid grid--4 stagger-children">
           <ServiceCard
             label="DATA"
             title="Validate, clean, enrich, discover."
@@ -186,7 +200,7 @@ import TerminalPanel from '../components/TerminalPanel.astro';
     <!-- ============================================
          SECTION 2 — The Forward Test
          ============================================ -->
-    <section class="section">
+    <section class="section scroll-reveal">
       <div class="container">
         <SectionLabel number="02" label="METHODOLOGY" />
 
@@ -204,7 +218,7 @@ import TerminalPanel from '../components/TerminalPanel.astro';
         </div>
 
         <!-- Three pillar cards -->
-        <div class="grid grid--3">
+        <div class="grid grid--3 stagger-children">
           <div class="card">
             <span class="card__label">SPECIFIC</span>
             <span class="card__title">Names. Numbers. Dates.</span>
@@ -231,7 +245,7 @@ import TerminalPanel from '../components/TerminalPanel.astro';
     <!-- ============================================
          SECTION 3 — What we build for sales, marketing, CS
          ============================================ -->
-    <section class="section">
+    <section class="section scroll-reveal">
       <div class="container">
         <SectionLabel number="03" label="SUBAGENTS" />
 
@@ -239,7 +253,7 @@ import TerminalPanel from '../components/TerminalPanel.astro';
           Twelve services. Three GTM functions. One engineering team.
         </h2>
 
-        <div class="grid grid--3">
+        <div class="grid grid--3 stagger-children">
           <!-- Sales -->
           <div>
             <h3 class="t-h3" style="margin-bottom: var(--space-6);">Sales</h3>
@@ -279,7 +293,7 @@ import TerminalPanel from '../components/TerminalPanel.astro';
     <!-- ============================================
          SECTION 4 — Social proof
          ============================================ -->
-    <section class="section">
+    <section class="section scroll-reveal">
       <div class="container">
         <SectionLabel number="04" label="PROOF" />
 
@@ -287,7 +301,7 @@ import TerminalPanel from '../components/TerminalPanel.astro';
           We don't pitch. We ship.
         </h2>
 
-        <div class="grid grid--4">
+        <div class="grid grid--4 stagger-children">
           <div class="stat">
             <span class="stat__value">700+</span>
             <span class="stat__label">PAGES BUILT — SHARPPAGES</span>
@@ -316,7 +330,7 @@ import TerminalPanel from '../components/TerminalPanel.astro';
     <!-- ============================================
          SECTION 5 — FAQ
          ============================================ -->
-    <section class="section">
+    <section class="section scroll-reveal">
       <div class="container">
         <SectionLabel number="05" label="QUESTIONS" />
 
@@ -361,7 +375,7 @@ import TerminalPanel from '../components/TerminalPanel.astro';
     <!-- ============================================
          SECTION 6 — Second CTA
          ============================================ -->
-    <section class="section">
+    <section class="section scroll-reveal">
       <div class="container" style="text-align: center;">
         <h2 class="t-display" style="margin-bottom: var(--space-6);">Ready to ship?</h2>
 
@@ -376,7 +390,7 @@ import TerminalPanel from '../components/TerminalPanel.astro';
     <!-- ============================================
          SECTION 7 — Founder's note
          ============================================ -->
-    <section class="section">
+    <section class="section scroll-reveal">
       <div class="container">
         <SectionLabel number="06" label="FROM ROME" />
 
@@ -404,6 +418,145 @@ import TerminalPanel from '../components/TerminalPanel.astro';
 </Base>
 
 <style>
+  /* ========================================================================
+     Background grid — faint depth texture matching OG image aesthetic
+     ======================================================================== */
+  .bg-grid {
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--surface-2) 1px, transparent 1px),
+      linear-gradient(90deg, var(--surface-2) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: 0.07;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  main {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ========================================================================
+     Hero entrance — staggered fade-up on page load
+     ======================================================================== */
+  .hero-enter {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: heroFadeUp 0.7s var(--ease) forwards;
+    animation-delay: calc(var(--delay) * 120ms + 100ms);
+  }
+
+  @keyframes heroFadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ========================================================================
+     Terminal typing — line-by-line progressive reveal
+     ======================================================================== */
+  .terminal-lines {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .terminal-line {
+    opacity: 0;
+    transform: translateX(-4px);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .terminal-line--gap {
+    margin-top: 1.2em;
+  }
+
+  .terminal--typing .terminal-line {
+    animation: terminalLineIn 0.25s var(--ease) forwards;
+  }
+
+  /* Stagger each line — 14 lines, ~120ms apart = ~1.7s total */
+  .terminal--typing .terminal-line:nth-child(1)  { animation-delay: 0ms; }
+  .terminal--typing .terminal-line:nth-child(2)  { animation-delay: 140ms; }
+  .terminal--typing .terminal-line:nth-child(3)  { animation-delay: 260ms; }
+  .terminal--typing .terminal-line:nth-child(4)  { animation-delay: 360ms; }
+  .terminal--typing .terminal-line:nth-child(5)  { animation-delay: 440ms; }
+  .terminal--typing .terminal-line:nth-child(6)  { animation-delay: 520ms; }
+  .terminal--typing .terminal-line:nth-child(7)  { animation-delay: 680ms; }
+  .terminal--typing .terminal-line:nth-child(8)  { animation-delay: 780ms; }
+  .terminal--typing .terminal-line:nth-child(9)  { animation-delay: 860ms; }
+  .terminal--typing .terminal-line:nth-child(10) { animation-delay: 940ms; }
+  .terminal--typing .terminal-line:nth-child(11) { animation-delay: 1020ms; }
+  .terminal--typing .terminal-line:nth-child(12) { animation-delay: 1100ms; }
+  .terminal--typing .terminal-line:nth-child(13) { animation-delay: 1320ms; }
+  .terminal--typing .terminal-line:nth-child(14) { animation-delay: 1440ms; }
+
+  @keyframes terminalLineIn {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Hide cursor until last line reveals */
+  .terminal__cursor {
+    opacity: 0;
+  }
+  .terminal--typing .terminal-line:last-child .terminal__cursor {
+    animation: cursorAppear 0.01s 1600ms forwards;
+  }
+  @keyframes cursorAppear {
+    to { opacity: 1; }
+  }
+
+  /* ========================================================================
+     Scroll reveal — sections fade up on viewport entry
+     ======================================================================== */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  }
+
+  .scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Stagger children (cards, stats) within a visible section */
+  .stagger-children > * {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+  }
+
+  .is-visible .stagger-children > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: translateY(0); }
+  .is-visible .stagger-children > *:nth-child(2) { transition-delay: 80ms; opacity: 1; transform: translateY(0); }
+  .is-visible .stagger-children > *:nth-child(3) { transition-delay: 160ms; opacity: 1; transform: translateY(0); }
+  .is-visible .stagger-children > *:nth-child(4) { transition-delay: 240ms; opacity: 1; transform: translateY(0); }
+
+  /* ========================================================================
+     Enhanced card hover — lift + shadow
+     ======================================================================== */
+  :global(.card) {
+    transition:
+      border-color var(--duration-base) var(--ease),
+      transform var(--duration-base) var(--ease),
+      box-shadow var(--duration-base) var(--ease);
+  }
+
+  :global(.card:hover) {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  /* ========================================================================
+     Existing styles
+     ======================================================================== */
   .service-list {
     list-style: none;
     padding: 0;
@@ -432,10 +585,35 @@ import TerminalPanel from '../components/TerminalPanel.astro';
   .faq-item p {
     margin: 0;
   }
-
-  pre {
-    margin: 0;
-    white-space: pre-wrap;
-    word-break: break-word;
-  }
 </style>
+
+<script>
+  // Terminal typing — trigger when terminal scrolls into view
+  const terminalEl = document.getElementById('terminal-output');
+  if (terminalEl) {
+    const terminalPanel = terminalEl.closest('.terminal');
+    const terminalObs = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && terminalPanel) {
+          terminalPanel.classList.add('terminal--typing');
+          terminalObs.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    if (terminalPanel) terminalObs.observe(terminalPanel);
+  }
+
+  // Scroll reveal — sections fade in on viewport entry
+  const revealEls = document.querySelectorAll('.scroll-reveal');
+  if (revealEls.length > 0) {
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach((el) => revealObs.observe(el));
+  }
+</script>
