@@ -85,19 +85,47 @@ import CTAButton from '../components/CTAButton.astro';
           </p>
         </div>
 
-        <!-- Pipeline digest visual -->
+        <!-- Pipeline digest — visual dashboard -->
         <div class="hero-enter" style="--delay: 3;">
           <div class="digest" id="digest-panel">
             <div class="digest__header">
               <span>PIPELINE DIGEST</span>
               <span class="t-muted">Week of Apr 14</span>
             </div>
-            <div class="digest-lines">
-              <div class="digest-line">847 opps scanned</div>
-              <div class="digest-line">23 stale deals flagged</div>
-              <div class="digest-line">21 re-engagement messages sent</div>
-              <div class="digest-line digest-line--accent">Pipeline accuracy: 78% → 94%</div>
-              <div class="digest-line digest-line--gap digest-line--accent">3 deals resurrected · $340K recovered</div>
+
+            <!-- Big numbers -->
+            <div class="digest__stats">
+              <div class="digest__stat">
+                <span class="digest__stat-value">$340K</span>
+                <span class="digest__stat-label">RECOVERED</span>
+              </div>
+              <div class="digest__stat">
+                <span class="digest__stat-value">21</span>
+                <span class="digest__stat-label">MESSAGES SENT</span>
+              </div>
+              <div class="digest__stat">
+                <span class="digest__stat-value">3</span>
+                <span class="digest__stat-label">DEALS RESURRECTED</span>
+              </div>
+            </div>
+
+            <!-- Pipeline accuracy bars -->
+            <div class="digest__bars">
+              <div class="digest__bar-row">
+                <span class="digest__bar-label">This week</span>
+                <div class="digest__bar-track">
+                  <div class="digest__bar-fill digest__bar-fill--current" style="--target-width: 94%;"></div>
+                </div>
+                <span class="digest__bar-value digest__bar-value--accent">94%</span>
+              </div>
+              <div class="digest__bar-row">
+                <span class="digest__bar-label">Last week</span>
+                <div class="digest__bar-track">
+                  <div class="digest__bar-fill digest__bar-fill--prev" style="--target-width: 78%;"></div>
+                </div>
+                <span class="digest__bar-value">78%</span>
+              </div>
+              <span class="digest__bar-caption">Pipeline accuracy</span>
             </div>
           </div>
         </div>
@@ -277,14 +305,14 @@ import CTAButton from '../components/CTAButton.astro';
   }
 
   /* ========================================================================
-     Pipeline digest (replaces terminal)
+     Pipeline digest — visual dashboard
      ======================================================================== */
   .digest {
     background: var(--surface);
     border: 1px solid var(--surface-2);
     border-radius: var(--radius-lg);
-    padding: var(--space-6);
-    max-width: 480px;
+    padding: var(--space-8);
+    max-width: 560px;
   }
 
   .digest__header {
@@ -296,49 +324,149 @@ import CTAButton from '../components/CTAButton.astro';
     letter-spacing: var(--ls-mono);
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-8);
     padding-bottom: var(--space-4);
     border-bottom: 1px solid var(--surface-2);
   }
 
-  .digest-lines {
+  /* Big stat numbers */
+  .digest__stats {
+    display: flex;
+    gap: var(--space-8);
+    margin-bottom: var(--space-8);
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--surface-2);
+  }
+
+  .digest__stat {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  .digest__stat-value {
+    font-family: var(--font-display);
+    font-size: var(--fs-h1);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: var(--ls-tight);
+    color: var(--ink);
+  }
+
+  .digest__stat-label {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: var(--ls-mono);
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  :global(.digest--active) .digest__stat {
+    animation: digestStatIn 0.5s var(--ease) forwards;
+  }
+
+  :global(.digest--active) .digest__stat:nth-child(1) { animation-delay: 0ms; }
+  :global(.digest--active) .digest__stat:nth-child(2) { animation-delay: 150ms; }
+  :global(.digest--active) .digest__stat:nth-child(3) { animation-delay: 300ms; }
+
+  @keyframes digestStatIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Progress bars */
+  .digest__bars {
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
   }
 
-  .digest-line {
+  .digest__bar-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .digest__bar-label {
     font-family: var(--font-mono);
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--ink);
-    opacity: 0;
-    transform: translateY(8px);
+    font-size: var(--fs-micro);
+    letter-spacing: var(--ls-mono);
+    text-transform: uppercase;
+    color: var(--muted);
+    min-width: 80px;
+    flex-shrink: 0;
   }
 
-  .digest-line--accent {
-    color: var(--accent);
+  .digest__bar-track {
+    flex: 1;
+    height: 8px;
+    background: var(--surface-2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .digest__bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    width: 0;
+    transition: width 1s var(--ease);
+  }
+
+  .digest__bar-fill--current {
+    background: var(--accent);
+  }
+
+  .digest__bar-fill--prev {
+    background: var(--muted);
+    opacity: 0.5;
+  }
+
+  :global(.digest--active) .digest__bar-fill {
+    width: var(--target-width);
+    transition-delay: 500ms;
+  }
+
+  :global(.digest--active) .digest__bar-fill--prev {
+    transition-delay: 700ms;
+  }
+
+  .digest__bar-value {
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
     font-weight: 500;
+    color: var(--muted);
+    min-width: 36px;
+    text-align: right;
   }
 
-  .digest-line--gap {
-    margin-top: var(--space-4);
-    padding-top: var(--space-4);
-    border-top: 1px solid var(--surface-2);
+  .digest__bar-value--accent {
+    color: var(--accent);
   }
 
-  :global(.digest--active) .digest-line {
-    animation: digestLineIn 0.4s var(--ease) forwards;
+  .digest__bar-caption {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: var(--ls-mono);
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: var(--space-2);
+    opacity: 0.6;
   }
 
-  :global(.digest--active) .digest-line:nth-child(1) { animation-delay: 0ms; }
-  :global(.digest--active) .digest-line:nth-child(2) { animation-delay: 200ms; }
-  :global(.digest--active) .digest-line:nth-child(3) { animation-delay: 400ms; }
-  :global(.digest--active) .digest-line:nth-child(4) { animation-delay: 700ms; }
-  :global(.digest--active) .digest-line:nth-child(5) { animation-delay: 1000ms; }
+  @media (max-width: 768px) {
+    .digest__stats {
+      gap: var(--space-6);
+    }
 
-  @keyframes digestLineIn {
-    to { opacity: 1; transform: translateY(0); }
+    .digest__stat-value {
+      font-size: var(--fs-h2);
+    }
+
+    .digest__bar-label {
+      min-width: 60px;
+      font-size: 10px;
+    }
   }
 
   /* ========================================================================
