@@ -130,17 +130,21 @@ import CTAButton from '../components/CTAButton.astro';
           </div>
         </div>
 
-        <!-- Social proof -->
+        <!-- Social proof — logos -->
         <div class="hero-enter" style="--delay: 4;">
-          <div style="margin-top: var(--space-8);">
-            <span class="t-micro">SNAPDOCS · SALESFORCE · MICROSOFT · DATABRICKS · WELLS FARGO</span>
+          <div class="logo-strip">
+            <img src="/logos/snapdocs-logo.svg" alt="Snapdocs" class="logo-strip__logo" />
+            <img src="/logos/salesforce_logo_white.svg" alt="Salesforce" class="logo-strip__logo" />
+            <img src="/logos/microsoft_logo.svg" alt="Microsoft" class="logo-strip__logo" />
+            <img src="/logos/databricks_logo.svg" alt="Databricks" class="logo-strip__logo" />
+            <img src="/logos/wellsfargo_logo.svg" alt="Wells Fargo" class="logo-strip__logo" />
           </div>
         </div>
 
         <!-- CTA -->
         <div class="hero-enter" style="--delay: 5;">
           <div style="margin-top: var(--space-12);">
-            <CTAButton href="/contact/" label="→ Book a build" variant="primary" large={true} caption="Fixed-fee. No seat licenses. You own everything we build." />
+            <CTAButton href="/contact/" label="→ Fix your GTM" variant="primary" large={true} caption="Fixed-fee. No seat licenses. You own everything we build." />
           </div>
         </div>
       </div>
@@ -256,7 +260,7 @@ import CTAButton from '../components/CTAButton.astro';
           Tell us what's broken. Fixed quote in two business days.
         </p>
 
-        <CTAButton href="/contact/" label="→ Book a build" variant="primary" large={true} />
+        <CTAButton href="/contact/" label="→ Fix your GTM" variant="primary" large={true} />
       </div>
     </section>
 
@@ -264,7 +268,7 @@ import CTAButton from '../components/CTAButton.astro';
       <div class="container">
         <div class="t-body t-muted" style="max-width: 560px;">
           <p>
-            Fifteen years at Snapdocs, Salesforce, Microsoft, and Databricks. I kept seeing teams buy AI tools nobody could operate. So we built a firm that builds AI for your GTM stack, trains your team to run it, and leaves. — <span style="color: var(--ink);">Rome Thorndike</span>
+            Fifteen years in GTM leadership. I spent millions on agencies and software that promised AI and delivered decks. Now I build the AI that replaces both — for your team, not mine. — <span style="color: var(--ink);">Rome Thorndike</span>
           </p>
         </div>
       </div>
@@ -291,6 +295,38 @@ import CTAButton from '../components/CTAButton.astro';
   main { position: relative; z-index: 1; }
 
   /* ========================================================================
+     Logo strip
+     ======================================================================== */
+  .logo-strip {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    margin-top: var(--space-8);
+    flex-wrap: wrap;
+  }
+
+  .logo-strip__logo {
+    height: 20px;
+    opacity: 0.4;
+    filter: grayscale(100%) brightness(1.5);
+    transition: opacity var(--duration-base) var(--ease);
+  }
+
+  .logo-strip__logo:hover {
+    opacity: 0.7;
+  }
+
+  @media (max-width: 768px) {
+    .logo-strip {
+      gap: var(--space-6);
+    }
+
+    .logo-strip__logo {
+      height: 16px;
+    }
+  }
+
+  /* ========================================================================
      Hero entrance
      ======================================================================== */
   .hero-enter {
@@ -312,7 +348,7 @@ import CTAButton from '../components/CTAButton.astro';
     border: 1px solid var(--surface-2);
     border-radius: var(--radius-lg);
     padding: var(--space-8);
-    max-width: 560px;
+    max-width: 100%;
   }
 
   .digest__header {
