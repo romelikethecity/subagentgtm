@@ -158,6 +158,20 @@ import CTAButton from '../components/CTAButton.astro';
         <div class="grid grid--3 stagger-children">
           <a href="/services/pipeline-hygiene/" class="card fix-card">
             <span class="card__label">PIPELINE</span>
+            <!-- Visual: accuracy bars -->
+            <div class="card-viz">
+              <div class="card-viz__row">
+                <span class="card-viz__label">Before</span>
+                <div class="card-viz__track"><div class="card-viz__bar" style="width: 52%; background: var(--muted); opacity: 0.4;"></div></div>
+                <span class="card-viz__val">52%</span>
+              </div>
+              <div class="card-viz__row">
+                <span class="card-viz__label">After</span>
+                <div class="card-viz__track"><div class="card-viz__bar" style="width: 94%; background: var(--accent);"></div></div>
+                <span class="card-viz__val" style="color: var(--accent);">94%</span>
+              </div>
+              <span class="card-viz__caption">PIPELINE ACCURACY</span>
+            </div>
             <span class="card__title">Your pipeline is lying.</span>
             <span class="card__body">Weekly truth digest built from CRM activity — not rep self-reporting. Stale deals resurrected into live conversations. Forecast accuracy your board can actually plan around.</span>
             <span class="card__arrow">Learn more →</span>
@@ -165,6 +179,20 @@ import CTAButton from '../components/CTAButton.astro';
 
           <a href="/services/ai-sdr-replacement/" class="card fix-card">
             <span class="card__label">OUTBOUND</span>
+            <!-- Visual: reply rate comparison -->
+            <div class="card-viz">
+              <div class="card-viz__compare">
+                <div class="card-viz__metric">
+                  <span class="card-viz__metric-val card-viz__metric-val--muted">0.3%</span>
+                  <span class="card-viz__metric-label">THEIR AI SDR</span>
+                </div>
+                <span class="card-viz__arrow">→</span>
+                <div class="card-viz__metric">
+                  <span class="card-viz__metric-val card-viz__metric-val--accent">4.2%</span>
+                  <span class="card-viz__metric-label">REPLY RATE</span>
+                </div>
+              </div>
+            </div>
             <span class="card__title">Your outbound isn't worth reading.</span>
             <span class="card__body">AI agents that research the prospect before they draft. Messages that get replies — and get forwarded. Nothing sends that isn't worth the recipient's time.</span>
             <span class="card__arrow">Learn more →</span>
@@ -172,6 +200,20 @@ import CTAButton from '../components/CTAButton.astro';
 
           <a href="/services/data-subagents/" class="card fix-card">
             <span class="card__label">DATA</span>
+            <!-- Visual: cost comparison -->
+            <div class="card-viz">
+              <div class="card-viz__compare">
+                <div class="card-viz__metric">
+                  <span class="card-viz__metric-val card-viz__metric-val--strike">$85K<span class="card-viz__strike-line"></span></span>
+                  <span class="card-viz__metric-label">CURRENT VENDOR</span>
+                </div>
+                <span class="card-viz__arrow">→</span>
+                <div class="card-viz__metric">
+                  <span class="card-viz__metric-val card-viz__metric-val--accent">$12K</span>
+                  <span class="card-viz__metric-label">WITH US</span>
+                </div>
+              </div>
+            </div>
             <span class="card__title">Your data is wrong. And expensive.</span>
             <span class="card__body">Contacts validated, enriched, and delivered in hours. 80% less than your current vendor. No annual contract. No stale records.</span>
             <span class="card__arrow">Learn more →</span>
@@ -324,6 +366,128 @@ import CTAButton from '../components/CTAButton.astro';
     .logo-strip__logo {
       height: 16px;
     }
+  }
+
+  /* ========================================================================
+     Card visuals
+     ======================================================================== */
+  .card-viz {
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--surface-2);
+  }
+
+  /* Pipeline accuracy bars */
+  .card-viz__row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-2);
+  }
+
+  .card-viz__row:last-of-type {
+    margin-bottom: var(--space-2);
+  }
+
+  .card-viz__label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: var(--ls-mono);
+    text-transform: uppercase;
+    color: var(--muted);
+    min-width: 44px;
+  }
+
+  .card-viz__track {
+    flex: 1;
+    height: 6px;
+    background: var(--surface-2);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .card-viz__bar {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.8s var(--ease);
+  }
+
+  .card-viz__val {
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
+    font-weight: 500;
+    color: var(--muted);
+    min-width: 32px;
+    text-align: right;
+  }
+
+  .card-viz__caption {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: var(--ls-mono);
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0.5;
+  }
+
+  /* Outbound + Data comparison */
+  .card-viz__compare {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .card-viz__metric {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .card-viz__metric-val {
+    font-family: var(--font-display);
+    font-size: var(--fs-h2);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: var(--ls-tight);
+  }
+
+  .card-viz__metric-val--muted {
+    color: var(--muted);
+    opacity: 0.5;
+  }
+
+  .card-viz__metric-val--accent {
+    color: var(--accent);
+  }
+
+  .card-viz__metric-val--strike {
+    color: var(--muted);
+    opacity: 0.5;
+    position: relative;
+  }
+
+  .card-viz__strike-line {
+    position: absolute;
+    left: -4px;
+    right: -4px;
+    top: 50%;
+    height: 2px;
+    background: var(--muted);
+  }
+
+  .card-viz__metric-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: var(--ls-mono);
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .card-viz__arrow {
+    font-family: var(--font-mono);
+    font-size: var(--fs-h3);
+    color: var(--muted);
+    opacity: 0.3;
   }
 
   /* ========================================================================
