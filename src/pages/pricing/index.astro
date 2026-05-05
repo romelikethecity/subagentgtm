@@ -6,7 +6,7 @@ import CTAButton from '../../components/CTAButton.astro';
 
 <Base
   title="Pricing"
-  description="Build a subagent in 21 days for $25K–$45K. Smoke Signals takes 90. We deploy proven subagents you own outright. Operate is optional. Cancel anytime."
+  description="Build a subagent in 21 days for $25K–$45K. We run it for you going forward at $7.5K–$12K/mo. Smoke Signals takes 90 days. You own the code from day one. Cancel operate anytime."
   path="/pricing/"
 >
   <!-- Service / pricing schema -->
@@ -39,10 +39,18 @@ import CTAButton from '../../components/CTAButton.astro';
       },
       {
         "@type": "Question",
-        "name": "What if we don't want the operate retainer?",
+        "name": "Do you actually run this for us going forward?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Don't take it. The build is fixed-fee. Your team takes the keys at handoff and runs it. Operate is opt-in for teams without engineering bandwidth."
+          "text": "Yes. Default mode is we operate the system after the build — daily monitoring, weekly reporting, quarterly tune-ups. Most clients take this because they don't have the engineering bandwidth to run Claude Code subagents in production. The TCO chart assumes you take operate."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if we'd rather run it ourselves?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Take it. The build is yours at handoff — repo, prompts, rubrics, data pipelines. If your team has the engineering bandwidth, skip operate. The Year-1 cost drops to just the build fee. We'll still train your team during the engagement at no extra cost."
         }
       },
       {
@@ -50,7 +58,7 @@ import CTAButton from '../../components/CTAButton.astro';
         "name": "Can we cancel operate?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Anytime. No migration cost. The system is in your repo running on your infrastructure. We just stop pushing changes."
+          "text": "Anytime. No migration cost. The system is already in your repo running on your infrastructure. We just stop pushing changes."
         }
       },
       {
@@ -73,15 +81,15 @@ import CTAButton from '../../components/CTAButton.astro';
          ============================================ -->
     <section class="section pricing-hero">
       <div class="container">
-        <span class="t-micro t-accent">PRICING · YOU OWN EVERYTHING WE BUILD</span>
+        <span class="t-micro t-accent">PRICING · BUILT, OPERATED, OWNED</span>
 
         <h1 class="pricing-hero__title">
-          Smoke Signals takes 90 days.<br>
-          We ship in <em>21</em>.
+          We build it in 21 days.<br>
+          Run it for you. <em>You own the code.</em>
         </h1>
 
         <p class="pricing-hero__sub">
-          Because we deploy proven subagents from a library, configured to your ICP and data — not first-principles consulting. Fixed-fee builds. Optional operate retainer. Cancel anytime, your team keeps the system.
+          Smoke Signals takes 90 days to build. We ship in 2–3 weeks because we deploy proven subagents from a library, configured to your ICP. Then we operate the system going forward at a flat monthly fee — or you take it in-house whenever you're ready. The repo is yours from day one.
         </p>
 
         <div class="pricing-hero__cta">
@@ -100,8 +108,11 @@ import CTAButton from '../../components/CTAButton.astro';
           <span class="t-micro">01 / TOTAL COST OF OWNERSHIP</span>
           <h2 class="t-display pricing-section-title">
             Build it in-house: $540K and 6 months.<br>
-            <em>Build it with us:</em> $145K and 3 weeks.
+            <em>Build it with us, fully operated:</em> $145K and 3 weeks.
           </h2>
+          <p class="pricing-hero__sub" style="margin-top: var(--space-4); max-width: 720px;">
+            $35K to build, then $10K/mo for us to run it for you for the next eleven months. Cancel operate anytime, your team takes the keys, the chart goes back down to $35K.
+          </p>
         </div>
 
         <TCOChart variant="full" />
@@ -177,15 +188,16 @@ import CTAButton from '../../components/CTAButton.astro';
             <div class="tier__head">
               <span class="tier__num">03</span>
               <span class="tier__label">OPERATE</span>
+              <span class="tier__pill">DEFAULT</span>
             </div>
             <div class="tier__price">
               <span class="tier__price-val">$7.5K</span>
               <span class="tier__price-sep">–</span>
               <span class="tier__price-val">$12K</span>
             </div>
-            <span class="tier__price-note">Per month · optional · cancel anytime</span>
+            <span class="tier__price-note">Per month · we run it · cancel anytime</span>
             <p class="tier__desc">
-              We run the system you own. For teams without engineering bandwidth. No managed-service lock-in.
+              We run the system you own. Daily monitoring, weekly reporting, quarterly tune-ups. Most clients take this. Take it in-house whenever ready.
             </p>
             <ul class="tier__features">
               <li>Daily monitoring + intervention</li>
@@ -286,16 +298,23 @@ import CTAButton from '../../components/CTAButton.astro';
           </details>
 
           <details class="faq__item">
-            <summary class="faq__q">What if we don't want the operate retainer?</summary>
+            <summary class="faq__q">Do you actually run this for us going forward?</summary>
             <div class="faq__a">
-              <p>Don't take it. The build is fixed-fee. Your team takes the keys at handoff and runs it. Operate is opt-in for teams without engineering bandwidth.</p>
+              <p>Yes. Default mode is we operate the system after the build — daily monitoring, weekly reporting, quarterly tune-ups. Most clients take this because they don't have the engineering bandwidth to run Claude Code subagents in production. The TCO chart on this page assumes you take operate.</p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary class="faq__q">What if we'd rather run it ourselves?</summary>
+            <div class="faq__a">
+              <p>Take it. The build is yours at handoff — repo, prompts, rubrics, data pipelines. If your team has the engineering bandwidth, skip operate. The Year-1 cost drops to just the build fee. We'll still train your team during the engagement at no extra cost.</p>
             </div>
           </details>
 
           <details class="faq__item">
             <summary class="faq__q">Can we cancel operate?</summary>
             <div class="faq__a">
-              <p>Anytime. No migration cost. The system is in your repo running on your infrastructure. We just stop pushing changes.</p>
+              <p>Anytime. No migration cost. The system is already in your repo running on your infrastructure. We just stop pushing changes. No re-implementation, no contract negotiation.</p>
             </div>
           </details>
 
