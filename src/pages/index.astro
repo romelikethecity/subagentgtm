@@ -6,7 +6,7 @@ import TCOChart from '../components/TCOChart.astro';
 
 <Base
   title="Home"
-  description="Your GTM, rebuilt with AI. Pipeline you trust. Outbound that converts. Data in hours. Fixed-fee GTM engineering for revenue teams."
+  description="Your sales and marketing machine. Built in 3 weeks. Pipeline you can defend, data you can trust, forecasts that hold up at QBR. Built on proprietary data, operated for you, owned by your team."
   path="/"
 >
   <!-- ProfessionalService schema -->
@@ -71,18 +71,19 @@ import TCOChart from '../components/TCOChart.astro';
     <section class="section" style="padding-top: var(--space-16);">
       <div class="container">
         <div class="hero-enter" style="--delay: 0;">
-          <span class="t-micro">GTM ENGINEERING</span>
+          <span class="t-micro">SALES & MARKETING MACHINE · BUILT, OPERATED, OWNED</span>
         </div>
 
         <div class="hero-enter" style="--delay: 1;">
           <h1 class="t-display-xl" style="margin: var(--space-6) 0 var(--space-6);">
-            Your GTM, rebuilt with AI.
+            Your Sales &amp; Marketing Machine.<br>
+            <em>Built in 3 Weeks.</em>
           </h1>
         </div>
 
         <div class="hero-enter" style="--delay: 2;">
-          <p class="t-body t-muted" style="max-width: 560px; margin-bottom: var(--space-12);">
-            Pipeline you trust. Outbound that converts. Data in hours.
+          <p class="t-body t-muted" style="max-width: 620px; margin-bottom: var(--space-12);">
+            Pipeline you can defend. Data you can trust. Forecasts that hold up at QBR. Built on proprietary data, operated for you, owned by your team.
           </p>
         </div>
 
@@ -1072,6 +1073,16 @@ import TCOChart from '../components/TCOChart.astro';
     .triggers__grid {
       grid-template-columns: 1fr;
     }
+  }
+
+  /* ========================================================================
+     Hero H1 emphasis
+     ======================================================================== */
+  .t-display-xl em {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
   }
 </style>
 
