@@ -1,0 +1,1048 @@
+---
+import Base from '../../../layouts/Base.astro';
+---
+
+<Base
+  title="Issue 47 — GTM Triggers Weekly"
+  description="Sample issue of GTM Triggers Weekly. Real triggers ranked by TVA. Hiring velocity, AI penetration, funded-and-hiring, stack moves, and the trigger of the week."
+  path="/newsletter/sample/"
+>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <main>
+    <section class="section sample-section">
+      <div class="container">
+
+        <!-- Breadcrumb back to newsletter -->
+        <a href="/newsletter/" class="sample-back">
+          <span class="sample-back__arrow">←</span>
+          Back to newsletter
+        </a>
+
+        <!-- The issue -->
+        <article class="issue">
+
+          <!-- Masthead -->
+          <header class="issue__head">
+            <div class="issue__masthead">
+              <div class="issue__masthead-left">
+                <span class="issue__masthead-name">GTM Triggers Weekly</span>
+                <span class="issue__masthead-sub">A subagent/gtm publication</span>
+              </div>
+              <div class="issue__masthead-right">
+                <span class="issue__num">ISSUE 47</span>
+                <span class="issue__date">May 14, 2026</span>
+              </div>
+            </div>
+
+            <div class="issue__intro">
+              <span class="issue__intro-label">THIS WEEK</span>
+              <p class="issue__intro-body">
+                Marketing crossed the <strong>17%</strong> AI-penetration line for the first time.
+                <strong>412 funded companies</strong> just opened their first VP Sales role. And at
+                twenty-three mid-market SaaS companies, Apollo got ripped out and Clay went in.
+              </p>
+            </div>
+          </header>
+
+          <!-- Section 01: Hiring velocity -->
+          <section class="issue__section">
+            <div class="issue__section-head">
+              <span class="issue__section-num">01 /</span>
+              <h2 class="issue__section-title">Hiring velocity watch</h2>
+            </div>
+            <p class="issue__section-desc">
+              Series A–C SaaS with three or more senior engineering roles posted in the last
+              fourteen days. Forward-rate spikes likely two to three weeks out.
+            </p>
+
+            <div class="rows">
+              <div class="row">
+                <div class="row__main">
+                  <span class="row__name">Cresta</span>
+                  <span class="row__note">Four senior backend roles plus one staff AI/ML. All Bay Area.</span>
+                </div>
+                <div class="row__meta">
+                  <span class="row__stage">SERIES C</span>
+                  <span class="row__stat">5 ROLES · 9d</span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="row__main">
+                  <span class="row__name">Hex</span>
+                  <span class="row__note">Three senior frontend, one staff PM, one head of platform.</span>
+                </div>
+                <div class="row__meta">
+                  <span class="row__stage">SERIES B</span>
+                  <span class="row__stat">5 ROLES · 11d</span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="row__main">
+                  <span class="row__name">Hightouch</span>
+                  <span class="row__note">Five senior engineering roles, all React/Node. Largest open burst since Series B.</span>
+                </div>
+                <div class="row__meta">
+                  <span class="row__stage">SERIES B</span>
+                  <span class="row__stat">5 ROLES · 6d</span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="row__main">
+                  <span class="row__name">Stytch</span>
+                  <span class="row__note">Three platform engineers plus first DevRel hire.</span>
+                </div>
+                <div class="row__meta">
+                  <span class="row__stage">SERIES B</span>
+                  <span class="row__stat">4 ROLES · 13d</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="issue__section-caption">
+              Velocity above three roles in fourteen days correlates with a Q+1 GTM hiring wave.
+              Watch for VP Sales/Marketing posts at these companies in the next 30–60 days.
+            </p>
+          </section>
+
+          <!-- Section 02: AI penetration -->
+          <section class="issue__section">
+            <div class="issue__section-head">
+              <span class="issue__section-num">02 /</span>
+              <h2 class="issue__section-title">AI penetration movers</h2>
+            </div>
+            <p class="issue__section-desc">
+              Functions that crossed +0.3ppt week-over-week. Source: AI Penetration Index, 27,000+ active postings.
+            </p>
+
+            <div class="bars">
+              <div class="bars__row">
+                <span class="bars__label">Marketing</span>
+                <div class="bars__track"><div class="bars__fill" style="width: 86%"></div></div>
+                <span class="bars__pct">17.1%</span>
+                <span class="bars__delta">↑ +0.9</span>
+              </div>
+              <div class="bars__row">
+                <span class="bars__label">Operations</span>
+                <div class="bars__track"><div class="bars__fill" style="width: 62%"></div></div>
+                <span class="bars__pct">12.4%</span>
+                <span class="bars__delta">↑ +0.5</span>
+              </div>
+              <div class="bars__row">
+                <span class="bars__label">Legal</span>
+                <div class="bars__track"><div class="bars__fill" style="width: 64%"></div></div>
+                <span class="bars__pct">12.7%</span>
+                <span class="bars__delta">↑ +0.4</span>
+              </div>
+              <div class="bars__row">
+                <span class="bars__label">Sales</span>
+                <div class="bars__track"><div class="bars__fill" style="width: 55%"></div></div>
+                <span class="bars__pct">10.9%</span>
+                <span class="bars__delta">↑ +0.3</span>
+              </div>
+              <div class="bars__row">
+                <span class="bars__label">People/HR</span>
+                <div class="bars__track"><div class="bars__fill" style="width: 31%"></div></div>
+                <span class="bars__pct">6.1%</span>
+                <span class="bars__delta">↑ +0.3</span>
+              </div>
+            </div>
+
+            <p class="issue__section-caption">
+              Marketing is the inflection point. CMOs hiring against AI-fluent JDs at scale for
+              the first time. The salary premium for Marketing roles mentioning AI is now
+              <strong>+$28,400</strong>.
+            </p>
+          </section>
+
+          <!-- Section 03: Funded + hiring -->
+          <section class="issue__section">
+            <div class="issue__section-head">
+              <span class="issue__section-num">03 /</span>
+              <h2 class="issue__section-title">Funded and hiring</h2>
+            </div>
+            <p class="issue__section-desc">
+              Series A/B/C raised in the last 90 days that just opened their first VP Sales or Head of GTM role.
+            </p>
+
+            <div class="rows">
+              <div class="row">
+                <div class="row__main">
+                  <span class="row__name">Vellum AI</span>
+                  <span class="row__note">VP Sales open eight days. First commercial leadership hire.</span>
+                </div>
+                <div class="row__meta">
+                  <span class="row__stage">SERIES A · $20M</span>
+                  <span class="row__stat">OPEN 8d</span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="row__main">
+                  <span class="row__name">Modal Labs</span>
+                  <span class="row__note">VP Sales open fourteen days. PLG founder team hiring sales for first time.</span>
+                </div>
+                <div class="row__meta">
+                  <span class="row__stage">SERIES B · $80M</span>
+                  <span class="row__stat">OPEN 14d</span>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="row__main">
+                  <span class="row__name">Distyl AI</span>
+                  <span class="row__note">Head of GTM open four days. Forward-deployed model — selling to F500.</span>
+                </div>
+                <div class="row__meta">
+                  <span class="row__stage">SEED · $32M</span>
+                  <span class="row__stat">OPEN 4d</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Conversion bridge — only one per issue -->
+            <div class="bridge">
+              <div class="bridge__label">SUBSCRIBERS ASK</div>
+              <p class="bridge__body">
+                "Can you filter this to only the companies in <em>my</em> ICP?" — Yes. The
+                ICP-filtered tier ships in June. <a href="/contact/">Reply to this email</a> to
+                be on the early list.
+              </p>
+            </div>
+          </section>
+
+          <!-- Section 04: Stack moves -->
+          <section class="issue__section">
+            <div class="issue__section-head">
+              <span class="issue__section-num">04 /</span>
+              <h2 class="issue__section-title">Stack moves</h2>
+            </div>
+            <p class="issue__section-desc">
+              Tools added or removed in the last fourteen days at mid-market SaaS companies.
+              Detected via BuiltWith and Wappalyzer signal pulls.
+            </p>
+
+            <ul class="stacklist">
+              <li>
+                <span class="stacklist__strike">Apollo</span>
+                <span class="stacklist__arrow">→</span>
+                <span class="stacklist__add">Clay</span>
+                <span class="stacklist__note">at twenty-three companies. Largest stack-swap of the quarter.</span>
+              </li>
+              <li>
+                <span class="stacklist__strike">ZoomInfo</span>
+                <span class="stacklist__arrow">→</span>
+                <span class="stacklist__add">enrichment + LinkedIn Sales Nav</span>
+                <span class="stacklist__note">at eleven companies. Cost cuts, not capability cuts.</span>
+              </li>
+              <li>
+                <span class="stacklist__add">Common Room</span>
+                <span class="stacklist__note">added at eight companies — replacing</span>
+                <span class="stacklist__strike">Mutiny</span>
+                <span class="stacklist__note">in five of them.</span>
+              </li>
+              <li>
+                <span class="stacklist__add">HubSpot Breeze</span>
+                <span class="stacklist__note">activated at fourteen companies — most still in pilot.</span>
+              </li>
+            </ul>
+
+            <p class="issue__section-caption">
+              Stack churn is a buying signal. Tools getting ripped out are tells about which
+              categories are losing trust this quarter.
+            </p>
+          </section>
+
+          <!-- Section 05: Trigger of the week -->
+          <section class="issue__section">
+            <div class="issue__section-head">
+              <span class="issue__section-num">05 /</span>
+              <h2 class="issue__section-title">Trigger of the week</h2>
+            </div>
+
+            <div class="featured">
+              <span class="featured__badge">
+                <span class="featured__badge-dot"></span>
+                HIGHEST TVA SCORE THIS WEEK
+              </span>
+
+              <h3 class="featured__title">The Practice Ownership Change Trigger</h3>
+
+              <p class="featured__lede">
+                <strong>Forty-seven healthcare practices</strong> changed ownership in the last
+                thirty days. Each new owner is in the ninety-day window where every tech stack
+                decision gets re-opened — EHR, billing, RCM, marketing, patient comms. The
+                trigger fires once per practice and decays fast.
+              </p>
+
+              <div class="featured__sta">
+                <div class="featured__sta-row">
+                  <span class="featured__sta-label">SPECIFIC</span>
+                  <div class="featured__sta-track"><div class="featured__sta-fill" style="width: 100%"></div></div>
+                  <span class="featured__sta-val">3/3</span>
+                </div>
+                <div class="featured__sta-row">
+                  <span class="featured__sta-label">TIMELY</span>
+                  <div class="featured__sta-track"><div class="featured__sta-fill" style="width: 100%"></div></div>
+                  <span class="featured__sta-val">3/3</span>
+                </div>
+                <div class="featured__sta-row">
+                  <span class="featured__sta-label">ACTIONABLE</span>
+                  <div class="featured__sta-track"><div class="featured__sta-fill" style="width: 100%"></div></div>
+                  <span class="featured__sta-val">3/3</span>
+                </div>
+              </div>
+
+              <p class="featured__more">
+                Full Trigger → Asset walkthrough — including the calculator we built for a
+                healthcare RCM customer last quarter — in the June 11 issue.
+              </p>
+            </div>
+          </section>
+
+          <!-- Issue footer -->
+          <footer class="issue__foot">
+            <div class="issue__foot-tag">
+              subagent<span class="issue__foot-slash">/</span>gtm — Built. Operated. Owned.
+            </div>
+            <p class="issue__foot-pitch">
+              We turn triggers into outbound that ops teams forward.
+            </p>
+            <div class="issue__foot-meta">
+              <a href="https://subagentgtm.com">subagentgtm.com</a>
+              <span>·</span>
+              <a href="/methodology/">Read the TVA framework</a>
+              <span>·</span>
+              <a href="/contact/">Book a build</a>
+            </div>
+          </footer>
+
+        </article>
+
+        <!-- Sub-issue CTA: subscribe to get the next one -->
+        <aside class="sample-cta">
+          <h2 class="sample-cta__title">Get the next one in your inbox.</h2>
+          <p class="sample-cta__sub">Issue 48 ships next Wednesday. Free, weekly, unsubscribe anytime.</p>
+          <form class="nl-form nl-form--centered" id="sample-signup" novalidate>
+            <input
+              type="email"
+              class="nl-form__field"
+              name="email"
+              placeholder="you@company.com"
+              aria-label="Email address"
+              required
+            />
+            <button type="submit" class="btn btn--primary btn--large nl-form__btn">
+              Subscribe →
+            </button>
+          </form>
+        </aside>
+
+      </div>
+    </section>
+  </main>
+</Base>
+
+<script is:inline>
+(function() {
+  var SIGNUP_URL = 'https://subagent-newsletter-signup.rome-workers.workers.dev/';
+
+  function showSuccess(form) {
+    while (form.firstChild) form.removeChild(form.firstChild);
+    var msg = document.createElement('p');
+    msg.className = 'nl-form__success';
+    msg.textContent = "You're in. Look for issue 48 next Wednesday.";
+    form.appendChild(msg);
+  }
+
+  document.querySelectorAll('.nl-form').forEach(function(form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var emailInput = form.querySelector('input[type="email"]');
+      var btn = form.querySelector('button[type="submit"]');
+      var email = (emailInput.value || '').trim();
+      if (!email || email.indexOf('@') === -1) {
+        emailInput.focus();
+        return;
+      }
+      var orig = btn.textContent;
+      btn.textContent = 'Subscribing…';
+      btn.disabled = true;
+
+      fetch(SIGNUP_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, list: 'gtm-triggers-weekly' })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data && (data.success || data.ok)) {
+          if (typeof gtag === 'function') {
+            gtag('event', 'newsletter_signup', { event_category: 'engagement', event_label: 'gtm-triggers-weekly-sample' });
+          }
+          showSuccess(form);
+        } else {
+          btn.textContent = orig;
+          btn.disabled = false;
+        }
+      })
+      .catch(function() {
+        btn.textContent = orig;
+        btn.disabled = false;
+      });
+    });
+  });
+})();
+</script>
+
+<style>
+  /* ============================================
+     Layout
+     ============================================ */
+  .sample-section {
+    padding-top: var(--space-12);
+    padding-bottom: var(--space-16);
+  }
+
+  .sample-back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: var(--space-12);
+    transition: color 0.15s;
+  }
+
+  .sample-back:hover { color: var(--accent); }
+
+  .sample-back__arrow { transition: transform 0.15s; }
+  .sample-back:hover .sample-back__arrow { transform: translateX(-3px); }
+
+  /* ============================================
+     Issue container
+     ============================================ */
+  .issue {
+    max-width: 720px;
+    margin: 0 auto;
+    background: var(--surface);
+    border: 1px solid var(--surface-2);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  /* Masthead */
+  .issue__head {
+    padding: var(--space-12) var(--space-12) var(--space-8);
+    border-bottom: 1px solid var(--surface-2);
+  }
+
+  .issue__masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--surface-2);
+    margin-bottom: var(--space-8);
+  }
+
+  .issue__masthead-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .issue__masthead-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0;
+    color: var(--ink);
+  }
+
+  .issue__masthead-sub {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .issue__masthead-right {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .issue__num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .issue__date {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .issue__intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .issue__intro-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .issue__intro-body {
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  .issue__intro-body strong {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* ============================================
+     Issue sections
+     ============================================ */
+  .issue__section {
+    padding: var(--space-10) var(--space-12);
+    border-bottom: 1px solid var(--surface-2);
+  }
+
+  .issue__section:last-of-type { border-bottom: none; }
+
+  .issue__section-head {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    margin-bottom: var(--space-2);
+  }
+
+  .issue__section-num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .issue__section-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 24px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  .issue__section-desc {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--muted);
+    margin: 0 0 var(--space-6);
+  }
+
+  .issue__section-caption {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--muted);
+    margin: var(--space-6) 0 0;
+    font-style: italic;
+  }
+
+  .issue__section-caption strong {
+    color: var(--ink);
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  /* ============================================
+     Company rows
+     ============================================ */
+  .rows {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-6);
+    align-items: center;
+    padding: var(--space-4) 0;
+    border-bottom: 1px dashed var(--surface-2);
+  }
+
+  .row:last-child { border-bottom: none; }
+
+  .row__main {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .row__name {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .row__name::before {
+    content: "/ ";
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .row__note {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  .row__meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .row__stage {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .row__stat {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* ============================================
+     Bar chart
+     ============================================ */
+  .bars {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-2);
+  }
+
+  .bars__row {
+    display: grid;
+    grid-template-columns: 110px 1fr 56px 56px;
+    gap: var(--space-4);
+    align-items: center;
+  }
+
+  .bars__label {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--ink);
+  }
+
+  .bars__track {
+    height: 6px;
+    background: var(--surface-2);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .bars__fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 3px;
+  }
+
+  .bars__pct {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .bars__delta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-align: right;
+  }
+
+  /* ============================================
+     Conversion bridge
+     ============================================ */
+  .bridge {
+    margin: var(--space-6) 0 0;
+    padding: var(--space-5) var(--space-6);
+    border-left: 2px solid var(--accent);
+    background: rgba(16, 185, 129, 0.06);
+    border-radius: 0 8px 8px 0;
+  }
+
+  .bridge__label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: var(--space-2);
+  }
+
+  .bridge__body {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  .bridge__body em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .bridge__body a {
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    text-decoration: none;
+    padding-bottom: 1px;
+  }
+
+  /* ============================================
+     Stack list
+     ============================================ */
+  .stacklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .stacklist li {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--muted);
+    display: inline-block;
+  }
+
+  .stacklist__strike {
+    color: var(--muted);
+    text-decoration: line-through;
+    text-decoration-thickness: 1.5px;
+    font-family: var(--font-display);
+    font-weight: 500;
+  }
+
+  .stacklist__arrow {
+    color: var(--accent);
+    margin: 0 var(--space-2);
+    font-family: var(--font-mono);
+  }
+
+  .stacklist__add {
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-weight: 500;
+  }
+
+  .stacklist__note {
+    color: var(--muted);
+  }
+
+  /* ============================================
+     Featured (Trigger of the Week)
+     ============================================ */
+  .featured {
+    position: relative;
+    padding: var(--space-10);
+    background: linear-gradient(180deg, rgba(16, 185, 129, 0.08), rgba(16, 185, 129, 0.02));
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    border-radius: 12px;
+    margin-top: var(--space-2);
+  }
+
+  .featured__badge {
+    position: absolute;
+    top: -12px;
+    left: var(--space-6);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    background: var(--bg);
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .featured__badge-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: feat-pulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes feat-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .featured__title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 24px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: var(--space-3) 0 var(--space-4);
+  }
+
+  .featured__lede {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0 0 var(--space-6);
+  }
+
+  .featured__lede strong {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .featured__sta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-5);
+    background: var(--bg);
+    border: 1px solid var(--surface-2);
+    border-radius: 8px;
+    margin-bottom: var(--space-5);
+  }
+
+  .featured__sta-row {
+    display: grid;
+    grid-template-columns: 100px 1fr 36px;
+    gap: var(--space-3);
+    align-items: center;
+  }
+
+  .featured__sta-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .featured__sta-track {
+    height: 4px;
+    background: var(--surface-2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .featured__sta-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  .featured__sta-val {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-align: right;
+    font-weight: 500;
+  }
+
+  .featured__more {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0;
+    font-style: italic;
+  }
+
+  /* ============================================
+     Issue footer
+     ============================================ */
+  .issue__foot {
+    padding: var(--space-10) var(--space-12);
+    background: var(--bg);
+    text-align: center;
+    border-top: 1px solid var(--surface-2);
+  }
+
+  .issue__foot-tag {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-2);
+  }
+
+  .issue__foot-slash {
+    color: var(--accent);
+  }
+
+  .issue__foot-pitch {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0 0 var(--space-6);
+    line-height: 1.5;
+  }
+
+  .issue__foot-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    justify-content: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  .issue__foot-meta a { color: var(--muted); text-decoration: none; }
+  .issue__foot-meta a:hover { color: var(--accent); }
+
+  /* ============================================
+     Bottom CTA
+     ============================================ */
+  .sample-cta {
+    max-width: 640px;
+    margin: var(--space-16) auto 0;
+    text-align: center;
+    padding: var(--space-12);
+    background: var(--surface);
+    border: 1px solid var(--surface-2);
+    border-radius: 12px;
+  }
+
+  .sample-cta__title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 32px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0 0 var(--space-3);
+  }
+
+  .sample-cta__sub {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--muted);
+    margin: 0 0 var(--space-6);
+    line-height: 1.5;
+  }
+
+  /* Re-import minimal nl-form styles for bottom CTA */
+  .nl-form {
+    display: flex;
+    gap: var(--space-2);
+    max-width: 460px;
+    margin: 0;
+  }
+  .nl-form--centered { margin: 0 auto; }
+  .nl-form__field {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--surface-2);
+    border-radius: 8px;
+    padding: var(--space-4);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    min-width: 0;
+  }
+  .nl-form__field::placeholder { color: var(--muted); }
+  .nl-form__field:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
+  }
+  .nl-form__btn { white-space: nowrap; }
+  .nl-form__success {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--accent);
+    margin: 0;
+    padding: var(--space-4) 0;
+  }
+
+  /* ============================================
+     Responsive
+     ============================================ */
+  @media (max-width: 720px) {
+    .issue__head, .issue__section, .issue__foot { padding-left: var(--space-6); padding-right: var(--space-6); }
+    .issue__head { padding-top: var(--space-8); padding-bottom: var(--space-6); }
+    .issue__section { padding-top: var(--space-8); padding-bottom: var(--space-8); }
+    .issue__foot { padding-top: var(--space-8); padding-bottom: var(--space-8); }
+    .issue__masthead { flex-direction: column; }
+    .issue__masthead-right { text-align: left; }
+    .issue__intro-body { font-size: 16px; }
+    .issue__section-title { font-size: 20px; }
+    .featured { padding: var(--space-6); }
+    .bars__row { grid-template-columns: 80px 1fr 48px 44px; gap: var(--space-2); }
+    .bars__label { font-size: 13px; }
+    .row { grid-template-columns: 1fr; gap: var(--space-2); }
+    .row__meta { flex-direction: row; align-items: center; gap: var(--space-3); text-align: left; }
+    .sample-cta { padding: var(--space-8); }
+    .sample-cta__title { font-size: 24px; }
+    .nl-form { flex-direction: column; }
+    .nl-form__btn { width: 100%; }
+  }
+</style>

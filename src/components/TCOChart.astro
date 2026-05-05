@@ -1,0 +1,379 @@
+---
+/**
+ * TCOChart — Total cost of ownership comparison.
+ *
+ * Renders a cumulative-cost line chart comparing in-house build vs
+ * subagent/gtm Build + Operate over 12 months.
+ *
+ * Drop into any page:
+ *   import TCOChart from '../../components/TCOChart.astro';
+ *   <TCOChart />
+ *
+ * Variant prop controls density:
+ *   variant="full"    — chart + breakdown table + callout (pricing, /stack)
+ *   variant="compact" — chart only, no table (homepage hero)
+ */
+const { variant = "full" } = Astro.props;
+
+// ---------- Data points (cumulative spend, $K) ----------
+// Month index → cost
+const months = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+const inHouse  = [0, 25, 50, 85, 135, 190, 245, 300, 355, 410, 465, 520, 540];
+const subagent = [0, 35, 45, 55,  65,  75,  85,  95, 105, 115, 125, 135, 145];
+
+const yMax = 600;
+const xMax = 12;
+
+// Chart geometry
+const W = 760, H = 380;
+const padL = 64, padR = 80, padT = 28, padB = 56;
+const cw = W - padL - padR, ch = H - padT - padB;
+
+const xAt = (m: number) => padL + (m / xMax) * cw;
+const yAt = (k: number) => padT + ch - (k / yMax) * ch;
+
+const inHousePath  = inHouse.map((k, i) => `${i === 0 ? "M" : "L"} ${xAt(months[i]).toFixed(1)} ${yAt(k).toFixed(1)}`).join(" ");
+const subagentPath = subagent.map((k, i) => `${i === 0 ? "M" : "L"} ${xAt(months[i]).toFixed(1)} ${yAt(k).toFixed(1)}`).join(" ");
+
+// First-pipeline markers
+const subagentPipelineMonth = 1;
+const inHousePipelineMonth = 6;
+---
+
+<figure class="tco" data-variant={variant}>
+  <figcaption class="tco__caption">
+    <span class="tco__label">TOTAL COST OF OWNERSHIP · YEAR 1</span>
+    <h3 class="tco__title">Build it in-house: <span class="tco__strike">$540K</span>. Build it with us: <span class="tco__win">$145K</span>.</h3>
+    <p class="tco__sub">$395K saved. First pipeline 5 months earlier.</p>
+  </figcaption>
+
+  <svg class="tco__svg" viewBox={`0 0 ${W} ${H}`} role="img" aria-labelledby="tco-title tco-desc">
+    <title id="tco-title">Total cost of ownership: in-house vs subagent/gtm</title>
+    <desc id="tco-desc">
+      Cumulative spend over twelve months. In-house path climbs to $540,000 with first
+      pipeline at month six. Subagent path climbs to $145,000 with first pipeline at week three.
+    </desc>
+
+    <!-- Background grid -->
+    <g class="tco__grid">
+      {[0, 100, 200, 300, 400, 500, 600].map((k) => (
+        <line x1={padL} x2={W - padR} y1={yAt(k)} y2={yAt(k)} />
+      ))}
+    </g>
+
+    <!-- Y-axis labels -->
+    <g class="tco__y-axis">
+      {[0, 100, 200, 300, 400, 500, 600].map((k) => (
+        <text x={padL - 12} y={yAt(k) + 4} text-anchor="end">${k}K</text>
+      ))}
+    </g>
+
+    <!-- X-axis labels -->
+    <g class="tco__x-axis">
+      {months.filter((m) => m % 3 === 0).map((m) => (
+        <text x={xAt(m)} y={H - padB + 22} text-anchor="middle">
+          {m === 0 ? "M0" : `M${m}`}
+        </text>
+      ))}
+      <text x={padL + cw / 2} y={H - 8} text-anchor="middle" class="tco__axis-title">MONTHS FROM KICKOFF</text>
+    </g>
+
+    <!-- In-house path -->
+    <path d={inHousePath} class="tco__line tco__line--inhouse" fill="none" />
+    <g class="tco__dots tco__dots--inhouse">
+      {inHouse.map((k, i) => (
+        <circle cx={xAt(months[i])} cy={yAt(k)} r="2.5" />
+      ))}
+    </g>
+
+    <!-- Subagent path -->
+    <path d={subagentPath} class="tco__line tco__line--subagent" fill="none" />
+    <g class="tco__dots tco__dots--subagent">
+      {subagent.map((k, i) => (
+        <circle cx={xAt(months[i])} cy={yAt(k)} r="2.5" />
+      ))}
+    </g>
+
+    <!-- First pipeline marker — Subagent (week 3) -->
+    <g class="tco__marker tco__marker--subagent" transform={`translate(${xAt(subagentPipelineMonth)}, ${yAt(subagent[subagentPipelineMonth])})`}>
+      <line x1="0" x2="0" y1="0" y2="-32" />
+      <circle cx="0" cy="-32" r="4" />
+      <text x="6" y="-36">FIRST PIPELINE · WEEK 3</text>
+    </g>
+
+    <!-- First pipeline marker — In-house (month 6) -->
+    <g class="tco__marker tco__marker--inhouse" transform={`translate(${xAt(inHousePipelineMonth)}, ${yAt(inHouse[inHousePipelineMonth])})`}>
+      <line x1="0" x2="0" y1="0" y2="-32" />
+      <circle cx="0" cy="-32" r="4" />
+      <text x="6" y="-36">FIRST PIPELINE · MONTH 6</text>
+    </g>
+
+    <!-- End-of-year value labels -->
+    <g class="tco__end-label tco__end-label--inhouse">
+      <text x={W - padR + 8} y={yAt(inHouse[12])}>IN-HOUSE</text>
+      <text x={W - padR + 8} y={yAt(inHouse[12]) + 18} class="tco__end-amount">$540K</text>
+    </g>
+
+    <g class="tco__end-label tco__end-label--subagent">
+      <text x={W - padR + 8} y={yAt(subagent[12])}>SUBAGENT</text>
+      <text x={W - padR + 8} y={yAt(subagent[12]) + 18} class="tco__end-amount">$145K</text>
+    </g>
+  </svg>
+
+  {variant === "full" && (
+    <div class="tco__breakdown">
+      <div class="tco__col">
+        <span class="tco__col-label">BUILD IT IN-HOUSE · $540K / YEAR 1</span>
+        <ul class="tco__list">
+          <li><span>RevOps Lead</span><span>$145K</span></li>
+          <li><span>Marketing Ops Specialist</span><span>$90K</span></li>
+          <li><span>GTM Ops Analyst</span><span>$80K</span></li>
+          <li><span>Data Engineer (½ year)</span><span>$90K</span></li>
+          <li><span>Software stack (HubSpot · ZoomInfo · Clay · Apollo)</span><span>$90K</span></li>
+          <li><span>Recruiting fees + onboarding</span><span>$50K</span></li>
+        </ul>
+        <p class="tco__note">Plus 4 months to hire. Plus 2 months to ramp. First pipeline month 6.</p>
+      </div>
+
+      <div class="tco__col tco__col--win">
+        <span class="tco__col-label tco__col-label--win">BUILD WITH SUBAGENT · $145K / YEAR 1</span>
+        <ul class="tco__list">
+          <li><span>Subagent Build (3 weeks, fixed-fee)</span><span>$35K</span></li>
+          <li><span>Operate · 11 months × $10K</span><span>$110K</span></li>
+          <li class="tco__list-sep"><span>Tech stack included</span><span>—</span></li>
+          <li class="tco__list-sep"><span>Customer owns repo + agents</span><span>—</span></li>
+          <li class="tco__list-sep"><span>Cancel operate anytime</span><span>—</span></li>
+          <li class="tco__list-sep"><span>Take it in-house when ready</span><span>—</span></li>
+        </ul>
+        <p class="tco__note">Build complete week 3. Pipeline producing month 1.</p>
+      </div>
+    </div>
+  )}
+</figure>
+
+<style>
+  .tco {
+    background: var(--surface);
+    border: 1px solid var(--surface-2);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    margin: 0;
+  }
+
+  .tco[data-variant="compact"] {
+    padding: var(--space-6);
+  }
+
+  .tco__caption {
+    margin-bottom: var(--space-6);
+  }
+
+  .tco__label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: var(--ls-mono);
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: var(--space-3);
+  }
+
+  .tco__title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--fs-h2);
+    line-height: 1.2;
+    letter-spacing: var(--ls-snug);
+    color: var(--ink);
+    margin: 0 0 var(--space-3);
+  }
+
+  .tco__strike {
+    color: var(--muted);
+    text-decoration: line-through;
+    text-decoration-thickness: 1.5px;
+  }
+
+  .tco__win {
+    color: var(--accent);
+  }
+
+  .tco__sub {
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    color: var(--muted);
+    margin: 0;
+  }
+
+  /* ---------- SVG ---------- */
+  .tco__svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: visible;
+  }
+
+  .tco__grid line {
+    stroke: var(--surface-2);
+    stroke-width: 1;
+  }
+
+  .tco__y-axis text,
+  .tco__x-axis text {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    fill: var(--muted);
+  }
+
+  .tco__axis-title {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    fill: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .tco__line {
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .tco__line--inhouse {
+    stroke: var(--muted);
+    stroke-dasharray: 4 4;
+    opacity: 0.85;
+  }
+
+  .tco__line--subagent {
+    stroke: var(--accent);
+  }
+
+  .tco__dots--inhouse circle {
+    fill: var(--muted);
+  }
+
+  .tco__dots--subagent circle {
+    fill: var(--accent);
+  }
+
+  .tco__marker line {
+    stroke-width: 1;
+    stroke-dasharray: 2 3;
+  }
+
+  .tco__marker text {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .tco__marker--subagent line { stroke: var(--accent); }
+  .tco__marker--subagent circle { fill: var(--accent); }
+  .tco__marker--subagent text { fill: var(--accent); }
+
+  .tco__marker--inhouse line { stroke: var(--muted); }
+  .tco__marker--inhouse circle { fill: var(--muted); }
+  .tco__marker--inhouse text { fill: var(--muted); }
+
+  .tco__end-label text {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .tco__end-label--inhouse text { fill: var(--muted); }
+  .tco__end-label--subagent text { fill: var(--accent); }
+
+  .tco__end-amount {
+    font-family: var(--font-display) !important;
+    font-size: 14px !important;
+    letter-spacing: 0 !important;
+    font-weight: 500;
+  }
+
+  /* ---------- Breakdown table ---------- */
+  .tco__breakdown {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    margin-top: var(--space-8);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--surface-2);
+  }
+
+  .tco__col-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: var(--ls-mono);
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: var(--space-4);
+  }
+
+  .tco__col-label--win {
+    color: var(--accent);
+  }
+
+  .tco__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-4);
+    font-family: var(--font-body);
+    font-size: var(--fs-small);
+    color: var(--ink);
+  }
+
+  .tco__list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--surface-2);
+  }
+
+  .tco__list li span:first-child {
+    color: var(--muted);
+    flex: 1;
+    padding-right: var(--space-4);
+  }
+
+  .tco__list li span:last-child {
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  .tco__list-sep span:last-child {
+    color: var(--muted) !important;
+  }
+
+  .tco__note {
+    font-family: var(--font-body);
+    font-size: var(--fs-small);
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 768px) {
+    .tco {
+      padding: var(--space-6);
+    }
+    .tco__title {
+      font-size: var(--fs-h3);
+    }
+    .tco__breakdown {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+    .tco__svg {
+      font-size: 8px;
+    }
+  }
+</style>

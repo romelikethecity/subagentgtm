@@ -8,6 +8,8 @@ dist/
 # Internal docs — never commit to public repo
 BUILD_BRIEF.md
 CLAUDE.md
+AGENTS.md
+ANTHROPIC_PARTNER_PROMPT.md
 head-snippet.html
 subagent-gtm-brand/
 

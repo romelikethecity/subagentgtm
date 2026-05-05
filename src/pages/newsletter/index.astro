@@ -1,0 +1,1178 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base
+  title="Newsletter — GTM Triggers Weekly"
+  description="Real triggers. Ranked by TVA. Delivered Wednesdays. Hiring velocity, AI penetration, funded-and-hiring, stack moves, and ownership changes — for ops teams tired of intent data."
+  path="/newsletter/"
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Newsletter",
+    "name": "GTM Triggers Weekly",
+    "description": "Real, observable, time-bound GTM triggers ranked by the TVA framework. Delivered every Wednesday.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "subagent/gtm",
+      "url": "https://subagentgtm.com"
+    },
+    "url": "https://subagentgtm.com/newsletter/"
+  })} />
+
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <main>
+
+    <!-- ============================================
+         HERO + DIGEST PANEL
+         ============================================ -->
+    <section class="section nl-hero">
+      <div class="container">
+        <div class="nl-hero__grid">
+
+          <div class="nl-hero__copy">
+            <span class="t-micro t-accent">GTM TRIGGERS WEEKLY · A SUBAGENT/GTM PUBLICATION</span>
+
+            <h1 class="nl-hero__title">
+              Real triggers.<br>
+              Ranked by <em>TVA</em>.<br>
+              Delivered Wednesdays.
+            </h1>
+
+            <p class="nl-hero__sub">
+              Hiring velocity. AI penetration shifts. Funded and hiring. Stack moves.
+              Practice ownership changes. Observable, time-bound, public triggers — for
+              ops teams tired of "intent data."
+            </p>
+
+            <form class="nl-form" id="nl-signup-hero" novalidate>
+              <input
+                type="email"
+                class="nl-form__field"
+                name="email"
+                placeholder="you@company.com"
+                aria-label="Email address"
+                required
+              />
+              <button type="submit" class="btn btn--primary btn--large nl-form__btn">
+                Subscribe →
+              </button>
+            </form>
+            <p class="nl-form__note">Free, weekly. Unsubscribe in one click.</p>
+          </div>
+
+          <!-- Digest panel — shows what's inside an issue -->
+          <aside class="digest digest--newsletter" id="nl-digest">
+            <div class="digest__header">
+              <span>ISSUE 47 PREVIEW · MAY 14</span>
+              <span class="t-muted">Live data</span>
+            </div>
+
+            <!-- Top stat row -->
+            <div class="nl-digest__topline">
+              <div class="nl-digest__topline-stat">
+                <span class="nl-digest__topline-val">412</span>
+                <span class="nl-digest__topline-lbl">FUNDED + HIRING</span>
+              </div>
+              <div class="nl-digest__topline-stat">
+                <span class="nl-digest__topline-val">17.1<span class="nl-digest__topline-pct">%</span></span>
+                <span class="nl-digest__topline-lbl">MARKETING AI%</span>
+              </div>
+              <div class="nl-digest__topline-stat">
+                <span class="nl-digest__topline-val">9<span class="nl-digest__topline-pct">/9</span></span>
+                <span class="nl-digest__topline-lbl">TRIGGER OF WEEK</span>
+              </div>
+            </div>
+
+            <!-- Mini bar chart: AI penetration movers -->
+            <div class="nl-digest__bars">
+              <span class="nl-digest__bars-label">AI PENETRATION MOVERS · WoW</span>
+              <div class="nl-digest__bar-row">
+                <span class="nl-digest__bar-name">Marketing</span>
+                <div class="nl-digest__bar-track">
+                  <div class="nl-digest__bar-fill" style="--target: 86%"></div>
+                </div>
+                <span class="nl-digest__bar-val t-accent">↑ +0.9</span>
+              </div>
+              <div class="nl-digest__bar-row">
+                <span class="nl-digest__bar-name">Operations</span>
+                <div class="nl-digest__bar-track">
+                  <div class="nl-digest__bar-fill" style="--target: 62%"></div>
+                </div>
+                <span class="nl-digest__bar-val t-accent">↑ +0.5</span>
+              </div>
+              <div class="nl-digest__bar-row">
+                <span class="nl-digest__bar-name">Legal</span>
+                <div class="nl-digest__bar-track">
+                  <div class="nl-digest__bar-fill" style="--target: 64%"></div>
+                </div>
+                <span class="nl-digest__bar-val t-accent">↑ +0.4</span>
+              </div>
+              <div class="nl-digest__bar-row">
+                <span class="nl-digest__bar-name">Sales</span>
+                <div class="nl-digest__bar-track">
+                  <div class="nl-digest__bar-fill" style="--target: 55%"></div>
+                </div>
+                <span class="nl-digest__bar-val t-accent">↑ +0.3</span>
+              </div>
+            </div>
+
+            <!-- Footer caption -->
+            <div class="nl-digest__caption">
+              Marketing crossed 17% AI-required for the first time. Salary premium for AI-fluent marketing roles now <span class="t-accent">+$28,400</span>.
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         INSIDE EVERY ISSUE — 5 PILLARS
+         ============================================ -->
+    <section class="section section--tight nl-pillars-section">
+      <div class="container">
+        <div class="nl-section-head">
+          <span class="t-micro">01 / WHAT'S INSIDE</span>
+          <h2 class="t-display nl-section-title">
+            Five sections. <em>One read.</em><br>
+            Every Wednesday.
+          </h2>
+        </div>
+
+        <div class="nl-pillars">
+          <div class="nl-pillar">
+            <span class="nl-pillar__num">01</span>
+            <h3 class="nl-pillar__name">Hiring velocity</h3>
+            <p class="nl-pillar__desc">Companies posting senior roles in bursts. Series stage, role count, day-count window. Forward-rate spikes follow within 14–21 days.</p>
+            <span class="nl-pillar__source">SOURCE · Fieldwork</span>
+          </div>
+
+          <div class="nl-pillar">
+            <span class="nl-pillar__num">02</span>
+            <h3 class="nl-pillar__name">AI penetration</h3>
+            <p class="nl-pillar__desc">Functions crossing AI-skill thresholds week-over-week. Salary premiums per function. The leading indicator for buyer-readiness signals.</p>
+            <span class="nl-pillar__source">SOURCE · AI Penetration Index</span>
+          </div>
+
+          <div class="nl-pillar">
+            <span class="nl-pillar__num">03</span>
+            <h3 class="nl-pillar__name">Funded + hiring</h3>
+            <p class="nl-pillar__desc">Series A/B/C raised in the last 90 days that just opened their first VP Sales or Head of GTM. The cleanest TVA-9 trigger you can buy.</p>
+            <span class="nl-pillar__source">SOURCE · Crunchbase + Fieldwork</span>
+          </div>
+
+          <div class="nl-pillar">
+            <span class="nl-pillar__num">04</span>
+            <h3 class="nl-pillar__name">Stack moves</h3>
+            <p class="nl-pillar__desc">Tools added or removed in the last 14 days at mid-market SaaS. Apollo → Clay swaps. ZoomInfo rip-outs. Common Room replacements.</p>
+            <span class="nl-pillar__source">SOURCE · BuiltWith + Wappalyzer</span>
+          </div>
+
+          <div class="nl-pillar nl-pillar--feature">
+            <span class="nl-pillar__num">05</span>
+            <h3 class="nl-pillar__name">Trigger of the week</h3>
+            <p class="nl-pillar__desc">Highest TVA-scored signal of the week, with a worked example. One issue per month is a full Trigger → Asset walkthrough.</p>
+            <span class="nl-pillar__source">SOURCE · subagent/gtm methodology</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         RECENT ISSUES (3 cards)
+         ============================================ -->
+    <section class="section section--tight nl-recent-section">
+      <div class="container">
+        <div class="nl-section-head">
+          <span class="t-micro">02 / RECENT ISSUES</span>
+          <h2 class="t-display nl-section-title">What landed in inboxes <em>this month</em>.</h2>
+        </div>
+
+        <div class="nl-recent">
+          <a href="/newsletter/sample/" class="nl-issue">
+            <div class="nl-issue__masthead">
+              <span class="nl-issue__num">ISSUE 47</span>
+              <span class="nl-issue__date">May 14, 2026</span>
+            </div>
+            <h3 class="nl-issue__title">Marketing crossed 17% AI. The Apollo → Clay swap is real.</h3>
+            <ul class="nl-issue__bullets">
+              <li>4 Series C/B companies posting hiring bursts</li>
+              <li>23 mid-market companies replaced Apollo this week</li>
+              <li>Trigger of the Week: practice-ownership change · TVA 9/9</li>
+            </ul>
+            <span class="nl-issue__cta">Read sample issue <span class="nl-issue__arrow">→</span></span>
+          </a>
+
+          <a href="/newsletter/sample/" class="nl-issue">
+            <div class="nl-issue__masthead">
+              <span class="nl-issue__num">ISSUE 46</span>
+              <span class="nl-issue__date">May 7, 2026</span>
+            </div>
+            <h3 class="nl-issue__title">Distyl, Modal, Vellum: VP Sales searches inside 60 days of funding.</h3>
+            <ul class="nl-issue__bullets">
+              <li>14 funded-and-hiring companies cleared TVA score 8+</li>
+              <li>Operations crossed 12% AI penetration for the first time</li>
+              <li>Trigger of the Week: post-funding stack consolidation</li>
+            </ul>
+            <span class="nl-issue__cta">Coming soon <span class="nl-issue__arrow">→</span></span>
+          </a>
+
+          <a href="/newsletter/sample/" class="nl-issue">
+            <div class="nl-issue__masthead">
+              <span class="nl-issue__num">ISSUE 45</span>
+              <span class="nl-issue__date">April 30, 2026</span>
+            </div>
+            <h3 class="nl-issue__title">Definitive Healthcare migrations: 47 practices changed hands in 30 days.</h3>
+            <ul class="nl-issue__bullets">
+              <li>9 healthcare practices in their 90-day stack-decision window</li>
+              <li>Trigger → Asset walkthrough: the practice-ownership calculator</li>
+              <li>HubSpot Breeze activated at 14 mid-market SaaS</li>
+            </ul>
+            <span class="nl-issue__cta">Coming soon <span class="nl-issue__arrow">→</span></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         METHODOLOGY TEASE — the warming play
+         ============================================ -->
+    <section class="section section--tight nl-method-section">
+      <div class="container">
+        <div class="nl-method">
+          <div class="nl-method__copy">
+            <span class="t-micro t-accent">03 / WHY THIS WORKS</span>
+            <h2 class="t-display nl-section-title">
+              The newsletter is built on the same methodology we ship to customers.
+            </h2>
+            <p class="nl-method__body">
+              Every trigger gets a TVA score: <strong>Specific</strong> (names, numbers, dates),
+              <strong>Timely</strong> (last 30 days), <strong>Actionable</strong> (the recipient
+              can act today). Below 7/9, we don't print it.
+            </p>
+            <p class="nl-method__body">
+              That same rubric runs inside every Subagent we build. The newsletter shows the
+              signal. We build the system that turns it into outbound that ops teams forward.
+            </p>
+            <a href="/methodology/" class="nl-method__link">Read the TVA framework →</a>
+          </div>
+
+          <div class="nl-method__card">
+            <div class="nl-method__card-head">
+              <span class="t-micro">TRIGGER OF THE WEEK · ISSUE 47</span>
+              <span class="nl-method__badge">
+                <span class="nl-method__badge-dot"></span>
+                TVA 9/9
+              </span>
+            </div>
+            <h3 class="nl-method__card-title">The Practice Ownership Change Trigger</h3>
+            <p class="nl-method__card-body">
+              47 healthcare practices changed ownership in the last 30 days. Each new owner
+              is in the 90-day window where every tech stack decision gets re-opened — EHR,
+              billing, RCM, marketing.
+            </p>
+            <div class="nl-method__sta">
+              <div class="nl-method__sta-row">
+                <span class="nl-method__sta-label">SPECIFIC</span>
+                <div class="nl-method__sta-track"><div class="nl-method__sta-fill" style="--target: 100%"></div></div>
+                <span class="nl-method__sta-val">3/3</span>
+              </div>
+              <div class="nl-method__sta-row">
+                <span class="nl-method__sta-label">TIMELY</span>
+                <div class="nl-method__sta-track"><div class="nl-method__sta-fill" style="--target: 100%"></div></div>
+                <span class="nl-method__sta-val">3/3</span>
+              </div>
+              <div class="nl-method__sta-row">
+                <span class="nl-method__sta-label">ACTIONABLE</span>
+                <div class="nl-method__sta-track"><div class="nl-method__sta-fill" style="--target: 100%"></div></div>
+                <span class="nl-method__sta-val">3/3</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         BUILT-BY STRIP
+         ============================================ -->
+    <section class="section section--tight nl-builtby-section">
+      <div class="container">
+        <div class="nl-builtby">
+          <span class="t-micro">BUILT BY SUBAGENT/GTM · THE TEAM BEHIND</span>
+          <div class="nl-builtby__row">
+            <a href="https://veruminc.com" target="_blank" rel="noopener" class="nl-builtby__brand">Verum</a>
+            <span class="nl-builtby__sep">/</span>
+            <a href="https://getprovyx.com" target="_blank" rel="noopener" class="nl-builtby__brand">Provyx</a>
+            <span class="nl-builtby__sep">/</span>
+            <a href="https://sharppages.com" target="_blank" rel="noopener" class="nl-builtby__brand">SharpPages</a>
+            <span class="nl-builtby__sep">/</span>
+            <a href="https://runfieldwork.com" target="_blank" rel="noopener" class="nl-builtby__brand">Fieldwork</a>
+          </div>
+          <p class="nl-builtby__note">
+            300K+ records validated monthly · 27,000+ active job postings tracked weekly · 700+ pages built · 2.4M+ healthcare provider records
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         BOTTOM CTA — second signup
+         ============================================ -->
+    <section class="section nl-cta-section">
+      <div class="container">
+        <div class="nl-cta">
+          <h2 class="t-display nl-cta__title">Get triggers every Wednesday.</h2>
+          <p class="nl-cta__sub">
+            Free. Programmatic. No fluff. Same datasets and methodology we deploy for paying customers.
+          </p>
+          <form class="nl-form nl-form--centered" id="nl-signup-foot" novalidate>
+            <input
+              type="email"
+              class="nl-form__field"
+              name="email"
+              placeholder="you@company.com"
+              aria-label="Email address"
+              required
+            />
+            <button type="submit" class="btn btn--primary btn--large nl-form__btn">
+              Subscribe →
+            </button>
+          </form>
+          <p class="nl-form__note">Free, weekly. Unsubscribe in one click.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</Base>
+
+<!-- ============================================
+     SIGNUP — wire to Cloudflare Worker (Resend Audiences)
+     ============================================ -->
+<script is:inline>
+(function() {
+  // Update this to your deployed worker URL after `wrangler deploy`
+  var SIGNUP_URL = 'https://subagent-newsletter-signup.rome-workers.workers.dev/';
+
+  function showSuccess(form) {
+    // Build the success state with safe DOM methods (no innerHTML)
+    while (form.firstChild) form.removeChild(form.firstChild);
+    var msg = document.createElement('p');
+    msg.className = 'nl-form__success';
+    msg.textContent = "You're in. Look for issue 48 next Wednesday.";
+    form.appendChild(msg);
+  }
+
+  function showError(form, text) {
+    var note = form.parentElement.querySelector('.nl-form__note');
+    if (note) {
+      note.textContent = text;
+      note.classList.add('nl-form__note--error');
+    }
+  }
+
+  document.querySelectorAll('.nl-form').forEach(function(form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var emailInput = form.querySelector('input[type="email"]');
+      var btn = form.querySelector('button[type="submit"]');
+      var email = (emailInput.value || '').trim();
+      if (!email || email.indexOf('@') === -1) {
+        emailInput.focus();
+        return;
+      }
+
+      var orig = btn.textContent;
+      btn.textContent = 'Subscribing…';
+      btn.disabled = true;
+
+      fetch(SIGNUP_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, list: 'gtm-triggers-weekly' })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data && (data.success || data.ok)) {
+          if (typeof gtag === 'function') {
+            gtag('event', 'newsletter_signup', { event_category: 'engagement', event_label: 'gtm-triggers-weekly' });
+          }
+          showSuccess(form);
+        } else {
+          btn.textContent = orig;
+          btn.disabled = false;
+          showError(form, (data && data.error) || 'Something went wrong. Try again.');
+        }
+      })
+      .catch(function() {
+        btn.textContent = orig;
+        btn.disabled = false;
+        showError(form, 'Connection error. Please try again.');
+      });
+    });
+  });
+
+  // Animate digest bars on scroll
+  var digest = document.getElementById('nl-digest');
+  if (digest) {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('digest--active');
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.25 });
+    obs.observe(digest);
+  }
+
+  // Animate STA bars
+  var stas = document.querySelectorAll('.nl-method__sta');
+  if (stas.length) {
+    var obs2 = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('nl-method__sta--active');
+        }
+      });
+    }, { threshold: 0.4 });
+    stas.forEach(function(el) { obs2.observe(el); });
+  }
+})();
+</script>
+
+<style>
+  /* ============================================
+     Hero
+     ============================================ */
+  .nl-hero {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
+  }
+
+  .nl-hero__grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: var(--space-16);
+    align-items: start;
+  }
+
+  .nl-hero__title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(40px, 5.6vw, 64px);
+    line-height: 1.04;
+    letter-spacing: var(--ls-tight);
+    color: var(--ink);
+    margin: var(--space-6) 0 var(--space-6);
+  }
+
+  .nl-hero__title em {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  .nl-hero__sub {
+    font-family: var(--font-body);
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--muted);
+    max-width: 540px;
+    margin: 0 0 var(--space-8);
+  }
+
+  /* ============================================
+     Form
+     ============================================ */
+  .nl-form {
+    display: flex;
+    gap: var(--space-2);
+    max-width: 520px;
+    margin: 0 0 var(--space-3);
+  }
+
+  .nl-form--centered {
+    margin: 0 auto var(--space-3);
+  }
+
+  .nl-form__field {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--surface-2);
+    border-radius: 8px;
+    padding: var(--space-4) var(--space-4);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    min-width: 0;
+  }
+
+  .nl-form__field::placeholder {
+    color: var(--muted);
+  }
+
+  .nl-form__field:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
+  }
+
+  .nl-form__btn {
+    white-space: nowrap;
+  }
+
+  .nl-form__note {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .nl-form__note--error {
+    color: #ef4444;
+  }
+
+  .nl-form__success {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--accent);
+    margin: 0;
+    padding: var(--space-4) 0;
+  }
+
+  /* ============================================
+     Digest panel (newsletter variant)
+     ============================================ */
+  .digest--newsletter {
+    background: var(--surface);
+    border: 1px solid var(--surface-2);
+    border-radius: 12px;
+    padding: var(--space-6);
+  }
+
+  .nl-digest__topline {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+    padding: var(--space-4) 0 var(--space-6);
+    border-bottom: 1px solid var(--surface-2);
+    margin-bottom: var(--space-6);
+  }
+
+  .nl-digest__topline-stat {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .nl-digest__topline-val {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 32px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .nl-digest__topline-pct {
+    font-size: 18px;
+    color: var(--muted);
+    margin-left: 1px;
+  }
+
+  .nl-digest__topline-lbl {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .nl-digest__bars {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-6);
+  }
+
+  .nl-digest__bars-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: var(--space-2);
+    display: block;
+  }
+
+  .nl-digest__bar-row {
+    display: grid;
+    grid-template-columns: 90px 1fr 60px;
+    gap: var(--space-3);
+    align-items: center;
+  }
+
+  .nl-digest__bar-name {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--ink);
+  }
+
+  .nl-digest__bar-track {
+    height: 4px;
+    background: var(--surface-2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .nl-digest__bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    width: 0;
+    transition: width 1.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .digest--active .nl-digest__bar-fill {
+    width: var(--target);
+  }
+
+  .nl-digest__bar-val {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-align: right;
+  }
+
+  .nl-digest__caption {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--muted);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--surface-2);
+  }
+
+  /* ============================================
+     Section heads
+     ============================================ */
+  .nl-section-head {
+    margin-bottom: var(--space-12);
+    max-width: 720px;
+  }
+
+  .nl-section-title {
+    margin: var(--space-3) 0 0;
+  }
+
+  .nl-section-title em {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  /* ============================================
+     Pillars (5-up grid)
+     ============================================ */
+  .nl-pillars {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--surface-2);
+    border-bottom: 1px solid var(--surface-2);
+  }
+
+  .nl-pillar {
+    padding: var(--space-8) var(--space-6);
+    border-right: 1px solid var(--surface-2);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    transition: background 0.2s;
+  }
+
+  .nl-pillar:last-child {
+    border-right: none;
+  }
+
+  .nl-pillar:hover {
+    background: var(--surface);
+  }
+
+  .nl-pillar--feature {
+    background: linear-gradient(180deg, rgba(16, 185, 129, 0.06), transparent);
+  }
+
+  .nl-pillar__num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+  }
+
+  .nl-pillar__name {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  .nl-pillar__desc {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--muted);
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  .nl-pillar__source {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: var(--space-3);
+    border-top: 1px dashed var(--surface-2);
+    margin-top: var(--space-2);
+  }
+
+  /* ============================================
+     Recent issues — 3 card grid
+     ============================================ */
+  .nl-recent {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+
+  .nl-issue {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: var(--space-8);
+    background: var(--surface);
+    border: 1px solid var(--surface-2);
+    border-radius: 12px;
+    color: var(--ink);
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+  }
+
+  .nl-issue:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .nl-issue:hover .nl-issue__cta {
+    color: var(--accent);
+  }
+
+  .nl-issue:hover .nl-issue__arrow {
+    transform: translateX(4px);
+  }
+
+  .nl-issue__masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--surface-2);
+  }
+
+  .nl-issue__num {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-transform: uppercase;
+  }
+
+  .nl-issue__date {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .nl-issue__title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  .nl-issue__bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    flex-grow: 1;
+  }
+
+  .nl-issue__bullets li {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--muted);
+    padding-left: var(--space-4);
+    position: relative;
+  }
+
+  .nl-issue__bullets li::before {
+    content: "/";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-weight: 500;
+  }
+
+  .nl-issue__cta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    transition: color 0.2s;
+  }
+
+  .nl-issue__arrow {
+    transition: transform 0.2s;
+  }
+
+  /* ============================================
+     Methodology card
+     ============================================ */
+  .nl-method {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+    align-items: center;
+  }
+
+  .nl-method__copy {
+    max-width: 480px;
+  }
+
+  .nl-method__body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: var(--space-4) 0 0;
+  }
+
+  .nl-method__body strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .nl-method__link {
+    display: inline-block;
+    margin-top: var(--space-6);
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+  }
+
+  .nl-method__card {
+    background: var(--surface);
+    border: 1px solid var(--surface-2);
+    border-radius: 12px;
+    padding: var(--space-8);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nl-method__card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.08), transparent 60%);
+    pointer-events: none;
+  }
+
+  .nl-method__card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-4);
+    position: relative;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .nl-method__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 4px 12px;
+    background: var(--bg);
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .nl-method__badge-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: nl-pulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes nl-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .nl-method__card-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 0 0 var(--space-3);
+    position: relative;
+  }
+
+  .nl-method__card-body {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--muted);
+    margin: 0 0 var(--space-6);
+    position: relative;
+  }
+
+  .nl-method__sta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    position: relative;
+  }
+
+  .nl-method__sta-row {
+    display: grid;
+    grid-template-columns: 90px 1fr 36px;
+    gap: var(--space-3);
+    align-items: center;
+  }
+
+  .nl-method__sta-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .nl-method__sta-track {
+    height: 4px;
+    background: var(--surface-2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .nl-method__sta-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    width: 0;
+    transition: width 1.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .nl-method__sta--active .nl-method__sta-fill {
+    width: var(--target);
+  }
+
+  .nl-method__sta-row:nth-child(2) .nl-method__sta-fill { transition-delay: 0.15s; }
+  .nl-method__sta-row:nth-child(3) .nl-method__sta-fill { transition-delay: 0.3s; }
+
+  .nl-method__sta-val {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-align: right;
+  }
+
+  /* ============================================
+     Built-by strip
+     ============================================ */
+  .nl-builtby {
+    text-align: center;
+    padding: var(--space-12) 0;
+    border-top: 1px solid var(--surface-2);
+    border-bottom: 1px solid var(--surface-2);
+  }
+
+  .nl-builtby__row {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 24px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: var(--space-4) 0;
+  }
+
+  .nl-builtby__brand {
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.15s;
+    padding: 0 var(--space-1);
+  }
+
+  .nl-builtby__brand:hover {
+    color: var(--accent);
+  }
+
+  .nl-builtby__sep {
+    color: var(--accent);
+    font-weight: 400;
+  }
+
+  .nl-builtby__note {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  /* ============================================
+     Bottom CTA
+     ============================================ */
+  .nl-cta-section {
+    padding: var(--space-16) 0;
+  }
+
+  .nl-cta {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .nl-cta__title {
+    margin: 0 0 var(--space-4);
+  }
+
+  .nl-cta__sub {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--muted);
+    margin: 0 0 var(--space-8);
+  }
+
+  /* ============================================
+     Responsive
+     ============================================ */
+  @media (max-width: 1024px) {
+    .nl-hero__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-12);
+    }
+
+    .nl-pillars {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .nl-pillar:nth-child(2n) {
+      border-right: none;
+    }
+
+    .nl-pillar {
+      border-bottom: 1px solid var(--surface-2);
+    }
+
+    .nl-pillar:nth-last-child(-n+2) {
+      border-bottom: none;
+    }
+
+    .nl-pillar:last-child {
+      grid-column: 1 / -1;
+    }
+
+    .nl-recent {
+      grid-template-columns: 1fr;
+    }
+
+    .nl-method {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .nl-hero__title {
+      font-size: 36px;
+    }
+
+    .nl-form {
+      flex-direction: column;
+    }
+
+    .nl-form__btn {
+      width: 100%;
+    }
+
+    .nl-pillars {
+      grid-template-columns: 1fr;
+    }
+
+    .nl-pillar {
+      border-right: none !important;
+      border-bottom: 1px solid var(--surface-2);
+    }
+
+    .nl-pillar:last-child {
+      border-bottom: none;
+    }
+
+    .nl-digest__topline {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+    }
+
+    .nl-builtby__row {
+      font-size: 18px;
+    }
+  }
+</style>
