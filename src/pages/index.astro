@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import CTAButton from '../components/CTAButton.astro';
+import TCOChart from '../components/TCOChart.astro';
 ---
 
 <Base
@@ -255,6 +256,11 @@ import CTAButton from '../components/CTAButton.astro';
         <p class="t-muted t-small" style="margin-top: var(--space-12);">
           Built by operators from Snapdocs, Salesforce, Microsoft, and Databricks. <a href="/methodology/">See how we work →</a>
         </p>
+
+        <!-- TCO comparison chart -->
+        <div style="margin-top: var(--space-16);">
+          <TCOChart variant="compact" />
+        </div>
 
         <!-- FAQ accordion -->
         <div class="faq-section" style="margin-top: var(--space-16);">

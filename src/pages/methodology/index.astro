@@ -5,15 +5,15 @@ import CTAButton from '../../components/CTAButton.astro';
 ---
 
 <Base
-  title="The Forward Test"
-  description="Every outbound message must pass one test: would the recipient forward it? If not, it doesn't send. Read the methodology."
+  title="TVA — Triggered Value Asset"
+  description="Trigger → Value → Asset. The methodology behind every subagent we ship. If it's not asset-grade, it doesn't send."
   path="/methodology/"
 >
   <!-- Article schema -->
   <script slot="head" type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "The Forward Test",
+    "headline": "TVA — Triggered Value Asset",
     "description": "Every outbound message must be valuable enough that the recipient wants to forward it to their boss, their peer, or their team. If it fails, it doesn't send.",
     "author": {
       "@type": "Person",
@@ -34,14 +34,14 @@ import CTAButton from '../../components/CTAButton.astro';
     <!-- Hero -->
     <section class="section" style="padding-top: var(--space-16);">
       <div class="container container--narrow">
-        <span class="t-micro">THE FORWARD TEST · SUBAGENT METHODOLOGY</span>
+        <span class="t-micro">TVA · SUBAGENT METHODOLOGY</span>
 
         <h1 class="t-display-xl" style="margin: var(--space-6) 0 var(--space-6);">
-          The Forward Test.
+          TVA — Triggered Value Asset.
         </h1>
 
         <p class="t-body t-muted" style="margin-bottom: 0;">
-          Every message we send must be valuable enough that the recipient wants their boss, their peer, or their team to see it. If it fails the Forward Test, it doesn't send.
+          Trigger → Value → Asset. Every outbound starts with an observable trigger, names a specific value, and delivers an asset worth forwarding. If it's not asset-grade, it doesn't send.
         </p>
       </div>
     </section>
@@ -97,7 +97,7 @@ import CTAButton from '../../components/CTAButton.astro';
 
         <div class="t-body t-muted methodology-prose">
           <p>
-            PVP asks one audience to like a message. The Forward Test asks two audiences to like it — the recipient AND whoever they might forward it to. A message that clears that bar has to be:
+            PVP asks one audience to like a message. TVA asks two audiences to like it — the recipient AND whoever they might forward it to. A message that clears that bar has to be:
           </p>
           <ul>
             <li>Valuable enough that sharing it makes the sharer look smart</li>
@@ -147,7 +147,7 @@ import CTAButton from '../../components/CTAButton.astro';
 
         <div class="t-body t-muted methodology-prose">
           <p>
-            Every subagent we ship includes a <code>forward-test.md</code> file in the repo with the three criteria and a scoring rubric (0–3 per criterion, 7+ to send). Before any message reaches the send queue, the subagent self-scores the draft. Below threshold, it regenerates. After three failed regenerations on the same prospect, it skips and logs.
+            Every subagent we ship includes a <code>tva-rubric.md</code> file in the repo with the three criteria and a scoring rubric (0–3 per criterion, 7+ to send). Before any message reaches the send queue, the subagent self-scores the draft. Below threshold, it regenerates. After three failed regenerations on the same prospect, it skips and logs.
           </p>
           <p>This means:</p>
           <ul>

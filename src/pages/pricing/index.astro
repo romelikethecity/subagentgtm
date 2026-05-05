@@ -1,0 +1,713 @@
+---
+import Base from '../../layouts/Base.astro';
+import TCOChart from '../../components/TCOChart.astro';
+import CTAButton from '../../components/CTAButton.astro';
+---
+
+<Base
+  title="Pricing"
+  description="Build a subagent in 21 days for $25K–$45K. Smoke Signals takes 90. We deploy proven subagents you own outright. Operate is optional. Cancel anytime."
+  path="/pricing/"
+>
+  <!-- Service / pricing schema -->
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Offer",
+    "name": "subagent/gtm — Build a Subagent",
+    "description": "Fixed-fee Claude Code subagent build. Shipped in 2–3 weeks. Customer owns the repo.",
+    "priceCurrency": "USD",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "minPrice": 25000,
+      "maxPrice": 45000,
+      "priceCurrency": "USD"
+    },
+    "url": "https://subagentgtm.com/pricing/"
+  })} />
+
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How is this different from Smoke Signals?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Smoke Signals takes 90 days to build. We ship in 2–3 weeks. Smoke Signals operates the system on your behalf forever; we operate it only if you want, and you own the code from day one. Smoke Signals is HubSpot-only; we work with HubSpot, Salesforce, or any CRM."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if we don't want the operate retainer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Don't take it. The build is fixed-fee. Your team takes the keys at handoff and runs it. Operate is opt-in for teams without engineering bandwidth."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can we cancel operate?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Anytime. No migration cost. The system is in your repo running on your infrastructure. We just stop pushing changes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a discovery fee?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Discovery calls are free. We scope, quote, and only proceed if both sides see fit."
+        }
+      }
+    ]
+  })} />
+
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <main>
+
+    <!-- ============================================
+         HERO — speed differentiator
+         ============================================ -->
+    <section class="section pricing-hero">
+      <div class="container">
+        <span class="t-micro t-accent">PRICING · YOU OWN EVERYTHING WE BUILD</span>
+
+        <h1 class="pricing-hero__title">
+          Smoke Signals takes 90 days.<br>
+          We ship in <em>21</em>.
+        </h1>
+
+        <p class="pricing-hero__sub">
+          Because we deploy proven subagents from a library, configured to your ICP and data — not first-principles consulting. Fixed-fee builds. Optional operate retainer. Cancel anytime, your team keeps the system.
+        </p>
+
+        <div class="pricing-hero__cta">
+          <CTAButton variant="primary" href="/contact/" label="→ Book a build" large={true} />
+          <span class="pricing-hero__caption">Fixed quote in two business days.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         TCO CHART — the cost story
+         ============================================ -->
+    <section class="section section--tight">
+      <div class="container">
+        <div class="pricing-section-head">
+          <span class="t-micro">01 / TOTAL COST OF OWNERSHIP</span>
+          <h2 class="t-display pricing-section-title">
+            Build it in-house: $540K and 6 months.<br>
+            <em>Build it with us:</em> $145K and 3 weeks.
+          </h2>
+        </div>
+
+        <TCOChart variant="full" />
+      </div>
+    </section>
+
+    <!-- ============================================
+         PRICING TIERS — 4 cards
+         ============================================ -->
+    <section class="section section--tight">
+      <div class="container">
+        <div class="pricing-section-head">
+          <span class="t-micro">02 / PRICING</span>
+          <h2 class="t-display pricing-section-title">
+            Four ways to engage. <em>Customer owns the code.</em>
+          </h2>
+        </div>
+
+        <div class="tiers">
+          <!-- Tier 1: Subagent Build -->
+          <div class="tier">
+            <div class="tier__head">
+              <span class="tier__num">01</span>
+              <span class="tier__label">SUBAGENT BUILD</span>
+            </div>
+            <div class="tier__price">
+              <span class="tier__price-val">$25K</span>
+              <span class="tier__price-sep">–</span>
+              <span class="tier__price-val">$45K</span>
+            </div>
+            <span class="tier__price-note">Fixed-fee · 2–3 weeks</span>
+            <p class="tier__desc">
+              One subagent, scoped in discovery. Trigger detection, asset generation, TVA scoring rubric. Shipped to your repo.
+            </p>
+            <ul class="tier__features">
+              <li>Single subagent (e.g. AI SDR replacement)</li>
+              <li>Custom trigger source(s)</li>
+              <li>TVA rubric tuned to your ICP</li>
+              <li>90-minute team handoff</li>
+              <li>You own the repo from day one</li>
+            </ul>
+            <a href="/contact/" class="tier__cta">Book a build →</a>
+          </div>
+
+          <!-- Tier 2: System Build -->
+          <div class="tier tier--feature">
+            <div class="tier__head">
+              <span class="tier__num">02</span>
+              <span class="tier__label">SYSTEM BUILD</span>
+              <span class="tier__pill">MOST CHOSEN</span>
+            </div>
+            <div class="tier__price">
+              <span class="tier__price-val">$55K</span>
+              <span class="tier__price-sep">–</span>
+              <span class="tier__price-val">$95K</span>
+            </div>
+            <span class="tier__price-note">Fixed-fee · 4–6 weeks</span>
+            <p class="tier__desc">
+              Multi-subagent system. AI SDR + Pipeline Hygiene + ICP discovery shipped together, sharing data pipelines.
+            </p>
+            <ul class="tier__features">
+              <li>3–5 subagents working together</li>
+              <li>Shared data layer + reporting</li>
+              <li>Per-subagent TVA rubric</li>
+              <li>Full team training session</li>
+              <li>Loom library of how-it-works videos</li>
+            </ul>
+            <a href="/contact/" class="tier__cta">Book a build →</a>
+          </div>
+
+          <!-- Tier 3: Operate -->
+          <div class="tier">
+            <div class="tier__head">
+              <span class="tier__num">03</span>
+              <span class="tier__label">OPERATE</span>
+            </div>
+            <div class="tier__price">
+              <span class="tier__price-val">$7.5K</span>
+              <span class="tier__price-sep">–</span>
+              <span class="tier__price-val">$12K</span>
+            </div>
+            <span class="tier__price-note">Per month · optional · cancel anytime</span>
+            <p class="tier__desc">
+              We run the system you own. For teams without engineering bandwidth. No managed-service lock-in.
+            </p>
+            <ul class="tier__features">
+              <li>Daily monitoring + intervention</li>
+              <li>Trigger source maintenance</li>
+              <li>Weekly forward-rate reporting</li>
+              <li>Quarterly TVA rubric tune-up</li>
+              <li>Cancel anytime, no migration cost</li>
+            </ul>
+            <a href="/contact/" class="tier__cta">Book a build →</a>
+          </div>
+
+          <!-- Tier 4: Maintain -->
+          <div class="tier">
+            <div class="tier__head">
+              <span class="tier__num">04</span>
+              <span class="tier__label">MAINTAIN</span>
+            </div>
+            <div class="tier__price">
+              <span class="tier__price-val">$4K</span>
+            </div>
+            <span class="tier__price-note">Per month · light-touch</span>
+            <p class="tier__desc">
+              Lights-on retainer for teams running their own subagents. Model upgrades, dependency bumps, monthly health check.
+            </p>
+            <ul class="tier__features">
+              <li>Claude/dependency upgrades</li>
+              <li>Monthly system health check</li>
+              <li>Bug fix queue</li>
+              <li>2-hour ad-hoc support / month</li>
+              <li>No campaign or content work</li>
+            </ul>
+            <a href="/contact/" class="tier__cta">Book a build →</a>
+          </div>
+        </div>
+
+        <p class="tiers__note">
+          Data subscriptions (Verum, Provyx, Fieldwork feeds) start at $1K/month and stack with any tier. Discovery calls are free.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================
+         WHAT YOU GET — three pillars
+         ============================================ -->
+    <section class="section section--tight">
+      <div class="container">
+        <div class="pricing-section-head">
+          <span class="t-micro">03 / WHAT MAKES THIS DIFFERENT</span>
+          <h2 class="t-display pricing-section-title">
+            Three things every engagement delivers.
+          </h2>
+        </div>
+
+        <div class="pillars">
+          <div class="pillar">
+            <span class="pillar__num">01</span>
+            <h3 class="pillar__name">You own the code</h3>
+            <p class="pillar__desc">
+              Every subagent ships to your repo. CLAUDE.md, prompts, rubrics, data pipelines. If we ended tomorrow, your team continues running exactly what we built.
+            </p>
+          </div>
+
+          <div class="pillar">
+            <span class="pillar__num">02</span>
+            <h3 class="pillar__name">TVA-graded outbound</h3>
+            <p class="pillar__desc">
+              Every message scored against the TVA rubric (Specific · Timely · Actionable). Below 7/9, regenerate. Three failed regenerations, skip the prospect.
+            </p>
+          </div>
+
+          <div class="pillar">
+            <span class="pillar__num">03</span>
+            <h3 class="pillar__name">Your team trained</h3>
+            <p class="pillar__desc">
+              90-minute handoff session per subagent. Loom library. Quarterly check-ins for 12 months. You leave more capable, not more dependent.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         FAQ
+         ============================================ -->
+    <section class="section section--tight">
+      <div class="container">
+        <div class="pricing-section-head">
+          <span class="t-micro">04 / QUESTIONS</span>
+          <h2 class="t-display pricing-section-title">The pricing questions buyers ask.</h2>
+        </div>
+
+        <div class="faq">
+          <details class="faq__item">
+            <summary class="faq__q">How is this different from Smoke Signals?</summary>
+            <div class="faq__a">
+              <p>Smoke Signals takes 90 days to build. We ship in 2–3 weeks. They operate the system on your behalf forever; we operate only if you want, and you own the code from day one. They're HubSpot-only; we work with HubSpot, Salesforce, or any CRM.</p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary class="faq__q">What if we don't want the operate retainer?</summary>
+            <div class="faq__a">
+              <p>Don't take it. The build is fixed-fee. Your team takes the keys at handoff and runs it. Operate is opt-in for teams without engineering bandwidth.</p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary class="faq__q">Can we cancel operate?</summary>
+            <div class="faq__a">
+              <p>Anytime. No migration cost. The system is in your repo running on your infrastructure. We just stop pushing changes.</p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary class="faq__q">Is there a discovery fee?</summary>
+            <div class="faq__a">
+              <p>No. Discovery calls are free. We scope, quote in two business days, and only proceed if both sides see fit.</p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary class="faq__q">Do you do hourly?</summary>
+            <div class="faq__a">
+              <p>No. Builds are fixed-fee. Operate and Maintain are flat monthly. We don't bill for time — we bill for delivered systems.</p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary class="faq__q">What's included in "data subscriptions"?</summary>
+            <div class="faq__a">
+              <p>Ongoing feeds from our four operating properties. Verum (300K+ B2B records validated monthly), Provyx (2.4M+ healthcare provider records, NPI-verified), Fieldwork (27,000+ active job postings refreshed weekly). Subscriptions feed your subagents' trigger detection.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         CTA
+         ============================================ -->
+    <section class="section pricing-cta-section">
+      <div class="container">
+        <div class="pricing-cta">
+          <h2 class="t-display pricing-cta__title">Ready to ship?</h2>
+          <p class="pricing-cta__sub">
+            Tell us what you want built. Fixed quote in two business days. If we're not the right fit, we'll say so.
+          </p>
+          <CTAButton variant="primary" href="/contact/" label="→ Book a build" large={true} />
+        </div>
+      </div>
+    </section>
+
+  </main>
+</Base>
+
+<style>
+  /* ============================================
+     Hero
+     ============================================ */
+  .pricing-hero {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-12);
+  }
+
+  .pricing-hero__title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(44px, 6.5vw, 72px);
+    line-height: 1.02;
+    letter-spacing: var(--ls-tight);
+    color: var(--ink);
+    margin: var(--space-6) 0 var(--space-6);
+    max-width: 880px;
+  }
+
+  .pricing-hero__title em {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  .pricing-hero__sub {
+    font-family: var(--font-body);
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--muted);
+    max-width: 640px;
+    margin: 0 0 var(--space-8);
+  }
+
+  .pricing-hero__cta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .pricing-hero__caption {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+
+  /* ============================================
+     Section heads
+     ============================================ */
+  .pricing-section-head {
+    margin-bottom: var(--space-12);
+    max-width: 760px;
+  }
+
+  .pricing-section-title {
+    margin: var(--space-3) 0 0;
+  }
+
+  .pricing-section-title em {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  /* ============================================
+     Tier cards (4-up)
+     ============================================ */
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-6);
+  }
+
+  .tier {
+    background: var(--surface);
+    border: 1px solid var(--surface-2);
+    border-radius: 12px;
+    padding: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    position: relative;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .tier:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .tier--feature {
+    border-color: var(--accent);
+    background: linear-gradient(180deg, rgba(16, 185, 129, 0.06), var(--surface));
+  }
+
+  .tier__head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  .tier__num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+  }
+
+  .tier__label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  .tier__pill {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 3px 8px;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+  }
+
+  .tier__price {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+  }
+
+  .tier__price-val {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 36px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .tier__price-sep {
+    color: var(--muted);
+    font-family: var(--font-display);
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  .tier__price-note {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .tier__desc {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--muted);
+    margin: var(--space-3) 0 0;
+  }
+
+  .tier__features {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-3) 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    flex-grow: 1;
+  }
+
+  .tier__features li {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink);
+    padding-left: var(--space-4);
+    position: relative;
+  }
+
+  .tier__features li::before {
+    content: "/";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-weight: 500;
+  }
+
+  .tier__cta {
+    margin-top: var(--space-6);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--surface-2);
+    transition: letter-spacing 0.2s;
+  }
+
+  .tier__cta:hover {
+    letter-spacing: 0.18em;
+  }
+
+  .tiers__note {
+    margin-top: var(--space-8);
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* ============================================
+     Pillars (3-up)
+     ============================================ */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--surface-2);
+    border-bottom: 1px solid var(--surface-2);
+  }
+
+  .pillar {
+    padding: var(--space-10) var(--space-8);
+    border-right: 1px solid var(--surface-2);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .pillar:last-child { border-right: none; }
+
+  .pillar__num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+  }
+
+  .pillar__name {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  .pillar__desc {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  /* ============================================
+     FAQ
+     ============================================ */
+  .faq {
+    max-width: 800px;
+    margin: 0 auto;
+    border-top: 1px solid var(--surface-2);
+  }
+
+  .faq__item {
+    border-bottom: 1px solid var(--surface-2);
+    padding: var(--space-6) 0;
+  }
+
+  .faq__q {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 19px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .faq__q::-webkit-details-marker { display: none; }
+
+  .faq__q::after {
+    content: "+";
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 22px;
+    transition: transform 0.2s;
+  }
+
+  details[open] .faq__q::after {
+    content: "−";
+  }
+
+  .faq__a {
+    margin-top: var(--space-4);
+  }
+
+  .faq__a p {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  /* ============================================
+     CTA section
+     ============================================ */
+  .pricing-cta-section {
+    padding: var(--space-16) 0;
+  }
+
+  .pricing-cta {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .pricing-cta__title {
+    margin: 0 0 var(--space-4);
+  }
+
+  .pricing-cta__sub {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--muted);
+    margin: 0 0 var(--space-8);
+  }
+
+  /* ============================================
+     Responsive
+     ============================================ */
+  @media (max-width: 1024px) {
+    .tiers { grid-template-columns: repeat(2, 1fr); }
+    .pillars { grid-template-columns: 1fr; }
+    .pillar {
+      border-right: none;
+      border-bottom: 1px solid var(--surface-2);
+    }
+    .pillar:last-child { border-bottom: none; }
+  }
+
+  @media (max-width: 640px) {
+    .tiers { grid-template-columns: 1fr; }
+    .tier__price-val { font-size: 28px; }
+  }
+</style>

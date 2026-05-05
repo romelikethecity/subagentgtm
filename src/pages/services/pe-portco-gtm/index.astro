@@ -1,5 +1,6 @@
 ---
 import ServicePage from '../../../layouts/ServicePage.astro';
+import TCOChart from '../../../components/TCOChart.astro';
 ---
 
 <ServicePage
@@ -53,12 +54,19 @@ import ServicePage from '../../../layouts/ServicePage.astro';
           PE firms acquire companies with impressive top-line numbers and discover the GTM stack underneath is duct tape. CRM data is stale. Pipeline reporting is fiction. Outbound is manual. The sales team is running plays from three years ago.
         </p>
         <p>
-          The operating partner needs results in 90 days. Traditional agencies take 90 days just to onboard. Consultants deliver a deck. Neither ships pipeline. You need someone who can audit, rebuild, and hand off a working GTM engine on a fixed timeline. That's what we do. Every outbound motion we deploy passes the <a href="/methodology/">Forward Test</a> — no generic sequences, no spray-and-pray.
+          The operating partner needs results in 90 days. Traditional agencies take 90 days just to onboard. Consultants deliver a deck. Neither ships pipeline. You need someone who can audit, rebuild, and hand off a working GTM engine on a fixed timeline. That's what we do. Every outbound motion we deploy passes <a href="/methodology/">TVA</a> — no generic sequences, no spray-and-pray.
         </p>
         <p>
           We've built the playbook to be repeatable across portfolio companies. Same methodology. Same data pipelines. Same handoff. Different portco, same speed.
         </p>
       </div>
+    </div>
+  </section>
+
+  <!-- TCO comparison — PE buyers care about this -->
+  <section class="section section--tight">
+    <div class="container">
+      <TCOChart variant="full" />
     </div>
   </section>
 
@@ -78,10 +86,10 @@ import ServicePage from '../../../layouts/ServicePage.astro';
           <strong>Pipeline rebuild.</strong> New pipeline stages mapped to buyer behavior, not internal process. Subagents deployed for deal scoring, stale-deal resurrection, and forecast accuracy. CRO gets a weekly pipeline truth digest on day one.
         </li>
         <li>
-          <strong>Outbound via the Forward Test.</strong> New outbound subagents trained on prospect pain, not the portco's value prop. Every message passes the Forward Test or it doesn't send. First 50 messages human-approved. Then the system runs.
+          <strong>Outbound via TVA.</strong> New outbound subagents trained on prospect pain, not the portco's value prop. Every message passes TVA or it doesn't send. First 50 messages human-approved. Then the system runs.
         </li>
         <li>
-          <strong>Team training and handoff.</strong> Your operators learn to run what we built. CLAUDE.md walkthrough. Forward Test rubric training. The portco's team leaves more capable than when the engagement started.
+          <strong>Team training and handoff.</strong> Your operators learn to run what we built. CLAUDE.md walkthrough. TVA rubric training. The portco's team leaves more capable than when the engagement started.
         </li>
       </ol>
     </div>

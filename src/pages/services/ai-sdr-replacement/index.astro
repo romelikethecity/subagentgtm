@@ -1,11 +1,12 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import CTAButton from '../../../components/CTAButton.astro';
+import TCOChart from '../../../components/TCOChart.astro';
 ---
 
 <Base
   title="AI SDR replacement"
-  description="Your AI SDR failed because it pitched. We build agents that pass the Forward Test. Or they don't send."
+  description="Your AI SDR failed because it pitched. We build agents that pass TVA. Or they don't send."
   path="/services/ai-sdr-replacement/"
 >
   <!-- Service schema -->
@@ -19,7 +20,7 @@ import CTAButton from '../../../components/CTAButton.astro';
       "url": "https://subagentgtm.com"
     },
     "areaServed": "United States",
-    "description": "Forward Test-trained AI SDR agents that replace failed AI SDR tools. Custom-built, versioned in your repo, owned by your team."
+    "description": "TVA-trained AI SDR agents that replace failed AI SDR tools. Custom-built, versioned in your repo, owned by your team."
   })} />
 
   <!-- FAQPage schema -->
@@ -66,14 +67,14 @@ import CTAButton from '../../../components/CTAButton.astro';
     <!-- Hero -->
     <section class="section" style="padding-top: var(--space-16);">
       <div class="container" style="max-width: 900px;">
-        <span class="t-micro">AI SDR REPLACEMENT · TRAINED ON THE FORWARD TEST</span>
+        <span class="t-micro">AI SDR REPLACEMENT · TRAINED ON TVA</span>
 
         <h1 class="t-display-xl" style="margin: var(--space-6) 0 var(--space-6);">
           Your AI SDR failed because it pitched. We build agents that do the reverse.
         </h1>
 
         <p class="t-body t-muted" style="max-width: 640px; margin-bottom: var(--space-8);">
-          We train on your prospect's visible pain first. Your value prop comes last — or not at all. Every message passes the <a href="/methodology/">Forward Test</a> or it doesn't send.
+          We train on your prospect's visible pain first. Your value prop comes last — or not at all. Every message passes <a href="/methodology/">TVA</a> or it doesn't send.
         </p>
 
         <CTAButton href="/contact/" label="→ Book a build" variant="primary" large={true} caption="Your existing AI SDR contract? We migrate you off. Fixed-fee." />
@@ -99,10 +100,17 @@ import CTAButton from '../../../components/CTAButton.astro';
       </div>
     </section>
 
+    <!-- TCO comparison -->
+    <section class="section section--tight">
+      <div class="container">
+        <TCOChart variant="compact" />
+      </div>
+    </section>
+
     <!-- How we train -->
     <section class="section">
       <div class="container container--narrow">
-        <h2 class="t-h1" style="margin-bottom: var(--space-8);">How we train subagents that pass the Forward Test.</h2>
+        <h2 class="t-h1" style="margin-bottom: var(--space-8);">How we train subagents that pass TVA.</h2>
 
         <ol class="t-body t-muted service-steps">
           <li>
@@ -115,7 +123,7 @@ import CTAButton from '../../../components/CTAButton.astro';
             <strong>Value-prop anchoring.</strong> Only after a high-STA signal survives does the third subagent anchor your value prop to it. The message leads with the signal, delivers the insight, and positions your product as the answer to a problem the prospect has already admitted publicly.
           </li>
           <li>
-            <strong>Forward Test self-scoring.</strong> The drafted message is scored by a fourth subagent against the Forward Test rubric. Below 7/9, regenerate. Three failed regenerations, skip the prospect.
+            <strong>TVA self-scoring.</strong> The drafted message is scored by a fourth subagent against the TVA rubric. Below 7/9, regenerate. Three failed regenerations, skip the prospect.
           </li>
           <li>
             <strong>Human approval for the first 50.</strong> For every new ICP, a human on your team approves the first 50 sends. After that, the system runs with sampling review.
@@ -153,7 +161,7 @@ import CTAButton from '../../../components/CTAButton.astro';
         </blockquote>
 
         <div style="margin-top: var(--space-8);">
-          <a href="/methodology/" class="btn">Read the Forward Test →</a>
+          <a href="/methodology/" class="btn">Read the TVA framework →</a>
         </div>
       </div>
     </section>
