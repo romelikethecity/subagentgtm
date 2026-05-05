@@ -17,9 +17,23 @@ import CTAButton from '../../components/CTAButton.astro';
           Tell us what you want built.
         </h1>
 
-        <p class="t-body t-muted" style="margin-bottom: var(--space-12);">
+        <p class="t-body t-muted" style="margin-bottom: var(--space-8);">
           Fixed quote within two business days. If we're not the right fit, we'll say so.
         </p>
+
+        <!-- Not a fit if... -->
+        <div class="contact-disqualify">
+          <span class="contact-disqualify__label">SAVE EVERYONE TIME — DON'T SUBMIT IF</span>
+          <ul class="contact-disqualify__list">
+            <li>You're shopping for a SaaS seat license. We build custom systems.</li>
+            <li>You're below $3M ARR. The build doesn't return at smaller scale.</li>
+            <li>You expect us to write campaign copy or buy media on your behalf.</li>
+            <li>You won't ever consider taking the system in-house. The model assumes you eventually do.</li>
+          </ul>
+          <p class="contact-disqualify__foot">
+            <a href="/pricing/#not-a-fit">Full disqualifier list →</a>
+          </p>
+        </div>
 
         <form action="https://formspree.io/f/xbdqoybv" method="POST" class="form">
           <label>
@@ -86,3 +100,69 @@ import CTAButton from '../../components/CTAButton.astro';
     </section>
   </main>
 </Base>
+
+<style>
+  .contact-disqualify {
+    background: var(--surface);
+    border: 1px solid var(--surface-2);
+    border-left: 2px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: var(--space-6);
+    margin-bottom: var(--space-12);
+  }
+
+  .contact-disqualify__label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: var(--space-4);
+  }
+
+  .contact-disqualify__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .contact-disqualify__list li {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+    padding-left: var(--space-5);
+    position: relative;
+  }
+
+  .contact-disqualify__list li::before {
+    content: "✕";
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
+
+  .contact-disqualify__foot {
+    margin: var(--space-4) 0 0;
+    padding-top: var(--space-3);
+    border-top: 1px dashed var(--surface-2);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .contact-disqualify__foot a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .contact-disqualify__foot a:hover { color: var(--accent); }
+</style>

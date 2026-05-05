@@ -257,6 +257,116 @@ import TCOChart from '../components/TCOChart.astro';
           Built by operators from Snapdocs, Salesforce, Microsoft, and Databricks. <a href="/methodology/">See how we work →</a>
         </p>
 
+        <!-- =====================================================
+             TRIGGERS — three named examples (outcome-based)
+             ===================================================== -->
+        <div class="triggers" style="margin-top: var(--space-16);">
+          <div class="triggers__head">
+            <span class="t-micro t-accent">TRIGGER EXAMPLES · WHAT YOU REACH FIRST</span>
+            <h2 class="t-display" style="margin: var(--space-3) 0 var(--space-4); max-width: 720px;">
+              Three triggers we detect that <em>your competitors don't</em>.
+            </h2>
+            <p class="t-body t-muted" style="max-width: 640px;">
+              Every Subagent we ship monitors a curated set of trigger sources, scores each candidate against TVA, and only sends when the asset is forward-worthy. Three live examples of what that looks like:
+            </p>
+          </div>
+
+          <div class="triggers__grid">
+
+            <!-- Trigger 1: Hiring Velocity -->
+            <div class="trigger-card">
+              <div class="trigger-card__top">
+                <span class="trigger-card__num">01</span>
+                <span class="trigger-card__source">SOURCE · Fieldwork (27K+ active job postings, weekly refresh)</span>
+              </div>
+              <h3 class="trigger-card__title">The hiring velocity spike</h3>
+              <p class="trigger-card__outcome">
+                You reach forty-seven funded SaaS companies inside their first fourteen days of posting a senior engineering burst — when their VP Sales hire is sixty days out and no other vendor has them on a list yet.
+              </p>
+              <div class="trigger-card__tva">
+                <div class="trigger-card__tva-row">
+                  <span class="trigger-card__tva-lbl">SPECIFIC</span>
+                  <div class="trigger-card__tva-track"><div class="trigger-card__tva-fill" style="width:100%"></div></div>
+                  <span class="trigger-card__tva-val">3/3</span>
+                </div>
+                <div class="trigger-card__tva-row">
+                  <span class="trigger-card__tva-lbl">TIMELY</span>
+                  <div class="trigger-card__tva-track"><div class="trigger-card__tva-fill" style="width:100%"></div></div>
+                  <span class="trigger-card__tva-val">3/3</span>
+                </div>
+                <div class="trigger-card__tva-row">
+                  <span class="trigger-card__tva-lbl">ACTIONABLE</span>
+                  <div class="trigger-card__tva-track"><div class="trigger-card__tva-fill" style="width:100%"></div></div>
+                  <span class="trigger-card__tva-val">3/3</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Trigger 2: AI Threshold Crossing -->
+            <div class="trigger-card">
+              <div class="trigger-card__top">
+                <span class="trigger-card__num">02</span>
+                <span class="trigger-card__source">SOURCE · AI Penetration Index (proprietary, weekly)</span>
+              </div>
+              <h3 class="trigger-card__title">The AI threshold crossing</h3>
+              <p class="trigger-card__outcome">
+                You email a marketing team the same week their function crosses seventeen percent AI-required — when their CMO is re-evaluating tools, their salary premium just spiked twenty-eight thousand, and the budget conversation is open.
+              </p>
+              <div class="trigger-card__tva">
+                <div class="trigger-card__tva-row">
+                  <span class="trigger-card__tva-lbl">SPECIFIC</span>
+                  <div class="trigger-card__tva-track"><div class="trigger-card__tva-fill" style="width:100%"></div></div>
+                  <span class="trigger-card__tva-val">3/3</span>
+                </div>
+                <div class="trigger-card__tva-row">
+                  <span class="trigger-card__tva-lbl">TIMELY</span>
+                  <div class="trigger-card__tva-track"><div class="trigger-card__tva-fill" style="width:100%"></div></div>
+                  <span class="trigger-card__tva-val">3/3</span>
+                </div>
+                <div class="trigger-card__tva-row">
+                  <span class="trigger-card__tva-lbl">ACTIONABLE</span>
+                  <div class="trigger-card__tva-track"><div class="trigger-card__tva-fill" style="width: 67%"></div></div>
+                  <span class="trigger-card__tva-val">2/3</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Trigger 3: Practice Ownership Change -->
+            <div class="trigger-card">
+              <div class="trigger-card__top">
+                <span class="trigger-card__num">03</span>
+                <span class="trigger-card__source">SOURCE · Provyx + state filings (NPI-verified, weekly)</span>
+              </div>
+              <h3 class="trigger-card__title">The practice ownership change</h3>
+              <p class="trigger-card__outcome">
+                You reach a healthcare practice inside their ninety-day post-acquisition window — every tech stack decision is open, the new owner needs quick wins, and the actual ownership change sits in your subject line.
+              </p>
+              <div class="trigger-card__tva">
+                <div class="trigger-card__tva-row">
+                  <span class="trigger-card__tva-lbl">SPECIFIC</span>
+                  <div class="trigger-card__tva-track"><div class="trigger-card__tva-fill" style="width:100%"></div></div>
+                  <span class="trigger-card__tva-val">3/3</span>
+                </div>
+                <div class="trigger-card__tva-row">
+                  <span class="trigger-card__tva-lbl">TIMELY</span>
+                  <div class="trigger-card__tva-track"><div class="trigger-card__tva-fill" style="width:100%"></div></div>
+                  <span class="trigger-card__tva-val">3/3</span>
+                </div>
+                <div class="trigger-card__tva-row">
+                  <span class="trigger-card__tva-lbl">ACTIONABLE</span>
+                  <div class="trigger-card__tva-track"><div class="trigger-card__tva-fill" style="width:100%"></div></div>
+                  <span class="trigger-card__tva-val">3/3</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <p class="triggers__foot">
+            Three of forty-plus triggers across our four data properties. <a href="/services/">See the full subagent catalog →</a>
+          </p>
+        </div>
+
         <!-- TCO comparison chart -->
         <div style="margin-top: var(--space-16);">
           <TCOChart variant="compact" />
@@ -829,6 +939,140 @@ import TCOChart from '../components/TCOChart.astro';
   .is-visible .stagger-children > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: translateY(0); }
   .is-visible .stagger-children > *:nth-child(2) { transition-delay: 80ms; opacity: 1; transform: translateY(0); }
   .is-visible .stagger-children > *:nth-child(3) { transition-delay: 160ms; opacity: 1; transform: translateY(0); }
+
+  /* ========================================================================
+     TRIGGER EXAMPLES (homepage)
+     ======================================================================== */
+  .triggers__head {
+    margin-bottom: var(--space-10);
+  }
+
+  .triggers__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+
+  .trigger-card {
+    background: var(--surface);
+    border: 1px solid var(--surface-2);
+    border-radius: 12px;
+    padding: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .trigger-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .trigger-card__top {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .trigger-card__num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+  }
+
+  .trigger-card__source {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .trigger-card__title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .trigger-card__outcome {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  .trigger-card__tva {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--surface-2);
+  }
+
+  .trigger-card__tva-row {
+    display: grid;
+    grid-template-columns: 78px 1fr 28px;
+    gap: var(--space-3);
+    align-items: center;
+  }
+
+  .trigger-card__tva-lbl {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .trigger-card__tva-track {
+    height: 3px;
+    background: var(--surface-2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .trigger-card__tva-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  .trigger-card__tva-val {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--accent);
+    text-align: right;
+  }
+
+  .triggers__foot {
+    margin-top: var(--space-8);
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .triggers__foot a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+  }
+
+  @media (max-width: 1024px) {
+    .triggers__grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
 
 <script>

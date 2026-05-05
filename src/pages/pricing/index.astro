@@ -120,12 +120,85 @@ import CTAButton from '../../components/CTAButton.astro';
     </section>
 
     <!-- ============================================
+         MILESTONES — outcome-based timeline
+         ============================================ -->
+    <section class="section section--tight">
+      <div class="container">
+        <div class="pricing-section-head">
+          <span class="t-micro">02 / WHAT YOU GET, WHEN</span>
+          <h2 class="t-display pricing-section-title">
+            What's in your hands at <em>each milestone</em>.
+          </h2>
+        </div>
+
+        <div class="milestones">
+
+          <div class="milestone">
+            <div class="milestone__marker">
+              <span class="milestone__dot"></span>
+              <span class="milestone__when">WEEK 1</span>
+            </div>
+            <h3 class="milestone__name">Your ICP, refined</h3>
+            <p class="milestone__outcome">
+              A scored list of trigger sources matched to your closed-won data. The first one hundred candidate signals waiting in your dashboard. The first fifty drafted sequences queued for your approval before anything sends.
+            </p>
+          </div>
+
+          <div class="milestone">
+            <div class="milestone__marker">
+              <span class="milestone__dot"></span>
+              <span class="milestone__when">WEEK 3</span>
+            </div>
+            <h3 class="milestone__name">First sequence live</h3>
+            <p class="milestone__outcome">
+              Asset-grade messages sending to triggered prospects. Forward rate metric tracking from message one. Loom library walking your team through every subagent we shipped, what it does, how to modify it.
+            </p>
+          </div>
+
+          <div class="milestone">
+            <div class="milestone__marker">
+              <span class="milestone__dot"></span>
+              <span class="milestone__when">MONTH 3</span>
+            </div>
+            <h3 class="milestone__name">First quarterly report</h3>
+            <p class="milestone__outcome">
+              Forward rate vs benchmark, by segment. Triggers that converted, triggers that didn't. A second trigger source added based on the data. Your CRO has a number to put in the board deck.
+            </p>
+          </div>
+
+          <div class="milestone">
+            <div class="milestone__marker">
+              <span class="milestone__dot"></span>
+              <span class="milestone__when">MONTH 6</span>
+            </div>
+            <h3 class="milestone__name">Per-segment TVA tuning</h3>
+            <p class="milestone__outcome">
+              Enough send data to tune the TVA rubric per ICP segment. Two campaigns running in parallel where there was one. Your team trained to modify the rubric without our help.
+            </p>
+          </div>
+
+          <div class="milestone">
+            <div class="milestone__marker">
+              <span class="milestone__dot milestone__dot--final"></span>
+              <span class="milestone__when">MONTH 12</span>
+            </div>
+            <h3 class="milestone__name">Year of forward-rate data</h3>
+            <p class="milestone__outcome">
+              Eleven months of forward-rate trend data. Take operate in-house — your team takes the keys, the system keeps running. Or keep us operating. The decision is yours, and the system stays yours either way.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
          PRICING TIERS — 4 cards
          ============================================ -->
     <section class="section section--tight">
       <div class="container">
         <div class="pricing-section-head">
-          <span class="t-micro">02 / PRICING</span>
+          <span class="t-micro">03 / PRICING</span>
           <h2 class="t-display pricing-section-title">
             Four ways to engage. <em>Customer owns the code.</em>
           </h2>
@@ -245,7 +318,7 @@ import CTAButton from '../../components/CTAButton.astro';
     <section class="section section--tight">
       <div class="container">
         <div class="pricing-section-head">
-          <span class="t-micro">03 / WHAT MAKES THIS DIFFERENT</span>
+          <span class="t-micro">04 / WHAT MAKES THIS DIFFERENT</span>
           <h2 class="t-display pricing-section-title">
             Three things every engagement delivers.
           </h2>
@@ -280,12 +353,79 @@ import CTAButton from '../../components/CTAButton.astro';
     </section>
 
     <!-- ============================================
+         NOT A FIT — disqualifier
+         ============================================ -->
+    <section class="section section--tight" id="not-a-fit">
+      <div class="container">
+        <div class="pricing-section-head">
+          <span class="t-micro">05 / NOT A FIT</span>
+          <h2 class="t-display pricing-section-title">
+            We won't take the engagement if <em>any of these are true</em>.
+          </h2>
+          <p class="t-body t-muted" style="max-width: 640px; margin-top: var(--space-3);">
+            Better to call it now than burn each other's time. If any of the below describe you, we'll say no on the discovery call and refund any deposit.
+          </p>
+        </div>
+
+        <div class="disqualify">
+          <div class="disqualify__row">
+            <span class="disqualify__mark">✕</span>
+            <div class="disqualify__copy">
+              <span class="disqualify__title">You want a seat license.</span>
+              <span class="disqualify__detail">If you're shopping for a SaaS subscription with a per-seat price, you're shopping in the wrong category. We build custom systems. The output is software, not a login.</span>
+            </div>
+          </div>
+
+          <div class="disqualify__row">
+            <span class="disqualify__mark">✕</span>
+            <div class="disqualify__copy">
+              <span class="disqualify__title">You're below $3M ARR.</span>
+              <span class="disqualify__detail">The build investment doesn't return at smaller scale. You'll get more from a $99/mo Clay seat plus a contractor than from a $35K subagent build. Come back at $3M.</span>
+            </div>
+          </div>
+
+          <div class="disqualify__row">
+            <span class="disqualify__mark">✕</span>
+            <div class="disqualify__copy">
+              <span class="disqualify__title">You expect us to write campaign copy.</span>
+              <span class="disqualify__detail">We engineer the system. Your team owns the message and the brand voice. If you need a copywriter or an ad agency, we'll refer one — but it's not us.</span>
+            </div>
+          </div>
+
+          <div class="disqualify__row">
+            <span class="disqualify__mark">✕</span>
+            <div class="disqualify__copy">
+              <span class="disqualify__title">You won't give us API access.</span>
+              <span class="disqualify__detail">Subagents need real CRM, real signals, and real outbound infrastructure to score against. If your security review on AI access takes more than 30 days, the engagement won't ship inside the build window.</span>
+            </div>
+          </div>
+
+          <div class="disqualify__row">
+            <span class="disqualify__mark">✕</span>
+            <div class="disqualify__copy">
+              <span class="disqualify__title">You want us to run paid ads.</span>
+              <span class="disqualify__detail">We don't manage ad spend. Subagents around your funnel? Yes. Buying media on your behalf? No. SharpPages can build the landing pages; we'll wire the subagents; an agency can buy the media. Three different jobs.</span>
+            </div>
+          </div>
+
+          <div class="disqualify__row">
+            <span class="disqualify__mark">✕</span>
+            <div class="disqualify__copy">
+              <span class="disqualify__title">You won't ever consider taking it in-house.</span>
+              <span class="disqualify__detail">The whole model is built on you eventually owning the system. If you want a forever-managed black box, Smoke Signals is a better fit than us. Our pitch is the opposite: we build it well enough that one day you don't need us.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
          FAQ
          ============================================ -->
     <section class="section section--tight">
       <div class="container">
         <div class="pricing-section-head">
-          <span class="t-micro">04 / QUESTIONS</span>
+          <span class="t-micro">06 / QUESTIONS</span>
           <h2 class="t-display pricing-section-title">The pricing questions buyers ask.</h2>
         </div>
 
@@ -728,5 +868,144 @@ import CTAButton from '../../components/CTAButton.astro';
   @media (max-width: 640px) {
     .tiers { grid-template-columns: 1fr; }
     .tier__price-val { font-size: 28px; }
+  }
+
+  /* ============================================
+     Milestones (vertical timeline)
+     ============================================ */
+  .milestones {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .milestones::before {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 24px;
+    bottom: 24px;
+    width: 1px;
+    background: var(--surface-2);
+    z-index: 0;
+  }
+
+  .milestone {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: var(--space-8);
+    padding: var(--space-6) 0;
+    position: relative;
+    z-index: 1;
+    align-items: start;
+  }
+
+  .milestone__marker {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .milestone__dot {
+    width: 13px;
+    height: 13px;
+    background: var(--bg);
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .milestone__dot--final {
+    background: var(--accent);
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.18);
+  }
+
+  .milestone__when {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .milestone__name {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 0 0 var(--space-2);
+  }
+
+  .milestone__outcome {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  @media (max-width: 640px) {
+    .milestone {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+    }
+    .milestones::before {
+      display: none;
+    }
+  }
+
+  /* ============================================
+     Not a fit (disqualifier)
+     ============================================ */
+  .disqualify {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 800px;
+    margin: 0 auto;
+    border-top: 1px solid var(--surface-2);
+  }
+
+  .disqualify__row {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: var(--space-5);
+    padding: var(--space-6) 0;
+    border-bottom: 1px solid var(--surface-2);
+    align-items: start;
+  }
+
+  .disqualify__mark {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    color: var(--muted);
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .disqualify__copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .disqualify__title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .disqualify__detail {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--muted);
   }
 </style>
