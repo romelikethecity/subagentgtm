@@ -348,7 +348,8 @@ import Base from '../../../layouts/Base.astro';
 
 <script is:inline>
 (function() {
-  var SIGNUP_URL = 'https://subagent-newsletter-signup.rome-workers.workers.dev/';
+  // Shared newsletter worker (D1-backed) — same endpoint as gtmepulse, fdepulse, etc.
+  var SIGNUP_URL = 'https://newsletter-subscribe.rome-workers.workers.dev/subscribe';
 
   function showSuccess(form) {
     while (form.firstChild) form.removeChild(form.firstChild);
@@ -375,7 +376,7 @@ import Base from '../../../layouts/Base.astro';
       fetch(SIGNUP_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email, list: 'gtm-triggers-weekly' })
+        body: JSON.stringify({ email: email, list: 'gtm-triggers-weekly', source: 'subagentgtm-sample' })
       })
       .then(function(r) { return r.json(); })
       .then(function(data) {

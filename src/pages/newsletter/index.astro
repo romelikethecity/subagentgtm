@@ -354,8 +354,8 @@ import Base from '../../layouts/Base.astro';
      ============================================ -->
 <script is:inline>
 (function() {
-  // Update this to your deployed worker URL after `wrangler deploy`
-  var SIGNUP_URL = 'https://subagent-newsletter-signup.rome-workers.workers.dev/';
+  // Shared newsletter worker (D1-backed) — same endpoint as gtmepulse, fdepulse, etc.
+  var SIGNUP_URL = 'https://newsletter-subscribe.rome-workers.workers.dev/subscribe';
 
   function showSuccess(form) {
     // Build the success state with safe DOM methods (no innerHTML)
@@ -392,7 +392,7 @@ import Base from '../../layouts/Base.astro';
       fetch(SIGNUP_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email, list: 'gtm-triggers-weekly' })
+        body: JSON.stringify({ email: email, list: 'gtm-triggers-weekly', source: 'subagentgtm' })
       })
       .then(function(r) { return r.json(); })
       .then(function(data) {
