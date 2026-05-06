@@ -26,12 +26,16 @@ const {
 
 const path = `/blog/${slug}/`;
 const url = `https://subagentgtm.com${path}`;
+const ogImage = `/og/posts/${slug}.png`;
+const ogImageUrl = `https://subagentgtm.com${ogImage}`;
+const ogImageAlt = `${title} — subagent/gtm`;
 
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
   headline: title,
   description,
+  image: ogImageUrl,
   author: {
     "@type": "Person",
     name: "Rome Thorndike",
@@ -74,7 +78,7 @@ const breadcrumbSchema = {
 };
 ---
 
-<Base title={title} description={description} path={path}>
+<Base title={title} description={description} path={path} ogImage={ogImage} ogImageAlt={ogImageAlt}>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   {faqSchema && (

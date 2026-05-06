@@ -6,11 +6,17 @@ interface Props {
   title: string;
   description: string;
   path: string;
+  ogImage?: string;
+  ogImageAlt?: string;
 }
 
-const { title, description, path } = Astro.props;
+const { title, description, path, ogImage, ogImageAlt } = Astro.props;
 const pageTitle = `${title} · subagent/gtm`;
 const canonicalUrl = `https://subagentgtm.com${path}`;
+const ogImageUrl = ogImage
+  ? `https://subagentgtm.com${ogImage}`
+  : 'https://subagentgtm.com/og/og-image.png';
+const ogImageAltText = ogImageAlt ?? 'subagent/gtm — AI for GTM that actually ships';
 ---
 
 <!doctype html>
@@ -34,17 +40,17 @@ const canonicalUrl = `https://subagentgtm.com${path}`;
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:image" content="https://subagentgtm.com/og/og-image.png" />
+    <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="subagent/gtm — AI for GTM that actually ships" />
+    <meta property="og:image:alt" content={ogImageAltText} />
 
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@subagentgtm" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="https://subagentgtm.com/og/og-image.png" />
+    <meta name="twitter:image" content={ogImageUrl} />
 
     <!-- Favicons -->
     <link rel="icon" href="/favicons/favicon.ico" sizes="any" />
