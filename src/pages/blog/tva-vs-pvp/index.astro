@@ -1,0 +1,169 @@
+---
+import BlogPost from '../../../layouts/BlogPost.astro';
+import { getPost } from '../../../data/posts';
+
+const post = getPost('tva-vs-pvp')!;
+
+const faq = [
+  {
+    q: "What is PVP?",
+    a: "Permissionless Value Proposition, the framework Jordan Crawford developed at Cannonball GTM. It asks whether the message itself delivers value the recipient would pay to receive, independent of any pitch. PVP reshaped how serious operators thought about cold outbound between 2021 and 2024 by elevating the message bar above hooks, breakers, and other tactical patterns.",
+  },
+  {
+    q: "What is TVA?",
+    a: "Triggered Value Asset. The framework we built to extend PVP for AI agents writing at scale. TVA structures every send as Trigger (observable, public event indicating active urgency), Value (the specific connection between trigger and prospect's pain), and Asset (the artifact sent, scored on whether it would get forwarded). The shareability bar is what makes it agent-native.",
+  },
+  {
+    q: "Why isn't PVP enough for agents?",
+    a: "Three reasons. Quality drift: PVP's seven criteria are a teaching tool, not a quality gate; agents pattern-match surface criteria and produce plausible slop. Sender bias: PVP's central question is still sender-side ('would the prospect pay for this'). No shareability test: a message can be valuable but unshareable, and the shareability bar is the stronger signal of real value at scale.",
+  },
+  {
+    q: "Is TVA replacing PVP?",
+    a: "No. PVP is still the right framework for human SDRs writing one-to-one outbound at low volume. TVA is the framework for agents at scale where you need an automated quality gate. The two coexist; many of our engagements teach the human team PVP and ship the agent system on TVA.",
+  },
+  {
+    q: "Did Jordan Crawford endorse this?",
+    a: "We talked through the framework with him. The lineage is documented in the methodology page on this site. PVP gave us the language and the teaching architecture; TVA borrowed the spirit and added the agent-native test. We attribute this in every case study and on the methodology page.",
+  },
+];
+---
+
+<BlogPost
+  title={post.title}
+  description={post.description}
+  slug={post.slug}
+  publishedAt={post.publishedAt}
+  category={post.category}
+  readingMinutes={post.readingMinutes}
+  faq={faq}
+>
+  <p>
+    Jordan Crawford's Permissionless Value Proposition framework is one of the best pieces of outbound thinking in the last decade. It reshaped how serious operators thought about cold email by elevating the bar to "would this message deliver value the recipient would pay for, independent of any pitch."
+  </p>
+
+  <p>
+    When we started building AI agents that write outbound at scale, we found PVP didn't fully transfer to the agent context. The framework was designed for humans drafting messages with judgment. When agents draft at volume, three things break that didn't break for humans. We built TVA (Triggered Value Asset) to fill those gaps. This post documents why.
+  </p>
+
+  <p>
+    The point isn't that PVP is wrong. PVP is right. The point is that an agent-native quality gate needs a different test, and the shift matters when the writer is an LLM.
+  </p>
+
+  <h2>What PVP gets right</h2>
+
+  <p>
+    PVP's central insight is that the message itself should deliver value, not just promise it. The seven criteria (Specific, Personal, Relevant, Insightful, Aware, Provocative, Actionable) raise the bar above hooks, breakers, and pattern-interrupt tricks. A PVP-grade message reads as research, not as outbound.
+  </p>
+
+  <p>
+    The framework's second insight is that the recipient is in charge. The sender doesn't earn time by virtue of having a list. The sender earns time by delivering something the recipient would have wanted independent of the pitch. That reorientation toward the recipient's value, not the sender's pitch, is the right starting point.
+  </p>
+
+  <p>
+    For a human SDR writing 5-10 one-to-one outbound messages a day, PVP is the right framework. The discipline of writing to the seven criteria forces specificity, raises the floor on send quality, and produces the kind of outbound that gets replied to.
+  </p>
+
+  <h2>Where PVP breaks under agent scale</h2>
+
+  <p>
+    Three failure modes show up when you try to scale PVP through AI agents.
+  </p>
+
+  <h3>Quality drift on surface criteria</h3>
+
+  <p>
+    PVP's seven criteria are a great teaching tool. They're a worse quality control mechanism for agents. LLMs are excellent at pattern-matching surface criteria without delivering the underlying substance. An agent can produce a message that technically hits Specific, Personal, Relevant, Insightful, Aware, Provocative, and Actionable on a surface read, while still being plausible-sounding slop.
+  </p>
+
+  <p>
+    The reason is that the criteria are descriptive of good messages but not generative of them. An agent training on the criteria can learn to produce messages that score well against the rubric without producing messages that work in inboxes. This is the alignment problem in miniature: optimizing for a proxy of the outcome rather than the outcome itself.
+  </p>
+
+  <h3>Sender bias in the central question</h3>
+
+  <p>
+    PVP's core question is "would the recipient pay for this content?" That's a sender-side question. The agent is guessing what the recipient values. Even with rich personalization data, the guess is structurally noisier than a recipient-side test.
+  </p>
+
+  <p>
+    For a human writer, this is fine. The writer has judgment about what kinds of content prospects in their segment have valued historically. For an agent, the judgment is shallower. The agent extrapolates from the data it has, which is the seller's perspective on what's valuable.
+  </p>
+
+  <h3>No shareability test</h3>
+
+  <p>
+    A message can be valuable in isolation and still be something the recipient would never share. The shareability bar is the stronger signal of real value, because forwarding requires the recipient to actively spend social capital on the sender's content.
+  </p>
+
+  <p>
+    PVP doesn't include a shareability test. A PVP-passing message can still produce zero forwards. The message clears the bar of "useful to the recipient" without clearing the higher bar of "useful enough to share with the recipient's boss." For agents at scale, the higher bar is what matters, because <a href="/blog/forward-rate-outbound-metric/">forward rate is the metric that actually predicts pipeline</a>.
+  </p>
+
+  <h2>What TVA changes</h2>
+
+  <p>
+    TVA borrows PVP's spirit (the recipient is in charge, the message itself must deliver) and adds three structural shifts that make it agent-native.
+  </p>
+
+  <h3>Structure: Trigger, Value, Asset</h3>
+
+  <p>
+    Every TVA-passing message is structured as three explicit components. Trigger is the observable, public event that justifies outbound (a hire, a raise, a launch, a regulatory filing). Value is the specific connection between the trigger and the prospect's likely pain. Asset is the artifact sent, which has to be useful enough that the recipient would forward it.
+  </p>
+
+  <p>
+    The structure isn't a rhetorical trick. It's an audit format. When the agent self-scores, it scores each component independently. When a human reviews, they can identify which component failed. When the team tunes the rubric, they tune by component. PVP's seven criteria are diffuse; TVA's three are concrete.
+  </p>
+
+  <h3>Question: would they forward this</h3>
+
+  <p>
+    The central test moves from "would the recipient pay for this" to "would the recipient forward this to their boss, peer, or team." The shift is small in language and large in consequence.
+  </p>
+
+  <p>
+    Forwarding is a recipient-side action. The agent isn't guessing; it's predicting an observable behavior. The bar is higher, because forwarding requires the recipient to put their own credibility behind the message. And the metric is measurable, because forwards leave traces in email threads, CC additions, and post-meeting references.
+  </p>
+
+  <p>
+    The forwardability question is also harder to game. An agent can pattern-match "Specific" by adding numbers without delivering insight. It's harder to pattern-match "would my boss respect me for sharing this" without actually delivering insight, because the content has to clear two human readers (recipient plus the person they share with), each with separate judgment.
+  </p>
+
+  <h3>STA: a tighter quality gate</h3>
+
+  <p>
+    TVA scores against three criteria instead of seven: Specific (names, numbers, dates), Timely (last 30 days, ideally last 7), Actionable (something the recipient could do this week). Score 0-3 per criterion, 7+ to send. Below threshold, regenerate. Three failed regenerations, skip.
+  </p>
+
+  <p>
+    The reduction from seven to three is intentional. Seven criteria spread the agent's optimization effort across surface qualities; three force focus on the core gate. STA is also more scoreable for an LLM. "Specific" against a concrete trigger is a cleaner judgment than "Provocative" or "Insightful," which are more interpretive.
+  </p>
+
+  <h2>Where TVA fits and where PVP still wins</h2>
+
+  <p>
+    TVA is the framework for agents at scale. PVP is the framework for human SDRs writing one-to-one. Most engagements we run teach the human team PVP for one-to-one outbound and ship the agent system on TVA. The two coexist.
+  </p>
+
+  <p>
+    If you're a B2B founder writing your first 50 cold emails yourself, use PVP. The discipline of writing to seven criteria will produce better messages than any framework that tries to compress them.
+  </p>
+
+  <p>
+    If you're a CRO standing up an automated outbound system, use TVA. The shareability bar and STA scoring give the agents a quality gate they can self-score against, and the metric (forward rate) is observable in production.
+  </p>
+
+  <p>
+    For a fuller methodology write-up, see <a href="/methodology/">our TVA framework page</a>. For the practical implementation in a Claude Code repo, see the <a href="/blog/claude-code-for-gtm/">Claude Code for GTM guide</a>. We <a href="/services/ai-sdr-replacement/">build TVA-trained subagent systems as fixed-fee engagements</a>.
+  </p>
+
+  <h2>The lineage matters</h2>
+
+  <p>
+    PVP did the work of moving the category off hooks-and-breakers tactics and onto value as the bar. TVA wouldn't exist without that move. We attribute Jordan Crawford in every case study and on the methodology page because the lineage is real and the credit is owed.
+  </p>
+
+  <p>
+    What TVA adds is the agent-native test. When the writer is an LLM and the volume is hundreds of sends a week, the question "would they forward this" is the only one that survives. The rest of the framework is engineering around that question.
+  </p>
+</BlogPost>

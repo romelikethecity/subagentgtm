@@ -1,0 +1,191 @@
+---
+import BlogPost from '../../../layouts/BlogPost.astro';
+import { getPost } from '../../../data/posts';
+
+const post = getPost('ai-for-gtm-2026')!;
+
+const faq = [
+  {
+    q: "What does 'AI for GTM' actually mean in 2026?",
+    a: "It means three live categories. AI agents that draft outbound off real signals. AI pipelines that clean, enrich, and validate CRM data on a schedule. AI subagents that read CRM activity and surface stale deals, single-thread risks, and bad close dates. Anything else marketed as 'AI for GTM' is a copilot bolted onto a SaaS UI, and most of those got cut from budgets in Q1.",
+  },
+  {
+    q: "Are AI SDRs actually dead, or just repositioning?",
+    a: "Both. The volume-pitch AI SDR category is dead. 11x lost most of its early customers. Artisan got banned from LinkedIn outreach. The vendors that remain are repositioning as 'AI orchestration' or 'agentic outbound,' which is mostly the same product with new packaging. Custom Claude Code subagents owned by the customer are eating the category.",
+  },
+  {
+    q: "Why is Claude Code winning where horizontal AI tools lost?",
+    a: "Three reasons. The output is a repo, not a UI, so the buyer owns the work product. The agents read the customer's actual data and prompt rules, not the vendor's defaults. And the cost structure is fixed-fee build plus engineering retainer, not per-seat licensing that scales linearly with team size.",
+  },
+  {
+    q: "What should a CRO do this quarter if their AI SDR pilot stalled?",
+    a: "Cancel the contract before the auto-renewal. Audit which signals would have actually justified outbound, and write that scoring into a CLAUDE.md. Build one subagent for one ICP and put a human in the loop for the first 50 sends. Compare forward rate against the pilot you just canceled. If the new build can't beat the old vendor on forward rate, the rebuild is wrong, not the category.",
+  },
+  {
+    q: "What's the realistic budget for AI for GTM in 2026?",
+    a: "A single-subagent build runs $25K-$45K fixed fee, two to three weeks. A multi-subagent system that covers outbound, pipeline, and intel runs $55K-$95K. Ongoing engineering retainer to keep the system fresh starts at $7.5K/mo. That's typically 30-50% lower TCO than the AI SDR + ZoomInfo + sales engagement stack it replaces.",
+  },
+];
+---
+
+<BlogPost
+  title={post.title}
+  description={post.description}
+  slug={post.slug}
+  publishedAt={post.publishedAt}
+  category={post.category}
+  readingMinutes={post.readingMinutes}
+  faq={faq}
+>
+  <p>
+    Three years into the AI GTM hype cycle, the receipts are in. The pitch was that AI would replace the SDR, the data vendor, and half the sales engagement stack. The first product wave shipped on that pitch. Most of it didn't survive contact with a real revenue team.
+  </p>
+
+  <p>
+    What did survive looks nothing like the keynotes from 2024. It's smaller, custom, owned by the buyer, and it lives in the customer's repo. Calling it "AI for GTM" is technically right, but the category that earned its budget in 2026 is narrower and stranger than what the term implies in a vendor deck.
+  </p>
+
+  <p>
+    This is a practitioner read on what worked, what didn't, and where the budgets actually went. We build this stack for a living, so the bias is toward what shipped, not what got announced.
+  </p>
+
+  <h2>The first wave was the value-prop wave, and it failed</h2>
+
+  <p>
+    From late 2023 through 2025, every AI GTM vendor sold the same shape of product. Plug in your ICP, paste your value proposition, and the agent would write personalized outbound at scale. The implementation was always: scrape a LinkedIn title, plug in positioning, generate.
+  </p>
+
+  <p>
+    11x raised $76M on this bet. Artisan raised $25M. Regie, Lavender, and a dozen smaller vendors followed. The category logged some of the highest 12-month renewal collapses in B2B SaaS history. 11x reportedly lost 70-80% of its early customers. Artisan's outbound got blocked at the LinkedIn API layer for spam patterns.
+  </p>
+
+  <p>
+    The failure mode was structural, not tactical. When the input is the seller's value prop, the output is structurally generic. Recipients started pattern-matching the prose as AI within two sentences. Reply rates sat below 0.4%. Forward rates stayed at zero.
+  </p>
+
+  <p>
+    A category that prices on "more outbound" can't survive a year where buyers learn to spot the output in their sleep. By the back half of 2025, CROs were canceling AI SDR contracts faster than they were signing them. That's where the budget came from for what came next.
+  </p>
+
+  <h2>The second wave is the agent-in-your-repo wave</h2>
+
+  <p>
+    Three things shifted between Q4 2025 and now. Anthropic shipped Claude Code with native subagent support. The GTM engineering category emerged as a real budget line, separate from RevOps. And the smartest revenue teams realized the AI SDR product never had a methodology problem hiding inside a tool problem.
+  </p>
+
+  <p>
+    The build that's working in 2026 looks like this. The customer owns a repo. Inside that repo, there's a <code>CLAUDE.md</code> with the ICP definition, voice rules, banned phrases, and a signal scoring rubric. There's a folder of subagents, each one a small Claude Code agent with a specific job. One subagent researches a prospect. Another scores the signal. A third drafts. A fourth self-scores the draft against a rubric and either ships it, regenerates it, or skips the prospect.
+  </p>
+
+  <p>
+    The pricing is fixed-fee build plus engineering retainer. The output is the repo, plus a running system. The team using it can audit every send, every signal, every prompt change. If the vendor goes away, the system keeps running.
+  </p>
+
+  <p>
+    That's the whole shift. The agents are smaller and more specific. The buyer owns the artifact. The pricing is sized to the engineering work, not to seat counts. We <a href="/services/ai-sdr-replacement/">build this stack as a fixed-fee engagement</a>.
+  </p>
+
+  <h2>What's actually shipping in 2026</h2>
+
+  <p>
+    Four categories are getting most of the GTM AI budget right now. Each one used to be a separate SaaS line item that's collapsing into a Claude Code subagent.
+  </p>
+
+  <h3>Outbound subagents that pass a forwardability test</h3>
+
+  <p>
+    The replacement for the AI SDR is not another AI SDR. It's a chain of three or four subagents that research the prospect first, score the signal second, and only then anchor the value prop. Every draft is graded on whether the recipient would forward it to their boss. Below threshold, regenerate. Three failed regenerations, skip.
+  </p>
+
+  <p>
+    We score this with the <a href="/methodology/">TVA framework (Triggered Value Asset)</a>. The forward rate from one of these systems beats the AI SDR it replaced by 5-10x in the first 30 days. The reason isn't the model. It's that the agent isn't allowed to send slop.
+  </p>
+
+  <h3>Pipeline subagents that read CRM truth, not rep self-reports</h3>
+
+  <p>
+    Forecast accuracy is the second budget line cratering AI SDR contracts. Most CROs walked into 2026 with three quarters of bad call coverage. The fix is a subagent that reads CRM activity (emails, meetings, opportunity changes, contact roles) and produces a weekly truth digest. Stale deals get resurrected. Single-thread risks get flagged. Bad close dates get rewritten.
+  </p>
+
+  <p>
+    This used to be a Clari subscription plus a $200K/year RevOps hire. Now it's a subagent that reads your data, runs on a cron, and writes the digest into Slack on Monday morning. We ship this as <a href="/services/pipeline-hygiene/">pipeline hygiene & stale-deal resurrection</a>.
+  </p>
+
+  <h3>Data subagents that replace ZoomInfo and Definitive</h3>
+
+  <p>
+    The ZoomInfo renewal in 2026 is the single most disputed line item on B2B operating budgets. The data ages out faster than vendors refresh it, the contract structure is hostile, and the contact data quality at the bottom of the funnel is often worse than what a custom pipeline produces in week two.
+  </p>
+
+  <p>
+    The replacement is a build. Source the contacts from the actual primary data (state directories, NPI registries, public web), validate them against email and phone authoritative sources, and refresh on a schedule. We do this at <a href="https://veruminc.com" rel="noopener">Verum</a> for B2B and <a href="https://getprovyx.com" rel="noopener">Provyx</a> for healthcare. The first ZoomInfo migration we ran cut data spend 40% and improved deliverability 6 points in the same quarter.
+  </p>
+
+  <h3>Competitive intel subagents that watch hiring and tech-stack moves</h3>
+
+  <p>
+    The fourth category is intelligence. What's a competitor hiring for? What tech stack are they posting roles against? Where are they expanding geographically? This used to be a junior researcher with a spreadsheet. It's now a subagent that scrapes hiring boards, classifies roles, and writes a monthly competitive report.
+  </p>
+
+  <p>
+    We run this through <a href="https://runfieldwork.com" rel="noopener">Fieldwork</a>. The output is the kind of intel that used to take a $250K analyst-hire two months to produce. The repo runs it in three minutes.
+  </p>
+
+  <h2>What stopped working in 2026</h2>
+
+  <p>
+    The horizontal AI copilot is the loudest casualty. Every SaaS tool added an AI assistant to its UI between 2024 and 2025. Most of those features are unused after week three. The reason is structural. A copilot inside a product can only act on the data the product owns. GTM problems live across CRM, email, LinkedIn, billing, and intent data. A copilot can't reach across those systems, so it ends up doing summarization on data the user already saw.
+  </p>
+
+  <p>
+    The other casualty is "agentic" SDR repositioning. The vendors that survived the AI SDR cull are now selling "AI orchestration platforms" with multi-agent dashboards. The product underneath is the same. The output is still generic. The output is still not getting forwarded. Anyone who's been through a renewal cycle on this category has seen the deck twice.
+  </p>
+
+  <p>
+    The third casualty is the seat-license model. AI labor that priced like seats lost to AI labor that priced like a fixed engagement. The unit economics for the buyer are obvious. If a subagent can run 100x the volume of an SDR for less than the SDR's fully loaded cost, charging by the seat is a tax on adoption.
+  </p>
+
+  <h2>What to actually build in the next 90 days</h2>
+
+  <p>
+    For most B2B revenue teams in 2026, the right first build is not a moonshot. It's a single subagent for a single ICP that proves the methodology before the team commits to a system. The order of operations we recommend looks like this.
+  </p>
+
+  <p>
+    Week one. Define the ICP in writing. Not a Salesforce report. A two-page document that says who buys, what trigger predicts the buy, what message earns the response, and what message gets you blocked. This becomes the seed of the CLAUDE.md.
+  </p>
+
+  <p>
+    Week two. Pick one signal source. Funded round inside the last 30 days. New VP Sales hire in the last 14 days. Practice ownership change in the last 90 days. Anything observable, public, and time-bound. Build the subagent that reads that source and scores STA: Specific, Timely, Actionable.
+  </p>
+
+  <p>
+    Week three. Wire the drafting subagent. Train on five excellent examples from your team's best-performing outbound. The agent reads the dossier, drafts, self-scores against the TVA rubric, regenerates if needed, and queues for human approval.
+  </p>
+
+  <p>
+    Week four. Send the first 50 with a human approving each draft. Track forward rate. If forward rate beats your best human SDR's, expand the ICP. If it doesn't, the rubric is wrong, not the architecture.
+  </p>
+
+  <p>
+    By day 60, the system should be running with sampling review instead of full approval. By day 90, you should have data on forward rate per signal type, which is what tells you which signals to expand and which to kill.
+  </p>
+
+  <h2>The category prediction for 2027</h2>
+
+  <p>
+    The companies that will own GTM AI in 2027 won't be the ones with the slickest UI. They'll be the ones whose customers can describe the system to their CFO without using the vendor's slide deck. That's the test. If the buyer can't explain what the agent does in three sentences, the agent doesn't actually exist as a product. It exists as a slide.
+  </p>
+
+  <p>
+    GTM engineering becomes a real role on the org chart. Not RevOps. Not Sales Engineering. A function that owns the repo, the subagents, and the data pipelines that feed them. The hires for this role will come from RevOps engineers and AE/SDR backgrounds with technical chops, not from traditional engineering. We're already seeing the postings.
+  </p>
+
+  <p>
+    The pricing model converges on fixed-fee build plus engineering retainer. Per-seat AI pricing dies completely outside of consumer-grade tools. The vendors who survive the next 18 months are the ones who restructure compensation around delivery work, not subscription growth.
+  </p>
+
+  <p>
+    If you've been waiting to start because the category felt unsettled, the category is now settled enough to build on. Pick one ICP. Ship one subagent. Track forward rate. The rest is just iteration.
+  </p>
+</BlogPost>

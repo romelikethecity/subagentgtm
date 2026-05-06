@@ -1,0 +1,236 @@
+---
+import BlogPost from '../../../layouts/BlogPost.astro';
+import { getPost } from '../../../data/posts';
+
+const post = getPost('forward-rate-outbound-metric')!;
+
+const faq = [
+  {
+    q: "How do you measure forward rate technically?",
+    a: "Three signals combined. Direct forwards detected by parsing 'Fwd:' in inbound replies. CC and BCC additions on reply threads where the new participant wasn't on the original send. Post-meeting references where a new contact mentions the original message in a follow-up. None of these are perfect alone; together they triangulate within 10-15% accuracy. The number is directional, not absolute, but it's the only directional metric that survives AI generation cycles.",
+  },
+  {
+    q: "What's a good forward rate?",
+    a: "0.5% to 2% for cold outbound is excellent. 2-5% on warm contexts (event follow-ups, mutual-connection intros) is realistic. Below 0.2% means the messages aren't earning their place. The benchmark we publish per campaign is forward rate vs the team's prior baseline, since absolute numbers vary heavily by industry and ICP.",
+  },
+  {
+    q: "Why isn't reply rate enough?",
+    a: "Reply rate includes auto-replies, polite declines, and unsubscribe-style responses. A 3% reply rate often decomposes to 2.5% rejection plus 0.4% auto-reply plus 0.1% real conversations. The metric tells you the email reached an inbox; it doesn't tell you the message was worth reading. Forward rate is the only metric that proves the message earned its place.",
+  },
+  {
+    q: "Can you measure forward rate on LinkedIn outbound?",
+    a: "Indirectly. LinkedIn doesn't expose forwarding signals, but you can proxy with second-degree mentions in comments, screenshots posted in adjacent feeds, and direct messages from people who aren't the original recipient. The signal is noisier than email, but the trend is observable across a 90-day campaign window.",
+  },
+  {
+    q: "Is forward rate gameable?",
+    a: "Less than reply rate, but yes. The defense is to track forward rate against meetings booked from forwarded recipients. If forwards are happening but the new recipients aren't booking, the message is shareable as a curiosity, not as a buyer signal. The combined metric (forward rate plus secondary-recipient meeting rate) is much harder to game.",
+  },
+];
+---
+
+<BlogPost
+  title={post.title}
+  description={post.description}
+  slug={post.slug}
+  publishedAt={post.publishedAt}
+  category={post.category}
+  readingMinutes={post.readingMinutes}
+  faq={faq}
+>
+  <p>
+    Open rate and reply rate became unreliable the same year AI lifted both ceilings. By Q3 2025, every B2B inbox was getting a baseline of generic-but-readable AI outbound, which moved open rates up and reply rates sideways. The metrics that drove SDR compensation for a decade started lying.
+  </p>
+
+  <p>
+    Forward rate is the metric that survived. It's the percentage of sent messages that the recipient forwarded to a colleague, peer, or boss. We publish it on every case study. Most AI GTM vendors don't, because their messages don't get forwarded.
+  </p>
+
+  <p>
+    This post covers what forward rate is, how to measure it without enterprise tooling, what good looks like by ICP, and why it's the metric every <a href="/methodology/">TVA-trained subagent</a> we ship optimizes against.
+  </p>
+
+  <h2>Why open rate stopped meaning anything</h2>
+
+  <p>
+    Open rate was always weak. The metric depends on tracking pixel reliability, and most enterprise inboxes (Microsoft 365, Google Workspace) progressively stripped or proxied pixels over the last five years. By 2024, open rates reported by sales engagement tools were 30-50% noise.
+  </p>
+
+  <p>
+    The 2025 AI inflection killed what was left of the signal. Generic AI outbound at scale pushed open rates up across the board, because AI prose is technically readable and gets past basic spam filters. A high open rate in 2026 says the email reached an inbox. Nothing more.
+  </p>
+
+  <h2>Why reply rate is half a metric</h2>
+
+  <p>
+    Reply rate is closer to a real signal but still misleading. A typical B2B reply rate of 3% decomposes into something like:
+  </p>
+
+  <ul>
+    <li>2.0-2.5% rejection responses ("not interested," "remove me from your list")</li>
+    <li>0.3-0.5% auto-replies (out-of-office, vacation, role change)</li>
+    <li>0.1-0.3% real conversations (the buyer engages substantively)</li>
+  </ul>
+
+  <p>
+    Most sales engagement dashboards report the headline number without disaggregating. A team optimizing on reply rate is mostly optimizing on rejection rate, because rejections dominate the denominator.
+  </p>
+
+  <p>
+    The teams that disaggregate get better data. Track real-conversation rate separately. The AI SDR vendors that did this and reported it transparently are mostly the ones who survived the 2025 churn cycle. The ones that didn't, didn't.
+  </p>
+
+  <h2>What forward rate measures</h2>
+
+  <p>
+    Forward rate is the percentage of sent messages where the recipient shared the message with a colleague, peer, or boss. The signal is harder to fake because it requires the recipient to actively spend social capital on the sender's content.
+  </p>
+
+  <p>
+    Forwarding only happens when the message clears three bars. The message has to be valuable enough that sharing it makes the sharer look smart. Specific enough that it reads as research, not mass email. Timely enough that forwarding it is still relevant tomorrow. Most outbound fails at least one of these. Most AI SDR output fails all three.
+  </p>
+
+  <p>
+    Forward rate is what proves the message earned its place. When the recipient hits forward, you've reached not just them but everyone they wanted to impress with their find. That's the multiplier the metric captures.
+  </p>
+
+  <h2>How to measure it</h2>
+
+  <p>
+    Three signals combined. None is perfect alone; together they triangulate within 10-15% accuracy.
+  </p>
+
+  <p>
+    <strong>Direct forwards.</strong> Parse inbound replies for "Fwd:" in the subject line or quoted-message structure that indicates the original send was forwarded and the new sender is responding. This catches the highest-confidence forwards but misses cases where the recipient forwards without ever replying back to you.
+  </p>
+
+  <p>
+    <strong>Thread expansion.</strong> Detect CC or BCC additions on reply threads where the new participant wasn't on the original send. If you sent to one person and a colleague is CC'd on the reply, the message was internalized and shared. This catches forwards that don't generate a separate "Fwd:" thread.
+  </p>
+
+  <p>
+    <strong>Secondary references.</strong> Post-meeting follow-ups, calendar invites, and intro requests that mention the original message in their body. These are the highest-value forwards (they led to a meeting) and the hardest to detect automatically. Tag them manually when you see them in CRM.
+  </p>
+
+  <p>
+    Combined into a single rate, the formula is:
+  </p>
+
+  <p>
+    <code>forward_rate = (direct_forwards + thread_expansions + secondary_refs) / total_sends</code>
+  </p>
+
+  <p>
+    Run this weekly. The numbers will be small. That's normal.
+  </p>
+
+  <h2>What good looks like</h2>
+
+  <p>
+    Numbers vary heavily by ICP and message context, but here are the bands we see across the GTM Claude Code builds we run:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Context</th>
+        <th>Floor</th>
+        <th>Median</th>
+        <th>Excellent</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Cold outbound, B2B SaaS</td>
+        <td>0.2%</td>
+        <td>0.7%</td>
+        <td>1.5%+</td>
+      </tr>
+      <tr>
+        <td>Cold outbound, vertical (healthcare, finance)</td>
+        <td>0.4%</td>
+        <td>1.1%</td>
+        <td>2.5%+</td>
+      </tr>
+      <tr>
+        <td>Event follow-up</td>
+        <td>1.0%</td>
+        <td>3.5%</td>
+        <td>6%+</td>
+      </tr>
+      <tr>
+        <td>Warm intro / mutual connection</td>
+        <td>2.0%</td>
+        <td>5.0%</td>
+        <td>10%+</td>
+      </tr>
+      <tr>
+        <td>AI SDR baseline (industry)</td>
+        <td>~0%</td>
+        <td>~0%</td>
+        <td>0.1%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    The last row is the comparison that matters. Most AI SDR products produce forward rates that round to zero. That's the gap a custom Claude Code build closes.
+  </p>
+
+  <h2>How to use forward rate in production</h2>
+
+  <p>
+    Forward rate is a slow metric. You need 200-500 sends per ICP before the rate stabilizes. Don't make tactical decisions on a 50-send sample. The rate is for monthly review and quarterly campaign planning, not daily tuning.
+  </p>
+
+  <p>
+    Three uses we recommend.
+  </p>
+
+  <p>
+    <strong>Signal-type ranking.</strong> Track forward rate per signal source. If "new VP Sales hire" produces 1.5% forward rate and "funded round" produces 0.3%, weight your scoring rubric accordingly. Some signals are structurally more forwardable than others.
+  </p>
+
+  <p>
+    <strong>ICP qualification.</strong> Track forward rate per ICP segment. If healthcare practice owners forward at 2% and B2B SaaS COOs forward at 0.4%, the segments tell you something about product-market fit, not just message quality.
+  </p>
+
+  <p>
+    <strong>Vendor comparison.</strong> If you're holding an AI SDR contract, ask the vendor to report forward rate. If they can't, that tells you. We <a href="/services/ai-sdr-replacement/">publish forward rate on every campaign we run</a>; it's the metric our methodology was designed to optimize.
+  </p>
+
+  <h2>What changes when you optimize on it</h2>
+
+  <p>
+    Teams that move from reply rate to forward rate as the primary metric usually see three operational shifts within a quarter.
+  </p>
+
+  <p>
+    <strong>Send volume drops.</strong> The TVA scoring gate kills 40-60% of drafts that would have shipped under a reply-rate regime. The remaining sends are sharper. Counterintuitively, total real conversations go up while total sends go down. Reps stop drowning in low-quality threads.
+  </p>
+
+  <p>
+    <strong>Signal selection tightens.</strong> Tracked per signal type, forward rate exposes which triggers actually produce shareable messages. New VP Sales hire might run 1.5%, while "expanded into a new geography" runs 0.2%. The team progressively kills low-yield signals. The dataset shrinks, the quality rises.
+  </p>
+
+  <p>
+    <strong>The team writes differently.</strong> When forward rate is the metric on the wall, reps and AI prompts both gravitate toward content that respects the recipient's status with their colleagues. Generic "checking in" emails disappear. Insight-led messages with specific data points dominate. The whole team's voice tightens.
+  </p>
+
+  <h2>The metric that survives the next AI cycle</h2>
+
+  <p>
+    Open rate has been dying for five years. Reply rate became misleading the moment AI made inbox-readable prose cheap. Forward rate is the metric that survives the next ceiling lift, because forwarding requires a human judgment call that no model has shortcut yet.
+  </p>
+
+  <p>
+    When the recipient hits forward, the message earned it. When they don't, no number of opens or polite declines makes up the gap. That's why we publish it. That's why every TVA-trained subagent we ship self-scores against the bar that produces it.
+  </p>
+
+  <p>
+    If you want to know whether your outbound is real, count forwards. The number tells you the truth.
+  </p>
+
+  <p>
+    For the methodology that produces forwardable outbound, see <a href="/methodology/">the TVA framework</a>. For the implementation in a Claude Code repo, see <a href="/blog/claude-code-for-gtm/">Claude Code for GTM teams</a>. For the broader category collapse that made this metric necessary, see <a href="/blog/why-ai-sdrs-are-failing/">why every AI SDR pilot is dying</a>. We <a href="/services/ai-sdr-replacement/">build TVA-trained subagent systems as fixed-fee engagements</a> with forward rate as the published outcome metric.
+  </p>
+</BlogPost>

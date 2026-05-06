@@ -1,0 +1,201 @@
+---
+import BlogPost from '../../../layouts/BlogPost.astro';
+import { getPost } from '../../../data/posts';
+
+const post = getPost('pe-portco-gtm-rebuild')!;
+
+const faq = [
+  {
+    q: "Why is the GTM stack always worse than the LOI claimed?",
+    a: "The diligence runs on whatever the seller's RevOps lead presents, and that lead is typically gone within 60 days of close. What looked like clean Salesforce data in the data room is usually three years of merge artifacts, dead opportunities marked open, and pipeline coverage that depends on a handful of mega-deals being live. The first month post-close is usually the discovery that the operating model assumed bad data was good.",
+  },
+  {
+    q: "What gets cut in week one?",
+    a: "Anything per-seat that scales linearly with team size. AI SDR contracts. Sales engagement licenses on inactive seats. Intent data subscriptions that haven't been touched in 90 days. ZoomInfo seats above what active reps actually use. The cuts in week one are usually 15-25% of the GTM tooling spend, with no operational impact.",
+  },
+  {
+    q: "When do AI subagents fit in the rebuild?",
+    a: "Day 60, not day 1. The first 30 days are pipeline truth-finding. Days 30-60 are ICP redefinition based on closed-won data. Only after the ICP is clean does it make sense to ship outbound subagents, because the agents are only as good as the ICP they're aimed at. Building the agents before the ICP redefinition guarantees they're aimed at the wrong target.",
+  },
+  {
+    q: "How big does the team need to be?",
+    a: "Smaller than most operating partners assume. A typical $50M-$200M ARR portco can run on 1 RevOps engineer, 2-4 AEs, 1-2 CSMs, and a fractional GTM engineering retainer for the systems work. The headcount that gets cut is mostly mid-management and SDR teams whose work the subagents now handle.",
+  },
+  {
+    q: "What's the typical cost of the rebuild?",
+    a: "$80K-$180K for the build, depending on stack complexity and number of products. Engineering retainer of $7.5K-$15K/mo for ongoing operations. Total year-one cost lands at $170K-$360K, which is typically 30-50% lower than the legacy GTM tooling and managed-service stack it replaces. The savings show up by quarter two.",
+  },
+];
+---
+
+<BlogPost
+  title={post.title}
+  description={post.description}
+  slug={post.slug}
+  publishedAt={post.publishedAt}
+  category={post.category}
+  readingMinutes={post.readingMinutes}
+  faq={faq}
+>
+  <p>
+    After a take-private close, the GTM stack always needs surgery. The diligence ran on whatever the seller's RevOps lead presented; that lead is usually gone within 60 days; and the operating model the deal team built assumes data quality the actual CRM doesn't deliver. By month three, the operating partner's calls with the new CEO are mostly about pipeline accuracy.
+  </p>
+
+  <p>
+    This is the 90-day rebuild playbook we run for PE portco engagements. Order of operations matters here. Most rebuilds fail because they ship the AI agents before they fix the ICP, or refresh the data before they audit the pipeline. The sequence below is the one that works.
+  </p>
+
+  <h2>The first week: kill what's broken before you build anything</h2>
+
+  <p>
+    Week one is the audit. No new tools, no new agents, no new hires. The job is finding and cutting the line items that are wasting budget and signaling to the team that the GTM operating model is being rewritten.
+  </p>
+
+  <p>
+    Three questions to answer in the first five days.
+  </p>
+
+  <p>
+    <strong>Which seats are active?</strong> Pull license usage on every per-seat tool. Sales engagement, AI SDR, intent data, ZoomInfo, Outreach, Salesloft, anything billed per user. Most portco audits find 20-40% of seats are inactive or assigned to people who left. Cancel those seats in week one. Communicate the change publicly to the GTM team. The signal that waste isn't tolerated is worth more than the dollars.
+  </p>
+
+  <p>
+    <strong>Which contracts auto-renew this quarter?</strong> Most legacy GTM tooling auto-renews annually with 60-90 day notice requirements. Pull the contract calendar. Anything renewing in the next 90 days needs a buy/cancel decision now. Anything older than 12 months without measured ROI is a default-cancel.
+  </p>
+
+  <p>
+    <strong>What's the AI SDR situation?</strong> If the portco has an active AI SDR contract (11x, Artisan, Regie, etc.), audit the last 90 days of campaigns. Count real conversations. If the number is single-digit, cancel at the next opportunity. <a href="/blog/why-ai-sdrs-are-failing/">The category is collapsing</a> and continuing the contract is dead money.
+  </p>
+
+  <h2>Days 8-30: pipeline truth-finding</h2>
+
+  <p>
+    The second phase is figuring out what the pipeline actually looks like, not what the CRM says. Most portco CRMs are three years of merge artifacts with stale opportunities, bad close dates, and coverage that depends on a handful of mega-deals being live.
+  </p>
+
+  <p>
+    The deliverable for this phase is a weekly truth digest. We <a href="/services/pipeline-hygiene/">build this as a Claude Code subagent</a> that reads CRM activity, scores deal health, and writes a Monday-morning digest into Slack. The first three digests are usually painful for the new CEO to read; that's how you know they're working.
+  </p>
+
+  <p>
+    What the digest covers:
+  </p>
+
+  <ul>
+    <li><strong>Deals with no activity in 30+ days</strong> that are still marked open. These are usually dead but counting toward forecast.</li>
+    <li><strong>Deals with close dates in the past</strong> that haven't been re-dated. Indicator of rep self-reporting drift.</li>
+    <li><strong>Single-thread deals</strong> with only one contact engaged. High-risk for execution; needs multi-thread expansion or de-risk.</li>
+    <li><strong>Deals with bad fit signals</strong> against the historical close-won profile. Often resurrected from old campaigns the rep forgot about.</li>
+    <li><strong>Stage drift</strong> where deals have been in proposal stage for 90+ days. Either dead or stuck in procurement.</li>
+  </ul>
+
+  <p>
+    By day 30, the pipeline picture should be honest. Forecast should be re-baselined against reality. The numbers are usually 20-40% lower than what the seller showed in diligence. That's normal. The board needs to see the new number.
+  </p>
+
+  <h2>Days 31-60: ICP redefinition</h2>
+
+  <p>
+    With pipeline truth in hand, the next phase is rebuilding the ICP from closed-won data. Most legacy ICPs were aspirational, set by marketing in a planning offsite, never validated against actual win rates. The clean version comes from looking at who actually bought, what they had in common, and what triggered the buy.
+  </p>
+
+  <p>
+    The deliverable is a written ICP document, 2-3 pages, that goes into the team CLAUDE.md. <a href="/services/icp-discovery/">We run this as ICP discovery from closed-won data</a>. The structure matches what we publish in the <a href="/blog/claude-md-for-revenue-teams/">CLAUDE.md template</a>.
+  </p>
+
+  <p>
+    What the ICP rebuild surfaces, almost every time:
+  </p>
+
+  <ul>
+    <li>The aspirational segment (often "enterprise") was never the actual buyer. The real buyer is one tier lower.</li>
+    <li>The trigger that predicts a close-won is more specific than the legacy ICP captured. Hiring patterns, ownership changes, regulatory filings, that nobody had named.</li>
+    <li>20-30% of the legacy "ICP" segments are lookalikes that almost qualify but don't actually convert. Sending into them is wasted spend.</li>
+    <li>The buyer titles are different from what marketing assumed. Often two layers down from where the campaigns were aimed.</li>
+  </ul>
+
+  <p>
+    The ICP rebuild is the single highest-yield move in the 90 days. Every system that ships next is aimed at this target. Get it wrong and the agents waste sends; the data pulls wrong contacts; the campaigns optimize against the wrong outcomes.
+  </p>
+
+  <h2>Days 61-90: build the systems</h2>
+
+  <p>
+    Only at day 60 do the AI subagents and data pipelines come into the rebuild. The reason for the wait is that you now know what you're aiming at. The agents will optimize against a real ICP, the data will source against real segments, and the metrics will mean something.
+  </p>
+
+  <p>
+    What ships in the last 30 days, in order of priority.
+  </p>
+
+  <p>
+    <strong>Outbound subagent for the redefined ICP.</strong> Research, score, draft, audit. Trained on the ICP document and few-shot examples from the team's best-performing historical outbound. Forward rate as the optimization metric. We <a href="/services/ai-sdr-replacement/">ship this as a fixed-fee engagement in 2-3 weeks</a>.
+  </p>
+
+  <p>
+    <strong>Data pipeline for the redefined ICP.</strong> If the legacy stack was ZoomInfo or Definitive, this is the migration. Custom pipeline pulling from primary sources, validated against email and phone APIs, refreshed weekly. <a href="/blog/migrating-off-zoominfo/">The migration sequence is documented separately</a>.
+  </p>
+
+  <p>
+    <strong>Pipeline hygiene subagent (now in steady state).</strong> The truth digest from days 8-30 becomes the permanent operational rhythm. Weekly Monday digest, action items assigned to rep owners, stale deals resurrected through scripted outbound or de-risked through formal disqualification.
+  </p>
+
+  <p>
+    <strong>Competitive intel subagent (optional).</strong> If the portco competes against 2-3 named competitors, ship the monthly intel report through Fieldwork. Hiring patterns, tech-stack moves, geographic expansion. Especially valuable for portcos in fragmented categories where competitor moves predict market share shifts.
+  </p>
+
+  <h2>The team shape that emerges</h2>
+
+  <p>
+    A typical $50M-$200M ARR portco running this rebuild lands in a different team shape than the legacy operating model assumed.
+  </p>
+
+  <p>
+    The rebuilt team usually has:
+  </p>
+
+  <ul>
+    <li>1 RevOps engineer (technical, owns the repo and the subagents)</li>
+    <li>2-4 AEs (carrying real quotas with clean pipelines)</li>
+    <li>1-2 CSMs for net retention work</li>
+    <li>0 SDRs (the subagent chain replaces them)</li>
+    <li>0-1 sales managers (depending on segment count)</li>
+    <li>Fractional GTM engineering retainer for systems work and quarterly tuning</li>
+  </ul>
+
+  <p>
+    The headcount that gets cut is mostly SDR team and mid-management. The SDR cut is the one that draws the most attention from the operating partner; it's also the one with the highest payoff if the subagent chain is built well. We document forward rate and meeting volume against pre-cut baselines so the comparison is honest.
+  </p>
+
+  <h2>The metrics that prove the rebuild worked</h2>
+
+  <p>
+    Three numbers tell the operating partner whether the rebuild delivered.
+  </p>
+
+  <p>
+    <strong>Forecast accuracy.</strong> Pre-rebuild, most portco forecasts are within 30-50% of actuals. Post-rebuild with pipeline hygiene running weekly, accuracy lands at 5-15%. The board can plan against the number.
+  </p>
+
+  <p>
+    <strong>Forward rate on outbound.</strong> Pre-rebuild AI SDR forward rate is typically zero. Post-rebuild custom subagent forward rate is 0.5%-2%. The metric is the difference between sending and not sending, in real terms.
+  </p>
+
+  <p>
+    <strong>Cost per real conversation.</strong> Pre-rebuild costs (legacy AI SDR, ZoomInfo, sales engagement) divided by real conversations are usually $400-$1,200 per conversation. Post-rebuild, the same math runs $80-$250. That's the line on the model the operating partner cares about.
+  </p>
+
+  <h2>Where this fits</h2>
+
+  <p>
+    The 90-day rebuild is the operational execution of a thesis the operating partner already has. We <a href="/services/pe-portco-gtm/">run this as a defined engagement</a>, with weekly check-ins to the operating partner and a written 90-day report at the end. The deliverables are owned by the portco. The knowledge transfer is built into every phase.
+  </p>
+
+  <p>
+    For PE firms holding multiple GTM-heavy portcos, the playbook scales. The CLAUDE.md, the subagent architecture, and the pipeline hygiene digest are reusable across portcos with adjustments for segment specifics. The reuse is what makes the third and fourth engagements fast.
+  </p>
+
+  <p>
+    Get the order right. Audit before you build. ICP before agents. Data after ICP. The 90 days is enough; the order is what makes it stick.
+  </p>
+</BlogPost>

@@ -1,0 +1,277 @@
+---
+import Base from './Base.astro';
+import CTAButton from '../components/CTAButton.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  slug: string;
+  publishedAt: string;
+  updatedAt?: string;
+  category: string;
+  readingMinutes: number;
+  faq?: Array<{ q: string; a: string }>;
+}
+
+const {
+  title,
+  description,
+  slug,
+  publishedAt,
+  updatedAt,
+  category,
+  readingMinutes,
+  faq = [],
+} = Astro.props;
+
+const path = `/blog/${slug}/`;
+const url = `https://subagentgtm.com${path}`;
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: title,
+  description,
+  author: {
+    "@type": "Person",
+    name: "Rome Thorndike",
+    url: "https://www.linkedin.com/in/romethorndike",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "subagent/gtm",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://subagentgtm.com/brand/logo-dark.svg",
+    },
+  },
+  datePublished: publishedAt,
+  dateModified: updatedAt ?? publishedAt,
+  mainEntityOfPage: url,
+  articleSection: category,
+};
+
+const faqSchema = faq.length
+  ? {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faq.map(({ q, a }) => ({
+        "@type": "Question",
+        name: q,
+        acceptedAnswer: { "@type": "Answer", text: a },
+      })),
+    }
+  : null;
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://subagentgtm.com/" },
+    { "@type": "ListItem", position: 2, name: "Blog", item: "https://subagentgtm.com/blog/" },
+    { "@type": "ListItem", position: 3, name: title, item: url },
+  ],
+};
+---
+
+<Base title={title} description={description} path={path}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  {faqSchema && (
+    <script slot="head" type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  )}
+
+  <main>
+    <article class="post">
+      <header class="section" style="padding-top: var(--space-16); padding-bottom: var(--space-8);">
+        <div class="container container--narrow">
+          <nav class="t-micro post__crumbs" aria-label="Breadcrumb">
+            <a href="/blog/">BLOG</a>
+            <span aria-hidden="true">·</span>
+            <span>{category.toUpperCase()}</span>
+            <span aria-hidden="true">·</span>
+            <span>{readingMinutes} MIN READ</span>
+          </nav>
+
+          <h1 class="t-display-xl post__title">{title}</h1>
+
+          <p class="t-body t-muted post__lede">{description}</p>
+
+          <p class="t-micro post__byline">
+            <span>BY ROME THORNDIKE</span>
+            <span aria-hidden="true">·</span>
+            <time datetime={publishedAt}>{new Date(publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</time>
+          </p>
+        </div>
+      </header>
+
+      <div class="section section--tight">
+        <div class="container container--narrow post__body t-body">
+          <slot />
+        </div>
+      </div>
+
+      {faq.length > 0 && (
+        <section class="section">
+          <div class="container container--narrow">
+            <h2 class="t-h1 post__faq-title">Questions.</h2>
+            <div class="faq-list">
+              {faq.map(({ q, a }) => (
+                <div class="faq-item">
+                  <h3 class="t-h3">{q}</h3>
+                  <p class="t-body t-muted">{a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <section class="section">
+        <div class="container" style="text-align: center;">
+          <h2 class="t-display post__cta-title">Want this built?</h2>
+          <p class="t-body t-muted post__cta-lede">
+            We deploy Claude Code subagents into your GTM stack. Fixed fee. You own everything.
+          </p>
+          <CTAButton href="/contact/" label="→ Fix your GTM" variant="primary" large={true} />
+        </div>
+      </section>
+    </article>
+  </main>
+</Base>
+
+<style>
+  .post__crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  .post__crumbs a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .post__title {
+    margin: 0 0 var(--space-6);
+  }
+
+  .post__lede {
+    max-width: 640px;
+    margin: 0 0 var(--space-6);
+  }
+
+  .post__byline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    color: var(--muted);
+  }
+
+  .post__body :global(h2) {
+    font-family: var(--font-display);
+    font-size: var(--fs-h1);
+    line-height: var(--lh-display);
+    letter-spacing: -0.02em;
+    margin: var(--space-12) 0 var(--space-4);
+  }
+
+  .post__body :global(h3) {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    line-height: var(--lh-h3);
+    letter-spacing: -0.01em;
+    margin: var(--space-8) 0 var(--space-3);
+  }
+
+  .post__body :global(p) {
+    margin: 0 0 var(--space-5);
+  }
+
+  .post__body :global(ul),
+  .post__body :global(ol) {
+    margin: 0 0 var(--space-6);
+    padding-left: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .post__body :global(li) {
+    line-height: var(--lh-body);
+  }
+
+  .post__body :global(blockquote) {
+    border-left: 2px solid var(--accent);
+    padding: var(--space-2) 0 var(--space-2) var(--space-6);
+    margin: var(--space-8) 0;
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-size: var(--fs-h3);
+    color: var(--ink);
+  }
+
+  .post__body :global(a) {
+    color: var(--accent);
+  }
+
+  .post__body :global(code) {
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
+    background: var(--surface);
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+  }
+
+  .post__body :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--space-8) 0;
+    font-size: var(--fs-small);
+  }
+
+  .post__body :global(th),
+  .post__body :global(td) {
+    border-bottom: 1px solid var(--line);
+    padding: var(--space-3) var(--space-4);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .post__body :global(th) {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: var(--fs-micro);
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .post__faq-title {
+    margin-bottom: var(--space-12);
+  }
+
+  .post__cta-title {
+    margin-bottom: var(--space-4);
+  }
+
+  .post__cta-lede {
+    max-width: 520px;
+    margin: 0 auto var(--space-8);
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  .faq-item h3 {
+    margin-bottom: var(--space-3);
+  }
+
+  .faq-item p {
+    margin: 0;
+  }
+</style>

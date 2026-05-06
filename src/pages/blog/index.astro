@@ -1,31 +1,139 @@
 ---
 import Base from '../../layouts/Base.astro';
-import CTAButton from '../../components/CTAButton.astro';
+import { postsSorted } from '../../data/posts';
+
+const posts = postsSorted();
+
+const blogSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'subagent/gtm essays',
+  url: 'https://subagentgtm.com/blog/',
+  description: 'Essays on AI for GTM, Claude Code subagents, outbound that gets forwarded, and the GTM engineering playbook.',
+  publisher: {
+    '@type': 'Organization',
+    name: 'subagent/gtm',
+    url: 'https://subagentgtm.com',
+  },
+  blogPost: posts.map((p) => ({
+    '@type': 'BlogPosting',
+    headline: p.title,
+    description: p.description,
+    datePublished: p.publishedAt,
+    url: `https://subagentgtm.com/blog/${p.slug}/`,
+  })),
+};
+
+const hubs = posts.filter((p) => p.hub);
+const spokes = posts.filter((p) => !p.hub);
 ---
 
 <Base
   title="Blog"
-  description="Essays on AI for GTM, Claude Code, and TVA."
+  description="Essays on AI for GTM, Claude Code subagents, outbound that gets forwarded, and how revenue teams ship in 2026."
   path="/blog/"
 >
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(blogSchema)} />
+
   <main>
     <section class="section" style="padding-top: var(--space-16);">
       <div class="container container--narrow">
-        <span class="t-micro">BLOG · ESSAYS</span>
+        <span class="t-micro">BLOG · ESSAYS · PLAYBOOKS</span>
 
         <h1 class="t-display-xl" style="margin: var(--space-6) 0 var(--space-6);">
-          Essays coming.
+          Essays from the GTM engineering desk.
         </h1>
 
-        <p class="t-body t-muted" style="margin-bottom: var(--space-8);">
-          We're writing about AI for GTM, Claude Code, and TVA. First posts ship soon.
+        <p class="t-body t-muted" style="max-width: 640px; margin-bottom: var(--space-12);">
+          Practitioner writing on AI for GTM, Claude Code, outbound, data, and the GTM rebuilds we run for clients. Read the hubs first, then dig into a spoke.
         </p>
+      </div>
+    </section>
 
-        <div style="display: flex; flex-direction: column; gap: var(--space-4);">
-          <a href="/methodology/" class="btn">Read the TVA framework →</a>
-          <a href="/stack/" class="btn">See the four-property stack →</a>
-        </div>
+    <section class="section section--tight">
+      <div class="container container--narrow">
+        <span class="t-micro">HUBS · START HERE</span>
+        <ul class="post-list" style="margin-top: var(--space-6);">
+          {hubs.map((p) => (
+            <li class="post-list__item">
+              <a href={`/blog/${p.slug}/`} class="post-list__link">
+                <span class="post-list__meta">
+                  <span class="t-micro">{p.category.toUpperCase()}</span>
+                  <span aria-hidden="true">·</span>
+                  <span class="t-micro">{p.readingMinutes} MIN</span>
+                </span>
+                <h2 class="t-h1 post-list__title">{p.title}</h2>
+                <p class="t-body t-muted post-list__excerpt">{p.excerpt}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container container--narrow">
+        <span class="t-micro">SPOKES · LONG-TAIL READS</span>
+        <ul class="post-list" style="margin-top: var(--space-6);">
+          {spokes.map((p) => (
+            <li class="post-list__item post-list__item--compact">
+              <a href={`/blog/${p.slug}/`} class="post-list__link">
+                <span class="post-list__meta">
+                  <span class="t-micro">{p.category.toUpperCase()}</span>
+                  <span aria-hidden="true">·</span>
+                  <span class="t-micro">{p.readingMinutes} MIN</span>
+                </span>
+                <h3 class="t-h2 post-list__title">{p.title}</h3>
+                <p class="t-body t-muted post-list__excerpt">{p.excerpt}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   </main>
 </Base>
+
+<style>
+  .post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  .post-list__item {
+    border-top: 1px solid var(--line);
+    padding-top: var(--space-6);
+  }
+
+  .post-list__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .post-list__link:hover .post-list__title {
+    color: var(--accent);
+  }
+
+  .post-list__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    color: var(--muted);
+    margin-bottom: var(--space-3);
+  }
+
+  .post-list__title {
+    margin: 0 0 var(--space-3);
+    transition: color 120ms ease;
+  }
+
+  .post-list__excerpt {
+    margin: 0;
+    max-width: 720px;
+  }
+</style>

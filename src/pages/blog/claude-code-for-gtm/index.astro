@@ -1,0 +1,201 @@
+---
+import BlogPost from '../../../layouts/BlogPost.astro';
+import { getPost } from '../../../data/posts';
+
+const post = getPost('claude-code-for-gtm')!;
+
+const faq = [
+  {
+    q: "Do I need engineers to use Claude Code for GTM?",
+    a: "You need at least one technical operator. RevOps engineers are the natural fit. The work is closer to writing prompts and workflows than building infrastructure, but the team has to be comfortable in a terminal and a git repo. If your RevOps lead can write SQL and ship a Make.com workflow, they can run a GTM Claude Code repo with two weeks of ramp.",
+  },
+  {
+    q: "What does a GTM Claude Code repo actually contain?",
+    a: "Six things. A CLAUDE.md with ICP, voice, banned phrases, and signal scoring rules. A folder of subagents (one per job). A data folder with read-only access to CRM exports, signal sources, and approved senders. A prompts folder with TVA rubrics and few-shot examples. A workflows folder with cron schedules. And an audit log every send writes to. Total repo size is usually under 200 files.",
+  },
+  {
+    q: "How is this different from running Cursor or Copilot for sales?",
+    a: "Cursor and Copilot are coding assistants. Claude Code with subagents is a runtime. You write a CLAUDE.md and a set of subagent prompts, then the system runs against your data on a schedule. The output is sends, digests, and reports, not code suggestions. It's closer to a Make.com workflow with a brain than to an IDE plugin.",
+  },
+  {
+    q: "What's the most common mistake teams make in their first build?",
+    a: "Trying to build one omni-agent that does everything. The win is the opposite. Three small subagents (research, score, draft) outperform one big agent every time, because you can audit each step independently and tune them in isolation. Force the architecture into small, single-responsibility agents from day one.",
+  },
+  {
+    q: "How do I keep the agents from going off-brand?",
+    a: "The CLAUDE.md is the brand contract. List banned phrases, voice rules, and required citations. The drafting subagent's first instruction is 'read CLAUDE.md and confirm in your reasoning that this draft satisfies all banned-phrase and voice rules.' That single instruction kills 90% of off-brand output. The other 10% gets caught by the self-scoring step.",
+  },
+];
+---
+
+<BlogPost
+  title={post.title}
+  description={post.description}
+  slug={post.slug}
+  publishedAt={post.publishedAt}
+  category={post.category}
+  readingMinutes={post.readingMinutes}
+  faq={faq}
+>
+  <p>
+    Claude Code shipped subagent support in late 2025, and the GTM teams that picked it up first ate most of the AI SDR replacement market in Q1 2026. The reason is mostly architectural, not magical. A subagent runtime in your own repo solves a class of problems that horizontal AI tools couldn't reach.
+  </p>
+
+  <p>
+    This is a working guide for revenue teams thinking about adoption. It covers what a real GTM Claude Code repo looks like, the four subagents most teams ship first, the CLAUDE.md structure that keeps output on-brand, and the failure modes worth avoiding before you write a line of prompt.
+  </p>
+
+  <h2>Why a runtime in your repo beats a SaaS UI</h2>
+
+  <p>
+    Most AI for GTM tools live in their own dashboard. The user logs in, the tool reads from a few connected systems, and output is rendered inside the vendor's UI. The buyer's data flows through the vendor's environment, the prompts are the vendor's defaults, and the output is whatever the vendor's product roadmap allows.
+  </p>
+
+  <p>
+    Claude Code reverses every part of that. The buyer's repo is the workspace. The data stays in the buyer's environment. The prompts are the buyer's prompts. The output is whatever the buyer wires up. There's no UI to learn because the runtime is git plus the terminal plus whatever destination the workflow writes to (Slack, email, CRM, sheet, anything).
+  </p>
+
+  <p>
+    For a CRO who's spent two years watching AI SDR vendors hold the data hostage and ship the prompts opaque, this is the sentence that matters: the repo runs whether the vendor exists or not. That's the moat.
+  </p>
+
+  <h2>The shape of a working GTM Claude Code repo</h2>
+
+  <p>
+    A real revenue-team Claude Code repo is small. Most of ours sit under 200 files, including data exports. The structure looks like this.
+  </p>
+
+  <p>
+    At the root: <code>CLAUDE.md</code>. This is the contract every subagent reads first. It contains the ICP definition, the voice rules, banned phrases, signal scoring criteria, the data sources the agents are allowed to touch, and the rubrics every draft self-scores against. We <a href="/blog/claude-md-for-revenue-teams/">publish a working template here</a>.
+  </p>
+
+  <p>
+    Under <code>/subagents/</code>: one folder per agent, each with its own prompt, rubric, and few-shot examples. A typical outbound system has four: research, score, draft, audit. A pipeline hygiene system has two: read-CRM and write-digest. Keep the agents single-responsibility. The temptation to build one omni-agent ends every first build in a tar pit.
+  </p>
+
+  <p>
+    Under <code>/data/</code>: read-only exports of CRM data, signal sources, and any reference lists. Most teams sync this nightly from Salesforce or HubSpot. The agents never write back to the source systems directly. If a CRM update is needed, the workflow generates a queued change for a human or a downstream tool to apply.
+  </p>
+
+  <p>
+    Under <code>/workflows/</code>: cron schedules and orchestration. Which subagent runs when, in what order, with what inputs. Most teams use a small Python or TypeScript orchestrator that calls Claude Code agents in sequence and writes output to a sink (Slack, email, CRM-update queue).
+  </p>
+
+  <p>
+    Under <code>/audit/</code>: every send, every score, every regeneration logged. This is the line item that earns budget approval from compliance and security. When someone asks "how do you know what the agent sent last Tuesday," the answer is a grep.
+  </p>
+
+  <h2>The four subagents most teams ship first</h2>
+
+  <p>
+    There's a strong pattern in what teams build in their first 30 days. Almost everyone ships some version of these four. We <a href="/services/gtm-subagents/">build all four as a fixed-fee engagement</a>, but the architecture is the same whether you build it in-house or hire it out.
+  </p>
+
+  <h3>Research subagent</h3>
+
+  <p>
+    Job: take a prospect (company plus contact), produce a structured dossier of recent signals. Funding events, hiring patterns, leadership changes, tech stack moves, product launches, public reviews, regulatory filings. The output is a markdown file with citations to source URLs. Time to run: 30-90 seconds per prospect.
+  </p>
+
+  <p>
+    The thing that makes this subagent work is what it doesn't do. It doesn't draft anything. It doesn't decide whether to send. It produces evidence. The next agent in the chain decides what to do with that evidence.
+  </p>
+
+  <h3>Signal scoring subagent</h3>
+
+  <p>
+    Job: read the research dossier and score each signal against three criteria: Specific, Timely, Actionable (STA). Specific means names, numbers, dates, not industry-level abstractions. Timely means the signal happened in the last 30 days, ideally last 7. Actionable means the recipient could do something this week based on it.
+  </p>
+
+  <p>
+    Signals scoring below threshold are dropped. The output is a ranked list of high-STA signals with the reasoning attached. This step alone kills 60-80% of "possible reasons to reach out" before drafting starts. That's the difference between an outbound system that respects inboxes and an AI SDR that doesn't.
+  </p>
+
+  <h3>Drafting subagent</h3>
+
+  <p>
+    Job: take one high-STA signal and write a message that anchors to it. The first sentence is the signal. The second sentence connects the signal to the prospect's likely problem. The third sentence offers something concrete the recipient can act on. Your value prop, if it appears, comes last and only as the answer to a problem the agent has already named.
+  </p>
+
+  <p>
+    The few-shot examples in the prompt are where this pays off. Five excellent messages from your best human SDR's track record will outperform any amount of generic instruction. The drafting agent reads the rules, then pattern-matches your team's actual voice.
+  </p>
+
+  <h3>Audit subagent</h3>
+
+  <p>
+    Job: score the draft against the TVA rubric (0-3 per criterion, 7+ to send). Below threshold, regenerate. Three failed regenerations on the same prospect, skip and log. Above threshold, queue for human approval (first 50 sends per ICP) or send directly (after approval phase).
+  </p>
+
+  <p>
+    This is the subagent that earns the buyer's trust. Every send is auditable. Every skip is logged with reasoning. When a CRO asks "why didn't we reach Acme Corp this week," the answer is a sentence with timestamps.
+  </p>
+
+  <h2>The CLAUDE.md is the brand contract</h2>
+
+  <p>
+    Most first-build failures trace back to a thin CLAUDE.md. Teams write a paragraph about voice and call it done. The agents then drift toward LLM-default prose, and the output reads like every other AI SDR in the inbox.
+  </p>
+
+  <p>
+    A working revenue-team CLAUDE.md is 800-1,500 words. It includes:
+  </p>
+
+  <ul>
+    <li>An ICP definition that names companies, titles, signals, and exclusions specifically. Not "B2B SaaS." More like: "Series B-D vertical SaaS in healthcare, finance, or industrial. CRO, VP Sales, or Head of RevOps. Trigger: 3+ AE openings posted in last 30 days OR new CRO in last 60 days. Exclude: companies under 50 employees, companies in active down-round talks."</li>
+    <li>Voice rules that name banned phrases. Em dashes are out. "Just checking in" is out. "Not just X, it's Y" constructions are out. Anything that reads as AI-default prose to a human reader gets banned by name.</li>
+    <li>A signal scoring rubric. STA criteria with specific examples of high-scoring and low-scoring signals.</li>
+    <li>A data contract. Which CSVs the agent can read, which fields are valid for personalization, which fields are hallucination risks if cited (titles from LinkedIn that haven't been confirmed against the company website, for example).</li>
+    <li>An escalation rule. Conditions under which the agent stops and asks for human review. Edge cases that should never auto-send.</li>
+  </ul>
+
+  <p>
+    This document is the contract. Tune it weekly for the first month. After that, monthly. The CLAUDE.md is the artifact your team owns even if every model or vendor changes.
+  </p>
+
+  <h2>The data layer that actually matters</h2>
+
+  <p>
+    The agents are only as good as the data they read. Most teams underinvest here at first and discover the gap when forward rates plateau in week three. There are two parts to the data layer that matter.
+  </p>
+
+  <p>
+    First, signal sources. The hiring data, funding data, leadership data, tech stack data, regulatory data, and review data the research subagent reads. Some of this you can buy (Crunchbase, BuiltWith, Glassdoor APIs). Some of it you scrape or fetch (state directories, NPI registries, public web). Some of it you build (your own customer-base reviews, your own win-loss notes).
+  </p>
+
+  <p>
+    Second, contact data. The names, emails, phones, and titles the drafting subagent uses. ZoomInfo and Definitive are leaving the chat in most 2026 budgets. The replacement is a primary-source pipeline: validate the email at the deliverability level, validate the phone at the line-status level, refresh on a schedule. We build this for B2B at <a href="https://veruminc.com" rel="noopener">Verum</a> and for healthcare at <a href="https://getprovyx.com" rel="noopener">Provyx</a>. <a href="/services/data-migration/">Migration from ZoomInfo to a custom pipeline</a> is one of the highest-ROI moves in a Claude Code GTM stack.
+  </p>
+
+  <h2>The failure modes worth avoiding</h2>
+
+  <p>
+    Three patterns blow up most first builds. Watch for them.
+  </p>
+
+  <p>
+    <strong>Building the omni-agent.</strong> One big agent that researches, scores, drafts, and decides whether to send. The output is unauditable, untunable, and impossible to debug. Force the architecture into single-responsibility subagents from day one. Three small agents in a chain beat one big agent every time.
+  </p>
+
+  <p>
+    <strong>Skipping the audit step.</strong> Drafts go straight to send because the system "feels good enough." Two weeks later, a recipient screenshots a generic-sounding message on LinkedIn. The cost of a bad send is much higher than the cost of regenerating. Always run the audit subagent.
+  </p>
+
+  <p>
+    <strong>Treating CLAUDE.md as static.</strong> The first version is a guess. The second version, after 50 human-reviewed sends, is the real version. Tune weekly for the first month. Tune monthly after that. A frozen CLAUDE.md is a dead system.
+  </p>
+
+  <h2>How to start without overcommitting</h2>
+
+  <p>
+    The right first move is small. Pick one ICP. Pick one signal source. Build one chain of subagents (research, score, draft, audit). Send the first 50 with human approval. Track forward rate. If forward rate beats your best human SDR's, expand. If it doesn't, the rubric is wrong, not the architecture.
+  </p>
+
+  <p>
+    Most teams ship this first build in 2-3 weeks. The cost is engineering time plus model tokens, both of which are line-item small compared to the AI SDR contract you're replacing. By day 60, you should have data on which signal types produce forwardable messages and which don't. By day 90, you should be running with sampling review instead of full approval.
+  </p>
+
+  <p>
+    That's the loop. Smaller agents, owned in your repo, scored on forwardability, tuned weekly. The rest of GTM AI is mostly noise.
+  </p>
+</BlogPost>

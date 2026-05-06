@@ -1,0 +1,157 @@
+---
+import BlogPost from '../../../layouts/BlogPost.astro';
+import { getPost } from '../../../data/posts';
+
+const post = getPost('why-ai-sdrs-are-failing')!;
+
+const faq = [
+  {
+    q: "Did 11x actually lose 70-80% of customers?",
+    a: "That's the figure reported across multiple sources tracking the company's renewal data through 2025. The exact number varies by who's reporting, but no public source disputes the directional collapse. The company's response has been to reposition as an 'agentic outbound platform' rather than dispute the renewal numbers.",
+  },
+  {
+    q: "What happened to Artisan?",
+    a: "Artisan's outbound was rate-limited and partially blocked at the LinkedIn API layer in 2024 for spam patterns associated with their automated messaging. The company has since pivoted toward email-only outbound, which faces the same forward-rate problem the LinkedIn outbound did.",
+  },
+  {
+    q: "Are reply rates and open rates still useful?",
+    a: "Marginally. Open rate is mostly tracking pixel reliability, which most enterprise inboxes now strip. Reply rate is closer to a real signal but still includes auto-replies, polite declines, and unsubscribe-style responses. Forward rate is the only metric that proves the message earned its place. We measure all three but make decisions on forward rate.",
+  },
+  {
+    q: "What's actually replacing AI SDRs?",
+    a: "Custom Claude Code subagents built and owned by the buyer. The architecture is research-first (the agent scores public signals before drafting), draft-second (only after a high-quality signal survives), and audit-always (every draft self-scores against a forwardability rubric). The buyer owns the repo. The vendor charges fixed-fee build plus engineering retainer.",
+  },
+  {
+    q: "Should I cancel my AI SDR contract before renewal?",
+    a: "If forward rate is zero and reply rate is below 1%, yes. Audit the last 90 days of campaigns and count how many messages produced a real conversation versus auto-replies and unsubscribes. If the answer is double-digits, keep iterating. If it's single-digits or zero, the rebuild will pay for itself before the next renewal cycle.",
+  },
+];
+---
+
+<BlogPost
+  title={post.title}
+  description={post.description}
+  slug={post.slug}
+  publishedAt={post.publishedAt}
+  category={post.category}
+  readingMinutes={post.readingMinutes}
+  faq={faq}
+>
+  <p>
+    The AI SDR category is collapsing in 2026, and the reasons are documented in renewal data, public LinkedIn moderation actions, and the tone of every CRO conversation we walked into in the last six months. This is a write-up of what actually went wrong, what's filling the void, and how to think about the rebuild if you're holding an active contract.
+  </p>
+
+  <h2>The headline numbers</h2>
+
+  <p>
+    11x raised $76M from a16z and Benchmark on the AI SDR thesis. By Q4 2025, sources tracking customer churn reported 70-80% of early customers had not renewed. The company's response was to reposition as an "agentic outbound platform," which is the playbook every collapsing SaaS category runs in its second-to-last year.
+  </p>
+
+  <p>
+    Artisan raised $25M, ran a Times Square billboard campaign declaring "stop hiring humans," and spent 2024 watching its automated outbound get rate-limited and partially blocked at the LinkedIn API layer for spam-pattern signatures. The pivot to email-only didn't fix the underlying forward-rate problem.
+  </p>
+
+  <p>
+    Regie, Lavender, Outreach's AI assistant, Salesloft's AI assistant, and a dozen other tools shipped versions of the same product between 2023 and 2025. None of them earned the renewal numbers their funding rounds priced in.
+  </p>
+
+  <p>
+    This wasn't a market timing problem. The category was structurally broken from the first product spec. The mistake was the same across every vendor.
+  </p>
+
+  <h2>The training data was the seller's value prop</h2>
+
+  <p>
+    Every AI SDR vendor sold the same onboarding flow. Connect your CRM. Paste your value proposition. Define your ICP. The agent uses your value prop to write personalized outbound at scale.
+  </p>
+
+  <p>
+    The problem is that the training data is the seller's pitch. The agent generates messages from inside the pitch, not from inside the prospect's pain. The personalization is a thin layer of LinkedIn-title pattern-matching grafted onto a value prop the recipient never asked about.
+  </p>
+
+  <p>
+    A human SDR who's good at outbound starts with the prospect. They notice the company is hiring three React engineers and just raised a Series B. They notice the new CRO posted on LinkedIn about pipeline coverage. They notice the practice was just acquired and the new owner needs quick wins. The pitch comes last and only as the answer to a problem the prospect has already named.
+  </p>
+
+  <p>
+    The AI SDR products inverted this. They started with the seller and worked backward. The output read as generic in the first sentence because the input was generic. Recipients learned to pattern-match the prose within two months of mass adoption.
+  </p>
+
+  <h2>Reply rate was a vanity metric the whole time</h2>
+
+  <p>
+    Most AI SDR vendors reported reply rates as their core efficacy metric. The reason was that reply rate looks healthy when it includes auto-replies, polite declines, and unsubscribe-style responses. A 3% "reply rate" can be 2.5% rejection plus 0.4% auto-reply plus 0.1% real conversations, and most dashboards don't disaggregate.
+  </p>
+
+  <p>
+    Forward rate exposes the difference. A message that gets forwarded is a message the recipient thought was worth their colleague's time. Most AI SDR output had a forward rate of effectively zero. The messages were getting opened, sometimes replied to with a "no thanks," and never shared. That's the evidence that the messages weren't real.
+  </p>
+
+  <p>
+    We <a href="/blog/forward-rate-outbound-metric/">cover forward rate methodology in detail in a separate post</a>. The short version is that it's the only outbound metric that survives the AI generation cycle. Open and reply ceilings move with model quality. Forward rate moves with whether the message earned its place.
+  </p>
+
+  <h2>The deliverability tax is real</h2>
+
+  <p>
+    The other failure mode AI SDR vendors didn't price into their contracts is the deliverability collapse. Email infrastructure providers (Google Workspace, Microsoft 365, the major ESPs) responded to mass AI-generated outbound by tightening reputation scoring and pattern-matching for AI prose.
+  </p>
+
+  <p>
+    By late 2025, AI SDR output was hitting Promotions tabs and Spam folders at rates 3-4x higher than equivalent human-written outbound from the same domains. Domain warmup tactics that worked in 2023 stopped working in 2024. Sending infrastructure that worked in 2024 got throttled in 2025.
+  </p>
+
+  <p>
+    LinkedIn made the same move on the connection-request side. Pattern-matched AI outbound got rate-limited, then progressively blocked. Artisan was the most public casualty, but every vendor running automated LinkedIn outreach faced the same throttle. The platform's response was rational. The cost landed on the vendor's customers.
+  </p>
+
+  <h2>The contract structure made cancellation hard</h2>
+
+  <p>
+    Most AI SDR contracts ran 12-month terms with auto-renewal, per-seat pricing, and onboarding fees that didn't refund on cancellation. Buyers who realized the product wasn't working in month two had to keep paying for ten months while the agent continued not getting forwarded.
+  </p>
+
+  <p>
+    This shows up in the churn data. The renewal collapse hit at month 13, not month 3, because that's when the auto-renewal could be canceled cleanly. Reading the curve, you can pin the moment buyers' patience ran out: late 2024 through Q3 2025.
+  </p>
+
+  <p>
+    The replacement category priced differently. Fixed-fee build plus monthly engineering retainer. Cancel the retainer anytime. The buyer owns the build. That structure aligned vendor and buyer incentives in a way the AI SDR contracts never did.
+  </p>
+
+  <h2>What's actually working in 2026</h2>
+
+  <p>
+    The teams that moved off AI SDR contracts in Q1 2026 mostly went one of three directions. Two of them are working. One isn't.
+  </p>
+
+  <p>
+    <strong>Direction one: re-hire human SDRs.</strong> A small but real cohort decided AI outbound was a category mistake and went back to 4-6 person human SDR teams. The economics work for some categories (low-volume, high-ACV enterprise) but break for most. The teams that did this report stable forward rates and unchanged pipeline coverage. They also report 6x higher fully-loaded outbound cost than the AI SDR contract they canceled.
+  </p>
+
+  <p>
+    <strong>Direction two: rebuild on Claude Code subagents.</strong> The teams that went here are the ones that figured out the methodology problem hiding inside the tool problem. Build the chain of small subagents (research, score, draft, audit), train on excellent human outbound, score every draft on forwardability, ship in your own repo. Forward rates from this approach are 5-10x what the AI SDR vendors produced. We <a href="/services/ai-sdr-replacement/">build this as a fixed-fee engagement</a>.
+  </p>
+
+  <p>
+    <strong>Direction three (not working): switch to a different AI SDR vendor.</strong> Some teams canceled 11x and signed Regie. Or canceled Artisan and signed an Outreach AI add-on. Same category, same architecture, same forward-rate problem. By month three, the same conversations are happening with a different logo on the contract.
+  </p>
+
+  <h2>The honest read on the category</h2>
+
+  <p>
+    AI for outbound is not dead. The product category called "AI SDR" is dead, because the architecture was wrong from inception. The buyer trained on the seller. The output was generic. The metrics that masked the problem (open, reply) lost their meaning. The contracts that protected the vendor lost their alignment.
+  </p>
+
+  <p>
+    What's filling the void is smaller, more technical, and owned by the buyer. The pricing is fixed-fee build plus retainer. The output is a repo. The agents are small and single-responsibility. The metric is forward rate. The methodology is <a href="/methodology/">TVA: Triggered Value Asset</a>.
+  </p>
+
+  <p>
+    For CROs holding an active AI SDR contract, the decision is the next renewal cycle. Audit the last 90 days. Count real conversations, not replies. Compare cost per real conversation against what a custom Claude Code build would cost over the same horizon. If the math is close, keep iterating. If the math isn't close, build.
+  </p>
+
+  <p>
+    The category isn't going to recover. The vendors who survive will have repositioned into something else by next year.
+  </p>
+</BlogPost>

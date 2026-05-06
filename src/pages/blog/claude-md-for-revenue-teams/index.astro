@@ -1,0 +1,253 @@
+---
+import BlogPost from '../../../layouts/BlogPost.astro';
+import { getPost } from '../../../data/posts';
+
+const post = getPost('claude-md-for-revenue-teams')!;
+
+const faq = [
+  {
+    q: "Where does CLAUDE.md actually live in the repo?",
+    a: "At the repo root. Claude Code automatically reads any CLAUDE.md it finds at the root of the working directory. You can also keep a /context/CLAUDE.md and import it from the root, but the simplest pattern is one root file per repo. For revenue teams, that one file should be the entire brand and ICP contract.",
+  },
+  {
+    q: "How long should CLAUDE.md be?",
+    a: "800 to 1,500 words for a working revenue-team CLAUDE.md. Below 500 words, it's too thin to constrain output. Above 2,000, agents start dropping context in long tool runs. The sweet spot is 1,000 to 1,200 words with clear section headers so agents can reference specific blocks.",
+  },
+  {
+    q: "Should we put real data in CLAUDE.md?",
+    a: "No. Keep CLAUDE.md as the rules layer. Real data (CRM exports, signal sources, contact lists) lives in /data/ folders the agents read separately. CLAUDE.md is the contract; data is the input. Mixing them turns the file into a maintenance nightmare and bloats the context window on every agent run.",
+  },
+  {
+    q: "How often should we update CLAUDE.md?",
+    a: "Weekly for the first month after launch. Monthly after that. Every time a real send produces a forwardable result, update the few-shot examples. Every time a send produces a bad outcome, add a banned phrase or scoring rule. The CLAUDE.md is a living document; treat it like the team playbook it is.",
+  },
+  {
+    q: "Can we share CLAUDE.md across multiple subagents?",
+    a: "Yes, and you should. Every subagent reads the same root CLAUDE.md before running. Subagent-specific instructions go in /subagents/{name}/prompt.md and reference back to CLAUDE.md sections. This keeps the brand and ICP contract in one place and prevents drift across agents.",
+  },
+];
+---
+
+<BlogPost
+  title={post.title}
+  description={post.description}
+  slug={post.slug}
+  publishedAt={post.publishedAt}
+  category={post.category}
+  readingMinutes={post.readingMinutes}
+  faq={faq}
+>
+  <p>
+    CLAUDE.md is the highest-yield file in a GTM Claude Code repo. It's the contract every subagent reads before running, the brand voice gate, the ICP definition, and the rubric every draft self-scores against. Most first-build failures we see trace back to a thin CLAUDE.md, so this post is a working template you can adapt.
+  </p>
+
+  <p>
+    The structure below comes from real revenue-team builds. Names changed, numbers anonymized, but the shape is what's actually shipping in production.
+  </p>
+
+  <h2>What CLAUDE.md is and isn't</h2>
+
+  <p>
+    CLAUDE.md is the rules layer. ICP definition, voice rules, banned phrases, signal scoring criteria, data contracts, escalation rules. It's the document every agent reads first.
+  </p>
+
+  <p>
+    CLAUDE.md is not the data layer. CRM exports, contact lists, signal sources, and reference data live in <code>/data/</code> folders the agents read separately. Mixing the two turns CLAUDE.md into a maintenance nightmare and bloats the context window on every agent run.
+  </p>
+
+  <p>
+    CLAUDE.md is not the prompt for any specific subagent. Each subagent has its own prompt in <code>/subagents/&#123;name&#125;/prompt.md</code> that references back to CLAUDE.md sections. Keep the rules in one place; let the subagent prompts cite them.
+  </p>
+
+  <h2>The eight sections that matter</h2>
+
+  <h3>1. Identity and audience</h3>
+
+  <p>
+    Open with two paragraphs naming who the team is, what the company sells, and who's reading the output. The agent uses this to calibrate everything that follows.
+  </p>
+
+  <p>
+    Example:
+  </p>
+
+  <blockquote>
+    We're the GTM engineering team at [Company]. We sell [product] to [buyer persona] at [company segment]. The recipients of our outbound are senior operators who get 200+ cold messages a month. They unsubscribe from anything that reads as automated. The bar for our messages is whether the recipient would forward this to their boss, peer, or team.
+  </blockquote>
+
+  <p>
+    Avoid abstractions. "B2B SaaS" is too broad. "Series B-D vertical SaaS in healthcare, finance, or industrial" is usable.
+  </p>
+
+  <h3>2. ICP definition</h3>
+
+  <p>
+    Name companies, titles, signals, and exclusions specifically. Include both the inclusion criteria and the exclusion criteria. The exclusion list is what keeps the agent from drifting into lookalike territory that wastes sends.
+  </p>
+
+  <p>
+    Working format:
+  </p>
+
+  <ul>
+    <li><strong>Company segment.</strong> [Specific industry, size band, funding stage, geography]</li>
+    <li><strong>Buyer titles.</strong> [Primary and secondary, with seniority floor]</li>
+    <li><strong>Triggering signals.</strong> [Hiring patterns, funding, leadership changes, product launches, regulatory filings, that justify outbound]</li>
+    <li><strong>Required STA threshold.</strong> [Score threshold for a signal to qualify; usually 7/9]</li>
+    <li><strong>Exclusions.</strong> [Companies in active down-round talks, companies under headcount floor, lookalikes that almost qualify but shouldn't]</li>
+  </ul>
+
+  <h3>3. Voice rules and banned phrases</h3>
+
+  <p>
+    This section is the difference between AI-default prose and your team's voice. Be specific. Ban phrases by name. Show good and bad examples in quotes.
+  </p>
+
+  <p>
+    Working format:
+  </p>
+
+  <ul>
+    <li><strong>Tone.</strong> Direct, operator-level, no hedging. Contractions allowed. First person plural.</li>
+    <li><strong>Banned punctuation.</strong> Em dashes. Use periods, commas, or rewrite the sentence.</li>
+    <li><strong>Banned phrases.</strong> "Just checking in." "I hope this finds you well." "Quick question." "Not just X, it's Y." "Game-changer." "Robust." "Leverage" as a verb.</li>
+    <li><strong>Banned structures.</strong> Negative parallelism ("not X, but Y"). Three-fragment dramatic triads. Self-answered rhetorical questions.</li>
+    <li><strong>Required structures.</strong> First sentence is the trigger. Second connects trigger to prospect's likely problem. Third offers something concrete to do this week.</li>
+  </ul>
+
+  <h3>4. Signal scoring rubric (STA)</h3>
+
+  <p>
+    Spell out Specific, Timely, Actionable with examples. The scoring agent reads this every run.
+  </p>
+
+  <ul>
+    <li><strong>Specific.</strong> Names, numbers, dates. A specific permit, hire, raise, tech-stack change. Bad: "they're growing." Good: "they posted 4 senior React roles in the last 14 days."</li>
+    <li><strong>Timely.</strong> Last 30 days, ideally last 7. Older signals are stale and read as outdated research.</li>
+    <li><strong>Actionable.</strong> The recipient could act this week. Not "think about this next quarter." Something concrete and scoped.</li>
+  </ul>
+
+  <p>
+    Score each criterion 0-3. Pass threshold: 7/9. Below threshold, the scoring agent kills the signal before drafting.
+  </p>
+
+  <h3>5. Data contract</h3>
+
+  <p>
+    Name the data sources the agents are allowed to read and the fields that are valid for personalization. This prevents hallucination by constraining what the drafting agent can cite.
+  </p>
+
+  <ul>
+    <li><strong>CRM exports.</strong> Path, fields, refresh cadence. Read-only.</li>
+    <li><strong>Signal sources.</strong> Hiring (BuiltIn, LinkedIn jobs API), funding (Crunchbase), leadership (LinkedIn People API), tech stack (BuiltWith), reviews (G2, Capterra). Cite source URLs in dossiers.</li>
+    <li><strong>Contact data.</strong> Path, fields. Email and phone validated within last 60 days. Title fields cross-referenced against company website.</li>
+    <li><strong>Hallucination risks.</strong> LinkedIn titles that haven't been confirmed against the company website should not be cited. Salary data not from a verified source is banned. Quotes from real people are banned unless the URL is in the dossier.</li>
+  </ul>
+
+  <h3>6. Escalation rules</h3>
+
+  <p>
+    Conditions under which the agent stops and asks for human review.
+  </p>
+
+  <ul>
+    <li>Three failed regenerations on the same prospect, skip and log.</li>
+    <li>Signal references a person by name, require human approval.</li>
+    <li>Signal touches a regulated topic (health PHI, finance MNPI, education FERPA), require human approval.</li>
+    <li>First 50 sends per new ICP require human approval before send.</li>
+    <li>Any send that would cite an unverified data point, regenerate without the citation.</li>
+  </ul>
+
+  <h3>7. Few-shot examples</h3>
+
+  <p>
+    The whole CLAUDE.md earns its keep in this section. Five excellent messages from your team's best outbound, with the trigger, the dossier, and the message annotated. The drafting agent pattern-matches voice from these examples.
+  </p>
+
+  <p>
+    Format each example as:
+  </p>
+
+  <ul>
+    <li>Trigger summary (one sentence)</li>
+    <li>STA score (with reasoning)</li>
+    <li>Final message (verbatim)</li>
+    <li>Outcome (forwarded/replied/booked)</li>
+  </ul>
+
+  <p>
+    Update this section monthly. Add new winners. Retire patterns that stopped working. The CLAUDE.md ages out fast if this section freezes.
+  </p>
+
+  <h3>8. Audit and metric definitions</h3>
+
+  <p>
+    Tell the agent what to log and what metric the system optimizes for.
+  </p>
+
+  <ul>
+    <li>Every draft logs: prospect, signal, STA score, regeneration count, final score, send/skip decision.</li>
+    <li>Every send logs: recipient, send time, message hash, audit trail.</li>
+    <li>Optimization metric: forward rate. Reply rate is secondary. Open rate is not used for decisions.</li>
+  </ul>
+
+  <h2>What to leave out</h2>
+
+  <p>
+    Three things that don't belong in CLAUDE.md.
+  </p>
+
+  <p>
+    <strong>Real CRM data.</strong> Live in <code>/data/</code> folders. CLAUDE.md is the contract; data is the input.
+  </p>
+
+  <p>
+    <strong>Subagent-specific instructions.</strong> Live in <code>/subagents/&#123;name&#125;/prompt.md</code>. CLAUDE.md is shared across agents.
+  </p>
+
+  <p>
+    <strong>Marketing fluff.</strong> No mission statements, no values riffs, no positioning theater. The agent doesn't need to know your brand purpose. It needs to know what to write and what not to write.
+  </p>
+
+  <h2>The maintenance loop</h2>
+
+  <p>
+    A frozen CLAUDE.md is a dead system. Tune weekly for the first month. Tune monthly after that.
+  </p>
+
+  <p>
+    The trigger to update is always a real outcome. A send that got forwarded, add the message to the few-shot section. A send that got a polite decline, refine the banned phrases. A signal that produced a great message, raise its weight in the scoring rubric. A signal that wasted sends, drop it from the qualifying list.
+  </p>
+
+  <p>
+    The CLAUDE.md is the team playbook the system runs against. Treat it like one.
+  </p>
+
+  <h2>Common mistakes in the first version</h2>
+
+  <p>
+    Three patterns we see in CLAUDE.md drafts that come across our desk for review.
+  </p>
+
+  <p>
+    <strong>Banned phrase lists too short.</strong> Five banned phrases is not enough. Most teams need 30-50 banned phrases and at least 5-10 banned sentence structures. The agent will pattern-match around any constraint that's looser than the prose it generates by default.
+  </p>
+
+  <p>
+    <strong>ICP defined by industry, not signal.</strong> "Mid-market SaaS" is not an ICP. "Series B-D vertical SaaS in healthcare or finance with a CRO change in the last 60 days" is. Define the trigger as part of the ICP. The signal scoring rubric inherits its thresholds from this definition.
+  </p>
+
+  <p>
+    <strong>Few-shot examples that don't include the trigger.</strong> The few-shot section often shows just the final message. Show the trigger and the dossier alongside it. The agent learns the mapping from signal to message, not just the prose style.
+  </p>
+
+  <h2>Where this fits in the broader Claude Code GTM stack</h2>
+
+  <p>
+    CLAUDE.md is the front door. Every subagent reads it before running. The <a href="/blog/claude-code-for-gtm/">broader Claude Code for GTM guide</a> covers the subagent architecture that reads this file. The <a href="/methodology/">TVA framework</a> covers the scoring philosophy that drives the rubric. The <a href="/services/ai-sdr-replacement/">AI SDR replacement service</a> is the engagement we run if you want this built rather than DIY.
+  </p>
+
+  <p>
+    Get CLAUDE.md right and the agents stay on-brand. Get it wrong and no model upgrade will fix the output.
+  </p>
+</BlogPost>

@@ -1,0 +1,194 @@
+---
+import BlogPost from '../../../layouts/BlogPost.astro';
+import { getPost } from '../../../data/posts';
+
+const post = getPost('migrating-off-zoominfo')!;
+
+const faq = [
+  {
+    q: "How much can a typical migration save?",
+    a: "Mid-market companies running a $120K-$200K annual ZoomInfo contract typically land at $35K-$70K total cost in year one of a custom pipeline (build cost plus engineering retainer plus data sourcing fees). By year two, ongoing cost drops to $25K-$50K. The savings compound because the data quality is higher, so deliverability improves and reply rates rise.",
+  },
+  {
+    q: "Is the data quality actually better, or just cheaper?",
+    a: "Better at the bottom of the funnel where it matters. ZoomInfo and Definitive are great at company-level coverage but progressively worse at contact freshness, especially below VP level. A custom pipeline that pulls from primary sources (state directories, NPI registries, company websites, LinkedIn signals) and validates email and phone weekly outperforms ZoomInfo on contact accuracy by 15-30% in the segments we've measured.",
+  },
+  {
+    q: "What's the migration order that doesn't break reps?",
+    a: "Run both stacks in parallel for 60 days. Start with one ICP segment, build the custom pipeline against it, validate quality with reps for two weeks, then progressively migrate segments. Don't cancel ZoomInfo until the new pipeline is shipping clean data for 60 days across all segments. Most failed migrations cancel too early.",
+  },
+  {
+    q: "What about Salesforce/HubSpot integration?",
+    a: "Both are straightforward. The custom pipeline writes to a CSV or queries an API on a schedule, and a small import script (Python, Node, or a Make/Zapier workflow) pushes records into Salesforce or HubSpot with the same field structure ZoomInfo populated. The buyer's reps don't see a difference in their CRM. They see fresher data.",
+  },
+  {
+    q: "Do we need engineers to maintain this?",
+    a: "Less than you'd think. The pipeline runs on a cron, the validation steps are commodity APIs (ZeroBounce, Twilio Lookup), and the orchestration is small. Most maintenance is updating signal source mappings when a website changes. A part-time RevOps engineer plus a quarterly check-in with a vendor like us covers it for most teams.",
+  },
+];
+---
+
+<BlogPost
+  title={post.title}
+  description={post.description}
+  slug={post.slug}
+  publishedAt={post.publishedAt}
+  category={post.category}
+  readingMinutes={post.readingMinutes}
+  faq={faq}
+>
+  <p>
+    The ZoomInfo renewal in 2026 is the single most disputed line item on B2B operating budgets. Contracts run $100K to $300K, the data ages out faster than vendors refresh it, and the contact quality at the bottom of the funnel is often worse than what a custom pipeline produces in week two. Most CROs walking into Q2 are doing the build-vs-buy math, and the math has shifted.
+  </p>
+
+  <p>
+    This is the playbook we run for the migration. 60-day timeline, parallel-stack strategy, segment-by-segment cutover, and the specific failure modes that kill migrations in week three. The numbers come from real engagements we've shipped at <a href="https://veruminc.com" rel="noopener">Verum</a> for B2B and <a href="https://getprovyx.com" rel="noopener">Provyx</a> for healthcare.
+  </p>
+
+  <h2>Why the math changed in 2025</h2>
+
+  <p>
+    ZoomInfo's pricing structure was designed for a world where data sourcing required massive scale economies. Buying access to a centralized provider was cheaper than building a sourcing pipeline. That premise broke between 2023 and 2025 for three reasons.
+  </p>
+
+  <p>
+    First, primary sources became cheaper to access. State medical board directories, NPI registries, secretary-of-state filings, and public hiring data are all queryable at low marginal cost. The infrastructure to pull, parse, and validate them is now commodity.
+  </p>
+
+  <p>
+    Second, validation services priced down. Email validation (ZeroBounce, NeverBounce), phone line-status validation (Twilio Lookup, Telnyx), and identity matching (LinkedIn signal pipelines) are pennies per record. The piece that used to require enterprise contracts is now a per-call API.
+  </p>
+
+  <p>
+    Third, AI made the pipeline orchestration cheap. A small subagent chain that pulls from primary sources, validates against commodity APIs, and writes to your CRM is engineering work measured in weeks, not quarters. The build-cost-vs-license math collapsed.
+  </p>
+
+  <p>
+    For mid-market companies running $120K-$200K ZoomInfo contracts, the year-one TCO of a custom pipeline lands at $35K-$70K. Year two drops to $25K-$50K. The savings are real, but the bigger win is data quality, which is what we'll cover next.
+  </p>
+
+  <h2>Where ZoomInfo is actually worse</h2>
+
+  <p>
+    ZoomInfo is excellent at company-level coverage. If you need a list of every company in an industry over $10M revenue, it's the right tool. Where it fails is contact freshness below VP level, vertical-specific data (healthcare practices, restaurants, contractors, agriculture), and any signal that requires recent (last-30-day) freshness.
+  </p>
+
+  <p>
+    The contact accuracy gap is documented in our migrations. Across five engagements in the last six months, the segments we measured (mid-market SaaS, healthcare practices, contractors) showed:
+  </p>
+
+  <ul>
+    <li>Email deliverability: ZoomInfo 78% vs custom pipeline 91-94%</li>
+    <li>Phone line-status validity: ZoomInfo 65% vs custom pipeline 88-92%</li>
+    <li>Title accuracy (cross-checked against company website): ZoomInfo 71% vs custom pipeline 86-89%</li>
+    <li>Contact recency (modified in last 90 days): ZoomInfo 22% vs custom pipeline 100% (by definition)</li>
+  </ul>
+
+  <p>
+    The gap is largest in vertical segments. ZoomInfo's healthcare coverage, for example, misses about 40% of independent practices and is heavily skewed toward hospital systems. A custom pipeline pulling from NPI and state registries hits 95%+ practice coverage with current ownership data.
+  </p>
+
+  <h2>The 60-day migration sequence</h2>
+
+  <p>
+    The right migration is sequential, not big-bang. Run both stacks in parallel. Cut over segment by segment. Don't cancel ZoomInfo until you've shipped 60 days of clean custom-pipeline data across all segments. The teams that fail at this skip the parallel period and find themselves with a gap in week three.
+  </p>
+
+  <h3>Week 1-2: pilot segment build</h3>
+
+  <p>
+    Pick the smallest, highest-value ICP segment. For most B2B teams, this is mid-market in the company's strongest vertical. Build the data pipeline against it. Source, validate, format to match ZoomInfo's CRM field mapping.
+  </p>
+
+  <p>
+    Output: a CSV (or live API endpoint) of contacts in the pilot segment, with the same field structure your reps already work with. Validation rates should hit 90%+ on email and 85%+ on phone. If they don't, the source mix is wrong; rework before expanding.
+  </p>
+
+  <h3>Week 3-4: rep validation</h3>
+
+  <p>
+    Hand the pilot data to two or three reps in the segment. Have them work it for two weeks against their normal ZoomInfo flow. Track which records produce real conversations versus which produce bounces, hang-ups, or "wrong person" responses.
+  </p>
+
+  <p>
+    If rep-reported quality is comparable to or better than ZoomInfo, you have permission to expand. If it's worse, you have a data quality problem to fix before continuing. Don't expand on a worse-quality pilot. The migration credibility lives or dies in this two-week window.
+  </p>
+
+  <h3>Week 5-8: segment expansion</h3>
+
+  <p>
+    Add segments one at a time. Each new segment goes through a one-week pilot with rep validation before going into the rotation. By the end of week 8, all major segments should be running on the custom pipeline.
+  </p>
+
+  <p>
+    Keep ZoomInfo live during this period. Reps default to the custom pipeline; ZoomInfo is the fallback for edge cases (international contacts, segments not yet migrated). Track which segments still need ZoomInfo each week. The list should shrink to zero by week 8.
+  </p>
+
+  <h3>Week 9-12: cutover and cancellation</h3>
+
+  <p>
+    Once all segments are running cleanly on the custom pipeline, move to cancellation. Most ZoomInfo contracts have notice requirements (30-90 days). Issue notice in week 9. Run both stacks in week 10-12 as a safety period. Cancel at the contract end date.
+  </p>
+
+  <p>
+    The teams that get this wrong cancel before the parallel period closes and find themselves chasing data quality issues without a fallback. Don't compress the timeline. The cost of an extra month of ZoomInfo is much smaller than the cost of a botched migration.
+  </p>
+
+  <h2>The tooling that actually matters</h2>
+
+  <p>
+    The custom pipeline doesn't need exotic infrastructure. The components are commodity.
+  </p>
+
+  <ul>
+    <li><strong>Primary sources.</strong> NPI for healthcare, secretary-of-state filings for entity ownership, BuiltWith for tech stack, public hiring boards for staffing signals, company websites scraped for current titles. Most of these are free or low-cost APIs.</li>
+    <li><strong>Email validation.</strong> ZeroBounce, NeverBounce, or Hunter.io. ~$0.005 per record at volume. Run on every contact, refresh weekly.</li>
+    <li><strong>Phone validation.</strong> Twilio Lookup or Telnyx for line-type and active-line-status. ~$0.01 per record. Run on every contact, refresh monthly.</li>
+    <li><strong>Identity enrichment.</strong> SBA Buddy or equivalent LinkedIn-signal pipelines for current title and employer. Specialized but commodity.</li>
+    <li><strong>Orchestration.</strong> A Python or Node script on a cron, or a Make.com / n8n workflow. Output writes to CSV or pushes to CRM via API.</li>
+  </ul>
+
+  <p>
+    Total per-record cost across this stack: $0.05-$0.15 depending on how often you refresh. ZoomInfo's effective per-record cost (license divided by usable records) is typically $0.40-$1.20.
+  </p>
+
+  <h2>Where ZoomInfo still wins</h2>
+
+  <p>
+    The honest read on this category. ZoomInfo is still the right call for two situations.
+  </p>
+
+  <p>
+    <strong>Global TAM mapping.</strong> If the use case is "give me every company in this industry globally over $10M revenue," ZoomInfo's coverage is hard to replicate. A custom pipeline is more accurate within your active ICP segments but doesn't scale to global TAM coverage at low cost.
+  </p>
+
+  <p>
+    <strong>One-time list pulls for marketing.</strong> If your need is a one-shot list for an ABM campaign or event invite, the contract structure of ZoomInfo (license includes unlimited pulls) is hard to beat for a single use.
+  </p>
+
+  <p>
+    For ongoing contact data feeding sales outbound, the math has tipped toward custom pipelines. The data is fresher, the cost is lower, and the buyer owns the pipeline. <a href="/services/data-migration/">We run this migration as a fixed-fee engagement</a> if you want it built rather than DIY.
+  </p>
+
+  <h2>The decision framework</h2>
+
+  <p>
+    Three questions decide whether to migrate.
+  </p>
+
+  <p>
+    First, what's your annual ZoomInfo spend? Below $60K, the migration ROI is marginal. Above $100K, the ROI is strong within year one. Between $60K-$100K, the answer depends on data quality requirements (high-quality vertical data favors custom; broad TAM favors ZoomInfo).
+  </p>
+
+  <p>
+    Second, is your bottom-of-funnel data quality currently a complaint? If reps are flagging stale contacts and bad phone numbers, that's the strongest migration signal. Custom pipelines fix this. If reps are happy with current data, the migration is less urgent.
+  </p>
+
+  <p>
+    Third, do you have someone who can own the pipeline? RevOps engineer, technical sales ops, or a fractional resource. The pipeline doesn't run itself. If no one can own it, hire it out as ongoing engineering retainer or stay on ZoomInfo.
+  </p>
+
+  <p>
+    For most companies hitting all three (high spend, data quality complaints, technical owner available), the migration pays for itself before the next renewal cycle.
+  </p>
+</BlogPost>
