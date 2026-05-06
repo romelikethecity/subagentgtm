@@ -98,7 +98,7 @@ const breadcrumbSchema = {
           <p class="t-body t-muted post__lede">{description}</p>
 
           <p class="t-micro post__byline">
-            <span>BY ROME THORNDIKE</span>
+            <span>BY <a href="https://www.linkedin.com/in/romethorndike/" rel="author noopener" target="_blank">ROME THORNDIKE</a></span>
             <span aria-hidden="true">·</span>
             <time datetime={publishedAt}>{new Date(publishedAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</time>
           </p>
@@ -126,6 +126,24 @@ const breadcrumbSchema = {
           </div>
         </section>
       )}
+
+      <section class="section section--tight">
+        <div class="container container--narrow">
+          <div class="post__author">
+            <span class="t-micro post__author-label">ABOUT THE AUTHOR</span>
+            <p class="t-body post__author-bio">
+              <strong>Rome Thorndike</strong> is the founder of subagent/gtm. Fifteen years across Snapdocs (second salesperson), Salesforce, Microsoft (Health & Life Sciences), Datajoy (acquired by Databricks), and Wells Fargo. He built the <a href="/methodology/">TVA framework</a> and runs the four-property stack behind subagent/gtm: <a href="https://veruminc.com" rel="noopener">Verum</a>, <a href="https://getprovyx.com" rel="noopener">Provyx</a>, <a href="https://sharppages.com" rel="noopener">SharpPages</a>, and <a href="https://runfieldwork.com" rel="noopener">Fieldwork</a>.
+            </p>
+            <p class="t-micro post__author-links">
+              <a href="https://www.linkedin.com/in/romethorndike/" rel="author noopener" target="_blank">LINKEDIN</a>
+              <span aria-hidden="true">·</span>
+              <a href="/about/">ABOUT</a>
+              <span aria-hidden="true">·</span>
+              <a href="/contact/">CONTACT</a>
+            </p>
+          </div>
+        </div>
+      </section>
 
       <section class="section">
         <div class="container" style="text-align: center;">
@@ -167,6 +185,54 @@ const breadcrumbSchema = {
     flex-wrap: wrap;
     gap: var(--space-3);
     color: var(--muted);
+  }
+
+  .post__byline a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .post__byline a:hover {
+    text-decoration: underline;
+  }
+
+  .post__author {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: var(--space-8) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .post__author-label {
+    color: var(--muted);
+  }
+
+  .post__author-bio {
+    margin: 0;
+    max-width: 720px;
+  }
+
+  .post__author-bio a {
+    color: var(--accent);
+  }
+
+  .post__author-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .post__author-links a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .post__author-links a:hover {
+    text-decoration: underline;
   }
 
   .post__body :global(h2) {
