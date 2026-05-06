@@ -8,7 +8,7 @@ const faqData = [
   },
   {
     question: "How do you maintain accuracy over time?",
-    answer: "The knowledge base updates with every response cycle. When your security posture changes — new certifications, updated policies, infrastructure changes — the subagent learns from the SME review and applies it to future responses automatically."
+    answer: "The knowledge base updates with every response cycle. When your security posture changes, new certifications, updated policies, infrastructure changes, the subagent learns from the SME review and applies it to future responses automatically."
   },
   {
     question: "What does it cost?",
@@ -19,12 +19,13 @@ const faqData = [
 
 <ServicePage
   title="RFP & security questionnaire response"
-  description="SOC 2, HIPAA, FedRAMP, enterprise RFPs — answered in 48-72 hours with AI-drafted, SME-reviewed responses."
+  description="SOC 2, HIPAA, FedRAMP, enterprise RFPs, answered in 48-72 hours with AI-drafted, SME-reviewed responses."
   path="/services/rfp-response/"
   microLabel="RFP & SECURITY QUESTIONNAIRE · GTM ENGINEERING"
   h1="SOC 2, HIPAA, FedRAMP, enterprise RFPs. Answered in 48-72 hours."
-  subhead="SOC 2, HIPAA, FedRAMP, enterprise RFPs — answered in 48-72 hours with AI-drafted, SME-reviewed responses."
+  subhead="SOC 2, HIPAA, FedRAMP, enterprise RFPs, answered in 48-72 hours with AI-drafted, SME-reviewed responses."
   serviceType="RFP Response Automation"
+  relatedPosts={['claude-code-for-gtm']}
 >
   <!-- FAQPage schema -->
   <script slot="head" type="application/ld+json" set:html={JSON.stringify({

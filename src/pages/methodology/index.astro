@@ -2,10 +2,11 @@
 import Base from '../../layouts/Base.astro';
 import SectionLabel from '../../components/SectionLabel.astro';
 import CTAButton from '../../components/CTAButton.astro';
+import FurtherReading from '../../components/FurtherReading.astro';
 ---
 
 <Base
-  title="TVA — Triggered Value Asset"
+  title="TVA: Triggered Value Asset"
   description="Trigger → Value → Asset. The methodology behind every subagent we ship. If it's not asset-grade, it doesn't send."
   path="/methodology/"
 >
@@ -13,7 +14,7 @@ import CTAButton from '../../components/CTAButton.astro';
   <script slot="head" type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "TVA — Triggered Value Asset",
+    "headline": "TVA: Triggered Value Asset",
     "description": "Every outbound message must be valuable enough that the recipient wants to forward it to their boss, their peer, or their team. If it fails, it doesn't send.",
     "author": {
       "@type": "Person",
@@ -37,7 +38,7 @@ import CTAButton from '../../components/CTAButton.astro';
         <span class="t-micro">TVA · SUBAGENT METHODOLOGY</span>
 
         <h1 class="t-display-xl" style="margin: var(--space-6) 0 var(--space-6);">
-          TVA — Triggered Value Asset.
+          TVA: Triggered Value Asset.
         </h1>
 
         <p class="t-body t-muted" style="margin-bottom: 0;">
@@ -53,7 +54,7 @@ import CTAButton from '../../components/CTAButton.astro';
 
         <div class="t-body t-muted methodology-prose">
           <p>
-            Jordan Crawford's Permissionless Value Proposition framework at Cannonball GTM is one of the best pieces of outbound thinking in the last five years. Its core insight — that the best outbound messages deliver value a prospect would pay to receive — reshaped how serious operators think about cold email.
+            Jordan Crawford's Permissionless Value Proposition framework at Cannonball GTM is one of the best pieces of outbound thinking in the last five years. Its core insight (that the best outbound messages deliver value a prospect would pay to receive) reshaped how serious operators think about cold email.
           </p>
           <p>
             But PVP was designed for humans drafting messages. When you try to scale it through AI agents at volume, three things break:
@@ -97,7 +98,7 @@ import CTAButton from '../../components/CTAButton.astro';
 
         <div class="t-body t-muted methodology-prose">
           <p>
-            PVP asks one audience to like a message. TVA asks two audiences to like it — the recipient AND whoever they might forward it to. A message that clears that bar has to be:
+            PVP asks one audience to like a message. TVA asks two audiences to like it: the recipient AND whoever they might forward it to. A message that clears that bar has to be:
           </p>
           <ul>
             <li>Valuable enough that sharing it makes the sharer look smart</li>
@@ -154,7 +155,7 @@ import CTAButton from '../../components/CTAButton.astro';
             <li>You can audit every message that was ever sent</li>
             <li>You can adjust the threshold per campaign</li>
             <li>Your team can modify the rubric as ICP understanding deepens</li>
-            <li>No human has to manually review each draft — the system self-regulates</li>
+            <li>No human has to manually review each draft, the system self-regulates</li>
           </ul>
         </div>
       </div>
@@ -167,10 +168,10 @@ import CTAButton from '../../components/CTAButton.astro';
 
         <div class="t-body t-muted methodology-prose">
           <p>
-            Every subagent<span class="slash">/</span>gtm engagement tracks <strong>forward rate</strong> — the percentage of sent messages that were forwarded by the recipient (measured by email thread replies, CC/BCC mentions, and post-meeting references).
+            Every subagent<span class="slash">/</span>gtm engagement tracks <strong>forward rate</strong>, the percentage of sent messages that were forwarded by the recipient (measured by email thread replies, CC/BCC mentions, and post-meeting references).
           </p>
           <p>
-            Open rate is vanity. Reply rate is closer. Forward rate is the real signal. When a message gets forwarded, you've reached not just the recipient but everyone the recipient wanted to impress with their find.
+            Open rate is vanity. Reply rate is closer. Forward rate is the real signal. When a message gets forwarded, you've reached the recipient and every colleague they wanted to impress with their find.
           </p>
           <p>
             We publish forward rate in every case study. No other AI GTM vendor reports it, because most can't.
@@ -178,6 +179,8 @@ import CTAButton from '../../components/CTAButton.astro';
         </div>
       </div>
     </section>
+
+    <FurtherReading slugs={['tva-vs-pvp', 'forward-rate-outbound-metric', 'claude-md-for-revenue-teams', 'why-ai-sdrs-are-failing']} />
 
     <!-- CTA -->
     <section class="section">

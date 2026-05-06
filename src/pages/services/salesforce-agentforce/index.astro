@@ -4,12 +4,13 @@ import ServicePage from '../../../layouts/ServicePage.astro';
 
 <ServicePage
   title="Salesforce Agentforce deployment"
-  description="Agentforce is aggressively sold and poorly deployed. We make it work — or tell you when it won't."
+  description="Agentforce is aggressively sold and poorly deployed. We make it work, or tell you when it won't."
   path="/services/salesforce-agentforce/"
   microLabel="SALESFORCE AGENTFORCE · GTM ENGINEERING"
   h1="Agentforce is aggressively sold and poorly deployed. We fix that."
-  subhead="Agentforce is aggressively sold and poorly deployed. We make it work — or tell you when it won't."
+  subhead="Agentforce is aggressively sold and poorly deployed. We make it work, or tell you when it won't."
   serviceType="Salesforce Agentforce Deployment"
+  relatedPosts={['claude-code-for-gtm', 'ai-for-gtm-2026']}
 >
   <!-- FAQPage schema -->
   <script slot="head" type="application/ld+json" set:html={JSON.stringify({
@@ -21,7 +22,7 @@ import ServicePage from '../../../layouts/ServicePage.astro';
         "name": "Do we need Salesforce Unlimited or Einstein 1 to use Agentforce?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Agentforce requires Einstein 1 Edition or specific add-on SKUs. Part of our assessment is telling you whether your current Salesforce contract supports it — and whether the per-conversation pricing makes financial sense for your volume."
+          "text": "Agentforce requires Einstein 1 Edition or specific add-on SKUs. Part of our assessment is telling you whether your current Salesforce contract supports it, and whether the per-conversation pricing makes financial sense for your volume."
         }
       },
       {
@@ -50,7 +51,7 @@ import ServicePage from '../../../layouts/ServicePage.astro';
 
       <div class="t-body t-muted service-prose">
         <p>
-          Salesforce made Agentforce the centerpiece of their product roadmap. Every AE is pitching it. Every QBR features it. The pressure to adopt is real — and the gap between what's promised and what's deployed is widening.
+          Salesforce made Agentforce the centerpiece of their product roadmap. Every AE is pitching it. Every QBR features it. The pressure to adopt is real, and the gap between what's promised and what's deployed is widening.
         </p>
         <p>
           Most Agentforce implementations stall at configuration. The data model isn't clean enough. The knowledge base isn't structured. The trust layer blocks useful actions. Teams end up with a partially deployed agent that answers simple questions and breaks on anything complex.
@@ -69,13 +70,13 @@ import ServicePage from '../../../layouts/ServicePage.astro';
 
       <ol class="t-body t-muted service-prose">
         <li>
-          <strong>Assess fit.</strong> We audit your Salesforce instance, data model, and use cases. Agentforce is strong for structured service workflows and weak for complex sales motions. We tell you where it fits and where it doesn't — before you spend configuration time.
+          <strong>Assess fit.</strong> We audit your Salesforce instance, data model, and use cases. Agentforce is strong for structured service workflows and weak for complex sales motions. We tell you where it fits and where it doesn't before you spend configuration time.
         </li>
         <li>
-          <strong>Configure Agentforce.</strong> Topics, actions, knowledge articles, trust layer guardrails. Each agent scoped to a specific workflow — not a catch-all chatbot. We configure against your actual objects and fields, not Salesforce demo data.
+          <strong>Configure Agentforce.</strong> Topics, actions, knowledge articles, trust layer guardrails. Each agent scoped to a specific workflow, not a catch-all chatbot. We configure against your actual objects and fields, not Salesforce demo data.
         </li>
         <li>
-          <strong>Integrate with Claude Code subagents.</strong> Where Agentforce hits its ceiling — multi-step research, cross-system orchestration, outbound that passes <a href="/methodology/">TVA</a> — we build Claude Code subagents that run alongside it. Results pipe back into Salesforce. One source of truth.
+          <strong>Integrate with Claude Code subagents.</strong> Where Agentforce hits its ceiling (multi-step research, cross-system orchestration, outbound that passes <a href="/methodology/">TVA</a>) we build Claude Code subagents that run alongside it. Results pipe back into Salesforce. One source of truth.
         </li>
         <li>
           <strong>Validate and hand off.</strong> Two weeks of production testing against real cases. We measure resolution rate, escalation rate, and accuracy. Your team gets a 90-minute handoff session covering what Agentforce handles, what the subagents handle, and how to adjust both.
@@ -92,7 +93,7 @@ import ServicePage from '../../../layouts/ServicePage.astro';
       <div class="faq-list">
         <div class="faq-item">
           <h3 class="t-h3">Do we need Salesforce Unlimited or Einstein 1 to use Agentforce?</h3>
-          <p class="t-body t-muted">Agentforce requires Einstein 1 Edition or specific add-on SKUs. Part of our assessment is telling you whether your current Salesforce contract supports it — and whether the per-conversation pricing makes financial sense for your volume.</p>
+          <p class="t-body t-muted">Agentforce requires Einstein 1 Edition or specific add-on SKUs. Part of our assessment is telling you whether your current Salesforce contract supports it, and whether the per-conversation pricing makes financial sense for your volume.</p>
         </div>
 
         <div class="faq-item">

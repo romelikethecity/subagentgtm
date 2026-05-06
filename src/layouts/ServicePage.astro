@@ -1,6 +1,7 @@
 ---
 import Base from './Base.astro';
 import CTAButton from '../components/CTAButton.astro';
+import FurtherReading from '../components/FurtherReading.astro';
 
 interface Props {
   title: string;
@@ -10,9 +11,10 @@ interface Props {
   h1: string;
   subhead: string;
   serviceType: string;
+  relatedPosts?: string[];
 }
 
-const { title, description, path, microLabel, h1, subhead, serviceType } = Astro.props;
+const { title, description, path, microLabel, h1, subhead, serviceType, relatedPosts = [] } = Astro.props;
 ---
 
 <Base title={title} description={description} path={path}>
@@ -47,6 +49,8 @@ const { title, description, path, microLabel, h1, subhead, serviceType } = Astro
 
     <!-- Page content slot -->
     <slot />
+
+    <FurtherReading slugs={relatedPosts} />
 
     <!-- CTA -->
     <section class="section">

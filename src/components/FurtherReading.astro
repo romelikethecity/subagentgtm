@@ -1,0 +1,76 @@
+---
+import { posts } from '../data/posts';
+
+interface Props {
+  slugs: string[];
+  heading?: string;
+}
+
+const { slugs, heading = 'Further reading.' } = Astro.props;
+const items = slugs
+  .map((slug) => posts.find((p) => p.slug === slug))
+  .filter((p): p is NonNullable<typeof p> => Boolean(p));
+---
+
+{items.length > 0 && (
+  <section class="section further-reading">
+    <div class="container container--narrow">
+      <h2 class="t-h1" style="margin-bottom: var(--space-8);">{heading}</h2>
+      <ul class="further-reading__list">
+        {items.map((p) => (
+          <li class="further-reading__item">
+            <a href={`/blog/${p.slug}/`} class="further-reading__link">
+              <span class="further-reading__meta t-micro">
+                {p.category.toUpperCase()} · {p.readingMinutes} MIN READ
+              </span>
+              <span class="further-reading__title t-h3">{p.title}</span>
+              <span class="further-reading__excerpt t-body t-muted">{p.excerpt}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}
+
+<style>
+  .further-reading__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .further-reading__item {
+    border-top: 1px solid var(--line);
+    padding-top: var(--space-5);
+  }
+
+  .further-reading__link {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    text-decoration: none;
+    color: inherit;
+    transition: color 120ms ease;
+  }
+
+  .further-reading__link:hover .further-reading__title {
+    color: var(--accent);
+  }
+
+  .further-reading__meta {
+    color: var(--muted);
+  }
+
+  .further-reading__title {
+    transition: color 120ms ease;
+  }
+
+  .further-reading__excerpt {
+    margin: 0;
+    max-width: 720px;
+  }
+</style>

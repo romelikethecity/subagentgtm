@@ -10,6 +10,7 @@ import ServicePage from '../../../layouts/ServicePage.astro';
   h1="You bought Breeze. Nobody knows how to deploy it."
   subhead="You bought Breeze. Nobody on your team knows how to deploy it. We configure Breeze + build Claude Code subagents around it."
   serviceType="HubSpot Breeze Deployment"
+  relatedPosts={['claude-code-for-gtm', 'claude-md-for-revenue-teams']}
 >
   <!-- FAQPage schema -->
   <script slot="head" type="application/ld+json" set:html={JSON.stringify({
@@ -21,7 +22,7 @@ import ServicePage from '../../../layouts/ServicePage.astro';
         "name": "Do we need to be on HubSpot Enterprise for Breeze?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Breeze features are available across HubSpot tiers, but the most useful ones — Breeze Copilot, Breeze Agents, and Breeze Intelligence — require Sales Hub or Marketing Hub Professional or Enterprise. We audit your current tier and tell you exactly what's usable before we touch anything."
+          "text": "Breeze features are available across HubSpot tiers, but the most useful ones (Breeze Copilot, Breeze Agents, and Breeze Intelligence) require Sales Hub or Marketing Hub Professional or Enterprise. We audit your current tier and tell you exactly what's usable before we touch anything."
         }
       },
       {
@@ -29,7 +30,7 @@ import ServicePage from '../../../layouts/ServicePage.astro';
         "name": "What if Breeze can't do what we need?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "That's half the engagement. Breeze has real gaps — especially in multi-step workflows and custom object handling. Where Breeze falls short, we build Claude Code subagents that fill the gap and pipe results back into HubSpot. You get one system, not two."
+          "text": "That's half the engagement. Breeze has real gaps, especially in multi-step workflows and custom object handling. Where Breeze falls short, we build Claude Code subagents that fill the gap and pipe results back into HubSpot. You get one system, not two."
         }
       },
       {
@@ -53,7 +54,7 @@ import ServicePage from '../../../layouts/ServicePage.astro';
           HubSpot shipped Breeze across every hub in 2024. Your AE promised AI-native CRM. Your team got a settings page nobody understands and a Copilot that hallucinates deal data.
         </p>
         <p>
-          The features are real — Breeze Intelligence for enrichment, Breeze Agents for customer-facing automation, Breeze Copilot for internal workflows. But HubSpot's deployment documentation is sparse, their CSMs aren't trained on it, and your RevOps team has a backlog that started before Breeze existed.
+          The features are real, Breeze Intelligence for enrichment, Breeze Agents for customer-facing automation, Breeze Copilot for internal workflows. But HubSpot's deployment documentation is sparse, their CSMs aren't trained on it, and your RevOps team has a backlog that started before Breeze existed.
         </p>
         <p>
           So the AI features sit unused. You're paying for them. Nobody's deploying them. That's the gap we close.
@@ -69,13 +70,13 @@ import ServicePage from '../../../layouts/ServicePage.astro';
 
       <ol class="t-body t-muted service-prose">
         <li>
-          <strong>Audit your HubSpot instance.</strong> We map your current objects, workflows, integrations, and data hygiene. Most Breeze features fail silently on dirty data — we identify blockers before configuration starts.
+          <strong>Audit your HubSpot instance.</strong> We map your current objects, workflows, integrations, and data hygiene. Most Breeze features fail silently on dirty data. We identify blockers before configuration starts.
         </li>
         <li>
           <strong>Configure Breeze features.</strong> Breeze Intelligence for contact and company enrichment. Breeze Agents for lead routing and customer-facing responses. Breeze Copilot for internal summarization and deal analysis. Each one configured against your actual data, not HubSpot defaults.
         </li>
         <li>
-          <strong>Build Claude Code subagents around the gaps.</strong> Breeze can't do everything. Where it falls short — multi-step research, custom scoring, cross-object analysis — we build subagents that run alongside HubSpot and pipe results back in. Versioned in your repo. You own the code.
+          <strong>Build Claude Code subagents around the gaps.</strong> Breeze can't do everything. Where it falls short (multi-step research, custom scoring, cross-object analysis) we build subagents that run alongside HubSpot and pipe results back in. Versioned in your repo. You own the code.
         </li>
         <li>
           <strong>Train your team.</strong> 90-minute handoff session. Your RevOps team learns what Breeze is doing, what the subagents are doing, and how to modify both. No black boxes.
@@ -92,12 +93,12 @@ import ServicePage from '../../../layouts/ServicePage.astro';
       <div class="faq-list">
         <div class="faq-item">
           <h3 class="t-h3">Do we need to be on HubSpot Enterprise for Breeze?</h3>
-          <p class="t-body t-muted">Breeze features are available across HubSpot tiers, but the most useful ones — Breeze Copilot, Breeze Agents, and Breeze Intelligence — require Sales Hub or Marketing Hub Professional or Enterprise. We audit your current tier and tell you exactly what's usable before we touch anything.</p>
+          <p class="t-body t-muted">Breeze features are available across HubSpot tiers, but the most useful ones (Breeze Copilot, Breeze Agents, and Breeze Intelligence) require Sales Hub or Marketing Hub Professional or Enterprise. We audit your current tier and tell you exactly what's usable before we touch anything.</p>
         </div>
 
         <div class="faq-item">
           <h3 class="t-h3">What if Breeze can't do what we need?</h3>
-          <p class="t-body t-muted">That's half the engagement. Breeze has real gaps — especially in multi-step workflows and custom object handling. Where Breeze falls short, we build Claude Code subagents that fill the gap and pipe results back into HubSpot. You get one system, not two.</p>
+          <p class="t-body t-muted">That's half the engagement. Breeze has real gaps, especially in multi-step workflows and custom object handling. Where Breeze falls short, we build Claude Code subagents that fill the gap and pipe results back into HubSpot. You get one system, not two.</p>
         </div>
 
         <div class="faq-item">
