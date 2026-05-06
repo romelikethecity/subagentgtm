@@ -1,0 +1,202 @@
+---
+import BlogPost from '../../../layouts/BlogPost.astro';
+import { getPost } from '../../../data/posts';
+
+const post = getPost('hubspot-breeze-deployment')!;
+
+const faq = [
+  {
+    q: "Do we need HubSpot Enterprise to use Breeze?",
+    a: "Some Breeze features ship across all tiers; the most useful ones (Breeze Copilot, Breeze Agents, Breeze Intelligence) require Sales Hub or Marketing Hub Professional or Enterprise. Audit your current tier before buying anything. Roughly 30% of teams we work with discover they're paying for a Breeze SKU their tier doesn't fully unlock.",
+  },
+  {
+    q: "Is Breeze Intelligence worth the per-credit cost?",
+    a: "For company enrichment, often yes. The data is fresher than ZoomInfo for the segments HubSpot covers well (mid-market SaaS, US-centric). For contact enrichment, results are mixed; below VP level the freshness drops. Run Breeze Intelligence on a 200-record test sample before committing budget. We cover the alternative pipelines in the ZoomInfo migration playbook.",
+  },
+  {
+    q: "What does Breeze Copilot actually do that Sales Hub doesn't?",
+    a: "Honestly, mostly summarization. Activity summaries on accounts, deal motion summaries, suggested next steps. The 'AI assistant' framing oversells the depth. For real workflow value, Breeze Agents (configurable for lead routing, conversational responses) and Breeze Intelligence (enrichment) carry more weight than Copilot.",
+  },
+  {
+    q: "Can Breeze handle multi-step workflows?",
+    a: "Native Breeze does single-step or simple-chain workflows well. Multi-step workflows requiring research across external sources, custom scoring against your ICP, or cross-object analysis hit the ceiling fast. Most teams that need this end up running Claude Code subagents alongside HubSpot, with the subagents writing back to HubSpot via API.",
+  },
+  {
+    q: "How long does a Breeze deployment realistically take?",
+    a: "Two to four weeks for a working deployment if data hygiene is decent. Six to eight weeks if the HubSpot instance has accumulated technical debt (stale custom properties, deprecated workflows, dirty contact records). The deployment cost is mostly the audit and cleanup; the configuration itself is fast once the data is clean.",
+  },
+];
+---
+
+<BlogPost
+  title={post.title}
+  description={post.description}
+  slug={post.slug}
+  publishedAt={post.publishedAt}
+  category={post.category}
+  readingMinutes={post.readingMinutes}
+  faq={faq}
+>
+  <p>
+    HubSpot shipped Breeze across every hub between late 2024 and 2025. Your AE promised AI-native CRM. Your team got a settings page nobody understood and a Copilot that sometimes hallucinated deal data. The features are real; the deployment guidance was sparse, and most teams are paying for capabilities they never turned on.
+  </p>
+
+  <p>
+    This is a working guide for revenue teams figuring out what to do with Breeze in 2026. What works, what breaks, where the gaps are, and how to fill them with Claude Code subagents that run alongside HubSpot. Based on real client deployments, not Dreamforce-style demos.
+  </p>
+
+  <h2>What's actually in Breeze</h2>
+
+  <p>
+    Breeze is HubSpot's umbrella term for three product lines. Treating them as one thing is the first mistake; they have separate value, separate pricing, and separate deployment profiles.
+  </p>
+
+  <p>
+    <strong>Breeze Intelligence.</strong> Data enrichment. Company and contact records get auto-populated from HubSpot's data co-op plus public sources. Pricing is per credit; each enrichment burns a credit from a monthly pool.
+  </p>
+
+  <p>
+    <strong>Breeze Agents.</strong> Configurable AI agents for lead routing, customer-facing responses, and content generation. Closest analog to Salesforce Agentforce. Pricing is per agent license plus per-action costs.
+  </p>
+
+  <p>
+    <strong>Breeze Copilot.</strong> An AI assistant inside the HubSpot UI for summarization, suggested next steps, and natural-language CRM queries. Included in Sales Hub and Marketing Hub Professional/Enterprise.
+  </p>
+
+  <p>
+    Each of these has different ROI characteristics, and the deployment sequence matters.
+  </p>
+
+  <h2>Where Breeze earns its license</h2>
+
+  <h3>Breeze Intelligence for company enrichment</h3>
+
+  <p>
+    The strongest use case in 2026. For mid-market SaaS targeting US companies, Breeze Intelligence's company-level data (employee count, funding, tech stack signals, revenue brackets) is competitive with ZoomInfo's at lower per-record cost. The data is also better integrated with HubSpot's lead scoring and segmentation, so the enrichment flows directly into reporting.
+  </p>
+
+  <p>
+    Where it doesn't earn its license: international coverage drops below US-centric segments, contact enrichment below VP level is patchy, and vertical specifics (healthcare practices, contractors, agriculture) are missing. For those segments, custom data pipelines outperform. We cover the migration math in the <a href="/blog/migrating-off-zoominfo/">ZoomInfo migration playbook</a>.
+  </p>
+
+  <h3>Breeze Agents for inbound triage</h3>
+
+  <p>
+    Strong use case. Inbound lead forms, chat conversations, basic customer service. The agents handle qualification questions, route leads based on rules, and answer common questions from the knowledge base. Resolution rates land at 60-80% on bounded workflows. Integration with HubSpot workflows is native, so configuration is faster than equivalent setups in Salesforce.
+  </p>
+
+  <p>
+    Where it stalls: anything requiring real research across multiple data sources or judgment calls outside the knowledge base. Same architectural ceiling as Agentforce, with the same response: Claude Code subagents handle the complex cases.
+  </p>
+
+  <h3>Breeze Copilot for activity summarization</h3>
+
+  <p>
+    Modest use case. Reps get useful summaries of recent account activity, suggested next steps based on stage and engagement signals, and natural-language queries against their pipeline. Adoption is uneven. Reps who already manage their pipelines tightly don't need it. Reps who don't probably won't trust the suggestions either.
+  </p>
+
+  <p>
+    The unmet promise of Breeze Copilot is autonomous action. The product summarizes well; it doesn't take action well. For action-taking workflows, Breeze Agents or Claude Code subagents are the right tool.
+  </p>
+
+  <h2>The deployment sequence</h2>
+
+  <p>
+    The phase order below produces the highest deployment hit rate. Skipping the data audit (phase one) is the single most common failure mode and the reason most Breeze deployments stall in week three.
+  </p>
+
+  <h3>Phase 1 (week 1): data audit</h3>
+
+  <p>
+    Pull every object Breeze will touch. Custom properties, workflows, integrations, contact and company records. Run a hygiene scan: empty required fields, deprecated property values, duplicate records, stale records. Most teams discover 15-30% of their HubSpot instance is technical debt that will block Breeze features from working.
+  </p>
+
+  <p>
+    The audit deliverable is a written gap list. What's clean, what's broken, what needs to be fixed before configuration starts. Skip this phase and Breeze will fail silently on dirty data with no useful error messages.
+  </p>
+
+  <h3>Phase 2 (week 2): tier and SKU verification</h3>
+
+  <p>
+    Confirm which Breeze features your contract actually unlocks. Roughly 30% of teams we work with discover they're paying for a SKU their tier doesn't fully support, or paying for credits they're not using. Adjust the contract before deploying. The HubSpot CSM will rarely flag this on their own.
+  </p>
+
+  <h3>Phase 3 (weeks 2-3): Breeze Intelligence rollout</h3>
+
+  <p>
+    The fastest-ROI piece. Run Breeze Intelligence on a sample of 200-500 records first. Compare the enrichment quality against your existing data source. If quality is comparable or better, expand to the full database. If quality is worse, the segments you target probably aren't the ones HubSpot's data covers well.
+  </p>
+
+  <p>
+    Configure the enrichment cadence. Most teams over-enrich and burn credits. The right cadence is monthly for active accounts, quarterly for the broader database, on-demand for new leads.
+  </p>
+
+  <h3>Phase 4 (weeks 3-4): Breeze Agents configuration</h3>
+
+  <p>
+    Pick one workflow. Lead routing or chat triage are the typical first agents. Configure the agent against real conversation data, not HubSpot's demo data. Test against 100 historical interactions before going live. The agent should match human routing decisions 80%+ of the time before deployment.
+  </p>
+
+  <p>
+    Avoid the temptation to build one omni-agent. Same architecture lesson as <a href="/blog/claude-code-for-gtm/">Claude Code for GTM</a>: small, single-responsibility agents outperform big agents.
+  </p>
+
+  <h3>Phase 5 (weeks 4-6): Claude Code subagents around the gaps</h3>
+
+  <p>
+    Where Breeze can't reach. Multi-step research across external sources. Custom scoring against your ICP. Cross-object analysis (contact + company + deal + product usage). Claude Code subagents read from HubSpot via API, run the workflow, and write results back to HubSpot via API. From the team's perspective, the output appears in HubSpot. From the build perspective, the heavy lifting happens outside HubSpot's constraints.
+  </p>
+
+  <p>
+    Common subagent uses we ship with HubSpot deployments: ICP scoring on new leads, signal-driven outbound triggers, weekly pipeline truth digests, RFP and security questionnaire automation. We <a href="/services/hubspot-breeze/">deploy this whole stack as a fixed-fee engagement</a>.
+  </p>
+
+  <h2>The pricing math</h2>
+
+  <p>
+    For a typical mid-market team running Sales Hub Professional plus Breeze, annual cost lands around:
+  </p>
+
+  <ul>
+    <li>Sales Hub Professional, 10 seats: $54,000</li>
+    <li>Breeze Intelligence credits (10K records monthly): $24,000</li>
+    <li>Breeze Agents (1 agent license): $18,000</li>
+    <li>Total: ~$96,000/year</li>
+  </ul>
+
+  <p>
+    Adding a Claude Code subagent layer that fills the gaps typically adds $25K-$45K fixed-fee build plus $6K-$10K monthly retainer. Total year-one cost lands around $120K-$170K.
+  </p>
+
+  <p>
+    That number is competitive against the alternative: Sales Hub Pro plus a separate AI SDR contract ($60K-$120K) plus a separate enrichment subscription ZoomInfo at $80K-$150K, which lands at $200K-$330K with worse integration and three vendor relationships to manage.
+  </p>
+
+  <h2>What to skip</h2>
+
+  <p>
+    Three Breeze features we recommend not buying in their current state.
+  </p>
+
+  <p>
+    <strong>Breeze Copilot for sales coaching.</strong> The feature exists. Its insights are generic. Reps don't trust it. Save the seat budget.
+  </p>
+
+  <p>
+    <strong>Breeze for content generation.</strong> The output reads as AI prose. The output earns the same forward rate AI SDRs do, which is roughly zero. Use Claude Code with a tuned <a href="/blog/claude-md-for-revenue-teams/">CLAUDE.md</a> instead.
+  </p>
+
+  <p>
+    <strong>Multiple Breeze Agents licenses for the same workflow.</strong> One well-tuned agent outperforms three poorly-scoped agents. Keep the agent count low and the scope narrow.
+  </p>
+
+  <h2>The honest bottom line</h2>
+
+  <p>
+    Breeze is solid infrastructure for inbound and enrichment workflows. It's not a complete AI GTM platform, and the marketing position oversells what's deployable today. The teams getting value from Breeze in 2026 are running it for what it's good at (intelligence, agents on bounded workflows) and filling the gaps with Claude Code subagents that read and write through HubSpot's API.
+  </p>
+
+  <p>
+    For HubSpot-native teams, this hybrid is the right architecture. For teams using HubSpot reluctantly, the Claude Code layer often becomes the primary system within 12 months and HubSpot becomes the system of record. Either trajectory works.
+  </p>
+</BlogPost>

@@ -1,0 +1,199 @@
+---
+import BlogPost from '../../../layouts/BlogPost.astro';
+import { getPost } from '../../../data/posts';
+
+const post = getPost('icp-discovery-from-closed-won')!;
+
+const faq = [
+  {
+    q: "How many closed-won deals do we need to do this?",
+    a: "30 minimum, 100+ ideal. Below 30, the patterns aren't statistically meaningful. Between 30 and 100, the analysis works but with caveats noted. Above 100, the patterns are reliable enough to drive scoring decisions. If you have fewer than 30, run the rebuild against won AND lost deals together (looking for separation between the groups) instead of trying to extract a positive ICP from too few wins.",
+  },
+  {
+    q: "What data do we need beyond the deal record itself?",
+    a: "Five additional fields per closed-won account: company size at time of purchase, primary technology stack, leadership tenure of the buying executive, what triggered the buy (pain, mandate, replacement, expansion), and source of the lead. Most CRMs don't capture these natively, so the rebuild starts with enriching closed-won accounts. We do this through Verum or Provyx for B2B and healthcare segments respectively.",
+  },
+  {
+    q: "Why do most legacy ICPs miss?",
+    a: "They were defined by marketing in a planning offsite, written to support narrative rather than predict win rate, and never validated against actual close patterns. The aspirational segment (often 'enterprise') is rarely the actual buyer. The real buyer is usually one tier lower, in a more specific vertical, with a specific trigger nobody had named. Closed-won data exposes the gap.",
+  },
+  {
+    q: "How do you validate the new ICP?",
+    a: "Test it against lost deals. If the new ICP would have predicted losses (i.e., the lost deals were out-of-ICP), the model is working. If lost deals scored as in-ICP, the model has false positives and needs refinement. Run a second validation against open pipeline: deals that score in-ICP should be progressing well; deals that score out-of-ICP should be the ones reps are struggling with.",
+  },
+  {
+    q: "What's the deliverable at the end of 30 days?",
+    a: "A two-page ICP document, a tier scoring rubric (so the team can score new accounts), a list of 'lookalike' segments to disqualify, and the trigger signals that predict purchase. The document goes into the team CLAUDE.md and feeds the outbound subagent's scoring rubric. We've published the structure in the CLAUDE.md template post.",
+  },
+];
+---
+
+<BlogPost
+  title={post.title}
+  description={post.description}
+  slug={post.slug}
+  publishedAt={post.publishedAt}
+  category={post.category}
+  readingMinutes={post.readingMinutes}
+  faq={faq}
+>
+  <p>
+    Your ICP was defined in a board meeting 18 months ago. A founder said "mid-market SaaS, VP of Sales, 200-500 employees." It went on a slide. SDRs started dialing. Nobody checked whether the companies you actually close look anything like that profile. Two years later, the team is still using the original ICP, and the slide deck is the reason your outbound is hitting the wrong accounts.
+  </p>
+
+  <p>
+    Real ICPs come from real win data, not founder intuition. This post is the 30-day rebuild we run for revenue teams whose outbound is underperforming, whose AE conversion is uneven, or whose sales cycle keeps stretching for reasons no one can name. The output is a working ICP plus a scoring rubric that feeds the outbound subagent's signal scoring.
+  </p>
+
+  <h2>Why the legacy ICP is almost always wrong</h2>
+
+  <p>
+    Three structural reasons.
+  </p>
+
+  <p>
+    <strong>It was aspirational.</strong> The company wanted to sell to enterprise, so the ICP was written for enterprise. The actual buyers turned out to be mid-market with strong product-market fit, but the marketing positioning still talks to enterprise, the SDR team still chases enterprise, and the close rate at enterprise is 4% while mid-market is 22%. The ICP shaped the team's effort against the wrong target.
+  </p>
+
+  <p>
+    <strong>It wasn't validated.</strong> The ICP was set, the team executed against it, but no one ever checked whether the companies in the closed-won column looked like the ICP. After 50 closes, the list of buyers usually looks substantially different from what the ICP slide claims.
+  </p>
+
+  <p>
+    <strong>It missed the trigger.</strong> Every real buyer has a reason to buy now. The ICP captured demographics (size, vertical, title) but not the behavioral or contextual trigger that distinguishes "this prospect will buy in 90 days" from "this prospect looks like a buyer but never closes." The trigger is the highest-leverage piece of the rebuild.
+  </p>
+
+  <h2>The 30-day sequence</h2>
+
+  <h3>Week 1: data preparation</h3>
+
+  <p>
+    Pull every closed-won deal from the last 18-24 months. For each, capture:
+  </p>
+
+  <ul>
+    <li>Company name, industry, size at purchase, geography</li>
+    <li>Buyer title and tenure (how long had they been in the role)</li>
+    <li>Tech stack at time of purchase (BuiltWith snapshot or self-reported)</li>
+    <li>Source: how did they enter the funnel</li>
+    <li>Sales cycle length</li>
+    <li>Deal size</li>
+    <li>Trigger: what changed in their world that opened the buying window</li>
+  </ul>
+
+  <p>
+    The trigger field is usually missing from CRM. Reconstruct it from won-deal notes, post-sale conversations, or a quick Slack to the AE who closed it. The trigger is what makes the rebuild work; don't skip it.
+  </p>
+
+  <p>
+    Most teams discover the trigger field for 60-80% of closes; the remainder get tagged "unknown trigger" and excluded from the trigger analysis (still useful for demographic patterns).
+  </p>
+
+  <h3>Week 2: pattern analysis</h3>
+
+  <p>
+    Look for clustering. The questions that tend to surface real patterns:
+  </p>
+
+  <ul>
+    <li>What size company tends to close fastest? Slowest?</li>
+    <li>Which industry verticals are over-represented in closed-won versus the overall pipeline?</li>
+    <li>What buyer tenure correlates with close rate? (New-to-role buyers often close faster than long-tenured ones)</li>
+    <li>What tech stack signals predict fit? (Companies running specific tools often have the pain we solve)</li>
+    <li>What triggers appear most often? Hiring patterns, leadership changes, funding rounds, regulatory changes, replacement of a competitor</li>
+  </ul>
+
+  <p>
+    The output is a draft ICP with named segments and triggers. Usually 2-3 segments emerge as the real ICP, with one being dominant. The legacy ICP usually claimed 4-6 segments; the real data shows 2-3.
+  </p>
+
+  <h3>Week 3: lookalike disqualification</h3>
+
+  <p>
+    Equally important: what almost-fits but doesn't actually close. These lookalikes are where the team wastes the most outbound spend.
+  </p>
+
+  <p>
+    Look at lost deals and stalled opportunities. What demographic profile do they share with closed-won? What signal is missing? Often the difference between "buyer" and "lookalike" is one specific trigger or one specific stack signal that the team has been treating as optional.
+  </p>
+
+  <p>
+    The disqualification list is the deliverable. "Companies in segment X that lack signal Y are not ICP, regardless of how qualified they look on title and size." This list is what stops the outbound team from chasing accounts that look right but never close.
+  </p>
+
+  <h3>Week 4: validation and rollout</h3>
+
+  <p>
+    Test the new ICP against:
+  </p>
+
+  <ul>
+    <li>The last 12 months of lost deals. The new model should predict losses (lost deals should score out-of-ICP). If lost deals score as in-ICP, the model is too generous and needs refinement.</li>
+    <li>Current open pipeline. Deals scoring in-ICP should be progressing well. Deals scoring out-of-ICP should be the ones reps are struggling with. If the correlation breaks, the model needs work.</li>
+    <li>A blind sample of 20 known-lost deals from peers in your category. If your model would have warned you off these (predicted out-of-ICP), it's tracking real signal.</li>
+  </ul>
+
+  <p>
+    After validation, the new ICP rolls into the team CLAUDE.md, the lead scoring rules, and the outbound subagent's signal scoring rubric. We use the structure described in the <a href="/blog/claude-md-for-revenue-teams/">CLAUDE.md template</a>.
+  </p>
+
+  <h2>What changes after the rebuild</h2>
+
+  <p>
+    Three operational shifts within 90 days of rolling out the new ICP.
+  </p>
+
+  <p>
+    <strong>Outbound efficiency rises.</strong> The same team produces more meetings because they're targeting accounts that actually convert. Forward rate on outbound usually doubles in the first 60 days because the trigger anchoring is sharper.
+  </p>
+
+  <p>
+    <strong>Sales cycle compresses.</strong> In-ICP deals close faster than the previous baseline because the trigger work means you're reaching prospects in their buying window, not before it. Average cycle length drops 15-30%.
+  </p>
+
+  <p>
+    <strong>Lookalike spend stops.</strong> The team stops working accounts that look qualified but never close. The freed capacity goes to in-ICP accounts. Win rate rises noticeably even though total pipeline volume drops.
+  </p>
+
+  <h2>Where this fits in a broader rebuild</h2>
+
+  <p>
+    ICP discovery is the second phase of the <a href="/blog/pe-portco-gtm-rebuild/">90-day PE portco rebuild</a>. Pipeline truth-finding comes first (you need to know what's actually in the pipeline before you redefine the target), ICP discovery comes second, system buildout comes third. The order matters; building outbound subagents against the wrong ICP wastes the build.
+  </p>
+
+  <p>
+    For non-PE contexts, the same sequence applies. Audit before you redefine. Redefine before you automate.
+  </p>
+
+  <h2>The honest read</h2>
+
+  <p>
+    Most ICPs are wrong. The teams running the same ICP for two years without a refresh are almost certainly mistargeting. The 30-day rebuild is short enough that there's no operational excuse to skip it, and the downstream impact (forward rate, sales cycle, win rate) shows up within a quarter.
+  </p>
+
+  <p>
+    The piece teams resist is the trigger work. Adding a "what changed in their world" field to closed-won analysis is unsexy. Reconstructing the trigger for 60+ deals takes time. Skip the trigger work and the ICP rebuild is just demographic clustering, which is half the value.
+  </p>
+
+  <p>
+    We <a href="/services/icp-discovery/">run ICP discovery as a fixed-fee 30-day engagement</a>, with the deliverable being the ICP document, the scoring rubric, the disqualification list, and the trigger taxonomy. The output goes into your CLAUDE.md so the outbound subagent can score against it the day after the engagement closes.
+  </p>
+
+  <h2>What surprises teams during the rebuild</h2>
+
+  <p>
+    Three patterns show up consistently across rebuilds that surprise the founders or CROs commissioning them.
+  </p>
+
+  <p>
+    <strong>The aspirational segment is dragging down win rate.</strong> Teams chasing enterprise often discover their close rate at enterprise is 3-5% while their close rate at mid-market is 18-25%. The aspirational segment is consuming sales capacity and producing the worst returns. The fix is unsexy: stop chasing it. Most teams resist this because the marketing positioning is built around the aspirational segment.
+  </p>
+
+  <p>
+    <strong>The trigger isn't what marketing thinks it is.</strong> Marketing usually claims the trigger is a content asset, an inbound lead form, or a webinar. The real trigger from closed-won data is almost always something else: a hire, a regulatory change, a leadership transition, or a competitor's product issue. The assets that marketing produced may have been adjacent to the buying moment but rarely caused it.
+  </p>
+
+  <p>
+    <strong>The buyer title is wrong by one or two layers.</strong> The legacy ICP says "VP Sales." The closed-won data shows the actual decision-maker was the CRO or the Director of Sales Operations. The "VP Sales" sat in the conversation but didn't move the deal. Re-targeting the right title compresses sales cycles by 20-40% on the affected segments.
+  </p>
+</BlogPost>

@@ -1,0 +1,214 @@
+---
+import BlogPost from '../../../layouts/BlogPost.astro';
+import { getPost } from '../../../data/posts';
+
+const post = getPost('event-driven-abm-playbook')!;
+
+const faq = [
+  {
+    q: "When does event ABM produce real pipeline?",
+    a: "When the pre-event signal capture is sharp and the post-event follow-up runs through a forwardability filter. Events alone don't produce pipeline; events plus a tight signal-to-asset workflow do. The teams that book pipeline at trade shows are the ones who already know which 50 attendees they want to talk to before the doors open.",
+  },
+  {
+    q: "What's the right pre-event prep timeline?",
+    a: "Six weeks. Week 1-2: pull the registered-attendees list and score against ICP. Weeks 3-4: signal research on the top 100 prospects. Weeks 5-6: pre-event outreach with calendar holds requested for during-event slots. Skipping the prep phase means you're working badge scans cold during the show, which is the worst possible context for outbound.",
+  },
+  {
+    q: "How do you handle the badge scan list after the event?",
+    a: "Run the list through a Claude Code subagent chain within 24 hours. Score each scanned attendee on engagement quality (did they stop and talk, or just walk by). Tag each with a signal-grade trigger from the conference itself or from public data. Draft personalized follow-up that references something from the conversation, not a generic 'great meeting you' template. First sends within 48 hours.",
+  },
+  {
+    q: "What about virtual or hybrid events?",
+    a: "Same playbook with different signals. The 'badge scan' equivalent is webinar attendance plus engagement (questions asked, polls answered, dwell time). Virtual events produce more registrants but lower engagement quality, so signal scoring matters more. The follow-up needs to be sharper because there's no in-person context to anchor.",
+  },
+  {
+    q: "What's the typical pipeline yield from a well-run event?",
+    a: "For a B2B SaaS team running a tier-1 trade show with proper prep: 8-15 booked meetings per booth-day, 3-5 qualified opportunities created in the 30 days post-event, 1-2 closed-won deals at the 9-12 month mark. Without the prep and follow-up rigor, the same event produces 1-2 booked meetings and zero opportunities. The delta is process, not booth size.",
+  },
+];
+---
+
+<BlogPost
+  title={post.title}
+  description={post.description}
+  slug={post.slug}
+  publishedAt={post.publishedAt}
+  category={post.category}
+  readingMinutes={post.readingMinutes}
+  faq={faq}
+>
+  <p>
+    Most B2B trade-show pipelines are dead by week three. The booth lights come down, reps come back to their desks, the badge-scan CSV sits in a Drive folder, and three weeks later the marketing team is debating whether to re-import the list into a sequence. By then the event is cold and the contacts have forgotten the conversation.
+  </p>
+
+  <p>
+    The teams that actually book pipeline from events run a different sequence. Pre-event signal work, day-of subagent triage, post-event follow-up that gets forwarded. This post is the working playbook we deploy with clients running event-heavy GTM motions.
+  </p>
+
+  <h2>Why most event ABM fails</h2>
+
+  <p>
+    Three failure modes account for ~90% of dead-on-arrival event pipelines.
+  </p>
+
+  <p>
+    <strong>No pre-event work.</strong> The team treats the event as a list-generation exercise. They show up cold, talk to whoever wanders by, and try to triage the badge scans afterward. The badge scans are mostly low-intent walkthroughs, the high-intent attendees were never identified before the show, and the 30 minutes a prospect spent at a competitor's booth was the meeting that actually mattered.
+  </p>
+
+  <p>
+    <strong>Generic follow-up.</strong> Day three after the event, every attendee gets the same "great meeting you" sequence. Recipients pattern-match this as "I scanned your badge and now I'm in a sequence." The forward rate is zero. Reply rate is mostly polite declines.
+  </p>
+
+  <p>
+    <strong>No signal anchoring.</strong> The follow-up doesn't reference anything specific from the conference. No talk attended, no panel discussed, no peer they were with. Without an anchor, the message reads as cold outbound that happens to share a venue.
+  </p>
+
+  <p>
+    The fix is in the prep, not the follow-up. By the time the show floor opens, you should already know the 50-100 attendees worth real conversation, what triggered each one, and what asset you'd send them. The day-of work is about confirming intent, not discovering it.
+  </p>
+
+  <h2>Pre-event: six weeks of work that does most of the lifting</h2>
+
+  <h3>Weeks 1-2: registered-attendees scoring</h3>
+
+  <p>
+    Most major events publish or sell the registered-attendees list. If the list isn't published, ask sponsors who have access. Pull it 5-6 weeks pre-event.
+  </p>
+
+  <p>
+    Score every attendee against your ICP. Title fit, company-size fit, vertical fit, geography. The output is a tiered list. Tier 1: high-fit prospects you want to meet at the event. Tier 2: medium-fit, worth pre-event outreach but lower priority. Tier 3: out of ICP, don't waste time.
+  </p>
+
+  <p>
+    For a typical 5,000-attendee trade show, expect Tier 1 to land at 80-150 names. That's the universe of pre-event work.
+  </p>
+
+  <h3>Weeks 3-4: signal research on Tier 1</h3>
+
+  <p>
+    A Claude Code research subagent runs against each Tier 1 prospect. The dossier includes recent funding, hiring patterns, leadership changes, product launches, public statements, and conference history (have they spoken at past events; what panels are they on at this one). This is the same architecture as the outbound research subagent, just aimed at attendee context.
+  </p>
+
+  <p>
+    Output: a one-page brief per Tier 1 prospect. Title, company, two trigger signals from the last 90 days, the panel or talk they're attending or speaking at, the rep on your team best positioned to meet them.
+  </p>
+
+  <p>
+    For 100 Tier 1 prospects, the research phase costs $200-$500 in compute and produces a working briefing pack reps can use. Cheaper than the booth's coffee budget.
+  </p>
+
+  <h3>Weeks 5-6: pre-event outreach</h3>
+
+  <p>
+    Send to Tier 1 with a clear ask: a 20-minute slot during the event. The message anchors to a specific signal from the dossier (their recent VP hire, their funded round, the talk they're giving) and proposes a meeting that's about their priority, not your pitch.
+  </p>
+
+  <p>
+    Track response rates. Expect 15-25% positive on Tier 1 with this approach, which is 10x what cold post-event outreach produces. The booked meetings become anchor slots in the rep's calendar before the show floor opens.
+  </p>
+
+  <p>
+    Tier 2 gets a lighter pre-event touch: an event-specific newsletter, an invitation to the side event you're hosting, a "we'll be there" mention. Don't ask for a meeting; create awareness.
+  </p>
+
+  <h2>During the event: the booth is a meeting machine</h2>
+
+  <p>
+    Two changes to how the booth runs.
+  </p>
+
+  <p>
+    <strong>Reps know who they're hunting.</strong> Each rep on the booth has 10-15 Tier 1 dossiers loaded on their phone. When a Tier 1 walks by (or they spot one in the lunch line, the sponsor party, the panel they attended), the rep knows the signal, the right opening, and the desired outcome.
+  </p>
+
+  <p>
+    <strong>Badge scans get tagged at capture.</strong> A spotter at the booth tags every scanned attendee in real time with three flags: engagement quality (passed by, brief talk, real conversation), signal strength (strong/weak/none), and follow-up priority. The badge-scan CSV that comes out at the end of the event already has the triage done.
+  </p>
+
+  <p>
+    The 60 hours of show floor time produces a ranked list of post-event work, not a pile of names to figure out later.
+  </p>
+
+  <h2>Post-event: forwardability over speed</h2>
+
+  <p>
+    The conventional wisdom is "follow up within 24 hours." That's right for the high-engagement contacts. For the broader scan list, speed without quality produces the same generic template every booth sends, and recipients tune out.
+  </p>
+
+  <p>
+    The right sequence:
+  </p>
+
+  <h3>Hours 0-24: real-conversation contacts</h3>
+
+  <p>
+    Reps personally write follow-ups to attendees they had real conversations with. Specific reference to what they discussed, the answer to the question they raised, a calendar link for next steps. These should not run through automation. The forward rate on these messages should approach 5-10% if the conversation was real.
+  </p>
+
+  <h3>Hours 24-72: high-signal scan contacts</h3>
+
+  <p>
+    Claude Code subagents draft follow-ups for the scan-list contacts who have strong public signals (funding, hiring, leadership change). Each draft anchors to the signal, references the event context (panel attended, talk given), and offers something useful. Drafts queue for human review before send.
+  </p>
+
+  <p>
+    This batch typically lands forward rate at 1-3%, which is 5-10x what generic event follow-up produces. Volume per event: 50-150 sends.
+  </p>
+
+  <h3>Days 4-14: nurture for the rest</h3>
+
+  <p>
+    Lower-signal scans go into a nurture sequence keyed to event content. Recordings of talks, summaries of trends from the show floor, links to sessions they might have missed. The frame is "we attended the same event, here's what was useful." Not pitch.
+  </p>
+
+  <p>
+    Recipients who engage with this nurture are the ones to convert into Tier 2 outbound work over the next 30-90 days.
+  </p>
+
+  <h2>The pipeline math that changes</h2>
+
+  <p>
+    For a typical $50K booth at a tier-1 event, the difference between the conventional approach and this playbook usually looks like:
+  </p>
+
+  <ul>
+    <li><strong>Conventional:</strong> 4-6 booked meetings during event, 2-3 opportunities created in 30 days, 0-1 closed-won at 9 months. Effective cost per closed deal: undefined (often zero deals).</li>
+    <li><strong>Playbook:</strong> 12-18 booked meetings during event, 4-6 opportunities created, 1-2 closed-won. Effective cost per closed deal: $25K-$50K, which lands within healthy CAC bands for B2B SaaS.</li>
+  </ul>
+
+  <p>
+    The delta is mostly in pre-event work. The booth and the team are the same; the prep and the follow-up rigor are different.
+  </p>
+
+  <h2>Where Claude Code subagents fit</h2>
+
+  <p>
+    Three places the subagent layer changes the economics.
+  </p>
+
+  <p>
+    <strong>Attendee scoring.</strong> Running ICP scoring against a 5,000-name list manually is impossible. A subagent does it in 30 minutes for $50 in compute.
+  </p>
+
+  <p>
+    <strong>Dossier research.</strong> 100 Tier 1 dossiers in 2-3 hours of subagent runtime. Manually, that's 2-3 weeks of intern time.
+  </p>
+
+  <p>
+    <strong>Post-event drafting.</strong> 100 personalized follow-ups drafted with signal anchoring in 4-6 hours. Manually, the same workload would take a rep 2-3 days and the quality would drift halfway through.
+  </p>
+
+  <p>
+    The subagents handle the volume; the reps handle the high-engagement contacts. We <a href="/services/event-abm/">ship event ABM as a fixed-fee engagement</a> that includes the subagent buildout plus a runbook for the rep team.
+  </p>
+
+  <h2>The honest read</h2>
+
+  <p>
+    Events still produce pipeline. The category collapse story (everyone's ROI is bad) is mostly a function of teams running the conventional playbook in 2026 against an audience that's pattern-matched it. The teams running pre-event signal work, day-of triage, and forwardability-filtered follow-up are the ones still booking meaningful pipeline at $20K-$50K per closed deal.
+  </p>
+
+  <p>
+    The cost of doing this right is mostly engineering work and rep prep time. Both are measurable. Both are dwarfed by the cost of the booth, the travel, and the team time you've already committed. Build the prep machine before you book the next event.
+  </p>
+</BlogPost>

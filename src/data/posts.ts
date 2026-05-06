@@ -2,7 +2,7 @@ export interface BlogPost {
   slug: string;
   title: string;
   description: string;
-  category: 'AI for GTM' | 'Claude Code' | 'Outbound' | 'Data' | 'Playbooks' | 'Methodology';
+  category: 'AI for GTM' | 'Claude Code' | 'Outbound' | 'Data' | 'Playbooks' | 'Methodology' | 'Reviews';
   publishedAt: string;
   updatedAt?: string;
   readingMinutes: number;
@@ -85,6 +85,60 @@ export const posts: BlogPost[] = [
     publishedAt: '2026-05-06',
     readingMinutes: 9,
     excerpt: 'Jordan Crawford\'s PVP reshaped outbound for human writers. TVA borrows the spirit and adds an agent-native test: would the recipient forward this. Why the shift matters.',
+  },
+  {
+    slug: 'salesforce-agentforce-review',
+    title: 'Salesforce Agentforce review: where it works, where it stalls, and what to build instead',
+    description: 'A practitioner review of Salesforce Agentforce in 2026. Real deployment failure modes, the per-conversation pricing trap, and when Claude Code subagents replace it.',
+    category: 'Reviews',
+    publishedAt: '2026-05-06',
+    readingMinutes: 11,
+    excerpt: 'Salesforce is selling Agentforce to everyone. Most deployments stall at configuration. Here\'s where Agentforce earns its license, where it doesn\'t, and the cost math nobody put in the AE deck.',
+  },
+  {
+    slug: 'hubspot-breeze-deployment',
+    title: 'HubSpot Breeze deployment in 2026: what works, what breaks, and the gaps to fill',
+    description: 'A working guide to deploying HubSpot Breeze. Breeze Intelligence, Agents, and Copilot in production. Where Breeze hits limits and where Claude Code subagents take over.',
+    category: 'Reviews',
+    publishedAt: '2026-05-06',
+    readingMinutes: 10,
+    excerpt: 'HubSpot shipped Breeze across every hub. Most teams paid for it and never deployed it. Here\'s the working sequence: audit, configure, fill the gaps with Claude Code, hand off.',
+  },
+  {
+    slug: 'event-driven-abm-playbook',
+    title: 'Event-driven ABM in 2026: a playbook for trade-show pipelines that don\'t die in week three',
+    description: 'How to run event ABM that converts. Pre-event signal capture, day-of subagent triage, post-event follow-up that gets forwarded. Why most event pipelines collapse and what to do.',
+    category: 'Playbooks',
+    publishedAt: '2026-05-06',
+    readingMinutes: 11,
+    excerpt: 'Most event pipelines are dead by week three. The ones that work run a subagent chain on the badge-scan list before the booth even closes. Pre-event, day-of, and post-event playbook.',
+  },
+  {
+    slug: 'rfp-response-automation',
+    title: 'RFP response automation in 2026: how to win procurement without burning your team',
+    description: 'A practitioner guide to automating RFP and security questionnaire responses with Claude Code. Knowledge base setup, draft scoring, the human review loop, and the failure modes to watch.',
+    category: 'Playbooks',
+    publishedAt: '2026-05-06',
+    readingMinutes: 10,
+    excerpt: 'A 200-question security questionnaire takes a sales engineer 20 hours. A Claude Code subagent does the first draft in 12 minutes. The setup that makes it work plus the failure modes to avoid.',
+  },
+  {
+    slug: 'icp-discovery-from-closed-won',
+    title: 'ICP discovery from closed-won data: a 30-day rebuild for revenue teams',
+    description: 'How to redefine your ICP from real closed-won data instead of marketing offsite assumptions. The 30-day sequence, the model validation step, and why most legacy ICPs are aspirational.',
+    category: 'Playbooks',
+    publishedAt: '2026-05-06',
+    readingMinutes: 9,
+    excerpt: 'Your ICP was set in a board meeting 18 months ago. Nobody checked whether the companies you actually close look anything like that profile. The 30-day rebuild from real win data.',
+  },
+  {
+    slug: 'soc2-trust-center-buildout',
+    title: 'SOC 2 / HIPAA trust center buildout: a 60-day plan that unblocks enterprise deals',
+    description: 'How to ship a SOC 2 trust center that closes enterprise security reviews in days instead of weeks. The 60-day sequence, what goes on the page, and where Claude Code subagents handle the questionnaire load.',
+    category: 'Playbooks',
+    publishedAt: '2026-05-06',
+    readingMinutes: 9,
+    excerpt: 'Enterprise buyers want a trust center URL before they\'ll book the demo. The 60-day buildout: audit gaps, ship the page, wire questionnaire automation. What the page actually has to contain.',
   },
 ];
 

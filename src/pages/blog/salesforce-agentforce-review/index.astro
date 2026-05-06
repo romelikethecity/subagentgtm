@@ -1,0 +1,179 @@
+---
+import BlogPost from '../../../layouts/BlogPost.astro';
+import { getPost } from '../../../data/posts';
+
+const post = getPost('salesforce-agentforce-review')!;
+
+const faq = [
+  {
+    q: "Do we need Salesforce Unlimited or Einstein 1 Edition for Agentforce?",
+    a: "Agentforce requires Einstein 1 Edition or specific add-on SKUs depending on the agent type. Service Cloud Agentforce works on Service Cloud Einstein editions; Sales Agentforce requires Sales Cloud Einstein. The per-conversation cost is separate from the license. Before deploying, audit whether your current contract includes the right SKU and whether the per-conversation pricing pencils for your use case.",
+  },
+  {
+    q: "What's the realistic deployment timeline?",
+    a: "Two to six weeks for a working deployment, though Salesforce will tell you it's faster. Week one is data model audit. Week two is topic and action configuration. Weeks three to four are knowledge article preparation and trust layer guardrail tuning. Weeks five to six are testing against real cases. Skipping the data audit is the single most common failure mode.",
+  },
+  {
+    q: "Where does Agentforce earn its license?",
+    a: "Structured service workflows. Refund authorization, order status, returns, password resets, basic billing questions. Anywhere the answer is bounded by clear policy, agent topics constrain the agent well and resolution rates land at 70-85%. The license earns its money in service deflection where the alternative is a $40K offshore agent salary.",
+  },
+  {
+    q: "Where does Agentforce stall?",
+    a: "Complex sales motions, multi-step research, anything requiring cross-system orchestration outside the Salesforce ecosystem. The trust layer blocks useful actions. Topics drift on edge cases. Customers ask about pricing or competitive positioning and the agent escalates because the knowledge base doesn't contain those answers. For sales-side work, custom Claude Code subagents connected to Salesforce via API consistently outperform Agentforce at lower cost.",
+  },
+  {
+    q: "How do you decide between Agentforce and a custom build?",
+    a: "Three questions. Is the workflow bounded by policy or open-ended? Bounded favors Agentforce. Does the answer live entirely inside Salesforce data or does it require external research? Internal favors Agentforce. Is volume high enough that per-conversation pricing pencils against fixed-cost compute? High volume favors custom. Most teams end up running both: Agentforce for service deflection, Claude Code subagents for sales and revenue work.",
+  },
+];
+---
+
+<BlogPost
+  title={post.title}
+  description={post.description}
+  slug={post.slug}
+  publishedAt={post.publishedAt}
+  category={post.category}
+  readingMinutes={post.readingMinutes}
+  faq={faq}
+>
+  <p>
+    Salesforce made Agentforce the centerpiece of their 2025 product roadmap and the centerpiece of every QBR through 2026. Every Salesforce AE is pitching it. Most deployments are stalling at configuration. The gap between what's promised in a Dreamforce keynote and what ships in production is wide.
+  </p>
+
+  <p>
+    This is a practitioner review of where Agentforce earns its license, where it doesn't, and the cost math nobody puts in the AE deck. We deploy it for clients who want it deployed, and we tell clients to skip it when the use case doesn't fit. Both happen.
+  </p>
+
+  <h2>What Agentforce is, in plain English</h2>
+
+  <p>
+    Agentforce is a layer on top of Salesforce that lets you configure AI agents tied to specific business workflows. You define topics (the agent's domain), actions (what it can do), and knowledge articles (what it can read). The agent runs inside the Salesforce trust layer, which constrains what data it can touch and what actions it can take.
+  </p>
+
+  <p>
+    The pricing is per conversation. Not per seat. Each agent interaction (a customer service ticket, a sales question answered) draws against a conversation pool you license annually. List pricing is roughly $2 per conversation, with volume discounts that bring high-tier customers to $0.50-$1.00. The conversation cost is separate from the underlying Salesforce edition license, which itself has to be Einstein 1 or a specific add-on SKU.
+  </p>
+
+  <p>
+    For service organizations replacing offshore call centers, the math can pencil. For sales organizations replacing AI SDR contracts, the math rarely does, and the architecture rarely fits.
+  </p>
+
+  <h2>Where Agentforce works</h2>
+
+  <p>
+    Three categories of workflow. Each has shipped in production at customers we've worked with.
+  </p>
+
+  <h3>Service deflection</h3>
+
+  <p>
+    The strongest use case. Refund authorization, order status, returns, password resets, basic billing questions, account changes. The answer is bounded by clear policy. The data lives in Salesforce. The trust layer prevents the agent from wandering into territory it shouldn't. Resolution rates in this category land at 70-85%, which is competitive with offshore agent baselines.
+  </p>
+
+  <p>
+    The replacement economics are real. A $40K-$60K offshore agent handles ~3,000 tickets a month. Agentforce at $1 per conversation handles the same load at $36K annually. The license cost roughly halves the per-ticket spend, plus the latency drops from 15-minute response time to seconds.
+  </p>
+
+  <h3>Field service triage</h3>
+
+  <p>
+    Less common but high-value. Field service technicians needing on-the-fly answers to install or repair questions. Agentforce reads the knowledge base, technical documentation, and prior service history. The agent answers in the technician's mobile app. Resolution rates land at 60-75%, with the rest escalating to a senior technician. Where this works, it cuts truck rolls.
+  </p>
+
+  <h3>Internal CRM Q&A</h3>
+
+  <p>
+    Reps asking "what's the latest activity on Acme account" or "summarize the last 30 days of deal motion." Agentforce reads CRM data and answers in plain English. Adoption is mixed. Reps who already understand their pipeline don't need it. Reps who don't won't trust it. The use case has more demos than production traffic.
+  </p>
+
+  <h2>Where Agentforce stalls</h2>
+
+  <p>
+    Three failure modes show up across most deployments. They're not bugs in the product; they're mismatches between the architecture and the use case.
+  </p>
+
+  <h3>Complex sales motions</h3>
+
+  <p>
+    Sales conversations are open-ended. The buyer asks about competitive positioning, pricing flex, deployment specifics, customer references. The answers don't live in a knowledge article. The trust layer blocks the agent from reading external sources. The agent escalates, and the rep gets a notification instead of a resolution.
+  </p>
+
+  <p>
+    For sales work, custom Claude Code subagents connected to Salesforce via API consistently outperform Agentforce. The subagent reads CRM data, runs research across external sources, drafts the response, and posts it back to the Salesforce activity feed. The architecture is the same shape as the AI SDR replacement work we cover in the <a href="/blog/why-ai-sdrs-are-failing/">AI SDR failure analysis</a>.
+  </p>
+
+  <h3>Cross-system orchestration</h3>
+
+  <p>
+    Anything requiring data from outside Salesforce. Marketing automation data in HubSpot or Marketo. Product usage data in Pendo or Mixpanel. Financial data in NetSuite or QuickBooks. Agentforce can integrate via APIs, but the configuration friction is high and the latency stacks. By the time the agent has fetched data from three external systems, the conversation budget for that turn has burned.
+  </p>
+
+  <p>
+    For cross-system work, a Claude Code subagent that reads from all relevant systems in parallel and posts a single answer back to Salesforce is faster, cheaper, and easier to debug.
+  </p>
+
+  <h3>Per-conversation pricing at scale</h3>
+
+  <p>
+    The cost model becomes hostile at high volume. A team running 100,000 sales conversations a month at $1 each is at $1.2M annually before any other cost. The same workload on a Claude Code subagent stack runs $80K-$150K in compute and engineering retainer, with no per-conversation tax.
+  </p>
+
+  <p>
+    The conversation pricing earns its margin in service workflows where the alternative is human labor at $15-$25 per ticket. It loses badly in revenue workflows where the alternative is fixed-cost compute.
+  </p>
+
+  <h2>The deployment sequence that works</h2>
+
+  <p>
+    For teams committed to deploying Agentforce, the sequence below produces the highest hit rate. Skipping any of these steps is the most common failure pattern.
+  </p>
+
+  <p>
+    Week one. Data model audit. Pull every object Agentforce will touch. Check field hygiene. Fix obvious gaps. Most Agentforce deployments fail because the data underneath is dirty, not because the configuration is wrong.
+  </p>
+
+  <p>
+    Week two. Topic configuration. Each agent gets one topic, scoped narrowly. "Refund processing" not "customer service." "Order status" not "order help." Narrow topics produce reliable agents. Broad topics produce escalation rates above 50%.
+  </p>
+
+  <p>
+    Week three. Knowledge article preparation. The articles the agent will read need to be current, structured, and granular. Most teams discover their knowledge base is six months out of date. The article rewrite is usually the highest-effort phase of the deployment.
+  </p>
+
+  <p>
+    Week four. Trust layer tuning. Action permissions, data masking rules, escalation triggers. This is where Agentforce blocks useful work in default config. Tune carefully against real cases.
+  </p>
+
+  <p>
+    Weeks five and six. Production testing. Real cases through the agent, results measured against a control. Resolution rate, escalation rate, customer satisfaction. Tune topics and articles based on what fails.
+  </p>
+
+  <h2>The integration pattern</h2>
+
+  <p>
+    The teams getting the most value from Agentforce in 2026 aren't running it standalone. They're running it for service workflows where it's strong and integrating Claude Code subagents for everything else. The integration looks like this.
+  </p>
+
+  <p>
+    Agentforce handles inbound service tickets. When the topic doesn't match Agentforce's scope, the case routes to a Claude Code subagent via Salesforce flow. The subagent reads CRM data plus external sources, drafts a response, and posts back to the Salesforce activity feed. From the customer's perspective, the experience is unified. From the GTM team's perspective, each agent runs the workflow it's best at.
+  </p>
+
+  <p>
+    We <a href="/services/salesforce-agentforce/">build this integration as a fixed-fee engagement</a>. The Agentforce configuration is the first phase; the Claude Code subagent buildout is the second. Most engagements ship in 4-6 weeks.
+  </p>
+
+  <h2>The honest bottom line</h2>
+
+  <p>
+    Agentforce is real software solving real problems for service-side workflows. It's not the universal AI agent platform Salesforce is selling, and the per-conversation pricing breaks the unit economics for most sales applications. The deployments that work treat it as a service tool and route revenue work elsewhere.
+  </p>
+
+  <p>
+    Before signing the renewal, audit which workflows are actually running on Agentforce, what your real per-conversation cost has been, and whether the topics you've configured map to the use cases that pencil. If the answer is "we configured it for everything and use it for service tickets," you're paying for capabilities you're not using. The contract restructure is worth the conversation.
+  </p>
+
+  <p>
+    For sales and revenue work, the right call in 2026 is increasingly a custom Claude Code build connected to Salesforce via API. Lower cost, more flexible, owned by the buyer. We cover the architecture in the <a href="/blog/claude-code-for-gtm/">Claude Code for GTM guide</a>.
+  </p>
+</BlogPost>

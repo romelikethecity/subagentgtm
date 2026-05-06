@@ -1,0 +1,219 @@
+---
+import BlogPost from '../../../layouts/BlogPost.astro';
+import { getPost } from '../../../data/posts';
+
+const post = getPost('soc2-trust-center-buildout')!;
+
+const faq = [
+  {
+    q: "Do we need a SOC 2 report before we build the trust center?",
+    a: "No. A trust center is useful even before the SOC 2 audit is complete. Pre-audit, the page can show audit-in-progress status, the auditor name, expected completion date, and the existing security controls and policies. Post-audit, you swap in the actual report. Many enterprise buyers will accept 'audit in progress' for early-stage vendors as long as the trust center demonstrates real security posture in the meantime.",
+  },
+  {
+    q: "What goes on the trust center page?",
+    a: "Eight things, in order of buyer priority: certifications and audit reports (with downloads), security policies (encryption, access control, incident response), data handling (where data lives, how long it's retained, sub-processors), compliance frameworks (SOC 2, HIPAA, GDPR, ISO 27001 as applicable), penetration test summary, infrastructure and hosting details, customer security FAQ, and contact for security questionnaires. The page should answer 80% of standard questionnaire questions before the buyer asks.",
+  },
+  {
+    q: "Should the SOC 2 report be public or gated?",
+    a: "The summary should be public; the full report should be gated behind an NDA-equivalent click-through or email request. Most buyers will accept the click-through gate as long as the request is fast (auto-approve from corporate email domains, manual review for personal email). Gating slows enterprise sales cycles by days; don't add unnecessary friction.",
+  },
+  {
+    q: "Where does Claude Code subagent automation fit?",
+    a: "Two places. First, the questionnaire response automation we cover in the RFP response post handles the 20% of questions the trust center doesn't answer in standardized form. Second, the trust center itself can include an auto-updating section (sub-processor list, sub-processor change log) that a subagent maintains so you don't have to remember to update the page when vendors change.",
+  },
+  {
+    q: "What does this cost to build?",
+    a: "$15K-$30K for the design and content if you're starting from scratch, plus the audit costs ($25K-$50K for SOC 2 Type I, $50K-$120K annual for Type II). The page itself is fast: 60 days from kickoff to publish if you have an audit underway, faster if you're using existing audit content. Most teams underestimate the content work and overestimate the design work; the writing is where the time goes.",
+  },
+];
+---
+
+<BlogPost
+  title={post.title}
+  description={post.description}
+  slug={post.slug}
+  publishedAt={post.publishedAt}
+  category={post.category}
+  readingMinutes={post.readingMinutes}
+  faq={faq}
+>
+  <p>
+    Enterprise buyers in 2026 want a trust center URL before they'll book the demo. The pattern is consistent across mid-market and enterprise: procurement or security review starts during evaluation, not after, and a vendor without a public trust center looks like a vendor that hasn't thought about security. Deals get blocked or stalled in the security review stage, and the cost of that stall (cycle time, deal slippage) is usually larger than the cost of building the trust center in the first place.
+  </p>
+
+  <p>
+    This post is the working buildout we deploy with clients running enterprise sales motions where security review keeps blocking deals. 60-day plan, what goes on the page, and where Claude Code subagent automation handles the questionnaire load that the page doesn't fully replace.
+  </p>
+
+  <h2>Why a trust center beats a sales-led security pitch</h2>
+
+  <p>
+    The pre-2024 pattern was sales-led: a buyer asks about security, an SE jumps on a call, walks through the architecture, fields questions, sends documents. The pattern worked when buyers were patient. Enterprise buyers in 2026 aren't patient. They expect a public trust center URL they can pre-read before deciding whether to engage. Vendors without one signal that security is an afterthought.
+  </p>
+
+  <p>
+    A trust center also pre-answers most of the standard questionnaire. Where in the AWS data center are you hosted? On the page. What's your encryption at rest? On the page. What's your incident response time SLA? On the page. The buyer's security team can complete most of the questionnaire from the trust center before involving sales. The deals that hit your inbox are pre-qualified.
+  </p>
+
+  <p>
+    The result: shorter sales cycles, fewer SE hours per deal, and a meaningful win-rate improvement on enterprise deals where security review is a make-or-break gate.
+  </p>
+
+  <h2>What goes on the page</h2>
+
+  <p>
+    Eight sections, in order of buyer priority. Skip any of these and the page becomes another marketing landing page rather than a real trust center.
+  </p>
+
+  <h3>1. Certifications and audit reports</h3>
+
+  <p>
+    Top of page. Logos for SOC 2, ISO 27001, HIPAA, FedRAMP, GDPR readiness, whatever you have. Each certification clickable. Each click opens either the public summary (immediately) or a click-through gate to download the full report.
+  </p>
+
+  <p>
+    Pre-audit, replace this section with "audit in progress" status: auditor name, scope, expected completion. Most enterprise buyers will accept this for vendors mid-audit as long as the rest of the page shows real security posture.
+  </p>
+
+  <h3>2. Security policies</h3>
+
+  <p>
+    Linkable summaries of the major policies. Access control. Encryption (at rest, in transit, key management). Incident response. Change management. Vendor management. Business continuity. Each one a paragraph or two, not a full document. The full documents are in the gated downloads section.
+  </p>
+
+  <h3>3. Data handling</h3>
+
+  <p>
+    Where customer data lives (region, data center, cloud provider). How long data is retained. Sub-processor list (with a link to a maintained version that updates when sub-processors change). Data deletion process. GDPR-relevant residency information for European buyers.
+  </p>
+
+  <p>
+    The sub-processor list is often where teams trip. Most companies maintain it in a spreadsheet that goes stale. A Claude Code subagent reading from your vendor management system and writing the sub-processor section automatically is a small win that prevents the page from going out of date.
+  </p>
+
+  <h3>4. Compliance frameworks</h3>
+
+  <p>
+    Beyond certifications, the frameworks you align to but might not be certified against. ISO 27001 alignment. NIST CSF alignment. CIS controls. PCI scope (if applicable). HIPAA covered entity status. State privacy law compliance (CCPA, CPA, etc.). The buyer's security team scans this for the framework they care about most.
+  </p>
+
+  <h3>5. Penetration test summary</h3>
+
+  <p>
+    The summary, not the full report. When was the last pen test, who performed it, scope, summary of findings, remediation status. The full report is gated. Most buyers want to see recency (within 12 months) and a credible auditor more than they want the gory details.
+  </p>
+
+  <h3>6. Infrastructure and hosting</h3>
+
+  <p>
+    Cloud provider. Region. Architecture diagram (publishable version, not the internal one). Backup and disaster recovery RTO/RPO. Multi-region availability if applicable. The buyer's infrastructure team reads this section.
+  </p>
+
+  <h3>7. Customer security FAQ</h3>
+
+  <p>
+    The 15-25 questions that come up in 80% of security reviews, pre-answered. Authentication options (SSO, SAML, SCIM). Audit logging access. Data export options. Access controls and admin separation. Vulnerability disclosure program. Bug bounty status if applicable.
+  </p>
+
+  <p>
+    These are the questions that buyers should be able to answer without sending you a questionnaire. Every question on the page reduces inbound questionnaire volume by ~5% over time as buyers learn your trust center has the answers.
+  </p>
+
+  <h3>8. Security contact</h3>
+
+  <p>
+    A clear path for security questionnaires, vulnerability disclosures, and compliance questions. Either an email (security@yourdomain.com) or a form. Response SLA published.
+  </p>
+
+  <h2>The 60-day buildout</h2>
+
+  <h3>Days 1-15: audit and content gathering</h3>
+
+  <p>
+    Pull every existing security artifact. Policies. SOC 2 documentation if any. Vendor list. Architecture diagrams. Insurance certificates. Penetration test reports. The first audit is what's missing. Most companies discover their policy documents are 18 months old, the sub-processor list is in someone's email, and the architecture diagram nobody can find.
+  </p>
+
+  <p>
+    Decide what's publishable as-is, what needs a public-facing summary, and what stays internal. Categorize each artifact.
+  </p>
+
+  <h3>Days 16-30: content writing</h3>
+
+  <p>
+    Write the page sections. The work is mostly translation: turning internal documents into buyer-facing prose. Each section is 2-4 paragraphs. The full page lands at 1,500-3,000 words plus linked downloads.
+  </p>
+
+  <p>
+    Have your security or compliance lead review every section. Marketing should write nothing in this content category alone; security claims have legal implications.
+  </p>
+
+  <h3>Days 31-45: design and build</h3>
+
+  <p>
+    The page itself is small. A standard CMS-built page or a simple static site. Don't overdesign. Trust centers should look credible and structured, not flashy. The design that converts is sober: clean typography, clear navigation, downloadable artifacts properly organized.
+  </p>
+
+  <p>
+    Wire the gated downloads. Most teams use a click-through agreement (auto-approve corporate domains, manual review personal emails). Avoid hard NDAs at this stage; the friction kills early-evaluation buyers.
+  </p>
+
+  <h3>Days 46-60: questionnaire automation wiring</h3>
+
+  <p>
+    The trust center handles 80% of the questionnaire load. The other 20% needs a workflow. Wire the Claude Code subagent for questionnaire response automation (covered in <a href="/blog/rfp-response-automation/">RFP response automation</a>) so when an enterprise buyer does send a custom questionnaire, your SE can turn it around in 5 hours instead of 22.
+  </p>
+
+  <p>
+    Together, the trust center plus the questionnaire subagent reduce security review cycle time from 3-4 weeks to 4-7 days for typical mid-market and enterprise deals.
+  </p>
+
+  <h2>The cost math</h2>
+
+  <p>
+    For a typical mid-market SaaS company:
+  </p>
+
+  <ul>
+    <li>Trust center build (design, content, hosting): $15K-$30K one-time</li>
+    <li>SOC 2 Type I audit: $25K-$50K one-time (if not already done)</li>
+    <li>SOC 2 Type II annual audit: $50K-$120K</li>
+    <li>Questionnaire automation buildout: $20K-$40K one-time + $4K-$8K monthly retainer</li>
+    <li>Total year-one cost: ~$120K-$240K</li>
+  </ul>
+
+  <p>
+    The cost-justification math is in deals. For a B2B SaaS with $50K average ACV, blocking 5 enterprise deals because of slow security review costs $250K in revenue. Unblocking them through a trust center plus questionnaire automation usually pays for itself within the first quarter post-launch.
+  </p>
+
+  <h2>What changes once you have a trust center</h2>
+
+  <p>
+    Three operational shifts in the 6 months after launch.
+  </p>
+
+  <p>
+    <strong>Inbound questionnaires drop.</strong> Buyers self-serve the standard questions. Custom questionnaire volume falls 30-50% as buyers stop asking what's already on the page.
+  </p>
+
+  <p>
+    <strong>Security review cycle compresses.</strong> The questionnaires that do come through are sharper and shorter because the buyer has already pre-read the trust center. Average response time per questionnaire drops from 18-24 hours to 4-6 hours.
+  </p>
+
+  <p>
+    <strong>Enterprise deal velocity rises.</strong> Deals that previously stalled in security review for 3-4 weeks now move through in 4-7 days. The cycle-time improvement compounds with the SE capacity savings to produce a measurable win-rate lift on enterprise deals.
+  </p>
+
+  <h2>Where this fits</h2>
+
+  <p>
+    The trust center is plumbing for enterprise sales motions. It's not a pipeline-generation tool; it's a deal-unblocking tool. For teams whose enterprise win rates are limited by security review cycle time rather than top-of-funnel volume, this is one of the highest-ROI infrastructure plays in 2026.
+  </p>
+
+  <p>
+    We <a href="/services/trust-center/">build trust centers as fixed-fee engagements</a>, including the page itself, the questionnaire automation subagent, and the maintenance runbook. The audit work itself we don't do (that's auditor work), but we sequence around your audit timeline so the page launches when the report is ready.
+  </p>
+
+  <p>
+    For early-stage companies pre-SOC 2, the trust center can launch with audit-in-progress status. The buyer signals you're collecting from "we have a trust center" are real even before the report ships, and the buyers who'll work with you pre-certification are the ones the page is doing its job for.
+  </p>
+</BlogPost>
