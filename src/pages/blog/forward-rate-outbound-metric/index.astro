@@ -1,5 +1,6 @@
 ---
 import BlogPost from '../../../layouts/BlogPost.astro';
+import ForwardRateContextChart from '../../../components/ForwardRateContextChart.astro';
 import { getPost } from '../../../data/posts';
 
 const post = getPost('forward-rate-outbound-metric')!;
@@ -41,6 +42,8 @@ const faq = [
     Open rate and reply rate became unreliable the same year AI lifted both ceilings. By Q3 2025, every B2B inbox was getting a baseline of generic-but-readable AI outbound, which moved open rates up and reply rates sideways. The metrics that drove SDR compensation for a decade started lying.
   </p>
 
+
+  <ForwardRateContextChart />
   <p>
     Forward rate is the metric that survived. It's the percentage of sent messages that the recipient forwarded to a colleague, peer, or boss. We publish it on every case study. Most AI GTM vendors don't, because their messages don't get forwarded.
   </p>

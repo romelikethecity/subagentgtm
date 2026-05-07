@@ -1,5 +1,6 @@
 ---
 import BlogPost from '../../../layouts/BlogPost.astro';
+import EventTimeline from '../../../components/EventTimeline.astro';
 import { getPost } from '../../../data/posts';
 
 const post = getPost('event-driven-abm-playbook')!;
@@ -41,6 +42,8 @@ const faq = [
     Most B2B trade-show pipelines are dead by week three. The booth lights come down, reps come back to their desks, the badge-scan CSV sits in a Drive folder, and three weeks later the marketing team is debating whether to re-import the list into a sequence. By then the event is cold and the contacts have forgotten the conversation.
   </p>
 
+
+  <EventTimeline />
   <p>
     The teams that actually book pipeline from events run a different sequence. Pre-event signal work, day-of subagent triage, post-event follow-up that gets forwarded. This post is the working playbook we deploy with clients running event-heavy GTM motions.
   </p>

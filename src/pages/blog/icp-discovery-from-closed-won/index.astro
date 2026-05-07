@@ -1,5 +1,6 @@
 ---
 import BlogPost from '../../../layouts/BlogPost.astro';
+import ThirtyDayIcpSequence from '../../../components/ThirtyDayIcpSequence.astro';
 import { getPost } from '../../../data/posts';
 
 const post = getPost('icp-discovery-from-closed-won')!;
@@ -41,6 +42,8 @@ const faq = [
     Your ICP was defined in a board meeting 18 months ago. A founder said "mid-market SaaS, VP of Sales, 200-500 employees." It went on a slide. SDRs started dialing. Nobody checked whether the companies you actually close look anything like that profile. Two years later, the team is still using the original ICP, and the slide deck is the reason your outbound is hitting the wrong accounts.
   </p>
 
+
+  <ThirtyDayIcpSequence />
   <p>
     Real ICPs come from real win data, not founder intuition. This post is the 30-day rebuild we run for revenue teams whose outbound is underperforming, whose AE conversion is uneven, or whose sales cycle keeps stretching for reasons no one can name. The output is a working ICP plus a scoring rubric that feeds the outbound subagent's signal scoring.
   </p>

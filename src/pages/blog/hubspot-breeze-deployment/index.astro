@@ -1,5 +1,6 @@
 ---
 import BlogPost from '../../../layouts/BlogPost.astro';
+import BreezeProducts from '../../../components/BreezeProducts.astro';
 import { getPost } from '../../../data/posts';
 
 const post = getPost('hubspot-breeze-deployment')!;
@@ -41,6 +42,8 @@ const faq = [
     HubSpot shipped Breeze across every hub between late 2024 and 2025. Your AE promised AI-native CRM. Your team got a settings page nobody understood and a Copilot that sometimes hallucinated deal data. The features are real; the deployment guidance was sparse, and most teams are paying for capabilities they never turned on.
   </p>
 
+
+  <BreezeProducts />
   <p>
     This is a working guide for revenue teams figuring out what to do with Breeze in 2026. What works, what breaks, where the gaps are, and how to fill them with Claude Code subagents that run alongside HubSpot. Based on real client deployments, not Dreamforce-style demos.
   </p>

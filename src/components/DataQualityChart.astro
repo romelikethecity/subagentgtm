@@ -1,0 +1,156 @@
+---
+/**
+ * Data quality comparison for /blog/migrating-off-zoominfo/.
+ * Shows ZoomInfo vs custom pipeline across four metrics.
+ *
+ * Numbers directly from the "Where ZoomInfo falls down" table.
+ */
+
+const metrics = [
+  { name: 'Email deliverability', zoominfo: 78, custom: 92 },
+  { name: 'Phone line-status validity', zoominfo: 65, custom: 90 },
+  { name: 'Title accuracy', zoominfo: 71, custom: 87 },
+  { name: 'Contact recency (last 90 days)', zoominfo: 22, custom: 100 },
+];
+---
+
+<figure class="dq-chart">
+  <figcaption class="dq-chart__caption">
+    <span class="t-micro dq-chart__eyebrow">DATA QUALITY · MEASURED IN ACTIVE MIGRATIONS</span>
+    <span class="t-h3 dq-chart__title">
+      Custom pipelines beat ZoomInfo on every metric we measured.
+    </span>
+  </figcaption>
+
+  <div class="dq-chart__rows" role="img" aria-label="ZoomInfo versus custom pipeline data quality. Email deliverability: ZoomInfo 78%, custom 92%. Phone validity: ZoomInfo 65%, custom 90%. Title accuracy: ZoomInfo 71%, custom 87%. Contact recency: ZoomInfo 22%, custom 100%.">
+    <div class="dq-chart__header">
+      <span class="dq-chart__header-cell"></span>
+      <span class="dq-chart__header-cell t-micro">ZOOMINFO</span>
+      <span class="dq-chart__header-cell t-micro dq-chart__header-cell--accent">CUSTOM PIPELINE</span>
+      <span class="dq-chart__header-cell t-micro">DELTA</span>
+    </div>
+
+    {metrics.map((m) => (
+      <div class="dq-chart__row">
+        <span class="dq-chart__row-name">{m.name}</span>
+        <div class="dq-chart__bar-cell">
+          <div class="dq-chart__bar dq-chart__bar--muted" style={`width: ${m.zoominfo}%;`}></div>
+          <span class="dq-chart__bar-value">{m.zoominfo}%</span>
+        </div>
+        <div class="dq-chart__bar-cell">
+          <div class="dq-chart__bar dq-chart__bar--accent" style={`width: ${m.custom}%;`}></div>
+          <span class="dq-chart__bar-value dq-chart__bar-value--accent">{m.custom}%</span>
+        </div>
+        <span class="dq-chart__delta">+{m.custom - m.zoominfo}pp</span>
+      </div>
+    ))}
+  </div>
+
+  <p class="t-micro dq-chart__footnote">
+    Sample: 5 migration engagements (mid-market SaaS, healthcare practices, contractors), 2025-2026.
+    Email validated against ZeroBounce; phone against Twilio Lookup; title cross-checked against
+    company website. See <a href="/blog/migrating-off-zoominfo/">migration playbook</a>.
+  </p>
+</figure>
+
+<style>
+  .dq-chart {
+    margin: var(--space-12) 0;
+    padding: var(--space-8);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+
+  .dq-chart__caption {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-8);
+  }
+
+  .dq-chart__eyebrow { color: var(--muted); }
+  .dq-chart__title { color: var(--ink); margin: 0; max-width: 560px; }
+
+  .dq-chart__rows {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .dq-chart__header,
+  .dq-chart__row {
+    display: grid;
+    grid-template-columns: minmax(180px, 1.4fr) 1.5fr 1.5fr 80px;
+    gap: var(--space-4);
+    align-items: center;
+  }
+
+  .dq-chart__header {
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: var(--space-2);
+  }
+
+  .dq-chart__header-cell { color: var(--muted); }
+  .dq-chart__header-cell--accent { color: var(--accent); }
+
+  .dq-chart__row-name {
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
+    color: var(--ink);
+  }
+
+  .dq-chart__bar-cell {
+    position: relative;
+    height: 24px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+  }
+
+  .dq-chart__bar {
+    height: 100%;
+    border-radius: 3px;
+  }
+
+  .dq-chart__bar--muted { background: var(--muted); }
+  .dq-chart__bar--accent { background: var(--accent); }
+
+  .dq-chart__bar-value {
+    position: absolute;
+    right: var(--space-3);
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    color: var(--ink);
+    text-shadow: 0 0 4px var(--bg);
+  }
+
+  .dq-chart__bar-value--accent { color: var(--bg); font-weight: 600; }
+
+  .dq-chart__delta {
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
+    color: var(--accent);
+    text-align: right;
+  }
+
+  .dq-chart__footnote {
+    color: var(--muted);
+    margin-top: var(--space-6);
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+
+  .dq-chart__footnote a { color: var(--accent); }
+
+  @media (max-width: 720px) {
+    .dq-chart__header,
+    .dq-chart__row {
+      grid-template-columns: 1fr;
+      gap: var(--space-2);
+    }
+  }
+</style>

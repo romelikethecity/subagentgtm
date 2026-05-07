@@ -1,0 +1,210 @@
+---
+/**
+ * Pre/during/post-event timeline for /blog/event-driven-abm-playbook/.
+ */
+
+const phases = [
+  {
+    when: 'PRE-EVENT',
+    weeks: 'Weeks -6 to -1',
+    color: 'muted',
+    title: 'Signal & prep',
+    deliverable: '15-25% positive response rate on pre-booked Tier 1 meetings.',
+    items: [
+      'Pull registered attendees, score against ICP',
+      'Research subagent: 100 Tier 1 dossiers',
+      'Pre-event outreach with calendar holds',
+    ],
+  },
+  {
+    when: 'DURING',
+    weeks: 'Days 0-3',
+    color: 'accent',
+    title: 'Booth as meeting machine',
+    deliverable: '12-18 booked meetings vs 4-6 conventional.',
+    items: [
+      'Reps know their hunting list',
+      'Real-time badge-scan tagging',
+      'Anchor slots already on rep calendars',
+    ],
+  },
+  {
+    when: 'POST-EVENT',
+    weeks: 'Days 4-30',
+    color: 'muted',
+    title: 'Forwardability over speed',
+    deliverable: '5-10x forward rate on follow-up vs generic templates.',
+    items: [
+      'Hours 0-24: rep-written for real conversations',
+      'Hours 24-72: subagent drafts for high-signal scans',
+      'Days 4-14: nurture for the rest',
+    ],
+  },
+];
+---
+
+<figure class="event-tl">
+  <figcaption class="event-tl__caption">
+    <span class="t-micro event-tl__eyebrow">EVENT-DRIVEN ABM · 6 WEEKS BEFORE TO 30 DAYS AFTER</span>
+    <span class="t-h3 event-tl__title">
+      Most event ROI is decided before the booth lights come on.
+    </span>
+  </figcaption>
+
+  <div class="event-tl__phases">
+    {phases.map((phase, i) => (
+      <div class={`event-tl__phase event-tl__phase--${phase.color}`}>
+        <div class="event-tl__phase-head">
+          <span class={`event-tl__phase-when event-tl__phase-when--${phase.color}`}>{phase.when}</span>
+          <span class="t-micro event-tl__phase-weeks">{phase.weeks}</span>
+        </div>
+        <span class="event-tl__phase-title">{phase.title}</span>
+        <p class="event-tl__phase-deliverable">{phase.deliverable}</p>
+        <ul class="event-tl__phase-items">
+          {phase.items.map((item) => (
+            <li class="event-tl__phase-item">{item}</li>
+          ))}
+        </ul>
+        {i < phases.length - 1 && (
+          <span class="event-tl__phase-arrow" aria-hidden="true">→</span>
+        )}
+      </div>
+    ))}
+  </div>
+
+  <p class="t-micro event-tl__footnote">
+    Numbers from B2B SaaS clients running tier-1 trade shows with the full
+    playbook. The booth and team are usually the same; the prep and follow-up
+    rigor determine whether the event ships pipeline.
+  </p>
+</figure>
+
+<style>
+  .event-tl {
+    margin: var(--space-12) 0;
+    padding: var(--space-8);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+
+  .event-tl__caption {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-8);
+  }
+
+  .event-tl__eyebrow { color: var(--muted); }
+  .event-tl__title { color: var(--ink); margin: 0; max-width: 560px; }
+
+  .event-tl__phases {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--space-4);
+  }
+
+  .event-tl__phase {
+    position: relative;
+    padding: var(--space-5);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .event-tl__phase--accent { border-color: var(--accent); }
+
+  .event-tl__phase-head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .event-tl__phase-when {
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
+    letter-spacing: 0.15em;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .event-tl__phase-when--accent { color: var(--accent); }
+
+  .event-tl__phase-weeks { color: var(--muted); }
+
+  .event-tl__phase-title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .event-tl__phase-deliverable {
+    margin: 0;
+    font-size: var(--fs-small);
+    color: var(--ink);
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  .event-tl__phase-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .event-tl__phase-item {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    color: var(--muted);
+    line-height: 1.4;
+    padding-left: var(--space-3);
+    position: relative;
+  }
+
+  .event-tl__phase-item::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  .event-tl__phase-arrow {
+    position: absolute;
+    right: -22px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 22px;
+    z-index: 2;
+    background: var(--surface);
+    padding: 0 4px;
+  }
+
+  .event-tl__footnote {
+    color: var(--muted);
+    margin-top: var(--space-6);
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
+    .event-tl__phases { grid-template-columns: 1fr; }
+    .event-tl__phase-arrow {
+      right: 50%;
+      top: auto;
+      bottom: -22px;
+      transform: translateX(50%) rotate(90deg);
+    }
+  }
+</style>

@@ -1,0 +1,202 @@
+---
+/**
+ * Forward rate by context chart for /blog/forward-rate-outbound-metric/.
+ * Visualizes the table from the "What good looks like" section.
+ *
+ * Bands shown: floor, median, excellent for each context.
+ * AI SDR baseline rendered last as the comparison anchor.
+ */
+
+const rows = [
+  { name: 'Cold outbound · B2B SaaS', floor: 0.2, median: 0.7, excellent: 1.5 },
+  { name: 'Cold outbound · vertical (healthcare, finance)', floor: 0.4, median: 1.1, excellent: 2.5 },
+  { name: 'Event follow-up', floor: 1.0, median: 3.5, excellent: 6.0 },
+  { name: 'Warm intro · mutual connection', floor: 2.0, median: 5.0, excellent: 10.0 },
+  { name: 'AI SDR baseline (industry)', floor: 0, median: 0, excellent: 0.1, isBaseline: true },
+];
+
+const maxValue = 10; // axis ceiling
+---
+
+<figure class="ctx-chart">
+  <figcaption class="ctx-chart__caption">
+    <span class="t-micro ctx-chart__eyebrow">FORWARD RATE BY CONTEXT · % OF SENT MESSAGES</span>
+    <span class="t-h3 ctx-chart__title">
+      Forward rate scales with context. AI SDR rounds to zero in every column.
+    </span>
+  </figcaption>
+
+  <div class="ctx-chart__rows" role="img" aria-label={`Forward rate ranges across five contexts. Cold B2B SaaS: floor 0.2%, median 0.7%, excellent 1.5%. Vertical cold outbound: floor 0.4%, median 1.1%, excellent 2.5%. Event follow-up: floor 1.0%, median 3.5%, excellent 6.0%. Warm intro: floor 2.0%, median 5.0%, excellent 10.0%. AI SDR baseline: under 0.1% across all tiers.`}>
+    {rows.map((row) => (
+      <div class={`ctx-chart__row ${row.isBaseline ? 'ctx-chart__row--baseline' : ''}`}>
+        <span class="ctx-chart__row-name">{row.name}</span>
+        <div class="ctx-chart__row-track">
+          <div
+            class={`ctx-chart__band ${row.isBaseline ? 'ctx-chart__band--muted' : ''}`}
+            style={`left: ${(row.floor / maxValue) * 100}%; width: ${((row.excellent - row.floor) / maxValue) * 100}%;`}
+          ></div>
+          <div
+            class="ctx-chart__median"
+            style={`left: ${(row.median / maxValue) * 100}%;`}
+          ></div>
+        </div>
+        <span class="ctx-chart__row-values">
+          <span class="ctx-chart__row-floor">{row.floor.toFixed(1)}%</span>
+          <span class="ctx-chart__row-median">{row.median.toFixed(1)}%</span>
+          <span class="ctx-chart__row-excellent">{row.excellent.toFixed(1)}%</span>
+        </span>
+      </div>
+    ))}
+  </div>
+
+  <div class="ctx-chart__legend">
+    <span class="ctx-chart__legend-item">
+      <span class="ctx-chart__legend-dot ctx-chart__legend-dot--band"></span>
+      Floor → Excellent band
+    </span>
+    <span class="ctx-chart__legend-item">
+      <span class="ctx-chart__legend-dot ctx-chart__legend-dot--median"></span>
+      Median
+    </span>
+  </div>
+
+  <p class="t-micro ctx-chart__footnote">
+    Bands measured across active subagent/gtm engagements, 2025-2026.
+    Floor / median / excellent tiers correspond to bottom-quartile, median,
+    and top-decile campaign performance per context.
+  </p>
+</figure>
+
+<style>
+  .ctx-chart {
+    margin: var(--space-12) 0;
+    padding: var(--space-8);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+
+  .ctx-chart__caption {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-8);
+  }
+
+  .ctx-chart__eyebrow { color: var(--muted); }
+  .ctx-chart__title { color: var(--ink); margin: 0; max-width: 560px; }
+
+  .ctx-chart__rows {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .ctx-chart__row {
+    display: grid;
+    grid-template-columns: minmax(220px, 1.2fr) 3fr minmax(160px, auto);
+    gap: var(--space-4);
+    align-items: center;
+  }
+
+  .ctx-chart__row-name {
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
+    color: var(--ink);
+  }
+
+  .ctx-chart__row--baseline .ctx-chart__row-name { color: var(--muted); }
+
+  .ctx-chart__row-track {
+    position: relative;
+    height: 14px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+  }
+
+  .ctx-chart__band {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, rgba(16, 185, 129, 0.25), rgba(16, 185, 129, 0.65));
+    border-radius: 3px;
+    min-width: 4px;
+  }
+
+  .ctx-chart__band--muted {
+    background: var(--muted);
+    opacity: 0.6;
+  }
+
+  .ctx-chart__median {
+    position: absolute;
+    top: -3px;
+    bottom: -3px;
+    width: 2px;
+    background: var(--ink);
+  }
+
+  .ctx-chart__row-values {
+    display: flex;
+    gap: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    color: var(--muted);
+    justify-content: flex-end;
+  }
+
+  .ctx-chart__row-median { color: var(--ink); font-weight: 500; }
+  .ctx-chart__row-excellent { color: var(--accent); }
+
+  .ctx-chart__legend {
+    display: flex;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+    margin-top: var(--space-6);
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .ctx-chart__legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .ctx-chart__legend-dot {
+    width: 14px;
+    height: 8px;
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  .ctx-chart__legend-dot--band {
+    background: linear-gradient(90deg, rgba(16, 185, 129, 0.25), rgba(16, 185, 129, 0.65));
+  }
+
+  .ctx-chart__legend-dot--median {
+    width: 2px;
+    height: 12px;
+    background: var(--ink);
+    border-radius: 0;
+  }
+
+  .ctx-chart__footnote {
+    color: var(--muted);
+    margin-top: var(--space-6);
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 720px) {
+    .ctx-chart__row {
+      grid-template-columns: 1fr;
+      gap: var(--space-2);
+    }
+    .ctx-chart__row-values { justify-content: flex-start; }
+  }
+</style>

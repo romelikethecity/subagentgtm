@@ -1,0 +1,182 @@
+---
+/**
+ * HubSpot Breeze 3-product breakdown for /blog/hubspot-breeze-deployment/.
+ * Visualizes the three Breeze product lines with verdict + tier requirement.
+ */
+
+const products = [
+  {
+    name: 'Breeze Intelligence',
+    purpose: 'Data enrichment',
+    pricing: 'Per-credit',
+    verdict: 'STRONG',
+    verdictKind: 'good',
+    notes: 'Best for company-level data on US mid-market SaaS. Below VP titles, freshness drops.',
+  },
+  {
+    name: 'Breeze Agents',
+    purpose: 'Configurable AI agents (lead routing, chat, content)',
+    pricing: 'Per agent + per action',
+    verdict: 'CASE-BY-CASE',
+    verdictKind: 'mixed',
+    notes: 'Solid for bounded inbound workflows. Hits ceiling on multi-step research and cross-system orchestration.',
+  },
+  {
+    name: 'Breeze Copilot',
+    purpose: 'Activity summaries, suggested next steps, NL CRM queries',
+    pricing: 'Included in Sales/Marketing Hub Pro+',
+    verdict: 'WEAK',
+    verdictKind: 'bad',
+    notes: 'Good summarization, doesn\'t take meaningful action. Adoption uneven; reps trust their own judgment more.',
+  },
+];
+---
+
+<figure class="breeze-grid">
+  <figcaption class="breeze-grid__caption">
+    <span class="t-micro breeze-grid__eyebrow">HUBSPOT BREEZE · 3 PRODUCT LINES, DIFFERENT VERDICTS</span>
+    <span class="t-h3 breeze-grid__title">
+      Treat Breeze as three products with three different ROI profiles.
+    </span>
+  </figcaption>
+
+  <div class="breeze-grid__cols">
+    {products.map((p) => (
+      <article class={`breeze-grid__card breeze-grid__card--${p.verdictKind}`}>
+        <header class="breeze-grid__card-head">
+          <span class="breeze-grid__card-name">{p.name}</span>
+          <span class="t-micro breeze-grid__card-purpose">{p.purpose}</span>
+        </header>
+
+        <div class="breeze-grid__verdict">
+          <span class={`breeze-grid__verdict-tag breeze-grid__verdict-tag--${p.verdictKind}`}>
+            {p.verdict}
+          </span>
+          <span class="t-micro breeze-grid__verdict-pricing">{p.pricing}</span>
+        </div>
+
+        <p class="breeze-grid__card-notes">{p.notes}</p>
+      </article>
+    ))}
+  </div>
+
+  <p class="t-micro breeze-grid__footnote">
+    The teams getting most value run Intelligence at scale, configure one or two
+    well-scoped Agents, and skip Copilot-as-coach. <a href="/services/hubspot-breeze/">We deploy this stack</a>
+    plus <a href="/blog/claude-code-for-gtm/">Claude Code subagents</a> for the gaps.
+  </p>
+</figure>
+
+<style>
+  .breeze-grid {
+    margin: var(--space-12) 0;
+    padding: var(--space-8);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+
+  .breeze-grid__caption {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-8);
+  }
+
+  .breeze-grid__eyebrow { color: var(--muted); }
+  .breeze-grid__title { color: var(--ink); margin: 0; max-width: 560px; }
+
+  .breeze-grid__cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+
+  .breeze-grid__card {
+    padding: var(--space-5);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .breeze-grid__card--good { border-color: var(--accent); }
+
+  .breeze-grid__card-head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .breeze-grid__card-name {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .breeze-grid__card-purpose { color: var(--muted); }
+
+  .breeze-grid__verdict {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .breeze-grid__verdict-tag {
+    align-self: flex-start;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.1em;
+    font-weight: 500;
+  }
+
+  .breeze-grid__verdict-tag--good {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+
+  .breeze-grid__verdict-tag--mixed {
+    background: var(--surface);
+    color: var(--ink);
+    border: 1px solid var(--muted);
+  }
+
+  .breeze-grid__verdict-tag--bad {
+    background: var(--surface);
+    color: var(--muted);
+    border: 1px solid var(--line);
+  }
+
+  .breeze-grid__verdict-pricing { color: var(--muted); }
+
+  .breeze-grid__card-notes {
+    margin: 0;
+    font-size: var(--fs-small);
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .breeze-grid__card--bad .breeze-grid__card-notes { color: var(--muted); }
+
+  .breeze-grid__footnote {
+    color: var(--muted);
+    margin-top: var(--space-6);
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+
+  .breeze-grid__footnote a { color: var(--accent); }
+
+  @media (max-width: 900px) {
+    .breeze-grid__cols { grid-template-columns: 1fr; }
+  }
+</style>

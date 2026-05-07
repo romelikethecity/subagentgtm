@@ -1,5 +1,6 @@
 ---
 import BlogPost from '../../../layouts/BlogPost.astro';
+import SubagentChain from '../../../components/SubagentChain.astro';
 import { getPost } from '../../../data/posts';
 
 const post = getPost('claude-code-for-gtm')!;
@@ -41,6 +42,8 @@ const faq = [
     Claude Code shipped subagent support in late 2025, and the GTM teams that picked it up first ate most of the AI SDR replacement market in Q1 2026. The reason is mostly architectural, not magical. A subagent runtime in your own repo solves a class of problems that horizontal AI tools couldn't reach.
   </p>
 
+
+  <SubagentChain />
   <p>
     This is a working guide for revenue teams thinking about adoption. It covers what a real GTM Claude Code repo looks like, the four subagents most teams ship first, the CLAUDE.md structure that keeps output on-brand, and the failure modes worth avoiding before you write a line of prompt.
   </p>

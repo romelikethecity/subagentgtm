@@ -1,0 +1,195 @@
+---
+/**
+ * Time savings stacked bar for /blog/rfp-response-automation/.
+ * Visualizes the manual vs subagent table from the post.
+ *
+ * Hours per phase across a 200-question security questionnaire.
+ */
+
+const phases = [
+  { name: 'Question parsing', manual: 2, subagent: 0.25 },
+  { name: 'Searching docs / prior responses', manual: 8, subagent: 0.2 },
+  { name: 'Drafting answers', manual: 6, subagent: 0 },
+  { name: 'Review & refinement', manual: 4, subagent: 4 },
+  { name: 'Final formatting & submission', manual: 2, subagent: 0.5 },
+];
+
+const manualTotal = phases.reduce((s, p) => s + p.manual, 0);
+const subagentTotal = phases.reduce((s, p) => s + p.subagent, 0);
+const maxTotal = Math.max(manualTotal, subagentTotal);
+const phaseColors = ['#10B981', '#0EA572', '#0B8F62', '#087952', '#066242'];
+---
+
+<figure class="ts-chart">
+  <figcaption class="ts-chart__caption">
+    <span class="t-micro ts-chart__eyebrow">200-QUESTION SECURITY QUESTIONNAIRE · HOURS</span>
+    <span class="t-h3 ts-chart__title">
+      Manual: 22 hours. With Claude Code subagent: ~5 hours.
+    </span>
+  </figcaption>
+
+  <div class="ts-chart__bars" role="img" aria-label={`Time per phase. Manual total ${manualTotal} hours: parsing 2, searching 8, drafting 6, review 4, formatting 2. Subagent total ${subagentTotal.toFixed(1)} hours: parsing 0.25, searching 0.2, drafting 0, review 4, formatting 0.5. Review and refinement is the only phase that doesn't compress.`}>
+    <div class="ts-chart__bar-group">
+      <div class="ts-chart__bar-head">
+        <span class="t-micro ts-chart__bar-label">MANUAL (SE ONLY)</span>
+        <span class="ts-chart__bar-total">{manualTotal}h</span>
+      </div>
+      <div class="ts-chart__bar-track">
+        {phases.map((p, i) => p.manual > 0 && (
+          <div
+            class="ts-chart__bar-seg"
+            style={`width: ${(p.manual / maxTotal) * 100}%; background: ${phaseColors[i]};`}
+            title={`${p.name}: ${p.manual}h`}
+          >
+            {p.manual >= 4 && <span class="ts-chart__bar-seg-label">{p.manual}h</span>}
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="ts-chart__bar-group">
+      <div class="ts-chart__bar-head">
+        <span class="t-micro ts-chart__bar-label ts-chart__bar-label--accent">WITH SUBAGENT</span>
+        <span class="ts-chart__bar-total ts-chart__bar-total--accent">{subagentTotal.toFixed(1)}h</span>
+      </div>
+      <div class="ts-chart__bar-track">
+        {phases.map((p, i) => p.subagent > 0 && (
+          <div
+            class="ts-chart__bar-seg"
+            style={`width: ${(p.subagent / maxTotal) * 100}%; background: ${phaseColors[i]};`}
+            title={`${p.name}: ${p.subagent}h`}
+          >
+            {p.subagent >= 2 && <span class="ts-chart__bar-seg-label">{p.subagent}h</span>}
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <ul class="ts-chart__legend">
+    {phases.map((p, i) => (
+      <li class="ts-chart__legend-item">
+        <span class="ts-chart__legend-dot" style={`background: ${phaseColors[i]};`}></span>
+        <span class="ts-chart__legend-label">{p.name}</span>
+        <span class="ts-chart__legend-delta">{p.manual}h → {p.subagent}h</span>
+      </li>
+    ))}
+  </ul>
+
+  <p class="t-micro ts-chart__footnote">
+    Source: client deployments running RFP automation in production, 2025-2026.
+    The biggest reclaim isn't raw clock time but where the SE's review attention
+    lands: medium and low confidence answers, not the whole document.
+  </p>
+</figure>
+
+<style>
+  .ts-chart {
+    margin: var(--space-12) 0;
+    padding: var(--space-8);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+
+  .ts-chart__caption {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-8);
+  }
+
+  .ts-chart__eyebrow { color: var(--muted); }
+  .ts-chart__title { color: var(--ink); margin: 0; max-width: 560px; }
+
+  .ts-chart__bars {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .ts-chart__bar-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .ts-chart__bar-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .ts-chart__bar-label { color: var(--muted); }
+  .ts-chart__bar-label--accent { color: var(--accent); }
+
+  .ts-chart__bar-total {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--muted);
+  }
+
+  .ts-chart__bar-total--accent { color: var(--accent); }
+
+  .ts-chart__bar-track {
+    height: 36px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    display: flex;
+    overflow: hidden;
+  }
+
+  .ts-chart__bar-seg {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 var(--space-3);
+    border-right: 1px solid var(--bg);
+  }
+
+  .ts-chart__bar-seg:last-child { border-right: 0; }
+
+  .ts-chart__bar-seg-label {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    color: var(--bg);
+    font-weight: 600;
+  }
+
+  .ts-chart__legend {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-6) 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-3);
+  }
+
+  .ts-chart__legend-item {
+    display: grid;
+    grid-template-columns: 14px 1fr auto;
+    gap: var(--space-3);
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    color: var(--muted);
+  }
+
+  .ts-chart__legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+  }
+
+  .ts-chart__legend-label { color: var(--ink); }
+  .ts-chart__legend-delta { color: var(--accent); white-space: nowrap; }
+
+  .ts-chart__footnote {
+    color: var(--muted);
+    margin-top: var(--space-6);
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+</style>

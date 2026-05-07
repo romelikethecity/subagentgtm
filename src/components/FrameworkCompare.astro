@@ -1,0 +1,203 @@
+---
+/**
+ * PVP vs TVA framework comparison for /blog/tva-vs-pvp/.
+ * Highlights criteria count + central question difference.
+ */
+
+const pvpCriteria = ['Specific', 'Personal', 'Relevant', 'Insightful', 'Aware', 'Provocative', 'Actionable'];
+const tvaCriteria = ['Specific', 'Timely', 'Actionable'];
+---
+
+<figure class="fwk-compare">
+  <figcaption class="fwk-compare__caption">
+    <span class="t-micro fwk-compare__eyebrow">PVP VS TVA · FRAMEWORK COMPARISON</span>
+    <span class="t-h3 fwk-compare__title">
+      Seven criteria for human writers. Three for agent self-scoring.
+    </span>
+  </figcaption>
+
+  <div class="fwk-compare__grid">
+    <div class="fwk-compare__col fwk-compare__col--pvp">
+      <div class="fwk-compare__col-head">
+        <span class="t-micro fwk-compare__col-tag">PVP</span>
+        <span class="fwk-compare__col-name">Permissionless Value Proposition</span>
+        <span class="t-micro fwk-compare__col-meta">Designed for human writers · Jordan Crawford / Cannonball GTM</span>
+      </div>
+
+      <div class="fwk-compare__question">
+        <span class="t-micro fwk-compare__question-label">Central question</span>
+        <span class="fwk-compare__question-text">"Would the recipient pay for this content?"</span>
+      </div>
+
+      <div class="fwk-compare__criteria">
+        <span class="t-micro fwk-compare__criteria-label">Criteria · 7</span>
+        <ul class="fwk-compare__chips">
+          {pvpCriteria.map((c) => (
+            <li class="fwk-compare__chip">{c}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="fwk-compare__col fwk-compare__col--tva">
+      <div class="fwk-compare__col-head">
+        <span class="t-micro fwk-compare__col-tag fwk-compare__col-tag--accent">TVA</span>
+        <span class="fwk-compare__col-name">Triggered Value Asset</span>
+        <span class="t-micro fwk-compare__col-meta">Designed for AI agents at scale · subagent/gtm</span>
+      </div>
+
+      <div class="fwk-compare__question fwk-compare__question--accent">
+        <span class="t-micro fwk-compare__question-label">Central question</span>
+        <span class="fwk-compare__question-text">"Would they forward this to their boss?"</span>
+      </div>
+
+      <div class="fwk-compare__criteria">
+        <span class="t-micro fwk-compare__criteria-label">Criteria · 3 (STA)</span>
+        <ul class="fwk-compare__chips">
+          {tvaCriteria.map((c) => (
+            <li class="fwk-compare__chip fwk-compare__chip--accent">{c}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <p class="t-micro fwk-compare__footnote">
+    PVP raised the outbound bar from "hooks and breakers" to "the message itself
+    delivers value." TVA borrows the spirit and adds an agent-native test that's
+    measurable in production: <a href="/blog/forward-rate-outbound-metric/">forward rate</a>.
+  </p>
+</figure>
+
+<style>
+  .fwk-compare {
+    margin: var(--space-12) 0;
+    padding: var(--space-8);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+
+  .fwk-compare__caption {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-8);
+  }
+
+  .fwk-compare__eyebrow { color: var(--muted); }
+  .fwk-compare__title { color: var(--ink); margin: 0; max-width: 560px; }
+
+  .fwk-compare__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+  }
+
+  .fwk-compare__col {
+    padding: var(--space-6);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .fwk-compare__col--tva { border-color: var(--accent); }
+
+  .fwk-compare__col-head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .fwk-compare__col-tag {
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .fwk-compare__col-tag--accent { color: var(--accent); }
+
+  .fwk-compare__col-name {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  .fwk-compare__col-meta { color: var(--muted); }
+
+  .fwk-compare__question {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+
+  .fwk-compare__question--accent {
+    border-color: var(--accent);
+  }
+
+  .fwk-compare__question-label { color: var(--muted); }
+
+  .fwk-compare__question-text {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  .fwk-compare__criteria {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .fwk-compare__criteria-label { color: var(--muted); }
+
+  .fwk-compare__chips {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .fwk-compare__chip {
+    padding: 4px 10px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .fwk-compare__chip--accent {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .fwk-compare__footnote {
+    color: var(--muted);
+    margin-top: var(--space-6);
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+
+  .fwk-compare__footnote a { color: var(--accent); }
+
+  @media (max-width: 720px) {
+    .fwk-compare__grid { grid-template-columns: 1fr; }
+  }
+</style>

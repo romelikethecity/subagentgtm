@@ -1,5 +1,6 @@
 ---
 import BlogPost from '../../../layouts/BlogPost.astro';
+import AgentforceFitMatrix from '../../../components/AgentforceFitMatrix.astro';
 import { getPost } from '../../../data/posts';
 
 const post = getPost('salesforce-agentforce-review')!;
@@ -41,6 +42,8 @@ const faq = [
     Salesforce made Agentforce the centerpiece of their 2025 product roadmap and the centerpiece of every QBR through 2026. Every Salesforce AE is pitching it. Most deployments are stalling at configuration. The gap between what's promised in a Dreamforce keynote and what ships in production is wide.
   </p>
 
+
+  <AgentforceFitMatrix />
   <p>
     This is a practitioner review of where Agentforce earns its license, where it doesn't, and the cost math nobody puts in the AE deck. We deploy it for clients who want it deployed, and we tell clients to skip it when the use case doesn't fit. Both happen.
   </p>

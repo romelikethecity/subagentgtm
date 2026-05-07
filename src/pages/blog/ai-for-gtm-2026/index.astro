@@ -1,5 +1,6 @@
 ---
 import BlogPost from '../../../layouts/BlogPost.astro';
+import TCOChart from '../../../components/TCOChart.astro';
 import { getPost } from '../../../data/posts';
 
 const post = getPost('ai-for-gtm-2026')!;
@@ -41,6 +42,8 @@ const faq = [
     Three years into the AI GTM hype cycle, the receipts are in. The pitch was that AI would replace the SDR, the data vendor, and half the sales engagement stack. The first product wave shipped on that pitch. Most of it didn't survive contact with a real revenue team.
   </p>
 
+
+  <TCOChart />
   <p>
     What did survive looks nothing like the keynotes from 2024. It's smaller, custom, owned by the buyer, and it lives in the customer's repo. Calling it "AI for GTM" is technically right, but the category that earned its budget in 2026 is narrower and stranger than what the term implies in a vendor deck.
   </p>

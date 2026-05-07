@@ -1,5 +1,6 @@
 ---
 import BlogPost from '../../../layouts/BlogPost.astro';
+import TrustCenterSections from '../../../components/TrustCenterSections.astro';
 import { getPost } from '../../../data/posts';
 
 const post = getPost('soc2-trust-center-buildout')!;
@@ -41,6 +42,8 @@ const faq = [
     Enterprise buyers in 2026 want a trust center URL before they'll book the demo. The pattern is consistent across mid-market and enterprise: procurement or security review starts during evaluation, not after, and a vendor without a public trust center looks like a vendor that hasn't thought about security. Deals get blocked or stalled in the security review stage, and the cost of that stall (cycle time, deal slippage) is usually larger than the cost of building the trust center in the first place.
   </p>
 
+
+  <TrustCenterSections />
   <p>
     This post is the working buildout we deploy with clients running enterprise sales motions where security review keeps blocking deals. 60-day plan, what goes on the page, and where Claude Code subagent automation handles the questionnaire load that the page doesn't fully replace.
   </p>

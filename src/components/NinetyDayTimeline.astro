@@ -1,0 +1,185 @@
+---
+/**
+ * 90-day PE portco GTM rebuild timeline for /blog/pe-portco-gtm-rebuild/.
+ * Four phases mapped to days, with deliverables.
+ */
+
+const phases = [
+  {
+    days: 'Week 1',
+    title: 'Audit & cuts',
+    deliverable: 'Cancel 15-25% of legacy tooling spend with no operational impact.',
+    items: ['License usage audit', 'Auto-renewal calendar', 'AI SDR contract review'],
+  },
+  {
+    days: 'Days 8-30',
+    title: 'Pipeline truth-finding',
+    deliverable: 'Honest forecast, usually 20-40% lower than what diligence showed.',
+    items: ['Stale-deal flagging', 'Single-thread risk', 'Bad close-date rewrites'],
+  },
+  {
+    days: 'Days 31-60',
+    title: 'ICP redefinition',
+    deliverable: 'Real ICP from closed-won data, not the slide-deck version.',
+    items: ['Closed-won pattern analysis', 'Trigger reconstruction', 'Lookalike disqualification'],
+  },
+  {
+    days: 'Days 61-90',
+    title: 'Build the systems',
+    deliverable: 'Outbound subagent, data pipeline, pipeline hygiene running steady-state.',
+    items: ['Outbound subagent for new ICP', 'Data pipeline migration', 'Weekly truth digest'],
+  },
+];
+---
+
+<figure class="timeline-90">
+  <figcaption class="timeline-90__caption">
+    <span class="t-micro timeline-90__eyebrow">PE PORTCO GTM REBUILD · 90 DAYS · ORDER MATTERS</span>
+    <span class="t-h3 timeline-90__title">
+      Audit before you build. ICP before agents. Data after ICP.
+    </span>
+  </figcaption>
+
+  <ol class="timeline-90__phases">
+    {phases.map((phase, i) => (
+      <li class="timeline-90__phase">
+        <div class="timeline-90__phase-marker">
+          <span class="timeline-90__phase-num">{String(i + 1).padStart(2, '0')}</span>
+          <span class="t-micro timeline-90__phase-days">{phase.days}</span>
+        </div>
+        <div class="timeline-90__phase-body">
+          <span class="timeline-90__phase-title">{phase.title}</span>
+          <p class="timeline-90__phase-deliverable">{phase.deliverable}</p>
+          <ul class="timeline-90__phase-items">
+            {phase.items.map((item) => (
+              <li class="timeline-90__phase-item">{item}</li>
+            ))}
+          </ul>
+        </div>
+      </li>
+    ))}
+  </ol>
+
+  <p class="t-micro timeline-90__footnote">
+    Sequence shipped across PE portco engagements. Building outbound subagents
+    against the wrong ICP wastes the build, which is why ICP comes before systems.
+    See <a href="/services/pe-portco-gtm/">post-PE GTM rebuild engagement</a>.
+  </p>
+</figure>
+
+<style>
+  .timeline-90 {
+    margin: var(--space-12) 0;
+    padding: var(--space-8);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+
+  .timeline-90__caption {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-8);
+  }
+
+  .timeline-90__eyebrow { color: var(--muted); }
+  .timeline-90__title { color: var(--ink); margin: 0; max-width: 560px; }
+
+  .timeline-90__phases {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    counter-reset: phase;
+  }
+
+  .timeline-90__phase {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: var(--space-6);
+    padding: var(--space-5) 0;
+    border-top: 1px solid var(--line);
+    position: relative;
+  }
+
+  .timeline-90__phase:first-child { border-top: 0; padding-top: 0; }
+  .timeline-90__phase:last-child { padding-bottom: 0; }
+
+  .timeline-90__phase-marker {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .timeline-90__phase-num {
+    font-family: var(--font-mono);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .timeline-90__phase-days {
+    color: var(--muted);
+  }
+
+  .timeline-90__phase-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .timeline-90__phase-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .timeline-90__phase-deliverable {
+    margin: 0;
+    font-size: var(--fs-small);
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .timeline-90__phase-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .timeline-90__phase-item {
+    padding: 3px 10px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .timeline-90__footnote {
+    color: var(--muted);
+    margin-top: var(--space-6);
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+
+  .timeline-90__footnote a { color: var(--accent); }
+
+  @media (max-width: 720px) {
+    .timeline-90__phase {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+    }
+  }
+</style>

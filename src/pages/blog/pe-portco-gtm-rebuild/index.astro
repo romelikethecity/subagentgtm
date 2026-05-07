@@ -1,5 +1,6 @@
 ---
 import BlogPost from '../../../layouts/BlogPost.astro';
+import NinetyDayTimeline from '../../../components/NinetyDayTimeline.astro';
 import { getPost } from '../../../data/posts';
 
 const post = getPost('pe-portco-gtm-rebuild')!;
@@ -41,6 +42,8 @@ const faq = [
     After a take-private close, the GTM stack always needs surgery. The diligence ran on whatever the seller's RevOps lead presented; that lead is usually gone within 60 days; and the operating model the deal team built assumes data quality the actual CRM doesn't deliver. By month three, the operating partner's calls with the new CEO are mostly about pipeline accuracy.
   </p>
 
+
+  <NinetyDayTimeline />
   <p>
     This is the 90-day rebuild playbook we run for PE portco engagements. Order of operations matters here. Most rebuilds fail because they ship the AI agents before they fix the ICP, or refresh the data before they audit the pipeline. The sequence below is the one that works.
   </p>

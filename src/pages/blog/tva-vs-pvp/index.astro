@@ -1,5 +1,6 @@
 ---
 import BlogPost from '../../../layouts/BlogPost.astro';
+import FrameworkCompare from '../../../components/FrameworkCompare.astro';
 import { getPost } from '../../../data/posts';
 
 const post = getPost('tva-vs-pvp')!;
@@ -41,6 +42,8 @@ const faq = [
     Jordan Crawford's Permissionless Value Proposition framework is one of the best pieces of outbound thinking in the last decade. It reshaped how serious operators thought about cold email by elevating the bar to "would this message deliver value the recipient would pay for, independent of any pitch."
   </p>
 
+
+  <FrameworkCompare />
   <p>
     When we started building AI agents that write outbound at scale, we found PVP didn't fully transfer to the agent context. The framework was designed for humans drafting messages with judgment. When agents draft at volume, three things break that didn't break for humans. We built TVA (Triggered Value Asset) to fill those gaps. This post documents why.
   </p>

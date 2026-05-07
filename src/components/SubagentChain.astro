@@ -1,0 +1,239 @@
+---
+/**
+ * Subagent chain architecture diagram for /blog/claude-code-for-gtm/.
+ * Research → Score → Draft → Audit, with inputs/outputs.
+ */
+
+const stages = [
+  {
+    num: '01',
+    name: 'Research',
+    role: 'Reads public signals',
+    detail: 'Funding, hiring, leadership, tech stack, regulatory filings.',
+    output: 'Markdown dossier with citations',
+  },
+  {
+    num: '02',
+    name: 'Score',
+    role: 'Evaluates STA',
+    detail: 'Specific, Timely, Actionable. Scores 0-3 per criterion.',
+    output: 'Ranked signals; <7/9 dropped',
+  },
+  {
+    num: '03',
+    name: 'Draft',
+    role: 'Anchors to signal',
+    detail: 'Trigger first, problem second, value-prop only as the answer.',
+    output: 'Draft message + reasoning',
+  },
+  {
+    num: '04',
+    name: 'Audit',
+    role: 'Self-scores forwardability',
+    detail: 'Below threshold, regenerate. 3 fails, skip and log.',
+    output: 'Send-ready or skip-logged',
+  },
+];
+---
+
+<figure class="subagent-chain">
+  <figcaption class="subagent-chain__caption">
+    <span class="t-micro subagent-chain__eyebrow">CLAUDE CODE SUBAGENT CHAIN · OUTBOUND</span>
+    <span class="t-h3 subagent-chain__title">
+      Four single-responsibility subagents. Auditable at every step.
+    </span>
+  </figcaption>
+
+  <div class="subagent-chain__flow">
+    <div class="subagent-chain__input">
+      <span class="t-micro subagent-chain__io-label">INPUT</span>
+      <span class="subagent-chain__io-name">Prospect</span>
+      <span class="subagent-chain__io-detail">Company + contact</span>
+    </div>
+
+    <div class="subagent-chain__stages">
+      {stages.map((s, i) => (
+        <div class="subagent-chain__stage">
+          <div class="subagent-chain__stage-card">
+            <span class="subagent-chain__stage-num">{s.num}</span>
+            <span class="subagent-chain__stage-name">{s.name}</span>
+            <span class="t-micro subagent-chain__stage-role">{s.role}</span>
+            <p class="subagent-chain__stage-detail">{s.detail}</p>
+            <div class="subagent-chain__stage-output">
+              <span class="t-micro subagent-chain__stage-output-label">→</span>
+              <span class="subagent-chain__stage-output-text">{s.output}</span>
+            </div>
+          </div>
+          {i < stages.length - 1 && (
+            <span class="subagent-chain__arrow" aria-hidden="true">→</span>
+          )}
+        </div>
+      ))}
+    </div>
+
+    <div class="subagent-chain__output">
+      <span class="t-micro subagent-chain__io-label">OUTPUT</span>
+      <span class="subagent-chain__io-name">Forwardable send</span>
+      <span class="subagent-chain__io-detail">Or skip-with-reason</span>
+    </div>
+  </div>
+
+  <p class="t-micro subagent-chain__footnote">
+    Each stage runs as a Claude Code subagent in the customer's repo, reading
+    a shared <a href="/blog/claude-md-for-revenue-teams/">CLAUDE.md</a> contract.
+    Output flows through the chain; failures are logged. <a href="/services/ai-sdr-replacement/">We ship this stack as a fixed-fee engagement</a>.
+  </p>
+</figure>
+
+<style>
+  .subagent-chain {
+    margin: var(--space-12) 0;
+    padding: var(--space-8);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+
+  .subagent-chain__caption {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-8);
+  }
+
+  .subagent-chain__eyebrow { color: var(--muted); }
+  .subagent-chain__title { color: var(--ink); margin: 0; max-width: 560px; }
+
+  .subagent-chain__flow {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .subagent-chain__input,
+  .subagent-chain__output {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: var(--space-4);
+    background: var(--bg);
+    border: 1px dashed var(--line);
+    border-radius: 6px;
+    align-self: flex-start;
+  }
+
+  .subagent-chain__output { align-self: flex-end; border-color: var(--accent); }
+
+  .subagent-chain__io-label { color: var(--muted); }
+
+  .subagent-chain__io-name {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .subagent-chain__io-detail {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    color: var(--muted);
+  }
+
+  .subagent-chain__stages {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-3);
+  }
+
+  .subagent-chain__stage {
+    position: relative;
+    display: flex;
+  }
+
+  .subagent-chain__stage-card {
+    flex: 1;
+    padding: var(--space-4);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .subagent-chain__stage-num {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  .subagent-chain__stage-name {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .subagent-chain__stage-role { color: var(--muted); }
+
+  .subagent-chain__stage-detail {
+    margin: 0;
+    font-size: var(--fs-small);
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  .subagent-chain__stage-output {
+    margin-top: var(--space-3);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--line);
+    display: flex;
+    gap: var(--space-2);
+  }
+
+  .subagent-chain__stage-output-label { color: var(--accent); }
+  .subagent-chain__stage-output-text {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    color: var(--muted);
+  }
+
+  .subagent-chain__arrow {
+    position: absolute;
+    right: -16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 18px;
+    z-index: 2;
+    background: var(--surface);
+    padding: 0 2px;
+  }
+
+  .subagent-chain__footnote {
+    color: var(--muted);
+    margin-top: var(--space-6);
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+
+  .subagent-chain__footnote a { color: var(--accent); }
+
+  @media (max-width: 900px) {
+    .subagent-chain__stages { grid-template-columns: 1fr 1fr; }
+    .subagent-chain__arrow:nth-child(2n) { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    .subagent-chain__stages { grid-template-columns: 1fr; }
+    .subagent-chain__arrow {
+      right: 50%;
+      top: auto;
+      bottom: -16px;
+      transform: translateX(50%) rotate(90deg);
+    }
+  }
+</style>

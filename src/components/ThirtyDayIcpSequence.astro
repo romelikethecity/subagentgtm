@@ -1,0 +1,191 @@
+---
+/**
+ * 30-day ICP discovery sequence for /blog/icp-discovery-from-closed-won/.
+ */
+
+const weeks = [
+  {
+    week: 'Week 1',
+    title: 'Data prep',
+    detail: 'Pull 18-24 months of closed-won. Reconstruct the trigger field for 60-80% of deals. The trigger work is what makes the rebuild work.',
+    fields: ['Industry & size', 'Buyer title & tenure', 'Tech stack at purchase', 'Sales cycle', 'Trigger'],
+  },
+  {
+    week: 'Week 2',
+    title: 'Pattern analysis',
+    detail: 'Look for clustering in size, vertical, buyer tenure, tech signals, and triggers. Most rebuilds surface 2-3 real segments, not the 4-6 the legacy ICP claimed.',
+    fields: ['Segment clustering', 'Trigger frequency', 'Cycle correlation', 'Buyer tenure'],
+  },
+  {
+    week: 'Week 3',
+    title: 'Lookalike disqualification',
+    detail: 'Identify what almost-fits but never closes. The disqualification list is what stops outbound from chasing accounts that look right but never convert.',
+    fields: ['Lost-deal demographics', 'Missing triggers', 'Disqualification rules'],
+  },
+  {
+    week: 'Week 4',
+    title: 'Validation & rollout',
+    detail: 'Test against lost deals (should predict losses), open pipeline (should track success), and a peer sample. Roll into CLAUDE.md + scoring rubric.',
+    fields: ['Lost-deal backtest', 'Open pipeline correlation', 'CLAUDE.md update', 'Scoring rubric live'],
+  },
+];
+---
+
+<figure class="icp-seq">
+  <figcaption class="icp-seq__caption">
+    <span class="t-micro icp-seq__eyebrow">ICP DISCOVERY · 30 DAYS · CLOSED-WON DATA</span>
+    <span class="t-h3 icp-seq__title">
+      Rebuild the ICP from real wins, not founder intuition.
+    </span>
+  </figcaption>
+
+  <ol class="icp-seq__weeks">
+    {weeks.map((w, i) => (
+      <li class="icp-seq__week">
+        <div class="icp-seq__week-marker">
+          <span class="icp-seq__week-num">W{i + 1}</span>
+          <span class="icp-seq__week-line" aria-hidden="true"></span>
+        </div>
+        <div class="icp-seq__week-body">
+          <span class="t-micro icp-seq__week-label">{w.week.toUpperCase()}</span>
+          <span class="icp-seq__week-title">{w.title}</span>
+          <p class="icp-seq__week-detail">{w.detail}</p>
+          <ul class="icp-seq__week-fields">
+            {w.fields.map((f) => (
+              <li class="icp-seq__week-field">{f}</li>
+            ))}
+          </ul>
+        </div>
+      </li>
+    ))}
+  </ol>
+
+  <p class="t-micro icp-seq__footnote">
+    Most aspirational ICPs target one tier above the actual buyer. The rebuild
+    surfaces the real segment, the real title, and the trigger signal nobody
+    had named. Output feeds the <a href="/blog/claude-md-for-revenue-teams/">CLAUDE.md scoring rubric</a> directly.
+  </p>
+</figure>
+
+<style>
+  .icp-seq {
+    margin: var(--space-12) 0;
+    padding: var(--space-8);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+
+  .icp-seq__caption {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-8);
+  }
+
+  .icp-seq__eyebrow { color: var(--muted); }
+  .icp-seq__title { color: var(--ink); margin: 0; max-width: 560px; }
+
+  .icp-seq__weeks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .icp-seq__week {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: var(--space-6);
+    padding-bottom: var(--space-6);
+    position: relative;
+  }
+
+  .icp-seq__week:last-child { padding-bottom: 0; }
+
+  .icp-seq__week-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .icp-seq__week-num {
+    font-family: var(--font-mono);
+    font-size: 22px;
+    color: var(--accent);
+    font-weight: 500;
+    width: 56px;
+    height: 56px;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+  }
+
+  .icp-seq__week-line {
+    flex: 1;
+    width: 2px;
+    background: var(--line);
+    min-height: var(--space-6);
+  }
+
+  .icp-seq__week:last-child .icp-seq__week-line { display: none; }
+
+  .icp-seq__week-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding-bottom: var(--space-4);
+  }
+
+  .icp-seq__week-label { color: var(--muted); }
+
+  .icp-seq__week-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .icp-seq__week-detail {
+    margin: 0;
+    font-size: var(--fs-small);
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .icp-seq__week-fields {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .icp-seq__week-field {
+    padding: 3px 10px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .icp-seq__footnote {
+    color: var(--muted);
+    margin-top: var(--space-6);
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+
+  .icp-seq__footnote a { color: var(--accent); }
+</style>

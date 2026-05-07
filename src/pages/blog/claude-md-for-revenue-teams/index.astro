@@ -1,5 +1,6 @@
 ---
 import BlogPost from '../../../layouts/BlogPost.astro';
+import ClaudeMdSections from '../../../components/ClaudeMdSections.astro';
 import { getPost } from '../../../data/posts';
 
 const post = getPost('claude-md-for-revenue-teams')!;
@@ -41,6 +42,8 @@ const faq = [
     CLAUDE.md is the highest-yield file in a GTM Claude Code repo. It's the contract every subagent reads before running, the brand voice gate, the ICP definition, and the rubric every draft self-scores against. Most first-build failures we see trace back to a thin CLAUDE.md, so this post is a working template you can adapt.
   </p>
 
+
+  <ClaudeMdSections />
   <p>
     The structure below comes from real revenue-team builds. Names changed, numbers anonymized, but the shape is what's shipping in production.
   </p>

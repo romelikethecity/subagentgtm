@@ -1,5 +1,6 @@
 ---
 import BlogPost from '../../../layouts/BlogPost.astro';
+import DataQualityChart from '../../../components/DataQualityChart.astro';
 import { getPost } from '../../../data/posts';
 
 const post = getPost('migrating-off-zoominfo')!;
@@ -41,6 +42,8 @@ const faq = [
     The ZoomInfo renewal in 2026 is the single most disputed line item on B2B operating budgets. Contracts run $100K to $300K, the data ages out faster than vendors refresh it, and the contact quality at the bottom of the funnel is often worse than what a custom pipeline produces in week two. Most CROs walking into Q2 are doing the build-vs-buy math, and the math has shifted.
   </p>
 
+
+  <DataQualityChart />
   <p>
     This is the playbook we run for the migration. 60-day timeline, parallel-stack strategy, segment-by-segment cutover, and the specific failure modes that kill migrations in week three. The numbers come from real engagements we've shipped at <a href="https://veruminc.com" rel="noopener">Verum</a> for B2B and <a href="https://getprovyx.com" rel="noopener">Provyx</a> for healthcare.
   </p>

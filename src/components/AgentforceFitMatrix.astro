@@ -1,0 +1,164 @@
+---
+/**
+ * Agentforce fit matrix for /blog/salesforce-agentforce-review/.
+ * Side-by-side: where it works vs where it stalls.
+ */
+
+const works = [
+  { name: 'Service deflection', detail: 'Refunds, returns, password resets, billing. Resolution rate 70-85%.' },
+  { name: 'Field service triage', detail: 'Technicians needing on-the-fly answers. Resolution 60-75%.' },
+  { name: 'Bounded internal Q&A', detail: 'Standard CRM queries on data Salesforce already owns.' },
+];
+
+const stalls = [
+  { name: 'Complex sales motions', detail: 'Open-ended buyer questions, competitive positioning, pricing flex.' },
+  { name: 'Cross-system orchestration', detail: 'Workflows pulling from HubSpot, Pendo, billing, etc.' },
+  { name: 'High-volume per-conversation pricing', detail: '100K+ monthly conversations make the per-conv model break.' },
+];
+---
+
+<figure class="fit-matrix">
+  <figcaption class="fit-matrix__caption">
+    <span class="t-micro fit-matrix__eyebrow">AGENTFORCE FIT MAP · BASED ON CLIENT DEPLOYMENTS</span>
+    <span class="t-h3 fit-matrix__title">
+      Bounded service workflows: fits. Sales conversations: doesn't.
+    </span>
+  </figcaption>
+
+  <div class="fit-matrix__grid">
+    <div class="fit-matrix__col fit-matrix__col--works">
+      <div class="fit-matrix__col-head">
+        <span class="t-micro fit-matrix__col-label fit-matrix__col-label--accent">WHERE IT WORKS</span>
+        <span class="fit-matrix__col-mark">✓</span>
+      </div>
+      <ul class="fit-matrix__items">
+        {works.map((w) => (
+          <li class="fit-matrix__item">
+            <span class="fit-matrix__item-name">{w.name}</span>
+            <span class="fit-matrix__item-detail">{w.detail}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="fit-matrix__col fit-matrix__col--stalls">
+      <div class="fit-matrix__col-head">
+        <span class="t-micro fit-matrix__col-label">WHERE IT STALLS</span>
+        <span class="fit-matrix__col-mark fit-matrix__col-mark--muted">✕</span>
+      </div>
+      <ul class="fit-matrix__items">
+        {stalls.map((s) => (
+          <li class="fit-matrix__item">
+            <span class="fit-matrix__item-name">{s.name}</span>
+            <span class="fit-matrix__item-detail">{s.detail}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <p class="t-micro fit-matrix__footnote">
+    Pattern from active deployments. The teams getting the most value run
+    Agentforce for service workflows and route revenue work to <a href="/blog/claude-code-for-gtm/">Claude Code subagents</a>
+    via Salesforce API. Not either/or.
+  </p>
+</figure>
+
+<style>
+  .fit-matrix {
+    margin: var(--space-12) 0;
+    padding: var(--space-8);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+
+  .fit-matrix__caption {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-8);
+  }
+
+  .fit-matrix__eyebrow { color: var(--muted); }
+  .fit-matrix__title { color: var(--ink); margin: 0; max-width: 560px; }
+
+  .fit-matrix__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+  }
+
+  .fit-matrix__col {
+    padding: var(--space-6);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .fit-matrix__col--works { border-color: var(--accent); }
+
+  .fit-matrix__col-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .fit-matrix__col-label { color: var(--muted); }
+  .fit-matrix__col-label--accent { color: var(--accent); }
+
+  .fit-matrix__col-mark {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .fit-matrix__col-mark--muted { color: var(--muted); }
+
+  .fit-matrix__items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .fit-matrix__item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .fit-matrix__item-name {
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .fit-matrix__item-detail {
+    font-size: var(--fs-small);
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .fit-matrix__footnote {
+    color: var(--muted);
+    margin-top: var(--space-6);
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+
+  .fit-matrix__footnote a { color: var(--accent); }
+
+  @media (max-width: 720px) {
+    .fit-matrix__grid { grid-template-columns: 1fr; }
+  }
+</style>

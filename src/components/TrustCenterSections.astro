@@ -1,0 +1,162 @@
+---
+/**
+ * Trust center page anatomy for /blog/soc2-trust-center-buildout/.
+ * Eight sections in priority order, with what each contains.
+ */
+
+const sections = [
+  { num: '01', name: 'Certifications & audit reports', detail: 'SOC 2, ISO 27001, HIPAA, FedRAMP. Public summary, gated full report.', priority: 'TOP' },
+  { num: '02', name: 'Security policies', detail: 'Access control, encryption, incident response, change management.', priority: 'HIGH' },
+  { num: '03', name: 'Data handling', detail: 'Region, retention, sub-processors, deletion process. GDPR residency.', priority: 'HIGH' },
+  { num: '04', name: 'Compliance frameworks', detail: 'ISO 27001 alignment, NIST CSF, CIS, PCI scope, HIPAA covered-entity status.', priority: 'MID' },
+  { num: '05', name: 'Penetration test summary', detail: 'Date, auditor, scope, findings summary, remediation status.', priority: 'MID' },
+  { num: '06', name: 'Infrastructure & hosting', detail: 'Cloud provider, region, architecture diagram, RTO/RPO.', priority: 'MID' },
+  { num: '07', name: 'Customer security FAQ', detail: '15-25 pre-answered questions covering 80% of standard reviews.', priority: 'HIGH' },
+  { num: '08', name: 'Security contact', detail: 'Email or form for questionnaires, vulnerability disclosures, response SLA.', priority: 'LOW' },
+];
+---
+
+<figure class="tc-sections">
+  <figcaption class="tc-sections__caption">
+    <span class="t-micro tc-sections__eyebrow">TRUST CENTER ANATOMY · 8 SECTIONS, PRIORITY-ORDERED</span>
+    <span class="t-h3 tc-sections__title">
+      The page should answer 80% of standard questionnaires before they're sent.
+    </span>
+  </figcaption>
+
+  <div class="tc-sections__grid">
+    {sections.map((s) => (
+      <article class={`tc-sections__card tc-sections__card--${s.priority.toLowerCase()}`}>
+        <div class="tc-sections__card-head">
+          <span class="tc-sections__card-num">{s.num}</span>
+          <span class={`t-micro tc-sections__card-priority tc-sections__card-priority--${s.priority.toLowerCase()}`}>
+            {s.priority}
+          </span>
+        </div>
+        <span class="tc-sections__card-name">{s.name}</span>
+        <p class="tc-sections__card-detail">{s.detail}</p>
+      </article>
+    ))}
+  </div>
+
+  <p class="t-micro tc-sections__footnote">
+    Pre-audit, the certifications card swaps to "audit in progress" with auditor
+    and timeline. Most enterprise buyers will accept that posture if the rest of
+    the page shows real security maturity. <a href="/services/trust-center/">Trust center buildout engagement</a>.
+  </p>
+</figure>
+
+<style>
+  .tc-sections {
+    margin: var(--space-12) 0;
+    padding: var(--space-8);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+
+  .tc-sections__caption {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-8);
+  }
+
+  .tc-sections__eyebrow { color: var(--muted); }
+  .tc-sections__title { color: var(--ink); margin: 0; max-width: 560px; }
+
+  .tc-sections__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-3);
+  }
+
+  .tc-sections__card {
+    padding: var(--space-4);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .tc-sections__card--top { border-color: var(--accent); }
+
+  .tc-sections__card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .tc-sections__card-num {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .tc-sections__card-priority {
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 10px;
+  }
+
+  .tc-sections__card-priority--top {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+
+  .tc-sections__card-priority--high {
+    background: var(--surface);
+    color: var(--ink);
+    border: 1px solid var(--muted);
+  }
+
+  .tc-sections__card-priority--mid {
+    background: var(--surface);
+    color: var(--muted);
+    border: 1px solid var(--line);
+  }
+
+  .tc-sections__card-priority--low {
+    background: var(--surface);
+    color: var(--muted);
+    border: 1px solid var(--line);
+    opacity: 0.7;
+  }
+
+  .tc-sections__card-name {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  .tc-sections__card-detail {
+    margin: 0;
+    font-size: var(--fs-small);
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .tc-sections__footnote {
+    color: var(--muted);
+    margin-top: var(--space-6);
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+
+  .tc-sections__footnote a { color: var(--accent); }
+
+  @media (max-width: 900px) {
+    .tc-sections__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 540px) {
+    .tc-sections__grid { grid-template-columns: 1fr; }
+  }
+</style>

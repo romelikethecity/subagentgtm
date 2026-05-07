@@ -1,5 +1,6 @@
 ---
 import BlogPost from '../../../layouts/BlogPost.astro';
+import TimeSavingsChart from '../../../components/TimeSavingsChart.astro';
 import { getPost } from '../../../data/posts';
 
 const post = getPost('rfp-response-automation')!;
@@ -41,6 +42,8 @@ const faq = [
     A 200-question enterprise security questionnaire takes a sales engineer 20 hours. The question set is repetitive (most of it overlaps with prior questionnaires the team has answered). The answers exist in source documents (SOC 2 reports, security policies, prior approved responses). The work is mostly retrieval and rewording. It's also the work that pulls SEs off demos, proof-of-concepts, and the discovery calls that actually close deals.
   </p>
 
+
+  <TimeSavingsChart />
   <p>
     Claude Code subagents handle the first-draft load. The architecture is simple, the deployment is fast, and the savings show up in SE capacity rather than headline cost. This post is the working setup we ship for clients running enterprise sales motions where security questionnaires are bottlenecking deals.
   </p>

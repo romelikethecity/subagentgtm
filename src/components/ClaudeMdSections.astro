@@ -1,0 +1,128 @@
+---
+/**
+ * CLAUDE.md template anatomy for /blog/claude-md-for-revenue-teams/.
+ * Eight sections of a working CLAUDE.md.
+ */
+
+const sections = [
+  { num: '01', name: 'Identity & audience', detail: 'Who the team is, what you sell, who reads the output.', wordCount: '~150' },
+  { num: '02', name: 'ICP definition', detail: 'Companies, titles, signals, exclusions. Specific over abstract.', wordCount: '~300' },
+  { num: '03', name: 'Voice rules & banned phrases', detail: 'Tone, banned punctuation, banned phrases by name, required structures.', wordCount: '~200' },
+  { num: '04', name: 'Signal scoring (STA)', detail: 'Specific, Timely, Actionable. Score 0-3 each, 7+ to send.', wordCount: '~200' },
+  { num: '05', name: 'Data contract', detail: 'Allowed sources, valid fields, hallucination risks to avoid citing.', wordCount: '~150' },
+  { num: '06', name: 'Escalation rules', detail: 'When agent stops and asks for human review. Names, regulated topics, edge cases.', wordCount: '~100' },
+  { num: '07', name: 'Few-shot examples', detail: 'Five excellent messages annotated with trigger, score, outcome.', wordCount: '~250' },
+  { num: '08', name: 'Audit & metric definitions', detail: 'What to log per draft and per send. Optimization metric.', wordCount: '~100' },
+];
+---
+
+<figure class="md-sections">
+  <figcaption class="md-sections__caption">
+    <span class="t-micro md-sections__eyebrow">CLAUDE.MD ANATOMY · 8 SECTIONS · 800-1,500 WORDS TOTAL</span>
+    <span class="t-h3 md-sections__title">
+      Eight sections every revenue-team CLAUDE.md needs.
+    </span>
+  </figcaption>
+
+  <ol class="md-sections__list">
+    {sections.map((s) => (
+      <li class="md-sections__item">
+        <div class="md-sections__item-head">
+          <span class="md-sections__item-num">{s.num}</span>
+          <span class="md-sections__item-name">{s.name}</span>
+          <span class="t-micro md-sections__item-words">{s.wordCount} WORDS</span>
+        </div>
+        <p class="md-sections__item-detail">{s.detail}</p>
+      </li>
+    ))}
+  </ol>
+
+  <p class="t-micro md-sections__footnote">
+    A 1,200-word CLAUDE.md is the leverage. Every subagent reads it before
+    drafting. <a href="/blog/claude-md-for-revenue-teams/">Working template with full per-section content</a>.
+  </p>
+</figure>
+
+<style>
+  .md-sections {
+    margin: var(--space-12) 0;
+    padding: var(--space-8);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+
+  .md-sections__caption {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-8);
+  }
+
+  .md-sections__eyebrow { color: var(--muted); }
+  .md-sections__title { color: var(--ink); margin: 0; max-width: 560px; }
+
+  .md-sections__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    background: var(--bg);
+    border-radius: 0 6px 6px 0;
+    overflow: hidden;
+  }
+
+  .md-sections__item {
+    padding: var(--space-4) var(--space-5);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .md-sections__item:last-child { border-bottom: 0; }
+
+  .md-sections__item-head {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: var(--space-4);
+    align-items: baseline;
+  }
+
+  .md-sections__item-num {
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .md-sections__item-name {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .md-sections__item-words { color: var(--muted); }
+
+  .md-sections__item-detail {
+    margin: 0;
+    font-size: var(--fs-small);
+    color: var(--muted);
+    line-height: 1.5;
+    padding-left: 28px;
+  }
+
+  .md-sections__footnote {
+    color: var(--muted);
+    margin-top: var(--space-6);
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+
+  .md-sections__footnote a { color: var(--accent); }
+</style>
