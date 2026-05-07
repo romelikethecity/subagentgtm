@@ -1,5 +1,6 @@
 ---
 import BlogPost from '../../../layouts/BlogPost.astro';
+import ForwardRateChart from '../../../components/ForwardRateChart.astro';
 import { getPost } from '../../../data/posts';
 
 const post = getPost('why-ai-sdrs-are-failing')!;
@@ -40,6 +41,8 @@ const faq = [
   <p>
     The AI SDR category is collapsing in 2026, and the reasons are documented in renewal data, public LinkedIn moderation actions, and the tone of every CRO conversation we walked into in the last six months. This is a write-up of what went wrong, what's filling the void, and how to think about the rebuild if you're holding an active contract.
   </p>
+
+  <ForwardRateChart />
 
   <h2>The headline numbers</h2>
 
