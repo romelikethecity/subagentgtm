@@ -1,0 +1,149 @@
+---
+import Base from '../../layouts/Base.astro';
+import { resources } from '../../data/resources';
+
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'subagent/gtm — resources',
+  url: 'https://subagentgtm.com/resources/',
+  description: 'Templates and rubrics for GTM teams running Claude Code subagents.',
+  hasPart: resources.map((r) => ({
+    '@type': 'CreativeWork',
+    name: r.title,
+    description: r.description,
+    url: `https://subagentgtm.com/resources/${r.slug}/`,
+    encodingFormat: 'text/markdown',
+  })),
+};
+
+const grouped = resources.reduce<Record<string, typeof resources>>((acc, r) => {
+  acc[r.category] = acc[r.category] ?? [];
+  acc[r.category].push(r);
+  return acc;
+}, {});
+---
+
+<Base
+  title="Resources"
+  description="Templates and rubrics for GTM teams running Claude Code subagents. TVA scoring rubric, CLAUDE.md template, ICP rebuild worksheet. Free to use."
+  path="/resources/"
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
+
+  <main>
+    <section class="section" style="padding-top: var(--space-16);">
+      <div class="container container--narrow">
+        <span class="t-micro">RESOURCES · TEMPLATES · RUBRICS</span>
+        <h1 class="t-display-xl" style="margin: var(--space-6) 0 var(--space-6);">
+          Working templates from real engagements.
+        </h1>
+        <p class="t-body t-muted" style="max-width: 640px; margin-bottom: var(--space-8);">
+          The artifacts we ship into client repos, published here for anyone to use. Read them inline, copy what you want, or download the raw markdown. No email gate.
+        </p>
+        <p class="t-micro" style="color: var(--muted);">
+          MIT-licensed. Modify and ship in your repo without attribution.
+        </p>
+      </div>
+    </section>
+
+    {Object.entries(grouped).map(([category, items]) => (
+      <section class="section section--tight">
+        <div class="container container--narrow">
+          <span class="t-micro" style="color: var(--muted);">{category.toUpperCase()}</span>
+          <ul class="resource-list" style="margin-top: var(--space-4);">
+            {items.map((r) => (
+              <li class="resource-list__item">
+                <a href={`/resources/${r.slug}/`} class="resource-list__link">
+                  <span class="resource-list__meta">
+                    <span class="t-micro">{r.fileName}</span>
+                    <span aria-hidden="true">·</span>
+                    <span class="t-micro">{r.lineCount} lines</span>
+                    <span aria-hidden="true">·</span>
+                    <span class="t-micro">{r.fileSize}</span>
+                  </span>
+                  <h2 class="t-h1 resource-list__title">{r.title}</h2>
+                  <p class="t-body t-muted resource-list__excerpt">{r.excerpt}</p>
+                  <span class="t-micro resource-list__use-case">USE: {r.useCase}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    ))}
+
+    <section class="section">
+      <div class="container container--narrow">
+        <div class="resource-cta">
+          <h2 class="t-h1" style="margin-bottom: var(--space-4);">Want this stack built for you?</h2>
+          <p class="t-body t-muted" style="margin-bottom: var(--space-6); max-width: 560px;">
+            We deploy Claude Code subagents into your GTM stack. Fixed-fee engagements, you own the repo, the templates above are starter kits not the deliverable.
+          </p>
+          <a href="/contact/" class="btn btn--primary">→ Fix your GTM</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style>
+  .resource-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .resource-list__item {
+    border-top: 1px solid var(--line);
+    padding-top: var(--space-6);
+  }
+
+  .resource-list__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: color 120ms ease;
+  }
+
+  .resource-list__link:hover .resource-list__title {
+    color: var(--accent);
+  }
+
+  .resource-list__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    color: var(--muted);
+    font-family: var(--font-mono);
+    margin-bottom: var(--space-3);
+  }
+
+  .resource-list__title {
+    margin: 0 0 var(--space-3);
+    transition: color 120ms ease;
+  }
+
+  .resource-list__excerpt {
+    margin: 0 0 var(--space-3);
+    max-width: 720px;
+  }
+
+  .resource-list__use-case {
+    color: var(--muted);
+    display: block;
+    padding-top: var(--space-3);
+    border-top: 1px dashed var(--line);
+    line-height: 1.5;
+  }
+
+  .resource-cta {
+    padding: var(--space-8);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+</style>

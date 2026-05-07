@@ -1,0 +1,102 @@
+---
+import ResourcePage from '../../../layouts/ResourcePage.astro';
+import { getResource } from '../../../data/resources';
+
+const resource = getResource('claude-md-template')!;
+---
+
+<ResourcePage resource={resource}>
+  <p>
+    Working CLAUDE.md template for a revenue-team Claude Code repo. Eight sections covering identity, ICP, voice, signal scoring, data contract, escalation rules, few-shot examples, and audit metrics. Replace bracketed values with your team's data; keep the section structure.
+  </p>
+
+  <p>
+    Save as <code>CLAUDE.md</code> at the root of your GTM Claude Code repo. Every subagent reads it before drafting.
+  </p>
+
+  <h2>1. Identity and audience</h2>
+
+  <p>
+    Open with two paragraphs naming who the team is, what the company sells, and who's reading the output. The agent uses this to calibrate everything that follows.
+  </p>
+
+  <blockquote>
+    We're the GTM engineering team at [Company Name]. We sell [product] to [primary buyer persona] at [company segment]. The recipients of our outbound are senior operators who get 200+ cold messages a month. They unsubscribe from anything that reads as automated. The bar for our messages is whether the recipient would forward this to their boss, peer, or team.
+  </blockquote>
+
+  <h2>2. ICP definition</h2>
+
+  <ul>
+    <li><strong>Company segment.</strong> [Specific industry, size band, funding stage, geography]</li>
+    <li><strong>Buyer titles.</strong> Primary + secondary, with seniority floor.</li>
+    <li><strong>Triggering signals.</strong> 5-7 specific events that justify outbound.</li>
+    <li><strong>Required STA threshold.</strong> 7/9.</li>
+    <li><strong>Exclusions.</strong> Lookalike segments to skip even if they look qualified.</li>
+  </ul>
+
+  <h2>3. Voice rules and banned phrases</h2>
+
+  <ul>
+    <li><strong>Tone.</strong> Direct, operator-level, no hedging. First person plural.</li>
+    <li><strong>Banned punctuation.</strong> Em dashes. Use periods, commas, or rewrite.</li>
+    <li><strong>Banned phrases.</strong> "Just checking in." "Game-changer." "Robust." "Leverage" as verb. "Not just X, it's Y." Plus your team's specific list.</li>
+    <li><strong>Banned structures.</strong> Negative parallelism. Three-fragment dramatic triads. Self-answered rhetorical questions. Filler intensifiers.</li>
+    <li><strong>Required structures.</strong> Trigger first, problem second, concrete offer third, value-prop last.</li>
+  </ul>
+
+  <h2>4. Signal scoring rubric (STA)</h2>
+
+  <p>
+    Score every draft 0-3 per criterion. Pass: 7/9. Three failed regens, skip. See the <a href="/resources/tva-rubric/">full TVA rubric</a> for the scoring detail.
+  </p>
+
+  <h2>5. Data contract</h2>
+
+  <p>The data sources the agents are allowed to read and the fields valid for personalization.</p>
+  <ul>
+    <li><strong>CRM exports.</strong> Path, fields, refresh cadence. Read-only.</li>
+    <li><strong>Signal sources.</strong> Hiring (BuiltIn, LinkedIn jobs API), funding (Crunchbase), leadership (LinkedIn), tech stack (BuiltWith), reviews (G2, Capterra), regulatory (SEC EDGAR, state SOS).</li>
+    <li><strong>Contact data.</strong> Validated within last 60 days. Title fields cross-checked against company website.</li>
+    <li><strong>Hallucination risks (banned citations).</strong> Unverified titles, unverified salary, quotes without URLs, internal strategy not publicly stated.</li>
+  </ul>
+
+  <h2>6. Escalation rules</h2>
+
+  <ul>
+    <li>Three failed regenerations on the same prospect, skip and log.</li>
+    <li>Signal references a person by name, require human approval.</li>
+    <li>Signal touches regulated topics (PHI, MNPI, FERPA), require human approval.</li>
+    <li>First 50 sends per new ICP segment, require human approval.</li>
+    <li>Any send that would cite an unverified data point: regenerate without the citation.</li>
+  </ul>
+
+  <h2>7. Few-shot examples</h2>
+
+  <p>
+    The leverage of the whole CLAUDE.md is here. Five excellent messages from your team, each annotated with the trigger, STA score, the final message verbatim, and the outcome. Update monthly.
+  </p>
+
+  <h2>8. Audit and metric definitions</h2>
+
+  <p>Every draft logs prospect, signal source URL, STA score, regeneration count, final decision. Every send logs recipient, send time, message hash, audit trail.</p>
+
+  <p>
+    <strong>Optimization metric:</strong> <a href="/blog/forward-rate-outbound-metric/">forward rate</a>. Reply rate is secondary. Open rate is not used for decisions.
+  </p>
+
+  <h2>Maintenance cadence</h2>
+
+  <p>
+    Weekly for the first month. Monthly after that. Triggers to update: a forwardable send (add to few-shot), a polite decline (refine banned phrases), a winning signal (raise weight), a wasted signal (drop from qualifying list).
+  </p>
+
+  <p>
+    A frozen CLAUDE.md is a dead system.
+  </p>
+
+  <h2>Where this fits</h2>
+
+  <p>
+    The CLAUDE.md is the contract. The <a href="/resources/tva-rubric/">TVA scoring rubric</a> is the gate. The <a href="/resources/icp-rebuild-worksheet/">ICP rebuild worksheet</a> populates section 2. Together they're the starting kit for a GTM Claude Code repo. <a href="/blog/claude-code-for-gtm/">See the architecture overview here</a>.
+  </p>
+</ResourcePage>

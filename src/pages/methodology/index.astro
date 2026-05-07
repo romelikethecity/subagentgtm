@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import SectionLabel from '../../components/SectionLabel.astro';
 import CTAButton from '../../components/CTAButton.astro';
 import FurtherReading from '../../components/FurtherReading.astro';
+import TVAFlow from '../../components/TVAFlow.astro';
 ---
 
 <Base
@@ -44,6 +45,13 @@ import FurtherReading from '../../components/FurtherReading.astro';
         <p class="t-body t-muted" style="margin-bottom: 0;">
           Trigger → Value → Asset. Every outbound starts with an observable trigger, names a specific value, and delivers an asset worth forwarding. If it's not asset-grade, it doesn't send.
         </p>
+      </div>
+    </section>
+
+    <!-- TVA flow visual -->
+    <section class="section section--tight">
+      <div class="container container--narrow">
+        <TVAFlow />
       </div>
     </section>
 

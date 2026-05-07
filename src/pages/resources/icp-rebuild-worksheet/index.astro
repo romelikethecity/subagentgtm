@@ -1,0 +1,164 @@
+---
+import ResourcePage from '../../../layouts/ResourcePage.astro';
+import { getResource } from '../../../data/resources';
+
+const resource = getResource('icp-rebuild-worksheet')!;
+---
+
+<ResourcePage resource={resource}>
+  <p>
+    Working doc for rebuilding your ICP from real closed-won data, not founder intuition or marketing-offsite assumptions. Week-by-week sequence with deliverables. Drop into a Google doc or Notion page and fill it out alongside your CRM data.
+  </p>
+
+  <h2>Who this is for</h2>
+
+  <ul>
+    <li>Outbound underperforming on forward rate or reply rate</li>
+    <li>AE conversion uneven across segments</li>
+    <li>Sales cycle stretching for unclear reasons</li>
+    <li>Legacy ICP set in a planning offsite 12+ months ago and never validated</li>
+  </ul>
+
+  <h2>What you need</h2>
+
+  <ul>
+    <li>Last 18-24 months of closed-won deals from CRM (minimum 30, ideally 100+)</li>
+    <li>Last 12 months of lost deals</li>
+    <li>Current open pipeline</li>
+    <li>Access to AEs who closed the deals (for trigger reconstruction)</li>
+  </ul>
+
+  <h2>Week 1: data preparation</h2>
+
+  <p>For each closed-won, capture:</p>
+
+  <table>
+    <thead>
+      <tr><th>Field</th><th>Source</th><th>Required</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Company name</td><td>CRM</td><td>Yes</td></tr>
+      <tr><td>Industry</td><td>CRM / enrich</td><td>Yes</td></tr>
+      <tr><td>Employee count at purchase</td><td>CRM / enrich</td><td>Yes</td></tr>
+      <tr><td>Geography</td><td>CRM</td><td>Yes</td></tr>
+      <tr><td>Buyer title</td><td>CRM</td><td>Yes</td></tr>
+      <tr><td>Buyer tenure (months in role)</td><td>LinkedIn</td><td>Yes</td></tr>
+      <tr><td>Tech stack at purchase</td><td>BuiltWith</td><td>Optional</td></tr>
+      <tr><td>Lead source</td><td>CRM</td><td>Yes</td></tr>
+      <tr><td>Sales cycle (days)</td><td>CRM</td><td>Yes</td></tr>
+      <tr><td>Deal size (ARR)</td><td>CRM</td><td>Yes</td></tr>
+      <tr><td><strong>Trigger</strong></td><td>Reconstruct from notes/AE</td><td><strong>Yes</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Trigger reconstruction (the most important step)</h3>
+
+  <p>The trigger field is usually missing from CRM. Reconstruct it:</p>
+
+  <ol>
+    <li>Pull won-deal notes from CRM</li>
+    <li>Slack or email the AE: "What changed in [Company]'s world that made them buy now?"</li>
+    <li>Categorize each trigger:
+      <ul>
+        <li><strong>Hire</strong> — new role posted or filled</li>
+        <li><strong>Fund</strong> — funded round</li>
+        <li><strong>Lead</strong> — leadership change (CRO, CEO, VP)</li>
+        <li><strong>Stack</strong> — tech-stack change</li>
+        <li><strong>Reg</strong> — regulatory filing or compliance event</li>
+        <li><strong>Comp</strong> — competitor product issue / price hike</li>
+        <li><strong>Acq</strong> — acquisition</li>
+        <li><strong>Internal</strong> — internal pain crystallized</li>
+        <li><strong>Unknown</strong> — can't reconstruct (mark, don't guess)</li>
+      </ul>
+    </li>
+  </ol>
+
+  <p>Most teams discover the trigger for 60-80% of deals.</p>
+
+  <h2>Week 2: pattern analysis</h2>
+
+  <p>Cluster closed-won by company size, vertical, geography, buyer title, buyer tenure, tech stack signals.</p>
+
+  <p>Answer in writing:</p>
+
+  <ol>
+    <li>What size company tends to close fastest?</li>
+    <li>Which industry verticals are over-represented vs total pipeline?</li>
+    <li>What buyer tenure correlates with close rate?</li>
+    <li>What tech stack signals predict fit?</li>
+    <li>Which two triggers appear most often in closed-won?</li>
+  </ol>
+
+  <p>Most rebuilds surface 2-3 real segments, not the 4-6 the legacy ICP claimed.</p>
+
+  <h2>Week 3: lookalike disqualification</h2>
+
+  <p>What almost-fits but doesn't actually close. These are where the team wastes the most outbound spend.</p>
+
+  <p>For each lost deal that demographically matches your primary ICP, what was missing?</p>
+
+  <ul>
+    <li>Wrong trigger (or no trigger)?</li>
+    <li>Wrong tech stack?</li>
+    <li>Wrong buyer tenure (long-tenured, no urgency)?</li>
+    <li>Different decision-maker than expected?</li>
+  </ul>
+
+  <p>Write the disqualification list:</p>
+
+  <blockquote>
+    Companies in [segment X] that lack [signal Y] are not ICP, regardless of how qualified they look on title and size.
+  </blockquote>
+
+  <p>The disqualification list is what makes the rebuild stick.</p>
+
+  <h2>Week 4: validation and rollout</h2>
+
+  <h3>Test against lost deals</h3>
+
+  <p>Apply the new ICP scoring to lost deals. The model should predict losses.</p>
+
+  <ul>
+    <li>80%+ of lost deals score out-of-ICP — pass</li>
+    <li>Lost deals that score in-ICP have a clear "what was missing" reason — pass</li>
+    <li>Win rate on in-ICP segments is ≥2x out-of-ICP — pass</li>
+  </ul>
+
+  <h3>Test against open pipeline</h3>
+
+  <ul>
+    <li>In-ICP open deals are progressing well</li>
+    <li>Out-of-ICP open deals are the ones reps are struggling with</li>
+  </ul>
+
+  <h2>Deliverables (end of day 30)</h2>
+
+  <ol>
+    <li><strong>Two-page ICP document</strong> with primary + secondary segments, triggers, exclusions</li>
+    <li><strong>Scoring rubric</strong> the team can apply to new accounts</li>
+    <li><strong>Disqualification list</strong> of lookalike segments to skip</li>
+    <li><strong>Trigger taxonomy</strong> of high-yield signals to monitor</li>
+  </ol>
+
+  <p>These go into:</p>
+  <ul>
+    <li>The team CLAUDE.md (Section 2: ICP definition) — see the <a href="/resources/claude-md-template/">CLAUDE.md template</a></li>
+    <li>The outbound subagent's signal scoring rubric — see the <a href="/resources/tva-rubric/">TVA scoring rubric</a></li>
+    <li>The lead scoring rules in your CRM</li>
+  </ul>
+
+  <h2>What surprises teams during the rebuild</h2>
+
+  <ol>
+    <li><strong>The aspirational segment is dragging down win rate.</strong> Teams chasing enterprise often discover their close rate at enterprise is 3-5% while mid-market is 18-25%.</li>
+    <li><strong>The trigger isn't what marketing thinks it is.</strong> Marketing claims content/inbound; closed-won data shows hires, funding, leadership changes.</li>
+    <li><strong>The buyer title is wrong by 1-2 layers.</strong> Legacy says "VP Sales"; closed-won shows CRO or Director of Sales Ops.</li>
+    <li><strong>20-30% of the legacy "ICP" is lookalikes.</strong> Filtering them out raises win rate without hurting volume.</li>
+  </ol>
+
+  <h2>Where this fits</h2>
+
+  <p>
+    This worksheet is the second phase of the <a href="/blog/pe-portco-gtm-rebuild/">90-day PE portco GTM rebuild</a>. ICP comes after pipeline truth-finding, before outbound subagent buildout. <a href="/blog/icp-discovery-from-closed-won/">Full deep dive here</a>.
+  </p>
+</ResourcePage>

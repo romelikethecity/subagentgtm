@@ -1,0 +1,235 @@
+---
+import Base from './Base.astro';
+import CTAButton from '../components/CTAButton.astro';
+import type { Resource } from '../data/resources';
+
+interface Props {
+  resource: Resource;
+}
+
+const { resource } = Astro.props;
+const path = `/resources/${resource.slug}/`;
+const downloadHref = `/resources/files/${resource.fileName}`;
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: resource.title,
+  description: resource.description,
+  url: `https://subagentgtm.com${path}`,
+  encodingFormat: 'text/markdown',
+  license: 'https://opensource.org/licenses/MIT',
+  author: {
+    '@type': 'Person',
+    name: 'Rome Thorndike',
+    url: 'https://www.linkedin.com/in/romethorndike',
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://subagentgtm.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Resources', item: 'https://subagentgtm.com/resources/' },
+    { '@type': 'ListItem', position: 3, name: resource.title, item: `https://subagentgtm.com${path}` },
+  ],
+};
+---
+
+<Base title={resource.title} description={resource.description} path={path}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+  <main>
+    <article class="resource">
+      <header class="section" style="padding-top: var(--space-16); padding-bottom: var(--space-8);">
+        <div class="container container--narrow">
+          <nav class="t-micro resource__crumbs" aria-label="Breadcrumb">
+            <a href="/resources/">RESOURCES</a>
+            <span aria-hidden="true">·</span>
+            <span>{resource.category.toUpperCase()}</span>
+          </nav>
+
+          <h1 class="t-display-xl resource__title">{resource.title}</h1>
+
+          <p class="t-body t-muted resource__lede">{resource.description}</p>
+
+          <div class="resource__actions">
+            <a class="btn btn--primary" href={downloadHref} download>
+              ↓ Download {resource.fileName}
+            </a>
+            <span class="t-micro resource__file-meta">
+              {resource.lineCount} LINES · {resource.fileSize} · MIT LICENSE
+            </span>
+          </div>
+        </div>
+      </header>
+
+      <div class="section section--tight">
+        <div class="container container--narrow resource__body t-body">
+          <slot />
+        </div>
+      </div>
+
+      <section class="section">
+        <div class="container container--narrow">
+          <div class="resource__download-cta">
+            <h2 class="t-h1" style="margin-bottom: var(--space-3);">Take the file.</h2>
+            <p class="t-body t-muted" style="margin-bottom: var(--space-6); max-width: 480px;">
+              Save it in your repo. Modify the bracketed values. Use it however you want.
+            </p>
+            <a class="btn btn--primary" href={downloadHref} download>
+              ↓ Download {resource.fileName}
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container" style="text-align: center;">
+          <h2 class="t-display" style="margin-bottom: var(--space-4);">Want this built for your team?</h2>
+          <p class="t-body t-muted" style="max-width: 520px; margin: 0 auto var(--space-8);">
+            We deploy these templates into your repo as part of a fixed-fee engagement. You own the repo. The templates above are the starting point.
+          </p>
+          <CTAButton href="/contact/" label="→ Fix your GTM" variant="primary" large={true} />
+        </div>
+      </section>
+    </article>
+  </main>
+</Base>
+
+<style>
+  .resource__crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+    color: var(--muted);
+  }
+
+  .resource__crumbs a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .resource__title {
+    margin: 0 0 var(--space-6);
+  }
+
+  .resource__lede {
+    max-width: 640px;
+    margin: 0 0 var(--space-8);
+  }
+
+  .resource__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    align-items: center;
+  }
+
+  .resource__file-meta {
+    color: var(--muted);
+  }
+
+  .resource__body :global(h2) {
+    font-family: var(--font-display);
+    font-size: var(--fs-h1);
+    line-height: var(--lh-display);
+    letter-spacing: -0.02em;
+    margin: var(--space-12) 0 var(--space-4);
+  }
+
+  .resource__body :global(h3) {
+    font-family: var(--font-display);
+    font-size: var(--fs-h3);
+    line-height: var(--lh-h3);
+    letter-spacing: -0.01em;
+    margin: var(--space-8) 0 var(--space-3);
+  }
+
+  .resource__body :global(p) {
+    margin: 0 0 var(--space-5);
+  }
+
+  .resource__body :global(ul),
+  .resource__body :global(ol) {
+    margin: 0 0 var(--space-6);
+    padding-left: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .resource__body :global(li) {
+    line-height: var(--lh-body);
+  }
+
+  .resource__body :global(blockquote) {
+    border-left: 2px solid var(--accent);
+    padding: var(--space-2) 0 var(--space-2) var(--space-6);
+    margin: var(--space-8) 0;
+    font-family: var(--font-editorial);
+    font-style: italic;
+    color: var(--ink);
+  }
+
+  .resource__body :global(a) {
+    color: var(--accent);
+  }
+
+  .resource__body :global(code) {
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
+    background: var(--surface);
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+  }
+
+  .resource__body :global(pre) {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: var(--space-5);
+    overflow-x: auto;
+    margin: var(--space-6) 0;
+  }
+
+  .resource__body :global(pre code) {
+    background: transparent;
+    padding: 0;
+    font-size: var(--fs-small);
+    line-height: 1.5;
+  }
+
+  .resource__body :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--space-6) 0;
+    font-size: var(--fs-small);
+  }
+
+  .resource__body :global(th),
+  .resource__body :global(td) {
+    border-bottom: 1px solid var(--line);
+    padding: var(--space-2) var(--space-4);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .resource__body :global(th) {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: var(--fs-micro);
+    color: var(--muted);
+  }
+
+  .resource__download-cta {
+    padding: var(--space-8);
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+</style>

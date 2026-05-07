@@ -1,0 +1,116 @@
+---
+import ResourcePage from '../../../layouts/ResourcePage.astro';
+import { getResource } from '../../../data/resources';
+
+const resource = getResource('tva-rubric')!;
+---
+
+<ResourcePage resource={resource}>
+  <p>
+    The Triggered Value Asset (TVA) rubric is the file every <a href="/methodology/">subagent we ship</a> reads before deciding whether a draft sends or regenerates. It's three criteria, scored 0-3 each, with a 7/9 pass threshold and a forwardability check on top.
+  </p>
+
+  <h2>Use this file in your repo</h2>
+
+  <p>
+    Save as <code>tva-rubric.md</code> at your repo root, or in <code>/subagents/audit/tva-rubric.md</code>. Reference it from your CLAUDE.md and from the audit subagent's prompt:
+  </p>
+
+  <pre><code>Read tva-rubric.md. Score the draft against each criterion (0-3).
+Sum to a total. If total &gt;= 7, queue for send. If total &lt; 7, regenerate.
+On the third failed regeneration for the same prospect, skip and log.</code></pre>
+
+  <h2>The three criteria</h2>
+
+  <h3>1. Specific (S)</h3>
+  <p><strong>Names. Numbers. Dates.</strong></p>
+  <ul>
+    <li><strong>Score 0</strong> — Generic. No specifics from the prospect's world. ("We help B2B SaaS companies grow.")</li>
+    <li><strong>Score 1</strong> — One specific data point, but not a real signal. ("I see you're at [Company].")</li>
+    <li><strong>Score 2</strong> — A specific public signal cited correctly. ("Saw your $12M Series B last month.")</li>
+    <li><strong>Score 3</strong> — A specific signal AND tied to a unique recent pain or opportunity. ("Saw your $12M Series B and the 4 senior React roles posted last week. Series B + engineering hire surge usually means you're 60-90 days from a CRO search.")</li>
+  </ul>
+  <p><strong>Pass test:</strong> could the message be sent to 50 other prospects with minor edits? If yes, it's a 0 or 1.</p>
+
+  <h3>2. Timely (T)</h3>
+  <p><strong>Last 30 days. Ideally last 7.</strong></p>
+  <ul>
+    <li><strong>Score 0</strong> — No date anchor. The message would have been valid 12 months ago.</li>
+    <li><strong>Score 1</strong> — A real signal, but stale (60+ days).</li>
+    <li><strong>Score 2</strong> — Signal from the last 30 days. Recent enough to feel current.</li>
+    <li><strong>Score 3</strong> — Signal from the last 7 days. Reads as "we're paying attention right now."</li>
+  </ul>
+  <p><strong>Pass test:</strong> if the recipient asked "how do you know this," would the answer be "from a public event in the last 30 days?"</p>
+
+  <h3>3. Actionable (A)</h3>
+  <p><strong>Something they can do this week.</strong></p>
+  <ul>
+    <li><strong>Score 0</strong> — No call to action, or one that's vague ("happy to chat").</li>
+    <li><strong>Score 1</strong> — A meeting ask with no specific framing.</li>
+    <li><strong>Score 2</strong> — A concrete, scoped offer the recipient could engage with this week.</li>
+    <li><strong>Score 3</strong> — Score 2, plus the offer is independently valuable even if they don't book a meeting.</li>
+  </ul>
+  <p><strong>Pass test:</strong> if the recipient never replies, did they still get something useful from the message?</p>
+
+  <h2>Scoring</h2>
+
+  <pre><code>Specific:   ___ / 3
+Timely:     ___ / 3
+Actionable: ___ / 3
+─────────────────
+Total:      ___ / 9</code></pre>
+
+  <p><strong>Threshold: 7+ to send.</strong> Below 7, regenerate. Three failed regenerations on the same prospect, skip and log.</p>
+
+  <h2>The forwardability test (final check)</h2>
+
+  <p>Even with 7+, ask the meta-question:</p>
+
+  <blockquote>Would the recipient forward this to their boss, peer, or team?</blockquote>
+
+  <p>If no, regenerate regardless of score. Forwardability is the bar TVA was built to enforce. <a href="/blog/forward-rate-outbound-metric/">Forward rate is the metric we publish on every campaign</a>.</p>
+
+  <h2>Banned phrases (auto-zero on Specific)</h2>
+  <ul>
+    <li>"Just checking in"</li>
+    <li>"I hope this finds you well"</li>
+    <li>"Quick question"</li>
+    <li>"Hope you're having a great week"</li>
+    <li>Any version of "I'd love to learn more about your business"</li>
+    <li>Any sentence that could appear unchanged in a competitor's outbound</li>
+  </ul>
+
+  <h2>Self-scoring template for agents</h2>
+
+  <pre><code>draft:
+  text: |
+    [the draft message]
+
+  scoring:
+    specific:
+      score: 2
+      reasoning: "Cites Series B + 4 React job posts, both within last 30 days"
+    timely:
+      score: 3
+      reasoning: "Series B announced 12 days ago"
+    actionable:
+      score: 2
+      reasoning: "Offers to send the 90-day plan; recipient can accept or pass"
+    total: 7
+
+  forwardability_check:
+    pass: true
+    reasoning: "VP would share the 90-day plan with their CRO"
+
+  decision: SEND</code></pre>
+
+  <h2>Lineage</h2>
+
+  <p>
+    TVA was developed by Rome Thorndike at subagent/gtm, building on Jordan Crawford's <a href="/blog/tva-vs-pvp/">Permissionless Value Proposition (PVP) framework</a> at Cannonball GTM. PVP asked "would they pay for this?" TVA asks "is the message the right asset for the trigger we observed, and is it worth forwarding?"
+  </p>
+
+  <p>
+    Read the full methodology at <a href="/methodology/">subagentgtm.com/methodology</a>.
+  </p>
+</ResourcePage>

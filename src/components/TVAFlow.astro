@@ -1,0 +1,388 @@
+---
+/**
+ * TVA framework visual for /methodology/.
+ *
+ * Two layers:
+ * 1. The TVA structure: Trigger → Value → Asset (with examples)
+ * 2. The STA gate: scoring rubric with decision flow (≥7 send / <7 regen / 3 fails skip)
+ */
+---
+
+<figure class="tva-flow">
+  <figcaption class="tva-flow__caption">
+    <span class="t-micro tva-flow__eyebrow">TVA · TRIGGER → VALUE → ASSET · STA GATE</span>
+    <span class="t-h3 tva-flow__title">
+      Every send passes through three components and a 7/9 scoring gate.
+    </span>
+  </figcaption>
+
+  <!-- Layer 1: TVA structure -->
+  <div class="tva-flow__structure" role="img" aria-label="TVA structure: Trigger flows to Value, Value flows to Asset. Each component has examples.">
+    <div class="tva-flow__component">
+      <div class="tva-flow__component-head">
+        <span class="tva-flow__component-letter">T</span>
+        <span class="tva-flow__component-name">Trigger</span>
+      </div>
+      <p class="tva-flow__component-desc">
+        Observable, public event indicating active urgency. Last 30 days, ideally last 7.
+      </p>
+      <ul class="tva-flow__component-examples">
+        <li>VP Sales hire posted</li>
+        <li>Series B funded round</li>
+        <li>Tech-stack change</li>
+        <li>Regulatory filing</li>
+      </ul>
+    </div>
+
+    <span class="tva-flow__arrow" aria-hidden="true">→</span>
+
+    <div class="tva-flow__component">
+      <div class="tva-flow__component-head">
+        <span class="tva-flow__component-letter">V</span>
+        <span class="tva-flow__component-name">Value</span>
+      </div>
+      <p class="tva-flow__component-desc">
+        The specific connection between the trigger and the prospect's active pain.
+      </p>
+      <ul class="tva-flow__component-examples">
+        <li>"60-90 days from CRO search"</li>
+        <li>"Engineering hire surge means..."</li>
+        <li>"This filing predicts a buying window"</li>
+        <li>Names the pain concretely</li>
+      </ul>
+    </div>
+
+    <span class="tva-flow__arrow" aria-hidden="true">→</span>
+
+    <div class="tva-flow__component">
+      <div class="tva-flow__component-head">
+        <span class="tva-flow__component-letter">A</span>
+        <span class="tva-flow__component-name">Asset</span>
+      </div>
+      <p class="tva-flow__component-desc">
+        The artifact sent. Useful enough that the recipient would forward to their boss.
+      </p>
+      <ul class="tva-flow__component-examples">
+        <li>90-day rebuild plan PDF</li>
+        <li>Benchmark report</li>
+        <li>Calculator or worksheet</li>
+        <li>Specific peer-company comp</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Divider -->
+  <div class="tva-flow__divider">
+    <span class="t-micro tva-flow__divider-label">EVERY DRAFT THEN SCORES THROUGH</span>
+    <span class="tva-flow__divider-arrow" aria-hidden="true">↓</span>
+  </div>
+
+  <!-- Layer 2: STA gate -->
+  <div class="tva-flow__gate" role="img" aria-label="STA scoring gate: Specific 0-3, Timely 0-3, Actionable 0-3. Total 7+ sends. Below 7 regenerates. Three failed regenerations skip.">
+    <div class="tva-flow__gate-head">
+      <span class="t-micro tva-flow__gate-eyebrow">STA SCORING GATE · 0-3 PER CRITERION · PASS AT 7/9</span>
+    </div>
+
+    <div class="tva-flow__criteria">
+      <div class="tva-flow__criterion">
+        <div class="tva-flow__criterion-head">
+          <span class="tva-flow__criterion-letter">S</span>
+          <span class="tva-flow__criterion-name">Specific</span>
+          <span class="t-micro tva-flow__criterion-range">0–3</span>
+        </div>
+        <p class="tva-flow__criterion-desc">Names. Numbers. Dates. Could it be sent to 50 others?</p>
+      </div>
+
+      <div class="tva-flow__criterion">
+        <div class="tva-flow__criterion-head">
+          <span class="tva-flow__criterion-letter">T</span>
+          <span class="tva-flow__criterion-name">Timely</span>
+          <span class="t-micro tva-flow__criterion-range">0–3</span>
+        </div>
+        <p class="tva-flow__criterion-desc">Last 30 days, ideally last 7.</p>
+      </div>
+
+      <div class="tva-flow__criterion">
+        <div class="tva-flow__criterion-head">
+          <span class="tva-flow__criterion-letter">A</span>
+          <span class="tva-flow__criterion-name">Actionable</span>
+          <span class="t-micro tva-flow__criterion-range">0–3</span>
+        </div>
+        <p class="tva-flow__criterion-desc">Something they can do this week, not next quarter.</p>
+      </div>
+    </div>
+
+    <!-- Decision flow -->
+    <div class="tva-flow__decisions">
+      <div class="tva-flow__decision tva-flow__decision--send">
+        <span class="tva-flow__decision-tag">≥ 7 / 9</span>
+        <span class="tva-flow__decision-action">SEND</span>
+        <span class="t-micro tva-flow__decision-detail">+ forwardability check</span>
+      </div>
+      <div class="tva-flow__decision tva-flow__decision--regen">
+        <span class="tva-flow__decision-tag">&lt; 7 / 9</span>
+        <span class="tva-flow__decision-action">REGENERATE</span>
+        <span class="t-micro tva-flow__decision-detail">try again with feedback</span>
+      </div>
+      <div class="tva-flow__decision tva-flow__decision--skip">
+        <span class="tva-flow__decision-tag">3 FAILS</span>
+        <span class="tva-flow__decision-action">SKIP</span>
+        <span class="t-micro tva-flow__decision-detail">log and move on</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="t-micro tva-flow__footnote">
+    Every subagent we ship reads <a href="/resources/tva-rubric/">tva-rubric.md</a> before deciding. Below 7/9, regenerate. Three failed regens, skip and log. The scoring is auditable per send.
+  </p>
+</figure>
+
+<style>
+  .tva-flow {
+    margin: var(--space-12) 0;
+    padding: var(--space-8);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+
+  .tva-flow__caption {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-8);
+  }
+
+  .tva-flow__eyebrow { color: var(--muted); }
+  .tva-flow__title { color: var(--ink); margin: 0; max-width: 600px; }
+
+  /* Layer 1: TVA structure */
+  .tva-flow__structure {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: var(--space-3);
+    align-items: stretch;
+  }
+
+  .tva-flow__component {
+    padding: var(--space-5);
+    background: var(--bg);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .tva-flow__component-head {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .tva-flow__component-letter {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .tva-flow__component-name {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .tva-flow__component-desc {
+    margin: 0;
+    font-size: var(--fs-small);
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .tva-flow__component-examples {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .tva-flow__component-examples li {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    color: var(--muted);
+    padding-left: var(--space-3);
+    position: relative;
+  }
+
+  .tva-flow__component-examples li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  .tva-flow__arrow {
+    display: flex;
+    align-items: center;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 24px;
+  }
+
+  /* Divider between layers */
+  .tva-flow__divider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    margin: var(--space-6) 0;
+    padding: var(--space-4) 0;
+    border-top: 1px dashed var(--line);
+    border-bottom: 1px dashed var(--line);
+  }
+
+  .tva-flow__divider-label { color: var(--muted); }
+
+  .tva-flow__divider-arrow {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 20px;
+  }
+
+  /* Layer 2: STA gate */
+  .tva-flow__gate {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .tva-flow__gate-head {
+    text-align: center;
+  }
+
+  .tva-flow__gate-eyebrow { color: var(--muted); }
+
+  .tva-flow__criteria {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+  }
+
+  .tva-flow__criterion {
+    padding: var(--space-4);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    background: var(--surface);
+  }
+
+  .tva-flow__criterion-head {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+  }
+
+  .tva-flow__criterion-letter {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+
+  .tva-flow__criterion-name {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .tva-flow__criterion-range {
+    color: var(--muted);
+    margin-left: auto;
+    font-family: var(--font-mono);
+  }
+
+  .tva-flow__criterion-desc {
+    margin: 0;
+    font-size: var(--fs-small);
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .tva-flow__decisions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--line);
+  }
+
+  .tva-flow__decision {
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    background: var(--surface);
+    text-align: center;
+  }
+
+  .tva-flow__decision--send { border-color: var(--accent); }
+  .tva-flow__decision--regen { border-color: var(--muted); }
+  .tva-flow__decision--skip { border-color: var(--line); opacity: 0.85; }
+
+  .tva-flow__decision-tag {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  .tva-flow__decision-action {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .tva-flow__decision--send .tva-flow__decision-action { color: var(--accent); }
+  .tva-flow__decision--regen .tva-flow__decision-action { color: var(--ink); }
+  .tva-flow__decision--skip .tva-flow__decision-action { color: var(--muted); }
+
+  .tva-flow__decision-detail {
+    color: var(--muted);
+  }
+
+  .tva-flow__footnote {
+    color: var(--muted);
+    margin-top: var(--space-6);
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+
+  .tva-flow__footnote a { color: var(--accent); }
+
+  @media (max-width: 900px) {
+    .tva-flow__structure { grid-template-columns: 1fr; }
+    .tva-flow__arrow { transform: rotate(90deg); padding: var(--space-2) 0; justify-self: center; }
+    .tva-flow__criteria,
+    .tva-flow__decisions { grid-template-columns: 1fr; }
+  }
+</style>
