@@ -109,6 +109,20 @@ const breadcrumbSchema = {
         </div>
       </header>
 
+      <div class="section section--tight post__hero-section">
+        <div class="container container--narrow">
+          <img
+            src={ogImage}
+            alt={ogImageAlt}
+            class="post__hero"
+            width="1200"
+            height="630"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+      </div>
+
       <div class="section section--tight">
         <div class="container container--narrow post__body t-body">
           <slot />
@@ -189,6 +203,19 @@ const breadcrumbSchema = {
     flex-wrap: wrap;
     gap: var(--space-3);
     color: var(--muted);
+  }
+
+  .post__hero-section {
+    padding-top: var(--space-4);
+    padding-bottom: var(--space-8);
+  }
+
+  .post__hero {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md, 12px);
   }
 
   .post__byline a {
